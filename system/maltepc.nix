@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware/maltepc.nix
+    ../graphical/greetd.nix
   ];
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
