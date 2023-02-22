@@ -2,6 +2,9 @@
 { config, lib, modulesPath, pkgs, agenix, nixpkgs, ... }:
 
 {
+  imports = [
+    ./hardware/pi3.nix
+  ];
   boot.loader.grub.enable = false;
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
