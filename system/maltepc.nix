@@ -9,4 +9,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "maltepc";
+
+  users.users.mtoepperwien = {
+    isNormalUser = true;
+    home = "/home/mtoepperwien";
+    extraGroups = [ "wheel" "networkmanager" ];
+  };
 }
