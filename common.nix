@@ -18,4 +18,5 @@
     enable = true;
     defaultEditor = true;
   };
+  programs.git.enable = true;
 }
