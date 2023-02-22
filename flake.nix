@@ -27,7 +27,7 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.mtoepperwien = import ./home-manager/maltepc.nix
+            home-manager.users.mtoepperwien = import ./homemanager/maltepc.nix;
           }
         ];
       };
