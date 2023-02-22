@@ -5,7 +5,7 @@
     agenix = { url = "github:ryantm/agenix"; };
   };
 
-  outputs = { self, nixpkgs, agenix, ... }@attrs: {
+  outputs = { self, nixpkgs, agenix, home-manager, ... }@attrs: {
     nixosConfigurations = {
       pi3 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
@@ -24,6 +24,11 @@
 	  ./system/maltepc.nix
           ./common.nix
           agenix.nixosModules.default
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.mtoepperwien = import ./home-manager/maltepc.nix
+          }
         ];
       };
     };
