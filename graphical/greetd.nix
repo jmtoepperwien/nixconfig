@@ -24,11 +24,9 @@ in {
       };
     };
   };
-
   environment.etc."greetd/environments".text = ''
-    sway
-    fish
+    sway-run
+    zsh
     bash
-    startxfce4
   '';
 }
