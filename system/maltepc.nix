@@ -5,8 +5,12 @@
     ./hardware/maltepc.nix
     ../graphical/greetd.nix
   ];
-  boot.loader.grub.enable = false;
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub = {
+    enable = true;
+    version = 2;
+    device = "nodev";
+    useOSProber = true;
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "maltepc";
