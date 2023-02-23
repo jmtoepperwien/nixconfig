@@ -13,7 +13,6 @@ local on_attach = function(client)
 end
 
 -- Python
-vim.g.python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
 require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on_attach,
   settings = { exclude = { ".venv" }, venvPath = ".", venv = ".venv" } }
 

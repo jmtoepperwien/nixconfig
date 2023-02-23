@@ -5,41 +5,41 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "usb_storage" "sd_mod" "sr_mod" "virtio_blk" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "uas" "sd_mod" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/eb068900-f88a-4b8c-a224-4553648bf177";
+    { device = "/dev/disk/by-uuid/f090b2e8-b682-44f8-b41f-e19fb484d937";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/04fd6420-991e-4e1d-881d-0553ee8429b0";
-
-  fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/eb068900-f88a-4b8c-a224-4553648bf177";
-      fsType = "btrfs";
-      options = [ "subvol=@var" ];
-    };
+  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/fcea5cb9-cebe-4ff0-9a9e-35665cc5d860";
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/eb068900-f88a-4b8c-a224-4553648bf177";
+    { device = "/dev/disk/by-uuid/f090b2e8-b682-44f8-b41f-e19fb484d937";
       fsType = "btrfs";
       options = [ "subvol=@home" ];
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/81A9-737A";
+  fileSystems."/var" =
+    { device = "/dev/disk/by-uuid/f090b2e8-b682-44f8-b41f-e19fb484d937";
+      fsType = "btrfs";
+      options = [ "subvol=@var" ];
+    };
+
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/3839-39DF";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ff88e180-6b73-4a59-bb42-dc35f0ca8f3a"; }
+    [ { device = "/dev/disk/by-uuid/d6b32b92-2cab-408a-9e5b-5cc4de3c88a7"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -47,9 +47,9 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  system.stateVersion = "23.05"; # Did you read the comment?
 }

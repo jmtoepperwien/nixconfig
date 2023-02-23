@@ -11,6 +11,7 @@ return require("lazy").setup({
     lazy = false,
     priority = 1000
   },
+  { "equalsraf/neovim-gui-shim", priority=9999 },
   { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup({ default = true }) end },
   {
     "nvim-lualine/lualine.nvim",
@@ -41,12 +42,13 @@ return require("lazy").setup({
           enable = true
         }
       })
+      require("nvim-treesitter.install").compilers = { "gcc" } -- does not work with clang
     end,
   },
   { "nvim-telescope/telescope.nvim",
     dependencies = { { "nvim-lua/plenary.nvim" },
       { 'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }, },
+        build = 'make' }, },
     config = function()
       require('telescope').setup({
         pickers = {
@@ -109,7 +111,7 @@ return require("lazy").setup({
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "hrsh7th/cmp-nvim-lua",
   { "onsails/lspkind-nvim" },
-  { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+  { "L3MON4D3/LuaSnip"},
   "saadparwaiz1/cmp_luasnip",
   { "hrsh7th/nvim-cmp", config = function() require('lsp-cmp-setup') end },
   -- nvim-lsp setup }}}
@@ -155,6 +157,6 @@ return require("lazy").setup({
   end },
   { 'Aasim-A/scrollEOF.nvim', config = function() require('scrollEOF').setup() end },
 
-  { "Exafunction/codeium.vim" }
+  --{ "Exafunction/codeium.vim" }
 
 })

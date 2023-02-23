@@ -1,12 +1,26 @@
 { config, lib, modulesPath, pkgs, agenix, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
+
+  imports = [
+    ./common/devel.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    wget
+    curl
+    ripgrep
+    fd
+    tree
+    tealdeer
+  ];
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -15,5 +29,13 @@
     enable = true;
     defaultEditor = true;
   };
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "main";
+      user.name = "Jan Malte Töpperwien";
+      user.email = "m.toepperwien@protonmail.com";
+    };
+  };
+  xdg.mime.enable = true;
 }

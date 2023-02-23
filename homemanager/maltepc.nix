@@ -1,20 +1,49 @@
 { config, pkgs, ... }:
-
-{
+let
+  selected-nerdfonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "SourceCodePro" ]; })
+  ]; # currently not working
+  python-packages = p: with p; [
+    pandas
+    numpy
+    pynvim
+  ];
+in {
   home.username = "mtoepperwien";
   home.homeDirectory = "/home/mtoepperwien";
-  home.stateVersion = "23.05";
+  home.stateVersion = "22.11";
 
-  home.packages = [
-    pkgs.alacritty
-    pkgs.mako
-    pkgs.mpv
-    pkgs.neovim
-    pkgs.neovim-qt
-    pkgs.qutebrowser
-    pkgs.sway
-    pkgs.waybar
-    pkgs.zathura
+  home.packages = with pkgs; [
+    alacritty
+    element-desktop
+    mako
+    mpv
+    # neovim and plugin dependencies {{{
+    neovim
+    neovim-remote
+    luajitPackages.jsregexp # dependency of luasnip neovim plugin
+    tree-sitter
+    neovim-qt
+    nodejs
+    nodePackages.npm
+    wget
+    curl
+    # }}} neovim and plugin dependencies
+    qutebrowser
+    spotify
+    sway
+    waybar
+    font-awesome # needed for waybar icons
+    bemenu
+    j4-dmenu-desktop # desktop files for bemenu
+    ungoogled-chromium
+    (python3.withPackages python-packages)
+    virtualenv
+    ripgrep
+    zathura
+    wl-clipboard
+    nerdfonts
+    xdg-utils
   ];
 
   # use config folder
@@ -22,6 +51,9 @@
     source = ./config;
     recursive = true;
   };
+
+  # allow homemanager fonts
+  fonts.fontconfig.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -43,6 +75,18 @@
         dotExpansion = true;
         keymap = "vi";
       };
+    };
+  };
+
+  # default applications
+  xdg.mime.enable = true;
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+    "x-scheme-handler/http" = [ "chromoum-browser.desktop" ];
+    "x-scheme-handler/https" = [ "chromoum-browser.desktop" ];
+    "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
+    "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
     };
   };
 }
