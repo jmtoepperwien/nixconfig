@@ -44,13 +44,19 @@ in {
     wl-clipboard
     nerdfonts
     xdg-utils
+    zsh-powerlevel10k
   ];
+
+  home.sessionVariables = {
+    VISUAL = "nvim";
+  };
 
   # use config folder
   home.file.".config" = {
     source = ./config;
     recursive = true;
   };
+  home.file.".p10k.zsh".source = ./config/p10k.zsh;
 
   # allow homemanager fonts
   fonts.fontconfig.enable = true;
@@ -75,6 +81,7 @@ in {
         dotExpansion = true;
         keymap = "vi";
       };
+      prompt.theme = "powerlevel10k";
     };
   };
 
@@ -83,8 +90,8 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-    "x-scheme-handler/http" = [ "chromoum-browser.desktop" ];
-    "x-scheme-handler/https" = [ "chromoum-browser.desktop" ];
+    "x-scheme-handler/http" = [ "chromium-browser.desktop" ];
+    "x-scheme-handler/https" = [ "chromium-browser.desktop" ];
     "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
     "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
     };
