@@ -1,0 +1,37 @@
+* {
+    border: none;
+    border-radius: 0;
+}
+ 
+window#waybar {
+    font-family: SauceCode Pro Nerd Font Mono;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fbf1c7;
+    background:  rgba(40,40,40,0.9);
+}
+ 
+#workspaces button {
+    color: #928374;
+    padding: 0 3px;
+    background: transparent;
+    border-bottom: 3px solid transparent;
+}
+ 
+#workspaces button.visible {
+    color: #fbf1c7;
+    background: #282828;
+    border-bottom: 3px solid transparent;
+}
+ 
+#workspaces button.focused {
+    color: #fbf1c7;
+    background: #282828;
+    border-bottom: 3px solid #fbf1c7;
+}
+ 
+#pulseaudio, #backlight, #battery, #cpu, #tray, #network {
+    padding-left: 10px;
+    padding-right: 5px;
+    margin: 0;
+}

@@ -25,13 +25,11 @@ output DP-2 {
   mode 3440x1440@144Hz
   pos 0 240
   adaptive_sync on
-  background "/home/mtoepperwien/data/wallpapers/backgrounds/Morskie Oko.jpg" fill
 }
 output HDMI-A-2 {
   res 1920x1080
   pos 3440 0
   transform 270
-  background "/home/mtoepperwien/data/wallpapers/backgrounds/Morskie Oko.jpg" fill
 }
 set $monitor_one "DP-2"
 set $monitor_two "HDMI-A-2"

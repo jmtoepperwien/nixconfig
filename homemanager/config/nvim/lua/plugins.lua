@@ -1,0 +1,160 @@
+return require("lazy").setup({
+  { "williamboman/mason.nvim", config = function() require("mason").setup() end },
+  { "williamboman/mason-lspconfig.nvim",
+    config = function() require("mason-lspconfig").setup({ automatic_installation = true }) end },
+  {
+    "sainnhe/gruvbox-material",
+    config = function()
+      vim.g.gruvbox_material_better_performance = 1
+      vim.cmd([[colorscheme gruvbox-material]])
+    end,
+    lazy = false,
+    priority = 1000
+  },
+  { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup({ default = true }) end },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    config = function()
+      require("lualine").setup({ options = { theme = "gruvbox-material" } })
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = function()
+      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+      ts_update()
+    end,
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        auto_install = true,
+        highlight = {
+          enable = true
+        },
+        incremental_selection = {
+          enable = true
+        },
+        indent = {
+          enable = true
+        },
+        rainbow = {
+          enable = true
+        }
+      })
+    end,
+  },
+  { "nvim-telescope/telescope.nvim",
+    dependencies = { { "nvim-lua/plenary.nvim" },
+      { 'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }, },
+    config = function()
+      require('telescope').setup({
+        pickers = {
+          find_files = {
+            hidden = true,
+            mappings = {
+              n = {
+                ["cd"] = function(prompt_bufnr)
+                  local selection = require("telescope.actions.state").get_selected_entry()
+                  local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+                  require("telescope.actions").close(prompt_bufnr)
+                  -- Depending on what you want put `cd`, `lcd`, `tcd`
+                  vim.cmd(string.format("silent lcd %s", dir))
+                end
+              }
+            }
+          },
+        }
+      })
+      require('telescope').load_extension('fzf')
+    end },
+  { "nvim-telescope/telescope-project.nvim", config = function() require('telescope').load_extension('project') end },
+  {
+    "HiPhish/nvim-ts-rainbow2",
+    dependencies = { "nvim-treesitter" },
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        rainbow = {
+          enable = true,
+          query = "rainbow-parens",
+          hlgroups = {
+            "TSRainbowRed",
+            "TSRainbowYellow",
+            "TSRainbowBlue",
+            "TSRainbowGreen",
+            "TSRainbowCyan",
+            "TSRainbowOrange",
+            "TSRainbowViolet",
+          },
+        },
+      })
+    end,
+  },
+  { "lervag/vimtex", lazy = true },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup()
+    end,
+  },
+
+  -- nvim-lsp setup {{{
+  { 'neovim/nvim-lspconfig', config = function() require("lsp-config") end },
+  { "lukas-reineke/lsp-format.nvim", config = function() require("lsp-format").setup() end },
+
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-path",
+  "hrsh7th/cmp-cmdline",
+  "hrsh7th/cmp-nvim-lsp-signature-help",
+  "hrsh7th/cmp-nvim-lua",
+  { "onsails/lspkind-nvim" },
+  { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+  "saadparwaiz1/cmp_luasnip",
+  { "hrsh7th/nvim-cmp", config = function() require('lsp-cmp-setup') end },
+  -- nvim-lsp setup }}}
+
+  { "ray-x/navigator.lua",
+    dependencies = { { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' }, { "neovim/nvim-lspconfig" } },
+    config = function() require('navigator').setup() end },
+  { "karb94/neoscroll.nvim", config = function() require('neoscroll').setup() end },
+  { "danymat/neogen", dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function() require('neogen').setup({ input_after_comment = true, jump_map = "<Tab>" }) end },
+  { "echasnovski/mini.nvim",
+    config = function()
+      require('mini.align').setup()
+      require('mini.comment').setup()
+      require('mini.pairs').setup()
+      require('mini.surround').setup()
+    end },
+  { "AckslD/nvim-neoclip.lua", dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function() require('neoclip').setup(); require('telescope').load_extension('neoclip') end },
+  { "chentoast/marks.nvim", config = function() require('marks').setup() end },
+  { "norcalli/nvim-colorizer.lua", config = function() require('colorizer').setup() end },
+  { "folke/twilight.nvim", config = function() require("twilight").setup() end },
+  { "kevinhwang91/nvim-bqf", dependencies = { { "junegunn/fzf", build = function() vim.fn['fzf#install']() end } } },
+  { "phaazon/hop.nvim", branch = "v2", config = function() require("hop").setup() end },
+  { "rktjmp/highlight-current-n.nvim" },
+  { "edluffy/specs.nvim", config = function() require("specs").setup {
+      show_jumps       = true,
+      min_jump         = 30,
+      popup            = {
+        delay_ms = 0, -- delay before popup displays
+        inc_ms = 10, -- time increments used for fade/resize effects
+        blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+        width = 10,
+        winhl = "PMenu",
+        fader = require('specs').linear_fader,
+        resizer = require('specs').shrink_resizer
+      },
+      ignore_filetypes = {},
+      ignore_buftypes  = {
+        nofile = true,
+      },
+    }
+  end },
+  { 'Aasim-A/scrollEOF.nvim', config = function() require('scrollEOF').setup() end },
+
+  { "Exafunction/codeium.vim" }
+
+})

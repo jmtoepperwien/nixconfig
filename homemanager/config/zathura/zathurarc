@@ -1,0 +1,14 @@
+# enable copying to clipboard with standard clipboard manager
+set selection-clipboard clipboard
+
+# enable to jump from "4page" to "4page" in [d]ouble-page mode
+map <C-j> feedkeys <S-j>jjjjjj
+map <C-k> feedkeys <S-k>kkkkkk
+map <Space> feedkeys <S-j>
+
+# 'enable' chromium/xdg-open for links
+set sandbox none
+
+# Synctex
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
