@@ -14,6 +14,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "maltepc";
+  age.secrets.wifipassword.file = ../secrets/wifipassword.age;
+  networking.wireless = {
+    environmentFile = config.age.secrets.wifipassword.path;
+    enable = true;
+    userControlled.enable = true;
+    networks.Mosi.psk = "@MOSI_PASSWORD@";
+  };
+  networking.networkmanager.enabled = true;
 
   users.users.mtoepperwien = {
     isNormalUser = true;
