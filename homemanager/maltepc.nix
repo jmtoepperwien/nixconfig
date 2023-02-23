@@ -68,7 +68,7 @@ in {
     defaultKeymap = "vicmd";
     history.save = 1000;
     history.size = 1000;
-    initExtra = "setopt extended_glob\nbindkey 'kj' vi-cmd-mode";
+    initExtra = "setopt extended_glob\nbindkey 'kj' vi-cmd-mode\n[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh";
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
       "tree" = "tree -C";
