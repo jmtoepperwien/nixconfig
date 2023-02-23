@@ -37,6 +37,7 @@
     isNormalUser = true;
     home = "/home/mtoepperwien";
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
   };
 
   # sound settings
