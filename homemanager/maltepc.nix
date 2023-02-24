@@ -44,7 +44,6 @@ in {
     wl-clipboard
     nerdfonts
     xdg-utils
-    zsh-powerlevel10k
   ];
 
   home.sessionVariables = {
@@ -75,16 +74,18 @@ in {
       "tt" = "taskwarrior-tui";
       "cp" = "cp --reflink=auto";
     };
-    prezto = {
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
+    oh-my-zsh = {
       enable = true;
-      editor = {
-        dotExpansion = true;
-        keymap = "vi";
-      };
-      prompt.theme = "powerlevel10k";
-      pmodules = [
+      plugins = [
         "git"
-        "completion"
+        "wd"
       ];
     };
   };
