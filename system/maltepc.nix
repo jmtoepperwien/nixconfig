@@ -48,6 +48,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  environment.systemPackages = [ pkgs.pulsemixer ];
 
 
   system.stateVersion = "22.11"; # Did you read the comment?
