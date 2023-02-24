@@ -82,6 +82,10 @@ in {
         keymap = "vi";
       };
       prompt.theme = "powerlevel10k";
+      pmodules = [
+        "git"
+        "completion"
+      ];
     };
   };
 
