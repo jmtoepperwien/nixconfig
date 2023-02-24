@@ -33,15 +33,14 @@
       };
       pi4 = nixpkgs.lib.nixosSystem  {
         system = "aarch64-linux";
+        specialArgs = attrs;
         modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-          {
-            nixpkgs.config.allowUnsupportedSystem = true;
-            nixpkgs.crossSystem.system = "aarch64-linux";
-          }
+          ./system/pi4.nix
+          ./ssh.nix
+          ./common.nix
+          agenix.nixosModules.default
         ];
       };
     };
-    images.pi4 = nixosConfigurations.pi4.config.system.build.sdImage;
   };
 }
