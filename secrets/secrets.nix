@@ -7,4 +7,5 @@ let
   systems = [ maltepchost pi3host ];
 in {
   "wifipassword.age".publicKeys = [ maltepc maltepchost pi3host ];
+  "pi4_mysql_password.age".publicKeys = [ TODO ];
 }
