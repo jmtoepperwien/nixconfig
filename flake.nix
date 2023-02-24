@@ -38,6 +38,9 @@
           ./system/pi4.nix
           ./ssh.nix
           ./common.nix
+          ./programs/nginx.nix
+          ./programs/mariadb.nix
+          ./programs/gitea.nix
           agenix.nixosModules.default
         ];
       };
