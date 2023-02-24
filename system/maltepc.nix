@@ -50,6 +50,9 @@
   };
   environment.systemPackages = [ pkgs.pulsemixer ];
 
+  # cross compilation to aarch64
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }

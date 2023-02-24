@@ -5,7 +5,7 @@
     agenix = { url = "github:ryantm/agenix"; };
   };
 
-  outputs = { self, nixpkgs, agenix, home-manager, ... }@attrs: {
+  outputs = { self, nixpkgs, agenix, home-manager, ... }@attrs: rec {
     nixosConfigurations = {
       pi3 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
@@ -31,6 +31,17 @@
           }
         ];
       };
+      pi4 = nixpkgs.lib.nixosSystem  {
+        system = "aarch64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          {
+            nixpkgs.config.allowUnsupportedSystem = true;
+            nixpkgs.crossSystem.system = "aarch64-linux";
+          }
+        ];
+      };
     };
+    images.pi4 = nixosConfigurations.pi4.config.system.build.sdImage;
   };
 }
