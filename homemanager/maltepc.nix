@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 let
-  selected-nerdfonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "SourceCodePro" ]; })
-  ]; # currently not working
   python-packages = p: with p; [
     pandas
     numpy
@@ -40,6 +37,7 @@ in {
     (python3.withPackages python-packages)
     virtualenv
     ripgrep
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "SourceCodePro" ]; })
     zathura
     wl-clipboard
     nerdfonts
