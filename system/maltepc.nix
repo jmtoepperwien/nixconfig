@@ -53,6 +53,12 @@
   # cross compilation to aarch64
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  # containers with podman
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }
