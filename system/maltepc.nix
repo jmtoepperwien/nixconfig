@@ -6,6 +6,7 @@
     ../graphical/greetd.nix
   ];
 
+  services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableRedistributableFirmware = true;
