@@ -34,9 +34,11 @@
   #};
   networking.networkmanager.enable = true;
 
+  users.groups.mtoepperwien = {};
   users.users.mtoepperwien = {
     isNormalUser = true;
     home = "/home/mtoepperwien";
+    group = "mtoepperwien";
     extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.zsh;
   };
