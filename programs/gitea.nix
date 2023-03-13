@@ -1,35 +1,27 @@
 { config, lib, pkgs, ... }:
 
 {
-  users.users.git = {
-    description = "User for git and gitea";
-    isSystemUser = true;
-    extraGroups = [ "gitea" ];
-    home = "/home/git";
-    createHome = true;
-  };
-  age.secrets.mysqlpassword.file = ../secrets/pi4_mysql_password.age;
-  service.gitea = {
+  users.users."gitea".extraGroups = [ "mysql" ];
+  services.gitea = {
     enable = true;
-    user = git;
-    repositoryRoot = "/home/git/gitea/repos";
-    rootUrl = "http://localhost:3000/";
+    user = "gitea";
+    rootUrl = "https://mosigit.duckdns.org/";
+    domain = "https://mosigit.duckdns.org/";
+    httpAddress = "localhost";
     httpPort = 3000;
     settings = {
       server = {
-        SSH_PORT = 222;
+        SSH_PORT = 22;
       };
     };
     lfs = {
       enable = true;
-      contentDir = "/home/git/gitea/lfs";
     };
     database ={
       user = "gitea";
       name = "gitea";
-      type = "mysql";
-      socket = "/var/run/mysqld.sock"
-      passwordFile = config.age.secrets.mysqlpassword.path;
+      type = "postgres";
+      socket = "/run/postgresql";
       createDatabase = false; # manually restore before this
     };
   };

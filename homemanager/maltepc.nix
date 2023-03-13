@@ -44,6 +44,7 @@ in {
     wl-clipboard
     nerdfonts
     xdg-utils
+    unzip
   ];
 
   home.sessionVariables = {
@@ -100,10 +101,5 @@ in {
     "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
     "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
     };
-  };
-
-  services.nextcloud-client = {
-    enable = true;
-    startInBackground = true;
   };
 }

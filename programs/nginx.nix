@@ -3,26 +3,45 @@
 {
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "m.toepperwien@protonmail.com";
-  security.acme.certs."mosihome.duckdns.org".extraDomainNames = [ "git.mosihome.duckdns.org" ];
+  security.acme.defaults.webroot = "/var/www/mosihome";
+  security.acme.certs."mosihome.duckdns.org".extraDomainNames = [ "mosigit.duckdns.org" "mosinextcloud.duckdns.org" ];
   services.nginx = {
     enable = true;
+    recommendedProxySettings = true;
     virtualHosts = {
-      "mosihome.duckdns.org" = { # [TODO] nextcloud
+      "mosihome.duckdns.org" = {
         forceSSL = true;
-        enableACME = true;
-        enableACME = true;
-        locations."/" = {
-          root = "/var/www/mosihome";
-        };
+	enableACME = true;
+	locations = {
+	  "/files/" = {
+	    root = "/var/www/";
+	    extraConfig = ''
+              access_log off;
+	      autoindex on;
+	      proxy_max_temp_file_size 0;
+	      aio threads;
+	      directio 16M;
+	      output_buffers 2 1M;
+	      sendfile on;
+	      sendfile_max_chunk 512k;
+	    '';
+	  };
+	  "/sabnzbd/".proxyPass = "http://localhost:6789";
+	  "/sonarr/".proxyPass = "http://localhost:8989";
+	  "/radarr/".proxyPass = "http://localhost:7878";
+	};
       };
-      "git.mosihome.duckdns.org" = {
+      "mosigit.duckdns.org" = {
         forceSSL = true;
-        enableACME = true;
-        useACMEHost = "mosihome.duckdns.org";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:3000";
+	useACMEHost = "mosihome.duckdns.org";
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:3000/";
+          };
         };
       };
     };
   };
+
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }

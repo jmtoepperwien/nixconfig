@@ -3,9 +3,10 @@
     nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
     home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
     agenix = { url = "github:ryantm/agenix"; };
+    nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
   };
 
-  outputs = { self, nixpkgs, agenix, home-manager, ... }@attrs: rec {
+  outputs = { self, nixpkgs, agenix, home-manager, nixos-hardware, ... }@attrs: rec {
     nixosConfigurations = {
       pi3 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
@@ -38,10 +39,16 @@
           ./system/pi4.nix
           ./ssh.nix
           ./common.nix
-          ./programs/nginx.nix
-          ./programs/mariadb.nix
-          ./programs/gitea.nix
+	  ./programs/nginx.nix
+	  ./programs/mariadb.nix
+	  ./programs/postgresql.nix
+	  ./programs/gitea.nix
+	  ./programs/kodi.nix
+	  ./programs/usenet.nix
+	  ./programs/nextcloud.nix
+
           agenix.nixosModules.default
+	  nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
     };

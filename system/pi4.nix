@@ -3,9 +3,12 @@
 {
  # This configuration worked on 09-03-2021 nixos-unstable @ commit 102eb68ceec
  # The image used https://hydra.nixos.org/build/134720986
+  imports = [
+    ./hardware/pi4.nix
+  ];
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     # ttyAMA0 is the serial console broken out to the GPIO
     kernelParams = [
@@ -13,42 +16,63 @@
         "console=ttyAMA0,115200"
         "console=tty1"
         # A lot GUI programs need this, nearly all wayland applications
-        "cma=128M"
+        "cma=512M"
     ];
   };
 
-  #boot.loader.raspberryPi = {
-  #  enable = true;
-  #  version = 4;
-  #};
   boot.loader.grub.enable = false;
+  boot.loader.generic-extlinux-compatible.enable = true;
+  boot.loader.raspberryPi = {
+    enable = false;
+    version = 4;
+    firmwareConfig = ''
+      dtparam=audio=on
+    '';
+  };
 
   # Required for the Wireless firmware
   hardware.enableRedistributableFirmware = true;
+  hardware.raspberry-pi."4" = {
+    fkms-3d.enable = true;
+    audio.enable = true;
+    dwc2.enable = true;
+  };
+  #sound.enable = true;
+  #hardware.pulseaudio.enable = true;
+  hardware.opengl = {
+    enable = true;
+    setLdLibraryPath = true;
+    package = pkgs.mesa_drivers;
+  };
+  # sound settings
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = false;
+  };
+  environment.systemPackages = [
+    pkgs.pulsemixer
+    pkgs.sway
+  ];
 
   networking = {
     hostName = "pi4"; # Define your hostname.
-    useDHCP = false;
-    defaultGateway.address = "192.168.1.1";
-    nameservers = [ "192.168.1.1" "1.1.1.1" "1.0.0.1" ];
-    interfaces.wlan0.ipv4.addresses = [
-      {
-        address = "192.168.1.234";
-        prefixLength = 24;
-      }
-    ];
+    useDHCP = true;
+    firewall.enable = false; # [TODO]
   };
-  age.secrets.wifipassword.file = ../secrets/wifipassword.age;
-  networking.wireless = {
-    environmentFile = config.age.secrets.wifipassword.path;
-    enable = true;
-    userControlled.enable = true;
-    networks."Mosi".psk = "@MOSI_PASSWORD@";
-  };
+  #age.secrets.wifipassword.file = ../secrets/wifipassword.age;
+  #networking.wireless = {
+  #  environmentFile = config.age.secrets.wifipassword.path;
+  #  enable = true;
+  #  userControlled.enable = true;
+  #  networks."Mosi".psk = "@MOSI_PASSWORD@";
+  #};
 
   users.users.pi4 = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" ];
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
     ];

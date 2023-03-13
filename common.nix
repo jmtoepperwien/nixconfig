@@ -24,6 +24,8 @@
     curl
     ripgrep
     fd
+    glances
+    tmux
     tree
     tealdeer
     unzip

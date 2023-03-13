@@ -8,13 +8,18 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "usb_storage" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" "uas" "usb_storage" "vc4" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+      fsType = "ext4";
+    };
+
+  fileSystems."/mnt/kodi_lib" =
+    { device = "/dev/disk/by-uuid/4899f233-1842-4a91-8509-7b06b852c027";
       fsType = "ext4";
     };
 
@@ -30,5 +35,4 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
-  system.stateVersion = "23.05"; # Did you read the comment?
 }
