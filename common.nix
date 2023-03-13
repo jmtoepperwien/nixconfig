@@ -26,6 +26,7 @@
     fd
     tree
     tealdeer
+    unzip
   ];
 
   time.timeZone = "Europe/Berlin";
