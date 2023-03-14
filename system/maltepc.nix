@@ -10,8 +10,12 @@
   hardware.cpu.amd.updateMicrocode = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableRedistributableFirmware = true;
+
+  # gpu
   hardware.opengl.enable = true;
+  # vulkan
   hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
 
   nix.settings.max-jobs = 6;
   nix.settings.cores = 6;

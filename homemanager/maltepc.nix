@@ -43,6 +43,8 @@ in {
     nerdfonts
     xdg-utils
     unzip
+
+    lutris
   ];
 
   home.sessionVariables = {
