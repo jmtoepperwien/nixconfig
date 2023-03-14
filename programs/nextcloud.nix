@@ -5,7 +5,7 @@
     file = ../secrets/nextcloud-adminpass.age;
     owner = "nextcloud";
     group = "nextcloud";
-  }
+  };
   services.nextcloud = {
     enable = true;
     https = true;

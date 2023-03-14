@@ -46,6 +46,10 @@ in {
     unzip
 
     lutris
+
+    # wine
+    wineWowPackages.staging
+    winetricks
   ];
 
   home.sessionVariables = {
