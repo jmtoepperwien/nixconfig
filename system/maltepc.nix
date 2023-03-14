@@ -16,6 +16,11 @@
   # vulkan
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages = with pkgs; [ 
+    vulkan-tools
+    vulkan-headers
+    vulkan-loader
+  ];
 
   nix.settings.max-jobs = 6;
   nix.settings.cores = 6;
