@@ -48,7 +48,7 @@ in {
     lutris
 
     # wine
-    wineWowPackages.staging
+    wineWowPackages.stagingFull
     winetricks
   ];
 
