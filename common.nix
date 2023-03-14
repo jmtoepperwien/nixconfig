@@ -32,6 +32,7 @@
     unzip
     unp
     zsh
+    findutils
   ];
 
   time.timeZone = "Europe/Berlin";

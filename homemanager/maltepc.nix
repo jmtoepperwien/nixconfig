@@ -82,10 +82,20 @@ in {
     enable = true;
     enableCompletion = true; # not finished if system package completion is wanted (look at home manager documentation)
     autocd = true;
-    defaultKeymap = "vicmd";
     history.save = 1000;
     history.size = 1000;
-    initExtra = "setopt extended_glob\nbindkey 'kj' vi-cmd-mode\n[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh";
+    initExtra = ''
+      setopt extended_glob
+
+      bindkey 'kj' vi-cmd-mode
+
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+      function open {
+      for i
+          do (xdg-open "$i" > /dev/null 2> /dev/null &)
+      done
+    }'';
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
       "tree" = "tree -C";
@@ -113,10 +123,11 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-    "x-scheme-handler/http" = [ "chromium-browser.desktop" ];
-    "x-scheme-handler/https" = [ "chromium-browser.desktop" ];
-    "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
-    "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
+      "x-scheme-handler/http" = [ "chromium-browser.desktop" ];
+      "x-scheme-handler/https" = [ "chromium-browser.desktop" ];
+      "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
+      "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
+      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
     };
   };
 }
