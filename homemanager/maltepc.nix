@@ -30,6 +30,7 @@ in {
     qutebrowser
     spotify
     sway
+    playerctl # sway audio button bindings
     waybar
     font-awesome # needed for waybar icons
     bemenu

@@ -20,6 +20,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    bat
     wget
     curl
     ripgrep
@@ -30,6 +31,7 @@
     tealdeer
     unzip
     unp
+    zsh
   ];
 
   time.timeZone = "Europe/Berlin";
