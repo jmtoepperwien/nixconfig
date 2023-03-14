@@ -20,6 +20,7 @@ in {
     neovim-remote
     luajitPackages.jsregexp # dependency of luasnip neovim plugin
     tree-sitter
+    nextcloud-client
     neovim-qt
     nodejs
     nodePackages.npm
