@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu j4-dmenu-desktop --dmenu='BEMENU_BACKEND=wayland bemenu --ignorecase --nb "#282828" --nf "ebdbb2" --fn "pango:DejaVu Sans Mono 12"' | xargs swaymsg exec --
+set $menu exec wofi --show drun --gtk-dark
 
 ### Output configuration
 output DP-2 {
