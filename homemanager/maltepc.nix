@@ -33,6 +33,8 @@ in {
     wofi # for sway
     playerctl # sway audio button bindings
     waybar
+    # alternative wm for testing
+    river
     font-awesome # needed for waybar icons
     bemenu
     j4-dmenu-desktop # desktop files for bemenu
