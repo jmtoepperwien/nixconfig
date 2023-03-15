@@ -5,7 +5,10 @@
     ./hardware/maltepc.nix
     ../graphical/greetd.nix
   ];
-  environment.systemPackages = with pkgs; [ tor-browser-bundle-bin ];
+  environment.systemPackages = with pkgs; [
+    tor-browser-bundle-bin
+    pulsemixer
+  ];
 
   services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
@@ -61,7 +64,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  environment.systemPackages = [ pkgs.pulsemixer ];
 
   # cross compilation to aarch64
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
