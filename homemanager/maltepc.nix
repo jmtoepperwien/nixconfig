@@ -4,6 +4,7 @@ let
     pandas
     numpy
     pynvim
+    ipython
   ];
 in {
   home.username = "mtoepperwien";
