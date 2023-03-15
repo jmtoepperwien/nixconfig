@@ -5,6 +5,7 @@
     ./hardware/maltepc.nix
     ../graphical/greetd.nix
   ];
+  environment.systemPackages = with pkgs; [ tor-browser-bundle-bin ];
 
   services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
