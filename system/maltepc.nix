@@ -8,6 +8,10 @@
   environment.systemPackages = with pkgs; [
     tor-browser-bundle-bin
     pulsemixer
+    
+    # cisco anyconnect uni vpn
+    openconnect
+    networkmanager-openconnect
   ];
 
   services.fwupd.enable = true;
