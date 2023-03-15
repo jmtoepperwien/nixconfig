@@ -156,6 +156,7 @@ return require("lazy").setup({
     }
   end },
   { 'Aasim-A/scrollEOF.nvim', config = function() require('scrollEOF').setup() end },
+  { 'tpope/vim-eunuch' },
 
   --{ "Exafunction/codeium.vim" }
 
