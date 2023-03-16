@@ -55,7 +55,7 @@
   environment.systemPackages = [
     pkgs.pulsemixer
     pkgs.alsa-utils
-    pkgs.sway
+    pkgs.libraspberrypi
   ];
 
   networking = {
