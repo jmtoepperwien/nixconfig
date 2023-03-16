@@ -4,7 +4,7 @@ let
   users = [ maltepc ];
 
   pi3host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTx5o298UgZ3gIBzFWwE+eOW3ACy0gXtdx71fcLdNvS";
-  pi4host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTZoiFBKeBwNGGUdeVCIKJrIqWULBB6VCY2ZsY3B05x";
+  pi4host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICGDf5ouwaiRlKetP7zb1OxmeronwE2/8S+YwS7tY0g6";
   systems = [ maltepchost pi3host pi4host ];
 in {
   "wifipassword.age".publicKeys = [ maltepc maltepchost pi3host pi4host ];

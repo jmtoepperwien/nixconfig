@@ -15,7 +15,7 @@
       dbuser = "nextcloud";
       dbhost = "/run/postgresql";
       dbname = "nextcloud";
-      adminpassFile = config.age.secrets.nextcloud-adminpass.path;
+      adminpassFile = config.age.secrets."nextcloud-adminpass".path;
       adminuser = "root";
     };
     phpOptions = {
