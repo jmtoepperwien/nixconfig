@@ -6,7 +6,7 @@
   users.users."kodi" = {
     isNormalUser = true;
     group = "kodi";
-    extraGroups = [ "audio" "users" "wheel" "video" ];
+    extraGroups = [ "audio" "users" "wheel" "video" "render" ];
     home = "/var/lib/kodi";
     createHome = true;
   };
