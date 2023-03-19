@@ -21,7 +21,7 @@
 
 
   systemd.services."kodi" = {
-    enable = true;
+    enable = false;
     after = [ "remote-fs.target" "systemd-user-sessions.service" "network-online.target" "nss-lookup.target" "sound.target" "polkit.service" "upower.service" "mysqld.service" "getty@tty1.service" ];
     wants = [ "network-online.target" "polkit.service" "upower.service" ];
     conflicts = [ "getty@tty1.service" ];
