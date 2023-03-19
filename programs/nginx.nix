@@ -29,6 +29,7 @@
 	  "/sabnzbd/".proxyPass = "http://localhost:6789";
 	  "/sonarr/".proxyPass = "http://localhost:8989";
 	  "/radarr/".proxyPass = "http://localhost:7878";
+	  "/prowlarr/".proxyPass = "http://localhost:9696";
 	};
       };
       "mosigit.duckdns.org" = {

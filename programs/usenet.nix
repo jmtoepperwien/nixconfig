@@ -30,6 +30,15 @@
     openFirewall = true;
   };
 
+  # Prowlarr
+  users.groups."prowlarr" = {};
+  users.users."prowlarr" = {
+    isSystemUser = true;
+    group = "prowlarr";
+    extraGroups = [ "usenet" ];
+  };
+  services.prowlarr.enable = true;
+
   # Sabnzbd
   users.users."sabnzbd" = {
     isSystemUser = true;
