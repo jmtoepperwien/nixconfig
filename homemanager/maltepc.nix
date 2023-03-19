@@ -14,6 +14,8 @@ in {
   home.packages = with pkgs; [
     alacritty
     element-desktop
+    discord
+    steam
     mako
     mpv
     # neovim and plugin dependencies {{{
