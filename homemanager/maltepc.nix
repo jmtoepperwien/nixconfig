@@ -31,7 +31,7 @@ in {
     curl
     # }}} neovim and plugin dependencies
     # Latex
-    texlive.combined.scheme-medium
+    texlive.combined.scheme-full
     qutebrowser
     spotify
     sway
