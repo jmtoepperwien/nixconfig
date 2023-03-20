@@ -30,6 +30,8 @@ in {
     wget
     curl
     # }}} neovim and plugin dependencies
+    # Latex
+    texlive.combined.scheme-medium
     qutebrowser
     spotify
     sway
