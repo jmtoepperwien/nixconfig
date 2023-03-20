@@ -43,7 +43,7 @@
 	  ./programs/mariadb.nix
 	  ./programs/postgresql.nix
 	  ./programs/gitea.nix
-	  ./programs/kodi.nix
+	  ./programs/kodi_nfs.nix
 	  ./programs/usenet.nix
 	  ./programs/nextcloud.nix
 
