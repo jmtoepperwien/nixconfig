@@ -12,6 +12,9 @@
     # cisco anyconnect uni vpn
     openconnect
     networkmanager-openconnect
+
+    # secret management
+    gnome.gnome-keyring
   ];
 
   services.fwupd.enable = true;
@@ -70,7 +73,6 @@
   };
 
   # secret management
-  services.gnome.gnome-keyring.enable = true;
   security.pam.services."gnome_keyring" = {
     text = ''
       auth     optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
