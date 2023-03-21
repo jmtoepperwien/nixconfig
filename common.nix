@@ -26,6 +26,7 @@
     ripgrep
     fd
     glances
+    ncdu
     tmux
     tree
     tealdeer
