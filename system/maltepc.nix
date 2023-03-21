@@ -69,6 +69,17 @@
     pulse.enable = true;
   };
 
+  # secret management
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services."gnome_keyring" = {
+    text = ''
+      auth     optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+      session  optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+
+      password  optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+    '';
+  };
+
   # cross compilation to aarch64
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
