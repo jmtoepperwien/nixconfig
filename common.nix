@@ -34,6 +34,7 @@
     unp
     zsh
     findutils
+    smartmontools
   ];
 
   time.timeZone = "Europe/Berlin";
@@ -52,4 +53,7 @@
     };
   };
   xdg.mime.enable = true;
+
+  # drive health checks
+  services.smartd.enable = true;
 }
