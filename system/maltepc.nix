@@ -15,6 +15,11 @@
 
     # secret management
     gnome.gnome-keyring
+
+    qemu_kvm
+    qemu-utils
+    virt-manager
+    libvirt
   ];
 
   services.fwupd.enable = true;
@@ -59,7 +64,7 @@
     isNormalUser = true;
     home = "/home/mtoepperwien";
     group = "mtoepperwien";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirt" ];
     shell = pkgs.zsh;
   };
 
