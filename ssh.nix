@@ -3,8 +3,11 @@
 {
   services.openssh = {
     enable = true;
-    settings.passwordAuthentication = false;
-    settings.kbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = lib.mkDefault "no"; # nixos-generators will put this to true for first install
+    settings.PasswordAuthentication = lib.mkForce false;
+    settings.KbdInteractiveAuthentication = lib.mkForce false;
+    settings.PermitRootLogin = lib.mkForce "no"; # nixos-generators will try to put this to true for first install
+    extraConfig = ''
+      UsePam no
+    '';
   };
 }
