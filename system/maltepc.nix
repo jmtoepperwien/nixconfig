@@ -22,6 +22,7 @@
     spice
     spice-protocol
     spice-gtk
+    gnome.gnome-boxes
   ];
 
   virtualisation.libvirtd.enable = true;
