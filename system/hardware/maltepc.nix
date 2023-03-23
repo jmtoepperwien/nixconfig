@@ -16,27 +16,30 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/0ef999fd-b03a-47eb-8c9b-373f7a391d77";
       fsType = "btrfs";
-      options = [ "subvol=@"  "defaults" ];
+      options = [ "subvol=@"  "defaults" "discard" ];
     };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/f97e6697-110c-4d82-ab82-f5129e937aeb";
+  boot.initrd.luks.devices."root" {
+    device = "/dev/disk/by-uuid/f97e6697-110c-4d82-ab82-f5129e937aeb";
+    allowDiscards = true;
+  };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/0ef999fd-b03a-47eb-8c9b-373f7a391d77";
       fsType = "btrfs";
-      options = [ "subvol=@home" "defaults" ];
+      options = [ "subvol=@home" "defaults" "discard" ];
     };
 
   fileSystems."/var" =
     { device = "/dev/disk/by-uuid/0ef999fd-b03a-47eb-8c9b-373f7a391d77";
       fsType = "btrfs";
-      options = [ "subvol=@var" "defaults" ];
+      options = [ "subvol=@var" "defaults" "discard" ];
     };
 
   fileSystems."/var/lib" =
     { device = "/dev/disk/by-uuid/0ef999fd-b03a-47eb-8c9b-373f7a391d77";
       fsType = "btrfs";
-      options = [ "subvol=@varlib" "defaults" ];
+      options = [ "subvol=@varlib" "defaults" "discard" ];
     };
 
   fileSystems."/boot" =
