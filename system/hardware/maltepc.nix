@@ -19,7 +19,7 @@
       options = [ "subvol=@"  "defaults" "discard" ];
     };
 
-  boot.initrd.luks.devices."root" {
+  boot.initrd.luks.devices."root" = {
     device = "/dev/disk/by-uuid/f97e6697-110c-4d82-ab82-f5129e937aeb";
     allowDiscards = true;
   };
