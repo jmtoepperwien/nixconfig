@@ -35,7 +35,7 @@
     zsh
     findutils
     smartmontools
-    usb-utils
+    usbutils
   ];
 
   time.timeZone = "Europe/Berlin";
