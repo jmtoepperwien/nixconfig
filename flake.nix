@@ -24,6 +24,7 @@
         modules = [
 	  ./system/maltepc.nix
           ./common.nix
+          ./ssd.nix
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
