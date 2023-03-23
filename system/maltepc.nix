@@ -19,8 +19,13 @@
     qemu_kvm
     qemu-utils
     virt-manager
-    libvirt
+    spice
+    spice-protocol
+    spice-gtk
   ];
+
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
 
   services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
@@ -64,7 +69,7 @@
     isNormalUser = true;
     home = "/home/mtoepperwien";
     group = "mtoepperwien";
-    extraGroups = [ "wheel" "networkmanager" "libvirt" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
