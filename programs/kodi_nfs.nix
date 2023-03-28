@@ -12,8 +12,8 @@
 
   services.nfs.server.enable = true;
   services.nfs.server.exports = ''
-    /export/series  192.168.1.244(ro,async,insecure,subtree_check,all_squash)
-    /export/movies  192.168.1.244(ro,async,insecure,subtree_check,all_squash)
+    /export/series  192.168.1.244(rw,async,insecure,subtree_check,all_squash,anongid=988)
+    /export/movies  192.168.1.244(rw,async,insecure,subtree_check,all_squash,anongid=988)
   '';
 
 }
