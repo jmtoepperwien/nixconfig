@@ -6,6 +6,8 @@
     wayland
     wl-clipboard
   ];
+
+  # xdg desktop portal for screensharing
   xdg.portal = {
     enable = true;
     wlr.enable = true;
