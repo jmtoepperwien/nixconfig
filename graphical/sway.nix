@@ -12,9 +12,4 @@
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
-  # enable sway window manager
-  programs.sway = {
-    enable = true;
-  };
 }
