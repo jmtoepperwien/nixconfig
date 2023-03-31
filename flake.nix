@@ -23,6 +23,7 @@
         specialArgs = attrs;
         modules = [
 	  ./system/maltepc.nix
+          ./graphical/sway.nix
           ./common.nix
           ./ssd.nix
           agenix.nixosModules.default

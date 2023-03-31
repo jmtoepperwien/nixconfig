@@ -20,3 +20,5 @@ config.bind('^', 'tab-focus 6', mode='normal')
 config.bind('&', 'tab-focus 7', mode='normal')
 config.bind('*', 'tab-focus 8', mode='normal')
 config.bind('(', 'tab-focus -1', mode='normal')
+
+config.bind(',m', 'hint links spawn mpv {hint-url}')
