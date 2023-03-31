@@ -16,7 +16,7 @@
 	  "/files/" = {
 	    root = "/var/www/";
 	    extraConfig = ''
-              access_log off;
+              access_log /var/log/nginx/public-files.log;
 	      autoindex on;
 	      proxy_max_temp_file_size 0;
 	      aio threads;
@@ -24,6 +24,22 @@
 	      output_buffers 2 1M;
 	      sendfile on;
 	      sendfile_max_chunk 512k;
+	    '';
+	  };
+          "/leander/" = {
+	    root = "/var/www/";
+	    extraConfig = ''
+              disable_symlinks off;
+              auth_basic           "Leander Serien";
+              auth_basic_user_file /etc/nginx/.htpasswd;
+              access_log /var/log/nginx/leander-files.log;
+              autoindex on;
+              proxy_max_temp_file_size 0;
+              aio threads;
+              directio 16M;
+              output_buffers 2 1M;
+              sendfile on;
+              sendfile_max_chunk 512k;
 	    '';
 	  };
 	  "/sabnzbd/".proxyPass = "http://localhost:6789";
