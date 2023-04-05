@@ -37,7 +37,7 @@
     group = "prowlarr";
     extraGroups = [ "usenet" ];
   };
-  services.prowlarr {
+  services.prowlarr = {
     enable = true;
     openFirewall = true;
   };
