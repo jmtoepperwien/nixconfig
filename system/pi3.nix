@@ -14,18 +14,7 @@
   networking = {
     hostName = "pi3";
     useDHCP = true;
-    firewall.enable = false;
-  };
-  age.secrets.wifipassword.file = ../secrets/wifipassword.age;
-  networking.wireless = {
-    environmentFile = config.age.secrets.wifipassword.path;
-    enable = true;
-    userControlled.enable = true;
-    networks = {
-      Mosi24 = {
-        psk = "@MOSI_PASSWORD@";
-      };
-    };
+    firewall.enable = true;
   };
 
   users.users.pi3 = {
@@ -42,6 +31,8 @@
       commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
     }
   ];
+
+  environment.systemPackages = with pkgs; [ libraspberrypi ];
 
   system.stateVersion = "22.11";
 }
