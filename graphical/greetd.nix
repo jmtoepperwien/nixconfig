@@ -13,7 +13,7 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "cage gtkgreet";
+        command = "cage -m last gtkgreet";
       };
     };
   };
