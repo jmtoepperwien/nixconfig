@@ -16,4 +16,5 @@
     /export/movies  192.168.1.244(rw,async,insecure,subtree_check,all_squash,anongid=988)
   '';
 
+  networking.firewall.allowedTCPPorts = [ 2049 ];
 }

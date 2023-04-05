@@ -61,7 +61,7 @@
   networking = {
     hostName = "pi4"; # Define your hostname.
     useDHCP = true;
-    firewall.enable = false; # [TODO]
+    firewall.enable = true;
   };
   #age.secrets.wifipassword.file = ../secrets/wifipassword.age;
   #networking.wireless = {

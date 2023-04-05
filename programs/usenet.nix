@@ -37,7 +37,10 @@
     group = "prowlarr";
     extraGroups = [ "usenet" ];
   };
-  services.prowlarr.enable = true;
+  services.prowlarr {
+    enable = true;
+    openFirewall = true;
+  };
 
   # Sabnzbd
   users.users."sabnzbd" = {
@@ -49,4 +52,5 @@
     enable = true;
     group = "usenet";
   };
+  networking.firewall.allowedTCPPorts = [ 6789 ];
 }
