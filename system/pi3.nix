@@ -11,21 +11,10 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "pi3";
-  networking.useDHCP = false;
-  networking.defaultGateway.address = "192.168.1.1";
-  networking.nameservers = [ "192.168.1.1" "1.1.1.1" "1.0.0.1" ];
-  networking.interfaces = {
-    wlan0 = {
-      ipv4 = {
-        addresses = [
-          {
-            address = "192.168.1.222";
-            prefixLength = 24;
-          }
-        ];
-      };
-    };
+  networking = {
+    hostName = "pi3";
+    useDHCP = true;
+    firewall.enable = false;
   };
   age.secrets.wifipassword.file = ../secrets/wifipassword.age;
   networking.wireless = {
@@ -38,8 +27,6 @@
       };
     };
   };
-
-
 
   users.users.pi3 = {
     isNormalUser = true;
@@ -55,4 +42,6 @@
       commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
     }
   ];
+
+  system.stateVersion = "22.11";
 }
