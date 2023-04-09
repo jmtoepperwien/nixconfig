@@ -27,7 +27,7 @@
       RemainAfterExit = true;
       ExecStart = pkgs.writers.writeBash "wg-up" ''
         conf=${config.age.secrets.protonvpn.path}
-        source <(${pkgs.gawk} -F ' = ' '{if (! ($0 ~ /^[#\[]/)) print $0}' $conf | ${pkgs.gnused}/bin/sed 's/ = /=/g')
+        source <(${pkgs.gawk}/bin/awk -F ' = ' '{if (! ($0 ~ /^[#\[]/)) print $0}' $conf | ${pkgs.gnused}/bin/sed 's/ = /=/g')
 
         # create wireguard interface; vpn namespace has to exist already
         ${pkgs.iproute2}/bin/ip link add wg0 type wireguard
