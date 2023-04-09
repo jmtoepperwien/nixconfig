@@ -11,10 +11,9 @@
   services.transmission = {
     enable = true;
     user = "transmission";
-    group = "usenet"; # [TODO: global rename]
     settings = {
-      incomplete-dir = /mnt/kodi_lib/incomplete;
-      download-dir = /mnt/kodi_lib/completed;
+      incomplete-dir = /mnt/kodi_lib/downloads_torrent/incomplete;
+      download-dir = /mnt/kodi_lib/downloads_torrent/completed;
     };
     openRPCPort = true;
   };
