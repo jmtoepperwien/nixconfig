@@ -48,6 +48,8 @@
 	  ./programs/kodi_nfs.nix
 	  ./programs/usenet.nix
 	  ./programs/nextcloud.nix
+          ./network/proton_wireguard.nix
+          ./programs/torrent.nix
 
           agenix.nixosModules.default
 	  nixos-hardware.nixosModules.raspberry-pi-4
