@@ -25,7 +25,7 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = writers.writeBash "wg-up" ''
+      ExecStart = pkgs.writers.writeBash "wg-up" ''
         conf=${config.age.secrets.protonvpn.path}
         source <(awk -F ' = ' '{if (! ($0 ~ /^[#\[]/)) print $0}' ${conf} | sed 's/ = /=/g')
 
