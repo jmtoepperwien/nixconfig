@@ -9,4 +9,5 @@ let
 in {
   "wifipassword.age".publicKeys = [ maltepc maltepchost pi3host pi4host ];
   "nextcloud-adminpass.age".publicKeys = [ maltepc pi4host ];
+  "protonvpn.age".publicKeys = [ maltepc pi4host ];
 }
