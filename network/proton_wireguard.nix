@@ -36,7 +36,7 @@
         ${pkgs.iproute2}/bin/ip -n vpn address add $Address dev wg0
         # conf without address and dns for wg setconf
         ${pkgs.iproute2}/bin/ip netns exec vpn \
-        $  wg setconf wg0 <(cat $conf | sed -E '/^(DNS|Address).*/d')
+          ${pkgs.wireguard-tools]/bin/wg} setconf wg0 <(cat $conf | sed -E '/^(DNS|Address).*/d')
         ${pkgs.iproute2}/bin/ip -n vpn link set wg0 up
         ${pkgs.iproute2}/bin/ip -n vpn route add default dev wg0
       '';
