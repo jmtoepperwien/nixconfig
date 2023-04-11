@@ -1,0 +1,76 @@
+{ config, lib, modulesPath, pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+    tor-browser-bundle-bin
+    pulsemixer
+    
+    # cisco anyconnect uni vpn
+    openconnect
+    networkmanager-openconnect
+
+    # secret management
+    gnome.gnome-keyring
+
+    qemu_kvm
+    qemu-utils
+    spice
+    spice-protocol
+    spice-gtk
+  ];
+
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
+  services.fwupd.enable = true;
+  hardware.enableRedistributableFirmware = true;
+
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
+    systemd-boot.enable = true;
+  };
+  networking.networkmanager.enable = true;
+
+  users.groups.mtoepperwien = {};
+  users.users.mtoepperwien = {
+    isNormalUser = true;
+    home = "/home/mtoepperwien";
+    group = "mtoepperwien";
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+    shell = pkgs.zsh;
+  };
+  security.sudo.extraRules = [
+    {
+      users = [ "mtoepperwien" ];
+      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
+    }
+  ];
+
+  # sound settings
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # secret management
+  security.pam.services."gnome_keyring" = {
+    text = ''
+      auth     optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+      session  optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+
+      password  optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+    '';
+  };
+
+  # containers with podman
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+}
