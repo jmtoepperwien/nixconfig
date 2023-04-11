@@ -36,8 +36,9 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.mtoepperwien = import ./homemanager/maltexps.nix
+            home-manager.users.mtoepperwien = import ./homemanager/maltexps.nix;
           }
+          nixos-hardware.nixosModules.dell-xps-13-9370
         ];
       };
       pi3 = nixpkgs.lib.nixosSystem {
