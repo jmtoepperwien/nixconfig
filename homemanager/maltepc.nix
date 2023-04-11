@@ -29,4 +29,11 @@
     winetricks
     # }}} Gaming
   ];
+
+  home.file.".config/sway/config" = {
+    text = ''
+      include maltepc
+      include common
+    '';
+  };
 }

@@ -9,4 +9,11 @@
     ./desktop.nix
     ./laptop.nix
   ];
+
+  home.file.".config/sway/config" = {
+    text = ''
+      include maltexps
+      include common
+    '';
+  };
 }

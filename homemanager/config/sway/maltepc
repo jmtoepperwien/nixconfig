@@ -1,0 +1,26 @@
+### Output configuration
+output DP-2 {
+  mode 3440x1440@144Hz
+  pos 0 240
+  adaptive_sync on
+}
+output HDMI-A-2 {
+  res 1920x1080
+  pos 3440 0
+  transform 270
+}
+set $monitor_one "DP-2"
+set $monitor_two "HDMI-A-2"
+
+# Bind workspaces to monitors
+workspace 1 output $monitor_one
+workspace 3 output $monitor_one
+workspace 5 output $monitor_one
+workspace 7 output $monitor_one
+workspace 9 output $monitor_one
+workspace 2 output $monitor_two
+workspace 4 output $monitor_two
+workspace 6 output $monitor_two
+workspace 8 output $monitor_two
+workspace 10 output $monitor_two
+
