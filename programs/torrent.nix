@@ -1,23 +1,24 @@
 { config, lib, pkgs, agenix, ... }:
 
 {
-  users.groups."transmission" = {};
-  users.users."transmission" = {
+  users.groups."rtorrent" = {};
+  users.users."rtorrent" = {
     isSystemUser = true;
-    group = "transmission";
+    group = "rtorrent";
     extraGroups= [ "usenet" ];
   };
 
-  services.transmission = {
+  environment.systemPackages = [ pkgs.flood ];
+
+  services.rtorrent = {
     enable = true;
-    user = "transmission";
-    settings = {
-      incomplete-dir = /mnt/kodi_lib/downloads_torrent/incomplete;
-      download-dir = /mnt/kodi_lib/downloads_torrent/completed;
-    };
-    openRPCPort = true;
-  };
-  systemd.services.transmission = {
+    user = "rtorrent";
+    dataPermissions = "0775";
+    rpcSocket = "/run/rtorrent/rpc.sock";
+    downloadDir = /mnt/kodi_lib/downloads_torrent;
+  }
+
+  systemd.services.rtorrent = {
     bindsTo = [ "netns@vpn.service" ];
     requires = [ "network-online.target" ];
     after = [ "protonvpn.service" ];
