@@ -7,6 +7,8 @@
     ./desktop.nix
   ];
 
+  services.tlp.enable = true;
+
   hardware.cpu.intel.updateMicrocode = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
