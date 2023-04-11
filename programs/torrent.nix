@@ -14,7 +14,6 @@
     enable = true;
     user = "rtorrent";
     dataPermissions = "0775";
-    rpcSocket = "/run/rtorrent/rpc.sock";
     downloadDir = /mnt/kodi_lib/downloads_torrent;
   };
 
