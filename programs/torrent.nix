@@ -14,7 +14,7 @@
     enable = true;
     user = "rtorrent";
     dataPermissions = "0775";
-    downloadDir = /mnt/kodi_lib/downloads_torrent;
+    downloadDir = "/mnt/kodi_lib/downloads_torrent";
   };
 
   systemd.services.rtorrent = {
