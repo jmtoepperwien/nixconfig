@@ -27,10 +27,11 @@
   };
 
   systemd.services.flood = {
+    enable = true;
     description = "Flood frontend for rtorrent";
     bindsTo = [ "rtorrent.service" ];
     serviceConfig = {
-      ExecStart = "${pkgs.flood}/bin/flood --rtsocket /run/rtorrent/rpc.sock --port 5678";
+      ExecStart = "${pkgs.flood}/bin/flood --rtsocket /run/rtorrent/rpc.sock --port 5678 --host 0.0.0.0";
       Restart = "on-failure";
       Type = "simple";
       User = "rtorrent";
