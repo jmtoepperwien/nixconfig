@@ -8,16 +8,6 @@
 
   outputs = { self, nixpkgs, agenix, home-manager, nixos-hardware, ... }@attrs: rec {
     nixosConfigurations = {
-      pi3 = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = attrs;
-        modules = [
-          ./system/pi3.nix
-          ./ssh.nix
-          ./common.nix
-          agenix.nixosModules.default
-        ];
-      };
       maltepc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = attrs;
@@ -32,6 +22,32 @@
             home-manager.useUserPackages = true;
             home-manager.users.mtoepperwien = import ./homemanager/maltepc.nix;
           }
+        ];
+      };
+      maltexps = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = attrs;
+        modules = [
+          ./system/maltexps.nix
+          ./graphical/sway.nix
+          ./common.nix
+          ./ssd.nix
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.mtoepperwien = import ./homemanager/maltexps.nix
+          }
+        ];
+      };
+      pi3 = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = attrs;
+        modules = [
+          ./system/pi3.nix
+          ./ssh.nix
+          ./common.nix
+          agenix.nixosModules.default
         ];
       };
       pi4 = nixpkgs.lib.nixosSystem  {
