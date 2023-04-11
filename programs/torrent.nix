@@ -16,7 +16,7 @@
     dataPermissions = "0775";
     rpcSocket = "/run/rtorrent/rpc.sock";
     downloadDir = /mnt/kodi_lib/downloads_torrent;
-  }
+  };
 
   systemd.services.rtorrent = {
     bindsTo = [ "netns@vpn.service" ];
