@@ -27,10 +27,10 @@
       NetworkNamespacePath = "/var/run/netns/vpn";
       # [TODO: not hardcoded gateway]
       ExecStartPre = pkgs.writers.writeBash "acquire-port-vpn" ''
-        ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/\1/' > /run/proton_udp_incoming && chown rtorrent:rtorrent /run/proton_udp_incoming
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/\1/' > /run/proton_udp_incoming && chown rtorrent:rtorrent /run/proton_udp_incoming"
       '';
       ExecStart = pkgs.writers.writeBash "keep-port-vpn" ''
-        while true ; do ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60; sleep 45 ; done
+        eval "while true ; do ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60; sleep 45 ; done"
       '';
       Type = "simple";
       Restart = "always";
