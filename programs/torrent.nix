@@ -28,7 +28,7 @@
       # [TODO: not hardcoded gateway]
       ExecStartPre = "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/\1/' > /run/proton_udp_incoming && chown rtorrent:rtorrent /run/proton_udp_incoming";
       ExecStart = "while true ; do ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60 || { echo -e \"ERROR with ${pkgs.libnatpmp}/bin/natpmpc command \a\" ; break ; } ; sleep 45 ; done";
-      Restart = "yes";
+      Restart = "always";
     };
   };
 
