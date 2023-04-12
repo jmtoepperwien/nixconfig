@@ -25,9 +25,8 @@
       after = [ "protonvpn.service" ];
       serviceConfig = {
         NetworkNamespacePath = "/var/run/netns/vpn";
-        ExecStart = lib.mkForce "${pkgs.tmux}/bin/tmux -L rt new-session -s rt -n rtorrent -d rtorrent ${pkgs.rtorrent}/bin/rtorrent -n -o import=${configFile}";
-        Type = lib.mkForce "forking";
-        ExecStop = "${pkgs.bash}/bin/bash -c \"${pkgs.tmux}/bin/tmux -L rt send-keys -t rt:rtorrent.0 C-q; while ${pkgs.procps}/bin/pidof rtorrent > /dev/null; do echo stopping rtorrent...; sleep 1; done\"";
+        ExecStart = lib.mkForce "${pkgs.tmux}/bin/tmux new-session ${pkgs.rtorrent}/bin/rtorrent -n -o import=${configFile}";
+        Type = lib.mkForce "simple";
       };
     };
 
