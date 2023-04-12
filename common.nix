@@ -38,7 +38,12 @@
     usbutils
   ];
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    shellAliases = {
+      nixgit = "sudo -i && cd /etc/nixos && git pull";
+    };
+  };
   users.defaultUserShell = pkgs.zsh;
 
   time.timeZone = "Europe/Berlin";
