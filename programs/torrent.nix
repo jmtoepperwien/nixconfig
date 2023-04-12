@@ -19,11 +19,11 @@
 
   systemd.services."natpmp-proton" = {
     enable = true;
-    user = "root";
     description = "Acquire incoming port from protonvpn natpmp";
     requires = [ "protonvpn.service" ];
     bindsTo = [ "protonvpn.service" ];
     serviceConfig = {
+      User = "root";
       NetworkNamespacePath = "/var/run/netns/vpn";
       # [TODO: not hardcoded gateway]
       ExecStartPre = "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/\1/' > /run/proton_udp_incoming && chown rtorrent:rtorrent /run/proton_udp_incoming";
