@@ -25,6 +25,8 @@
   };
   # disable this to use tlp as it seems to be better
   services.power-profiles-daemon.enable = lib.mkForce false;
+  # disable this to use pipewire instead
+  hardware.pulseaudio.enable = false;
 
   system.stateVersion = "22.11";
 }
