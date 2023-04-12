@@ -17,18 +17,14 @@
     downloadDir = "/mnt/kodi_lib/downloads_torrent";
   };
 
-  systemd.services.rtorrent = let
-      configFile = pkgs.writeText "rtorrent.rc" config.services.rtorrent.configText;
-    in {
-      bindsTo = [ "netns@vpn.service" ];
-      requires = [ "network-online.target" ];
-      after = [ "protonvpn.service" ];
-      serviceConfig = {
-        NetworkNamespacePath = "/var/run/netns/vpn";
-        #ExecStart = lib.mkForce "${pkgs.tmux}/bin/tmux new-session ${pkgs.rtorrent}/bin/rtorrent -n -o import=${configFile}";
-        #Type = lib.mkForce "simple";
-      };
+  systemd.services.rtorrent = {
+    bindsTo = [ "netns@vpn.service" ];
+    requires = [ "network-online.target" ];
+    after = [ "protonvpn.service" ];
+    serviceConfig = {
+      NetworkNamespacePath = "/var/run/netns/vpn";
     };
+  };
 
   systemd.services.flood = {
     enable = true;
