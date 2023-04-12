@@ -23,6 +23,8 @@
   services.xserver.desktopManager.gnome = { # this should not be "xserver" but nix naming conventions are currently like this
     enable = true;
   };
+  # disable this to use tlp as it seems to be better
+  services.power-profiles-daemon.enable = lib.mkForce false;
 
   system.stateVersion = "22.11";
 }
