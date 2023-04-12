@@ -10,6 +10,10 @@
     ./laptop.nix
   ];
 
+  home.packages = with pkgs; [
+    rnote
+  ];
+
   home.file.".config/sway/config" = {
     text = ''
       include maltexps
