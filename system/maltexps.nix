@@ -4,6 +4,7 @@
   imports = [
     ./hardware/maltexps.nix
     ../graphical/greetd.nix
+    ../graphical/environments-maltexps.nix
     ./desktop.nix
   ];
 
@@ -17,6 +18,11 @@
   nix.settings.cores = 4;
 
   networking.hostName = "maltexps";
+
+  # Gnome for touchscreen and beamer setups
+  services.xserver.desktopManager.gnome = { # this should not be "xserver" but nix naming conventions are currently like this
+    enable = true;
+  };
 
   system.stateVersion = "22.11";
 }

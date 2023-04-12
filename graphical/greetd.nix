@@ -17,7 +17,7 @@ in {
       };
     };
   };
-  environment.etc."greetd/environments".text = ''
+  environment.etc."greetd/environments".text = lib.mkDefault ''
     sway-run
     zsh
     bash
