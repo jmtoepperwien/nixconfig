@@ -37,7 +37,9 @@
     smartmontools
     usbutils
   ];
+
   programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
