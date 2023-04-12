@@ -25,8 +25,8 @@
       after = [ "protonvpn.service" ];
       serviceConfig = {
         NetworkNamespacePath = "/var/run/netns/vpn";
-        ExecStart = lib.mkForce "${pkgs.tmux}/bin/tmux new-session ${pkgs.rtorrent}/bin/rtorrent -n -o import=${configFile}";
-        Type = lib.mkForce "simple";
+        #ExecStart = lib.mkForce "${pkgs.tmux}/bin/tmux new-session ${pkgs.rtorrent}/bin/rtorrent -n -o import=${configFile}";
+        #Type = lib.mkForce "simple";
       };
     };
 
