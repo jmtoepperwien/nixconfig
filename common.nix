@@ -41,7 +41,7 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      nixgit = "sudo -i && cd /etc/nixos && git pull";
+      nixgit = "cd /etc/nixos && sudo git pull";
     };
   };
   users.defaultUserShell = pkgs.zsh;
