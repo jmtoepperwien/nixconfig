@@ -30,6 +30,7 @@
       ExecStart = pkgs.writers.writeBash "keep-port-vpn" ''
         while true ; do ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60; sleep 45 ; done
       '';
+      Type = "simple";
       Restart = "always";
     };
   };
