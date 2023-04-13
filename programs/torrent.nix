@@ -30,7 +30,7 @@
         echo "getting udp"
         eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .*/UDPPORT=\1/' > /run/proton_incoming"
         echo "getting tcp"
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .*/TCPPORT=\1/' >> /run/proton_incoming && ${pkgs.busybox}/bin/chown rtorrent:rtorrent /run/proton_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .*/TCPPORT=\1/' >> /run/proton_incoming"
         echo "looping to keep"
         while true ; do
           ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60
