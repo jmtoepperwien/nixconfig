@@ -63,7 +63,8 @@
   systemd.services.flood = {
     enable = true;
     description = "Flood frontend for rtorrent";
-    bindsTo = [ "rtorrent.service" "natpmp-proton.service" ];
+    bindsTo = [ "rtorrent.service" ];
+    after = [ "rtorrent.service" ];
     serviceConfig = {
       ExecStart = "${pkgs.flood}/bin/flood --rtsocket /run/rtorrent/rpc.sock --port 5678 --host 0.0.0.0";
       Restart = "on-failure";
