@@ -27,8 +27,8 @@
       NetworkNamespacePath = "/var/run/netns/vpn";
       # [TODO: not hardcoded gateway]
       ExecStart = pkgs.writers.writeBash "get-port-vpn" ''
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/UDPPORT=\1/' > /run/proton_incoming && chown rtorrent:rtorrent /run/proton_incoming"
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/TCPPORT=\1/' >> /run/proton_incoming && chown rtorrent:rtorrent /run/proton_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .*/UDPPORT=\1/' > /run/proton_incoming && ${pkgs.busybox}/bin/chown rtorrent:rtorrent /run/proton_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .*/TCPPORT=\1/' >> /run/proton_incoming"
         while true ; do
           ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60
           sleep 45
