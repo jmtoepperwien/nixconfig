@@ -21,28 +21,37 @@
     enable = true;
     description = "Acquire incoming port from protonvpn natpmp";
     requires = [ "protonvpn.service" ];
-    bindsTo = [ "protonvpn.service" ];
+    bindsTo = [ "protonvpn.service" "rtorrent.service" ];
     serviceConfig = {
       User = "root";
       NetworkNamespacePath = "/var/run/netns/vpn";
       # [TODO: not hardcoded gateway]
       ExecStartPre = pkgs.writers.writeBash "acquire-port-vpn" ''
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/\1/' > /run/proton_udp_incoming && chown rtorrent:rtorrent /run/proton_udp_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/UDPPORT=\1/' > /run/proton_incoming && chown rtorrent:rtorrent /run/proton_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60 | grep 'Mapped public port' | sed -E 's/.*Mapped public port ([0-9]+) .*/TCPPORT=\1/' >> /run/proton_incoming && chown rtorrent:rtorrent /run/proton_incoming"
       '';
       ExecStart = pkgs.writers.writeBash "keep-port-vpn" ''
-        eval "while true ; do ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60; sleep 45 ; done"
+        while true ; do
+          ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 0 tcp 60
+          sleep 45
+        done
       '';
       Type = "simple";
       Restart = "always";
     };
   };
 
-  systemd.services.rtorrent = {
+  systemd.services.rtorrent = let
+    configFile = pkgs.writeText "rtorrent.rc" config.services.rtorrent.configText;
+    rtorrentPackage = config.services.rtorrent.package;
+  in {
     bindsTo = [ "netns@vpn.service" ];
-    requires = [ "network-online.target" ];
-    after = [ "protonvpn.service" ];
+    requires = [ "network-online.target" "protonvpn.service" "natpmp-proton.service" ];
+    after = [ "protonvpn.service" "natpmp-proton.service" ];
     serviceConfig = {
+      EnvironmentFile = "/run/proton_incoming";
       NetworkNamespacePath = "/var/run/netns/vpn";
+      ExecStart = "${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORT-$TCPPORT -o dht.port.set = $UDPPORT";
     };
   };
 
