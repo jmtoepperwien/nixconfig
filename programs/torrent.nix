@@ -52,7 +52,11 @@
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
       NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = lib.mkForce "${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORT-$TCPPORT -o dht.port.set=$UDPPORT";
+      ExecStart = lib.mkForce pkgs.writers.writeBash "start-rtorrent" ''
+        echo "${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORT-$TCPPORT -o dht.port.set=$UDPPORT
+"
+        ${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORT-$TCPPORT -o dht.port.set=$UDPPORT
+      '';
     };
   };
 
