@@ -24,6 +24,8 @@ in {
     nodePackages.npm
     wget
     curl
+    lua-language-server
+    clang-tools
     # }}} neovim and plugin dependencies
     # Latex
     texlive.combined.scheme-full
