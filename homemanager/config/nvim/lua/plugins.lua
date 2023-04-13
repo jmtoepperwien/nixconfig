@@ -1,7 +1,4 @@
 return require("lazy").setup({
-  { "williamboman/mason.nvim", config = function() require("mason").setup() end },
-  { "williamboman/mason-lspconfig.nvim",
-    config = function() require("mason-lspconfig").setup({ automatic_installation = true }) end },
   {
     "sainnhe/gruvbox-material",
     config = function()
