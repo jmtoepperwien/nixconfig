@@ -49,6 +49,7 @@
     bindsTo = [ "netns@vpn.service" ];
     requires = [ "network-online.target" "protonvpn.service" "natpmp-proton.service" ];
     after = [ "protonvpn.service" "natpmp-proton.service" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
       NetworkNamespacePath = "/var/run/netns/vpn";
@@ -65,6 +66,7 @@
     description = "Flood frontend for rtorrent";
     bindsTo = [ "rtorrent.service" ];
     after = [ "rtorrent.service" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.flood}/bin/flood --rtsocket /run/rtorrent/rpc.sock --port 5678 --host 0.0.0.0";
       Restart = "on-failure";
