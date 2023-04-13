@@ -45,6 +45,7 @@
 	  "/sabnzbd/".proxyPass = "http://localhost:6789";
 	  "/sonarr/".proxyPass = "http://localhost:8989";
 	  "/radarr/".proxyPass = "http://localhost:7878";
+          "/readarr/".proxyPass = "http://localhost:8787";
 	  "/prowlarr/".proxyPass = "http://localhost:9696";
 	};
       };

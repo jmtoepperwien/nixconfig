@@ -30,6 +30,19 @@
     openFirewall = true;
   };
 
+  # Readarr
+  users.groups."readarr" = {};
+  users.users."readarr" = {
+    isSystemUser = true;
+    group = "readarr";
+    extraGroups = [ "usenet" ];
+  };
+
+  services.readarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Prowlarr
   users.groups."prowlarr" = {};
   users.users."prowlarr" = {
