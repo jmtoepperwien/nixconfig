@@ -43,6 +43,7 @@
     shellAliases = {
       nixgit = "cd /etc/nixos && sudo git pull";
     };
+    autosuggestions.enable = true;
   };
   users.defaultUserShell = pkgs.zsh;
 
