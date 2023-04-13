@@ -21,3 +21,6 @@ vim.opt.updatetime = 100
 vim.opt.hidden = true
 
 vim.opt.termguicolors = true
+
+-- enable loading of project specific configurations
+vim.o.exrc = true
