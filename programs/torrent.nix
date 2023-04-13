@@ -18,6 +18,8 @@
     configText = ''
       dht.mode.set = auto
       protocol.pex.set = yes
+
+      trackers.use_udp.set = yes
     '';
   };
 
