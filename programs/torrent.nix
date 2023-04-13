@@ -15,6 +15,10 @@
     user = "rtorrent";
     dataPermissions = "0775";
     downloadDir = "/mnt/kodi_lib/downloads_torrent";
+    configText = ''
+      dht.mode.set = auto
+      protocol.pex.set = yes
+    '';
   };
 
   systemd.services."natpmp-proton" = {
