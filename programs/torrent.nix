@@ -21,7 +21,7 @@
     enable = true;
     description = "Acquire incoming port from protonvpn natpmp";
     requires = [ "protonvpn.service" ];
-    bindsTo = [ "protonvpn.service" "rtorrent.service" ];
+    bindsTo = [ "protonvpn.service" ];
     serviceConfig = {
       User = "root";
       NetworkNamespacePath = "/var/run/netns/vpn";
