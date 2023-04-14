@@ -7,21 +7,21 @@ end
 
 -- to enable nvim-cmp (use in setup of lsps)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- to enable lsp-format (use in setup of lsps)
-local on_attach = function(client)
-  require("lsp-format").on_attach(client)
-end
 
 -- Python
-require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on_attach,
-  settings = { exclude = { ".venv" }, venvPath = ".", venv = ".venv" } }
+require('lspconfig').pyright.setup { capabilities = capabilities,
+  settings = {
+    exclude = { ".venv" },
+    venvPath = ".",
+    venv = ".venv"
+  } }
 
 -- Lua
-require('lspconfig').lua_ls.setup { capabilities = capabilities, on_attach = on_attach }
+require('lspconfig').lua_ls.setup { capabilities = capabilities }
 
 -- Haskell
-require('lspconfig').hls.setup { capabilities = capabilities, on_attach = on_attach,
+require('lspconfig').hls.setup { capabilities = capabilities,
   filetypes = { 'haskell', 'lhaskell', 'cabal' } }
 
 -- C/C++
-require('lspconfig').clangd.setup{}
+require('lspconfig').clangd.setup {}

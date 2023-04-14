@@ -131,8 +131,7 @@ return require("lazy").setup({
   },
 
   -- nvim-lsp setup {{{
-  { 'neovim/nvim-lspconfig',         config = function() require("lsp-config") end },
-  { "lukas-reineke/lsp-format.nvim", config = function() require("lsp-format").setup() end },
+  { 'neovim/nvim-lspconfig', config = function() require("lsp-config") end },
 
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
@@ -149,7 +148,14 @@ return require("lazy").setup({
   {
     "ray-x/navigator.lua",
     dependencies = { { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' }, { "neovim/nvim-lspconfig" } },
-    config = function() require('navigator').setup() end
+    config = function()
+      require('navigator').setup({
+        lsp = {
+          format_on_save = false,
+          format_options = { async = true },
+        }
+      })
+    end
   },
   { "karb94/neoscroll.nvim", config = function() require('neoscroll').setup() end },
   {
