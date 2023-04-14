@@ -2,7 +2,7 @@
 vim.keymap.set("i", "kj", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "U", "<C-r>")
-vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()")
+vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>")
 
 -- LSP
 vim.keymap.set("n", "<Leader>rn", function() vim.lsp.buf.rename() end)
