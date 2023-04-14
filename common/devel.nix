@@ -18,6 +18,7 @@
     llvmPackages.libcxxClang
     libcxx
     gcc
+    gdb
     lua
     lua51Packages.lua
     luajit
