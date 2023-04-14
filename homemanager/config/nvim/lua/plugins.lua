@@ -63,10 +63,40 @@ return require("lazy").setup({
               }
             }
           },
+        },
+        extensions = {
+          project = {
+            --base_dirs = {
+            --  '~/dev/src',
+            --  { '~/dev/src2' },
+            --  { '~/dev/src3',        max_depth = 4 },
+            --  { path = '~/dev/src4' },
+            --  { path = '~/dev/src5', max_depth = 2 },
+            --},
+            hidden_files = true, -- default: false
+            theme = "dropdown",
+            order_by = "asc",
+            search_by = "title",
+            sync_with_nvim_tree = true, -- default false
+            on_project_selected = function(prompt_bufnr)
+              local project_actions = require("telescope._extensions.project.actions")
+              project_actions.change_working_directory(prompt_bufnr, false)
+
+              -- ask if .nvim.lua should be loaded
+              local localconf = io.open("./.nvim.lua", "r")
+              if localconf ~= nil then
+                local selection = vim.fn.input("Found .nvim.lua \nChoose action: [l]oad [i]gnore: ")
+                if selection == "l" then
+                  dofile("./.nvim.lua")
+                end
+              end
+            end
+          }
         }
       })
       require('telescope').load_extension('fzf')
-    end },
+    end
+  },
   { "nvim-telescope/telescope-project.nvim", config = function() require('telescope').load_extension('project') end },
   {
     "HiPhish/nvim-ts-rainbow2",
