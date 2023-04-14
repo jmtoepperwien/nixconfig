@@ -22,3 +22,6 @@ require('lspconfig').lua_ls.setup { capabilities = capabilities, on_attach = on_
 -- Haskell
 require('lspconfig').hls.setup { capabilities = capabilities, on_attach = on_attach,
   filetypes = { 'haskell', 'lhaskell', 'cabal' } }
+
+-- C/C++
+require('lspconfig').clangd.setup{}
