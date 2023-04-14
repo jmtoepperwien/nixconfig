@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     # man pages for linux api not there by default
+    man
     man-pages
     man-pages-posix
     gnumake
@@ -22,4 +23,5 @@
     luajit
   ];
   documentation.dev.enable = true;
+  documentation.man.generateCaches = true;
 }
