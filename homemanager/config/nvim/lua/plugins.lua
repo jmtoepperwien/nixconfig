@@ -8,7 +8,7 @@ return require("lazy").setup({
     lazy = false,
     priority = 1000
   },
-  { "equalsraf/neovim-gui-shim", priority=9999 },
+  { "equalsraf/neovim-gui-shim",   priority = 9999 },
   { 'nvim-tree/nvim-web-devicons', config = function() require('nvim-web-devicons').setup({ default = true }) end },
   {
     "nvim-lualine/lualine.nvim",
@@ -42,10 +42,13 @@ return require("lazy").setup({
       require("nvim-treesitter.install").compilers = { "gcc" } -- does not work with clang
     end,
   },
-  { "nvim-telescope/telescope.nvim",
+  {
+    "nvim-telescope/telescope.nvim",
     dependencies = { { "nvim-lua/plenary.nvim" },
-      { 'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make' }, },
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make'
+      }, },
     config = function()
       require('telescope').setup({
         pickers = {
@@ -119,7 +122,7 @@ return require("lazy").setup({
       })
     end,
   },
-  { "lervag/vimtex", lazy = true },
+  { "lervag/vimtex",                         lazy = true },
   {
     "lewis6991/gitsigns.nvim",
     config = function()
@@ -128,7 +131,7 @@ return require("lazy").setup({
   },
 
   -- nvim-lsp setup {{{
-  { 'neovim/nvim-lspconfig', config = function() require("lsp-config") end },
+  { 'neovim/nvim-lspconfig',         config = function() require("lsp-config") end },
   { "lukas-reineke/lsp-format.nvim", config = function() require("lsp-format").setup() end },
 
   "hrsh7th/cmp-nvim-lsp",
@@ -138,51 +141,74 @@ return require("lazy").setup({
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "hrsh7th/cmp-nvim-lua",
   { "onsails/lspkind-nvim" },
-  { "L3MON4D3/LuaSnip"},
+  { "L3MON4D3/LuaSnip" },
   "saadparwaiz1/cmp_luasnip",
-  { "hrsh7th/nvim-cmp", config = function() require('lsp-cmp-setup') end },
+  { "hrsh7th/nvim-cmp",      config = function() require('lsp-cmp-setup') end },
   -- nvim-lsp setup }}}
 
-  { "ray-x/navigator.lua",
+  {
+    "ray-x/navigator.lua",
     dependencies = { { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' }, { "neovim/nvim-lspconfig" } },
-    config = function() require('navigator').setup() end },
+    config = function() require('navigator').setup() end
+  },
   { "karb94/neoscroll.nvim", config = function() require('neoscroll').setup() end },
-  { "danymat/neogen", dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function() require('neogen').setup({ input_after_comment = true, jump_map = "<Tab>" }) end },
-  { "echasnovski/mini.nvim",
+  {
+    "danymat/neogen",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function() require('neogen').setup({ input_after_comment = true, jump_map = "<Tab>" }) end
+  },
+  {
+    "echasnovski/mini.nvim",
     config = function()
       require('mini.align').setup()
       require('mini.comment').setup()
       require('mini.pairs').setup()
       require('mini.surround').setup()
-    end },
-  { "AckslD/nvim-neoclip.lua", dependencies = { 'nvim-telescope/telescope.nvim' },
-    config = function() require('neoclip').setup(); require('telescope').load_extension('neoclip') end },
-  { "chentoast/marks.nvim", config = function() require('marks').setup() end },
+    end
+  },
+  {
+    "AckslD/nvim-neoclip.lua",
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('neoclip').setup();
+      require('telescope').load_extension('neoclip')
+    end
+  },
+  { "chentoast/marks.nvim",        config = function() require('marks').setup() end },
   { "norcalli/nvim-colorizer.lua", config = function() require('colorizer').setup() end },
-  { "folke/twilight.nvim", config = function() require("twilight").setup() end },
-  { "kevinhwang91/nvim-bqf", dependencies = { { "junegunn/fzf", build = function() vim.fn['fzf#install']() end } } },
-  { "phaazon/hop.nvim", branch = "v2", config = function() require("hop").setup() end },
+  { "folke/twilight.nvim",         config = function() require("twilight").setup() end },
+  { "kevinhwang91/nvim-bqf",       dependencies = { { "junegunn/fzf", build = function() vim.fn['fzf#install']() end } } },
+  {
+    "phaazon/hop.nvim",
+    branch = "v2",
+    config = function()
+      require("hop").setup()
+    end
+  },
   { "rktjmp/highlight-current-n.nvim" },
-  { "edluffy/specs.nvim", config = function() require("specs").setup {
-      show_jumps       = true,
-      min_jump         = 30,
-      popup            = {
-        delay_ms = 0, -- delay before popup displays
-        inc_ms = 10, -- time increments used for fade/resize effects
-        blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-        width = 10,
-        winhl = "PMenu",
-        fader = require('specs').linear_fader,
-        resizer = require('specs').shrink_resizer
-      },
-      ignore_filetypes = {},
-      ignore_buftypes  = {
-        nofile = true,
-      },
-    }
-  end },
-  { 'Aasim-A/scrollEOF.nvim', config = function() require('scrollEOF').setup() end },
+  {
+    "edluffy/specs.nvim",
+    config = function()
+      require("specs").setup {
+        show_jumps       = true,
+        min_jump         = 30,
+        popup            = {
+          delay_ms = 0, -- delay before popup displays
+          inc_ms = 10,  -- time increments used for fade/resize effects
+          blend = 10,   -- starting blend, between 0-100 (fully transparent), see :h winblend
+          width = 10,
+          winhl = "PMenu",
+          fader = require('specs').linear_fader,
+          resizer = require('specs').shrink_resizer
+        },
+        ignore_filetypes = {},
+        ignore_buftypes  = {
+          nofile = true,
+        },
+      }
+    end
+  },
+  { 'Aasim-A/scrollEOF.nvim',         config = function() require('scrollEOF').setup() end },
   { 'tpope/vim-eunuch' },
 
   --{ "Exafunction/codeium.vim" }
