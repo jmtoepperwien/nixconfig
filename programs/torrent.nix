@@ -20,6 +20,8 @@
       protocol.pex.set = yes
 
       trackers.use_udp.set = yes
+
+      system.umask.set = 0022
     '';
   };
 
