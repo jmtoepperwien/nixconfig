@@ -25,7 +25,7 @@
       vaapiVdpau
       libvdpau-va-gl
     ];
-  }
+  };
 
   nix.settings.max-jobs = 4;
   nix.settings.cores = 4;
