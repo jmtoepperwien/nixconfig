@@ -17,12 +17,17 @@
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
   hardware.opengl = {
+    opengl.driSupport = true;
+    opengl.driSupport32Bit = true;
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
       vaapiIntel
       vaapiVdpau
       libvdpau-va-gl
+      vulkan-tools
+      vulkan-headers
+      vulkan-loader
     ];
   };
 
