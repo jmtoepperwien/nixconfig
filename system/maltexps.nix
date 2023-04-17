@@ -14,7 +14,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.orverride { enableHybridCodec = true; };
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
   hardware.opengl = {
     enable = true;
