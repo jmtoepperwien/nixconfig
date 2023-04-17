@@ -10,7 +10,6 @@
 
   services.tlp.enable = true;
 
-  hardware.opengl.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
