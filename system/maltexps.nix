@@ -14,6 +14,19 @@
   hardware.cpu.intel.updateMicrocode = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.orverride { enableHybridCodec = true; };
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-mediadriver
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  }
+
   nix.settings.max-jobs = 4;
   nix.settings.cores = 4;
 
