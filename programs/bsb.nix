@@ -4,8 +4,9 @@
   environment.systemPackages = with pkgs; [
     qemu
     qemu_kvm
-    gcc12
+    gcc
     gcc_multi
+    libcxx
     binutils
     nasm
   ];
