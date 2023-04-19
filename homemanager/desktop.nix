@@ -162,13 +162,6 @@ in {
       neomutt.enable = true;
       passwordCommand = "pass unimail";
       primary = true;
-      signature = {
-        text = ''
-          Mit freundlichen Grüßen
-          Jan Malte Töpperwien
-        '';
-        showSignature = "append";
-      };
     };
     "gmail" = {
       address = "m.toepperwien@gmail.com";
