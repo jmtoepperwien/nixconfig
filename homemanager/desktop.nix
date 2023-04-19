@@ -146,6 +146,10 @@ in {
       userName = "m.toepperwien@stud.uni-hannover.de";
       realName = "Jan Malte Töpperwien";
       imap.host = "mail.stud.uni-hannover.de";
+      mbsync = {
+        enable = true;
+        create = "maildir";
+      };
       smtp.host = "smtp.uni-hannover.de";
       smtp.tls.enable = true;
       smtp.tls.useStartTls = true;
@@ -178,5 +182,12 @@ in {
   programs.thunderbird.profiles."default".isDefault = true;
 
   programs.neomutt.enable = true;
+  programs.mbsync.enable = true;
+  programs.notmuch = {
+    enable = true;
+    hooks = {
+      preNew = "mbsync --all";
+    };
+  };
 
 }
