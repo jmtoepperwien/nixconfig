@@ -130,21 +130,25 @@ in {
 
   # emails
   accounts.email.accounts = {
-    "protonmail" = {
-      address = "m.toepperwien@protonmail.com";
-      userName = "m.toepperwien@protonmail.com";
-      primary = true;
-      realName = "Jan Malte Töpperwien";
-      thunderbird.enable = true;
-      neomutt.enable = true;
-      passwordCommand = "pass protonmail";
-    };
+    #"protonmail" = {
+    #  address = "m.toepperwien@protonmail.com";
+    #  userName = "m.toepperwien@protonmail.com";
+    #  primary = true;
+    #  realName = "Jan Malte Töpperwien";
+    #  thunderbird.enable = true;
+    #  neomutt.enable = true;
+    #  passwordCommand = "pass protonmail";
+    #  smtp.tls.enable = true;
+    #  smtp.tls.useStartTls = true;
+    #};
     "university" = {
       address = "m.toepperwien@stud.uni-hannover.de";
       userName = "m.toepperwien@stud.uni-hannover.de";
       realName = "Jan Malte Töpperwien";
       imap.host = "mail.stud.uni-hannover.de";
       smtp.host = "smtp.uni-hannover.de";
+      smtp.tls.enable = true;
+      smtp.tls.useStartTls = true;
       thunderbird.enable = true;
       neomutt.enable = true;
       passwordCommand = "pass unimail";
@@ -163,7 +167,11 @@ in {
       thunderbird.enable = true;
       neomutt.enable = true;
       passwordCommand = "pass gmail";
-    };
+      imap.host = "imap.gmail.com";
+      smtp.host = "smtp.gmail.com";
+      smtp.tls.enable = true;
+      smtp.tls.useStartTls = false;
+   };
   };
   programs.thunderbird.enable = true;
   programs.thunderbird.profiles."default".isDefault = true;
