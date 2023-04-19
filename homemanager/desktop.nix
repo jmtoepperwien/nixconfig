@@ -136,21 +136,37 @@ in {
       primary = true;
       realName = "Jan Malte Töpperwien";
       thunderbird.enable = true;
+      neomutt.enable = true;
+      passwordCommand = "pass protonmail";
     };
     "university" = {
       address = "m.toepperwien@stud.uni-hannover.de";
       userName = "m.toepperwien@stud.uni-hannover.de";
       realName = "Jan Malte Töpperwien";
+      imap.host = "mail.stud.uni-hannover.de";
+      smtp.host = "smtp.uni-hannover.de";
       thunderbird.enable = true;
+      neomutt.enable = true;
+      passwordCommand = "pass unimail";
+      signature = {
+        text = ''
+          Mit freundlichen Grüßen
+          Jan Malte Töpperwien
+        '';
+        showSignature = "append";
     };
     "gmail" = {
       address = "m.toepperwien@gmail.com";
       userName = "m.toepperwien@gmail.com";
       realName = "Jan Malte Töpperwien";
       thunderbird.enable = true;
+      neomutt.enable = true;
+      passwordCommand = "pass gmail";
     };
   };
   programs.thunderbird.enable = true;
   programs.thunderbird.profiles."default".isDefault = true;
+
+  programs.neomutt.enable = true;
 
 }
