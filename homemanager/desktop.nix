@@ -154,6 +154,7 @@ in {
           Jan Malte Töpperwien
         '';
         showSignature = "append";
+      };
     };
     "gmail" = {
       address = "m.toepperwien@gmail.com";
