@@ -160,6 +160,9 @@ in {
       };
       thunderbird.enable = true;
       neomutt.enable = true;
+      aerc = {
+        enable = true;
+      };
       passwordCommand = "pass unimail";
       primary = true;
     };
@@ -189,6 +192,7 @@ in {
     enable = true;
     vimKeys = true;
   };
+  programs.aerc.enable = true;
   programs.mbsync.enable = true;
   programs.msmtp.enable = true;
   programs.notmuch = {
