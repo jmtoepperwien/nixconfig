@@ -46,6 +46,10 @@ in {
     nerdfonts
     xdg-utils
     unzip
+    # gnupg
+    gnupg
+    pinentry-curses
+    pass
   ];
 
   home.sessionVariables = {
