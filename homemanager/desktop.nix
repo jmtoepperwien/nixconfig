@@ -150,6 +150,7 @@ in {
         enable = true;
         create = "maildir";
       };
+      msmtp.enable = true;
       notmuch.enable = true;
       smtp.host = "smtp.uni-hannover.de";
       smtp.tls.enable = true;
@@ -181,14 +182,19 @@ in {
         enable = true;
         create = "maildir";
       };
+      msmtp.enable = true;
       notmuch.enable = true;
    };
   };
   programs.thunderbird.enable = true;
   programs.thunderbird.profiles."default".isDefault = true;
 
-  programs.neomutt.enable = true;
+  programs.neomutt = {
+    enable = true;
+    vimKeys = true;
+  };
   programs.mbsync.enable = true;
+  programs.msmtp.enable = true;
   programs.notmuch = {
     enable = true;
     hooks = {
