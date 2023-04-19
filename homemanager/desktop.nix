@@ -152,9 +152,12 @@ in {
       };
       msmtp.enable = true;
       notmuch.enable = true;
-      smtp.host = "smtp.uni-hannover.de";
-      smtp.tls.enable = true;
-      smtp.tls.useStartTls = true;
+      smtp = {
+        host = "smtp.uni-hannover.de";
+        port = 587;
+        tls.enable = true;
+        tls.useStartTls = true;
+      };
       thunderbird.enable = true;
       neomutt.enable = true;
       passwordCommand = "pass unimail";
