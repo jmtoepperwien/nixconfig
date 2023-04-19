@@ -27,6 +27,9 @@
     fd
     glances
     ncdu
+    pass
+    gnupg
+    pinentry
     tmux
     tree
     tealdeer
