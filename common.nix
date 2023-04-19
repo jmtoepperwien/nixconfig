@@ -28,6 +28,8 @@
     glances
     ncdu
     pass
+    gnupg
+    pinentry-curses
     tmux
     tree
     tealdeer
