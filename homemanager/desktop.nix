@@ -115,4 +115,28 @@ in {
     };
   };
 
+  # emails
+  accounts.email.accounts = {
+    "protonmail" = {
+      address = "m.toepperwien@protonmail.com";
+      userName = "m.toepperwien@protonmail.com";
+      primary = true;
+      realName = "Jan Malte Töpperwien";
+      thunderbird.enable = true;
+    };
+    "university" = {
+      address = "m.toepperwien@stud.uni-hannover.de";
+      userName = "m.toepperwien@stud.uni-hannover.de";
+      realName = "Jan Malte Töpperwien";
+      thunderbird.enable = true;
+    };
+    "gmail" = {
+      address = "m.toepperwien@gmail.com";
+      userName = "m.toepperwien@gmail.com";
+      realName = "Jan Malte Töpperwien";
+      thunderbird.enable = true;
+    };
+  };
+  programs.thunderbird.enable = true;
+
 }
