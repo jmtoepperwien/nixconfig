@@ -193,7 +193,7 @@ in {
     vimKeys = true;
   };
   programs.aerc.enable = true;
-  programs.aerc.extraConfig = "extraConfig.general.unsafe-accounts-conf = true";
+  programs.aerc.extraConfig.extraConfig.general.unsafe-accounts-conf = true";
   programs.mbsync.enable = true;
   programs.msmtp.enable = true;
   programs.notmuch = {
