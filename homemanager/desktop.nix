@@ -150,6 +150,7 @@ in {
         enable = true;
         create = "maildir";
       };
+      notmuch.enable = true;
       smtp.host = "smtp.uni-hannover.de";
       smtp.tls.enable = true;
       smtp.tls.useStartTls = true;
@@ -176,6 +177,11 @@ in {
       smtp.host = "smtp.gmail.com";
       smtp.tls.enable = true;
       smtp.tls.useStartTls = false;
+      mbsync = {
+        enable = true;
+        create = "maildir";
+      };
+      notmuch.enable = true;
    };
   };
   programs.thunderbird.enable = true;
