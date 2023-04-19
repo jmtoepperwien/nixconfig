@@ -152,6 +152,7 @@ in {
       thunderbird.enable = true;
       neomutt.enable = true;
       passwordCommand = "pass unimail";
+      primary = true;
       signature = {
         text = ''
           Mit freundlichen Grüßen
