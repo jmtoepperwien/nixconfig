@@ -28,8 +28,6 @@
     glances
     ncdu
     pass
-    gnupg
-    pinentry
     tmux
     tree
     tealdeer
@@ -40,6 +38,11 @@
     smartmontools
     usbutils
   ];
+
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "curses";
+  };
 
   programs.zsh = {
     enable = true;
