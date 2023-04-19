@@ -115,6 +115,11 @@ in {
     };
   };
 
+  # GnuPG
+  programs.gpg = {
+    enable = true;
+  };
+
   # emails
   accounts.email.accounts = {
     "protonmail" = {
