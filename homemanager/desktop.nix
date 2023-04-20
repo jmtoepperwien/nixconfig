@@ -6,6 +6,7 @@ let
     pynvim
     ipython
   ];
+  neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
 in {
   home.packages = with pkgs; [
     alacritty
@@ -191,6 +192,10 @@ in {
   programs.neomutt = {
     enable = true;
     vimKeys = true;
+    extraConfig = ''
+      source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber.muttrc
+      source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber-extended.muttrc
+    '';
   };
   programs.aerc.enable = true;
   programs.aerc.extraConfig.general.unsafe-accounts-conf = true;
