@@ -191,7 +191,9 @@ in {
       set mail_check_stats
 
       # Archive messages with 'A', applies to tagged emails if present and else to current email
-      macro index A ":set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox>:set confirmappend=yes delete=ask-yes<enter>"
+      macro index A ":set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter>:set confirmappend=yes delete=ask-yes<enter>"
+
+      bind index <Return> display-message
 
       # extra university folders
       mailboxes "${config.home.homeDirectory}/Maildir/university/Sent"
