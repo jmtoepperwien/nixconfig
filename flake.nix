@@ -16,7 +16,6 @@
           ./graphical/sway.nix
           ./common.nix
           ./ssd.nix
-          ./programs/bsb.nix
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
@@ -33,7 +32,6 @@
           ./graphical/sway.nix
           ./common.nix
           ./ssd.nix
-          ./programs/bsb.nix
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
