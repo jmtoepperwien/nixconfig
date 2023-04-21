@@ -190,8 +190,8 @@ in {
       set sidebar_visible
       set mail_check_stats
 
-      # Archive messages with 'A'
-      macro index A "<save-message>=Archive"
+      # Archive messages with 'A', applies to tagged emails if present and else to current email
+      macro index A ":set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox>:set confirmappend=yes delete=ask-yes<enter>"
 
       # extra university folders
       mailboxes "${config.home.homeDirectory}/Maildir/university/Sent"
