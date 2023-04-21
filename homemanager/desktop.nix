@@ -51,6 +51,8 @@ in {
     gnupg
     pinentry-curses
     pass
+
+    pandoc
   ];
 
   home.sessionVariables = {
