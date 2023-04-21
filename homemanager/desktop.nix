@@ -194,8 +194,8 @@ in {
       macro index A "<save-message>=Archive"
 
       # extra university folders
-      mailboxes "${home.homeDirectory}/Maildir/university/Sent"
-      mailboxes "${home.homeDirectory}/Maildir/university/Archive"
+      mailboxes "${config.home.homeDirectory}/Maildir/university/Sent"
+      mailboxes "${config.home.homeDirectory}/Maildir/university/Archive"
 
       # gruvbox theme
       source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber.muttrc
