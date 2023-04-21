@@ -161,11 +161,7 @@ in {
         tls.enable = true;
         tls.useStartTls = true;
       };
-      thunderbird.enable = true;
       neomutt.enable = true;
-      aerc = {
-        enable = true;
-      };
       passwordCommand = "pass unimail";
       primary = true;
     };
@@ -173,7 +169,6 @@ in {
       address = "m.toepperwien@gmail.com";
       userName = "m.toepperwien@gmail.com";
       realName = "Jan Malte Töpperwien";
-      thunderbird.enable = true;
       neomutt.enable = true;
       passwordCommand = "pass gmail";
       imap.host = "imap.gmail.com";
@@ -188,13 +183,21 @@ in {
       notmuch.enable = true;
    };
   };
-  programs.thunderbird.enable = true;
-  programs.thunderbird.profiles."default".isDefault = true;
-
   programs.neomutt = {
     enable = true;
     vimKeys = true;
     extraConfig = ''
+      set sidebar_visible
+      set mail_check_stats
+
+      # Archive messages with 'A'
+      macro index A "<save-message>=Archive"
+
+      # extra university folders
+      mailboxes "${home.homeDirectory}/Maildir/university/Sent"
+      mailboxes "${home.homeDirectory}/Maildir/university/Archive"
+
+      # gruvbox theme
       source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber.muttrc
       source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber-extended.muttrc
     '';
