@@ -152,6 +152,7 @@ in {
       mbsync = {
         enable = true;
         create = "maildir";
+        patterns = [ "Inbox" "Sent" "Archive" ];
       };
       msmtp.enable = true;
       notmuch.enable = true;
@@ -195,18 +196,13 @@ in {
 
       bind index <Return> display-message
 
-      # extra university folders
-      mailboxes "${config.home.homeDirectory}/Maildir/university/Sent"
-      mailboxes "${config.home.homeDirectory}/Maildir/university/Archive"
-
       # gruvbox theme
       source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber.muttrc
       source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber-extended.muttrc
     '';
   };
-  programs.aerc.enable = true;
-  programs.aerc.extraConfig.general.unsafe-accounts-conf = true;
   programs.mbsync.enable = true;
+  services.mbsync.enable = true;
   programs.msmtp.enable = true;
   programs.notmuch = {
     enable = true;
