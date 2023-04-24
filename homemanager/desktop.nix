@@ -145,9 +145,9 @@ in {
     #  smtp.tls.enable = true;
     #  smtp.tls.useStartTls = true;
     #};
-    let
+    "university" = let
       mailboxFolders = [ "Inbox" "Sent" "Archive" ];
-    in "university" = {
+    in {
       address = "m.toepperwien@stud.uni-hannover.de";
       userName = "m.toepperwien@stud.uni-hannover.de";
       realName = "Jan Malte Töpperwien";
