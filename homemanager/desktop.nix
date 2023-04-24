@@ -196,6 +196,9 @@ in {
       set sidebar_visible
       set mail_check_stats
 
+      # Group reply
+      bind index,pager R group-reply
+
       # Archive messages with 'A', applies to tagged emails if present and else to current email
       macro index A ":set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter>:set confirmappend=yes delete=ask-yes<enter>"
 
