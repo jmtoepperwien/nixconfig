@@ -145,7 +145,9 @@ in {
     #  smtp.tls.enable = true;
     #  smtp.tls.useStartTls = true;
     #};
-    "university" = {
+    let
+      mailboxFolders = [ "Inbox" "Sent" "Archive" ];
+    in "university" = {
       address = "m.toepperwien@stud.uni-hannover.de";
       userName = "m.toepperwien@stud.uni-hannover.de";
       realName = "Jan Malte Töpperwien";
@@ -153,7 +155,7 @@ in {
       mbsync = {
         enable = true;
         create = "maildir";
-        patterns = [ "Inbox" "Sent" "Archive" ];
+        patterns = mailboxFolders;
       };
       msmtp.enable = true;
       notmuch.enable = true;
@@ -163,7 +165,10 @@ in {
         tls.enable = true;
         tls.useStartTls = true;
       };
-      neomutt.enable = true;
+      neomutt = {
+        enable = true;
+        extraMailboxes = mailboxFolders;
+      };
       passwordCommand = "pass unimail";
       primary = true;
     };
