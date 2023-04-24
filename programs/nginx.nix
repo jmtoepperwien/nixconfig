@@ -47,6 +47,7 @@
 	  "/radarr/".proxyPass = "http://localhost:7878";
           "/readarr/".proxyPass = "http://localhost:8787";
 	  "/prowlarr/".proxyPass = "http://localhost:9696";
+          # "/rutorrent/".proxyPass = "http://localhost:5678";
 	};
       };
       "mosigit.duckdns.org" = {
