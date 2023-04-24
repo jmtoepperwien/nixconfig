@@ -155,7 +155,6 @@ in {
       mbsync = {
         enable = true;
         create = "maildir";
-        patterns = mailboxFolders;
       };
       msmtp.enable = true;
       notmuch.enable = true;
