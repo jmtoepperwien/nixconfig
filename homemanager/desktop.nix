@@ -27,6 +27,7 @@ in {
     curl
     lua-language-server
     clang-tools
+    nodePackages_latest.pyright
     # }}} neovim and plugin dependencies
     # Latex
     texlive.combined.scheme-full
