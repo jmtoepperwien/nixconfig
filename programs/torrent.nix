@@ -158,12 +158,13 @@
       #chown ruTorrent:ruTorrent -R ${rutorrentRoot}
       #ln -sf ${rutorrentConfig} /var/www/rutorrent/conf/config.php
 
+      rm -rf ${rutorrentRoot}/*
       ln -snf ${rutorrentPackage}/{css,images,js,lang,index.html} ${rutorrentRoot}/
       mkdir -p ${rutorrentRoot}/{conf,logs,plugins} ${rutorrentRoot}/share/{settings,torrents,users}
       ln -snf ${rutorrentPackage}/conf/{access.ini,plugins.ini} ${rutorrentRoot}/conf/
       ln -snf ${rutorrentConfig} ${rutorrentRoot}/conf/config.php
       cp -r ${rutorrentPackage}/php ${rutorrentRoot}/
-      chown -R rutorrent:rutorrent ${rutorrentRoot}/
+      chown -R ruTorrent:ruTorrent ${rutorrentRoot}/
       chmod -R 755 ${rutorrentRoot}/
     '';
     serviceConfig.Type = "oneshot";
