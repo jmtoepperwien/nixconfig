@@ -17,6 +17,7 @@ in {
       "php_admin_value[error_log]" = "stderr";
       "php_admin_flag[log_errors]" = true;
       "catch_workers_output" = true;
+      "security.limit_extensions" = ".php .php3 .php4 .php5 .html .htm";
     };
     phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
   };
@@ -30,7 +31,7 @@ in {
       } ];
       locations."/" = {
         root = dataDir;
-        index = "index.html";
+        index = "index.php index.html";
         extraConfig = ''
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
           fastcgi_pass unix:${config.services.phpfpm.pools.${app}.socket};
