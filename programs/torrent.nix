@@ -153,10 +153,20 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "rtorrent.service" ];
     script = ''
-      mkdir -p ${rutorrentRoot}
-      cp -rsf ${rtorrentPackage}/* ${rutorrentRoot}/
-      chown ruTorrent:ruTorrent -R ${rutorrentRoot}
-      ln -sf ${rutorrentConfig} /var/www/rutorrent/conf/config.php
+      #mkdir -p ${rutorrentRoot}
+      #cp -rsf ${rtorrentPackage}/* ${rutorrentRoot}/
+      #chown ruTorrent:ruTorrent -R ${rutorrentRoot}
+      #ln -sf ${rutorrentConfig} /var/www/rutorrent/conf/config.php
+
+      ln -sf ${rutorrentPackage}/{css,images,js,lang,index.html} ${rutorrentRoot}/
+      mkdir -p ${rutorrentRoot}/{conf,logs,plugins} ${rutorrentRoot}/share/{settings,torrents,users}
+      ln -sf ${rutorrentPackage}/conf/{access.ini,plugins.ini} ${rutorrentRoot}/conf/
+      ln -sf ${rutorrentConfig} ${rutorrentRoot}/conf/config.php
+      cp -r ${rutorrentPackage}/php ${rutorrentRoot}/
+      #${optionalString (cfg.plugins != [])
+      #  ''cp -r ${concatMapStringsSep " " (p: "${rutorrentPackage}/plugins/${p}") cfg.plugins} ${rutorrentRoot}/plugins/''}
+      chown -R ${cfg.user}:${cfg.group} ${rutorrentRoot}/{conf,share,logs,plugins}
+      chmod -R 755 ${rutorrentRoot}/{conf,share,logs,plugins}
     '';
     serviceConfig.Type = "oneshot";
   };
