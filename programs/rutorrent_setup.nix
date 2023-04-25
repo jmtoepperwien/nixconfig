@@ -43,6 +43,7 @@ in {
           scgi_pass unix:///run/rtorrent/rpc.sock;
         '';
       };
+    };
   };
   users.users.${app} = {
     isSystemUser = true;
