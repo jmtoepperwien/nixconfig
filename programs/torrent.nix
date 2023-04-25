@@ -154,7 +154,7 @@
     after = [ "rtorrent.service" ];
     script = ''
       #mkdir -p ${rutorrentRoot}
-      #cp -rsf ${rtorrentPackage}/* ${rutorrentRoot}/
+      #cp -rsf ${rutorrentPackage}/* ${rutorrentRoot}/
       #chown ruTorrent:ruTorrent -R ${rutorrentRoot}
       #ln -sf ${rutorrentConfig} /var/www/rutorrent/conf/config.php
 
