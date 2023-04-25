@@ -23,8 +23,8 @@ in {
   };
   services.nginx = {
     enable = true;
-    root = dataDir;
     virtualHosts.${domain} = {
+      root = dataDir;
       listen = [ {
         addr = "0.0.0.0";
         port = 5678;
