@@ -37,7 +37,7 @@ in {
           include ${pkgs.nginx}/conf/fastcgi.conf;
         '';
       };
-      locations."/RPC2" {
+      locations."/RPC2" = {
         extraConfig = ''
           include scgi_params;
           scgi_pass unix:///run/rtorrent/rpc.sock;
