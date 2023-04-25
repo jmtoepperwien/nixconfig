@@ -41,9 +41,8 @@ in {
         extraConfig = ''
           include scgi_params;
           scgi_pass unix:///run/rtorrent/rpc.sock;
-      '';
-}
-     };
+        '';
+      };
   };
   users.users.${app} = {
     isSystemUser = true;
