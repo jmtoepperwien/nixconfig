@@ -165,7 +165,7 @@
       cp -r ${rutorrentPackage}/php ${rutorrentRoot}/
       #${optionalString (cfg.plugins != [])
       #  ''cp -r ${concatMapStringsSep " " (p: "${rutorrentPackage}/plugins/${p}") cfg.plugins} ${rutorrentRoot}/plugins/''}
-      chown -R ${cfg.user}:${cfg.group} ${rutorrentRoot}/{conf,share,logs,plugins}
+      chown -R rutorrent:rutorrent ${rutorrentRoot}/{conf,share,logs,plugins}
       chmod -R 755 ${rutorrentRoot}/{conf,share,logs,plugins}
     '';
     serviceConfig.Type = "oneshot";
