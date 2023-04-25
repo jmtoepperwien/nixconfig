@@ -40,11 +40,8 @@ in {
         extraConfig = ''
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
           fastcgi_pass unix:${config.services.phpfpm.pools.${app}.socket};
-          include ${pkgs.nginx}/conf/fastcgi_params;
-          include ${pkgs.nginx}/conf/fastcgi.conf;
           fastcgi_index  index.php;
-          fastcgi_param SCRIPT_FILENAME $request_filename;
-          fastcgi_read_timeout 300;
+          include ${pkgs.nginx}/conf/fastcgi.conf;
         '';
       };
     };
