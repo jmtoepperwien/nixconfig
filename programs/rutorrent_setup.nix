@@ -29,6 +29,13 @@ in {
         port = 5678;
         ssl = false;
       } ];
+      locations."/RPC2" = {
+        extraConfig = ''
+          scgi_pass unix:///run/rtorrent/rpc.sock;
+          include ${pkgs.nginx}/conf/scgi_params;
+          scgi_param SCRIPT_NAME /RPC2;
+        '';
+      };
       locations."~ [^/]\.php(/|$)" = {
         extraConfig = ''
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
@@ -38,13 +45,6 @@ in {
           fastcgi_index  index.php;
           fastcgi_param SCRIPT_FILENAME $request_filename;
           fastcgi_read_timeout 300;
-        '';
-      };
-      locations."/RPC2" = {
-        extraConfig = ''
-          scgi_pass unix:///run/rtorrent/rpc.sock;
-          include ${pkgs.nginx}/conf/scgi_params;
-          scgi_param SCRIPT_NAME /RPC2;
         '';
       };
     };
