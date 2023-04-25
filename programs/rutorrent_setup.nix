@@ -30,10 +30,10 @@ in {
       } ];
       locations."/" = {
         root = dataDir;
+        index = "index.html";
         extraConfig = ''
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
           fastcgi_pass unix:${config.services.phpfpm.pools.${app}.socket};
-          fastcgi_index index.php;
           include ${pkgs.nginx}/conf/fastcgi_params;
           include ${pkgs.nginx}/conf/fastcgi.conf;
         '';
