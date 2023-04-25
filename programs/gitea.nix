@@ -5,10 +5,10 @@
   services.gitea = {
     enable = true;
     user = "gitea";
-    rootUrl = "https://mosigit.duckdns.org/";
-    domain = "https://mosigit.duckdns.org/";
-    httpAddress = "localhost";
-    httpPort = 3000;
+    ROOT_URL = "https://mosigit.duckdns.org/";
+    DOMAIN = "https://mosigit.duckdns.org/";
+    HTTP_ADDR = "localhost";
+    HTTP_PORT = 3000;
     settings = {
       server = {
         SSH_PORT = 22;
