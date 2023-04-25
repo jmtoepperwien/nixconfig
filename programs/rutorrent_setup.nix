@@ -23,15 +23,14 @@ in {
   };
   services.nginx = {
     enable = true;
+    root = dataDir;
     virtualHosts.${domain} = {
       listen = [ {
         addr = "0.0.0.0";
         port = 5678;
         ssl = false;
       } ];
-      locations."/" = {
-        root = dataDir;
-        index = "index.php index.html";
+      locations."~ [^/]\.php(/|$)" = {
         extraConfig = ''
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
           fastcgi_pass unix:${config.services.phpfpm.pools.${app}.socket};
