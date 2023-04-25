@@ -17,7 +17,6 @@ in {
       "php_admin_value[error_log]" = "stderr";
       "php_admin_flag[log_errors]" = true;
       "catch_workers_output" = true;
-      "security.limit_extensions" = ".php .php3 .php4 .php5 .html .htm";
     };
     phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
   };
@@ -37,7 +36,13 @@ in {
           include ${pkgs.nginx}/conf/fastcgi_params;
           include ${pkgs.nginx}/conf/fastcgi.conf;
         '';
-       };
+      };
+      locations."/RPC2" {
+        extraConfig = ''
+          include scgi_params;
+          scgi_pass unix:///run/rtorrent/rpc.sock;
+      '';
+}
      };
   };
   users.users.${app} = {
