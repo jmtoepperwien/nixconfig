@@ -45,6 +45,7 @@ in {
     createHome = true;
     home = dataDir;
     group  = app;
+    extraGroups = [ "rtorrent" ];
   };
   users.groups.${app} = {};
 
