@@ -71,7 +71,7 @@
   };
 
   systemd.services.rtorrent-setup = let
-    rtorrentPackage = pkgs.callPackage ./rutorrent.nix {};
+    rutorrentPackage = pkgs.callPackage ./rutorrent.nix {};
     rutorrentRoot = "/var/www/rutorrent";
     rutorrentConfig = pkgs.writeText "rutorrent-config.php" ''
       <?php
