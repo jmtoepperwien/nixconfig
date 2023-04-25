@@ -24,8 +24,8 @@
 
       system.umask.set = 0002
 
-      network.scgi.open_local = /home/rtorrent/rpc.sock
-      execute.nothrow = chmod,770,/home/rtorrent/rpc.sock
+      network.scgi.open_local = /run/rtorrent/rpc.sock
+      execute.nothrow = chmod,770,/run/rtorrent/rpc.sock
     '';
   };
 
