@@ -23,6 +23,9 @@
       trackers.use_udp.set = yes
 
       system.umask.set = 0002
+
+      network.scgi.open_local = /home/rtorrent/rpc.sock
+      execute.nothrow = chmod,770,/home/rtorrent/rpc.sock
     '';
   };
 
