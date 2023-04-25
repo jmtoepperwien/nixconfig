@@ -155,6 +155,7 @@
       mkdir -p ${rutorrentRoot}
       cp -rsf ${rtorrentPackage}/* ${rutorrentRoot}/
       chown ruTorrent:ruTorrent -R ${rutorrentRoot}
+      ln -sf ${rutorrentConfig} /var/www/rutorrent/conf/config.php
     '';
     serviceConfig.Type = "oneshot";
   };
