@@ -43,7 +43,7 @@ in {
       locations."/RPC2" = {
         extraConfig = ''
           scgi_pass unix:///run/rtorrent/rpc.sock;
-          include ${pkgs.nginx}/conf/fastcgi_params;
+          include ${pkgs.nginx}/conf/scgi_params;
           scgi_param SCRIPT_NAME /RPC2;
         '';
       };
