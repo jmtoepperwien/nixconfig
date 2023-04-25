@@ -163,8 +163,6 @@
       ln -sf ${rutorrentPackage}/conf/{access.ini,plugins.ini} ${rutorrentRoot}/conf/
       ln -sf ${rutorrentConfig} ${rutorrentRoot}/conf/config.php
       cp -r ${rutorrentPackage}/php ${rutorrentRoot}/
-      #${optionalString (cfg.plugins != [])
-      #  ''cp -r ${concatMapStringsSep " " (p: "${rutorrentPackage}/plugins/${p}") cfg.plugins} ${rutorrentRoot}/plugins/''}
       chown -R rutorrent:rutorrent ${rutorrentRoot}/{conf,share,logs,plugins}
       chmod -R 755 ${rutorrentRoot}/{conf,share,logs,plugins}
     '';
