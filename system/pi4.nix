@@ -56,6 +56,7 @@
     pkgs.pulsemixer
     pkgs.alsa-utils
     pkgs.libraspberrypi
+    pkgs.mediainfo
   ];
 
   networking = {
