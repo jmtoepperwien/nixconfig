@@ -8,6 +8,7 @@
   ];
   environment.systemPackages = with pkgs; [
     virt-manager
+    virtiofsd
     gnome.gnome-boxes
   ];
 
