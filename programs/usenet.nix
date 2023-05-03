@@ -9,7 +9,7 @@
   users.users."sonarr" = {
     isSystemUser = true;
     group = "sonarr";
-    extraGroups = [ "usenet" ];
+    extraGroups = [ "usenet" "rtorrent" ];
   };
 
   services.sonarr = {
@@ -22,7 +22,7 @@
   users.users."radarr" = {
     isSystemUser = true;
     group = "radarr";
-    extraGroups = [ "usenet" ];
+    extraGroups = [ "usenet" "rtorrent" ];
   };
 
   services.radarr = {
@@ -35,7 +35,7 @@
   users.users."readarr" = {
     isSystemUser = true;
     group = "readarr";
-    extraGroups = [ "usenet" ];
+    extraGroups = [ "usenet" "rtorrent" ];
   };
 
   services.readarr = {
@@ -55,7 +55,7 @@
   users.users."prowlarr" = {
     isSystemUser = true;
     group = "prowlarr";
-    extraGroups = [ "usenet" ];
+    extraGroups = [ "usenet" "rtorrent" ];
   };
   services.prowlarr = {
     enable = true;
