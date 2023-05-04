@@ -54,6 +54,9 @@ in {
     pass
 
     pandoc
+    xournalpp
+    taskwarrior
+    taskwarrior-tui
   ];
 
   home.sessionVariables = {

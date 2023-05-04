@@ -20,8 +20,6 @@
     spice
     spice-protocol
     spice-gtk
-
-    xournalpp
   ];
 
   virtualisation.libvirtd.enable = true;
