@@ -4,6 +4,9 @@
   environment.systemPackages = with pkgs; [
     tor-browser-bundle-bin
     pulsemixer
+
+    # gnome icon themes (needed for some programs)
+    gnome3.adwaita-icon-theme
     
     # cisco anyconnect uni vpn
     openconnect
@@ -17,6 +20,8 @@
     spice
     spice-protocol
     spice-gtk
+
+    xournalpp
   ];
 
   virtualisation.libvirtd.enable = true;
