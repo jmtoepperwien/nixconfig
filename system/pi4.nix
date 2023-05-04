@@ -58,6 +58,8 @@
     pkgs.libraspberrypi
     pkgs.mediainfo
   ];
+  services.taskserver.enable = true;
+  networking.firewall.allowedTCPPorts = [ "53589" ];
 
   networking = {
     hostName = "pi4"; # Define your hostname.
