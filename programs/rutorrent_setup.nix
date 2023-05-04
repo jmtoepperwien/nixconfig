@@ -45,6 +45,7 @@ in {
       };
     };
   };
+  users.users.nginx.extraGroups = [ "rtorrent" ];
   users.users.${app} = {
     isSystemUser = true;
     createHome = true;
