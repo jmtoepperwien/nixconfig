@@ -69,6 +69,7 @@ in {
     recursive = true;
   };
   home.file.".p10k.zsh".source = ./config/p10k.zsh;
+  home.file.".taskrc".source = ./config/taskrc;
 
   # allow homemanager fonts
   fonts.fontconfig.enable = true;
