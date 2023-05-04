@@ -59,12 +59,12 @@
     pkgs.mediainfo
   ];
   services.taskserver.enable = true;
-  networking.firewall.allowedTCPPorts = [ "53589" ];
 
   networking = {
     hostName = "pi4"; # Define your hostname.
     useDHCP = true;
     firewall.enable = true;
+    firewall.allowedTCPPorts = [ "53589" ];
   };
   #age.secrets.wifipassword.file = ../secrets/wifipassword.age;
   #networking.wireless = {
