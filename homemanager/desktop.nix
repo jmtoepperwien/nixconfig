@@ -62,6 +62,11 @@ in {
     taskwarrior-tui
   ];
 
+  imports = [
+    ./sway-finished.nix
+    ./nextcloud.nix
+  ];
+
   home.sessionVariables = {
     VISUAL = "nvim";
   };
