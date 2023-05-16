@@ -29,6 +29,7 @@ in {
     clang-tools
     nodePackages_latest.pyright
     # }}} neovim and plugin dependencies
+    lazygit
     # Latex
     texlive.combined.scheme-full
     qutebrowser
