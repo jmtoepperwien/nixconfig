@@ -32,6 +32,7 @@
           ./graphical/sway.nix
           ./common.nix
           ./ssd.nix
+          ./programs/ppti.nix
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
