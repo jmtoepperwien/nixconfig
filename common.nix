@@ -39,6 +39,7 @@
     findutils
     smartmontools
     usbutils
+    rename
   ];
 
   programs.gnupg.agent = {
