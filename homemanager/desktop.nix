@@ -54,6 +54,8 @@ in {
     pinentry-curses
     pass
 
+    libreoffice-fresh
+    pdftk
     pandoc
     xournalpp
     taskwarrior
