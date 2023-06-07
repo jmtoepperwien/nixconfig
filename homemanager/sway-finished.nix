@@ -2,8 +2,9 @@
 
 {
   systemd.user.services."sway-finished.target" = {
-    enable = false;
-    requires = [ "graphical-session.target" ];
-    bindsTo = [ "graphical-session.target" ];
+    Unit = {
+      Requires = [ "graphical-session.target" ];
+      BindsTo = [ "graphical-session.target" ];
+    };
   };
 }
