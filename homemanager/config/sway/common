@@ -231,5 +231,5 @@ exec --no-startup-id swaymsg "workspace 9; exec thunderbird; exec spotify; works
 # enable screensharing via pipwire on wlroots based desktops
 exec export XDG_CURRENT_DESKTOP=sway
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec systemctl --user start sway-finished.target
+exec echo "before" > /home/mtoepperwien/test.txt && systemctl --user start sway-finished.target && echo "after" >> /home/mtoepperwien/test.txt
 # Miscellanous }}}
