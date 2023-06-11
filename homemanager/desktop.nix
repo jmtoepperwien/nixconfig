@@ -15,7 +15,6 @@ in {
     mako
     mpv
     # neovim and plugin dependencies {{{
-    neovim
     neovim-remote
     luajitPackages.jsregexp # dependency of luasnip neovim plugin
     tree-sitter
@@ -76,13 +75,16 @@ in {
 
   programs.neovim = {
     enable = true;
-    extraConfig = ''
-      lua <<EOF
-        local status, ts_install = pcall(require, "nvim-treesitter.install")
-        if(status) then
-          ts_install.compilers = { "${pkgs.gcc}/bin/gcc" }
-        end
-      EOF
+    extraLuaConfig = ''
+      vim.g.mapleader = ","
+      require("vimsettings")
+      require("bootstrap/lazy")
+      require("plugins")
+      require("keybindings")
+      local status, ts_install = pcall(require, "nvim-treesitter.install")
+      if(status) then
+        ts_install.compilers = { "${pkgs.gcc_multi}/bin/gcc" }
+      end
     '';
   };
 
