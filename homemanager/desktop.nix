@@ -74,6 +74,18 @@ in {
   home.file.".p10k.zsh".source = ./config/p10k.zsh;
   home.file.".taskrc".source = ./config/taskrc;
 
+  programs.neovim = {
+    enable = true;
+    extraConfig = ''
+      lua <<EOF
+        local status, ts_install = pcall(require, "nvim-treesitter.install")
+        if(status) then
+          ts_install.compilers = { "${pkgs.gcc}/bin/gcc" }
+        end
+      EOF
+    '';
+  };
+
   # allow homemanager fonts
   fonts.fontconfig.enable = true;
 
