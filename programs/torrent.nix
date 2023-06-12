@@ -29,6 +29,7 @@
     enable = true;
     description = "Acquire incoming port from protonvpn natpmp";
     requires = [ "protonvpn.service" ];
+    after = [ "protonvpn.service" ];
     bindsTo = [ "protonvpn.service" ];
     serviceConfig = {
       User = "root";

@@ -40,6 +40,11 @@
         ${pkgs.iproute2}/bin/ip -n vpn link set wg0 up
         ${pkgs.iproute2}/bin/ip -n vpn route add default dev wg0
       '';
+      ExecStartPost = pkgs.writers.writeBash "wait-online" ''
+        until ${pkgs.iproute2}/bin/ip netns exec vpn ${pkgs.unixtools.ping}/bin/ping -c1 www.google.com; do
+	  echo "waiting for vpn to come online";
+	done
+      '';
       ExecStop = pkgs.writers.writeBash "wg-down" ''
         ${pkgs.iproute2}/bin/ip -n vpn route del default dev wg0
         ${pkgs.iproute2}/bin/ip -n vpn link del wg0
