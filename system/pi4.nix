@@ -33,9 +33,9 @@
   # Required for the Wireless firmware
   hardware.enableRedistributableFirmware = true;
   hardware.raspberry-pi."4" = {
-    fkms-3d.enable = true;
-    audio.enable = true;
-    dwc2.enable = true;
+    fkms-3d.enable = false;
+    audio.enable = false;
+    dwc2.enable = false;
   };
   #sound.enable = true;
   #hardware.pulseaudio.enable = true;
