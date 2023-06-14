@@ -50,7 +50,7 @@
   fileSystems."/mnt/pi4" = {
     device = "pi4.home.lan:/export/books";
     fsType = "nfs";
-  }
+  };
 
   swapDevices = [ ];
 
