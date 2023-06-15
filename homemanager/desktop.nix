@@ -8,6 +8,8 @@ let
   ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
 in {
+  imports = [ ./devel.nix ];
+
   home.packages = with pkgs; [
     alacritty
     element-desktop
