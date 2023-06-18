@@ -6,5 +6,9 @@
     ghc
     ghcid
     cabal-install
+
+    # math stuff
+    blas
+    lapack
   ];
 }
