@@ -5,6 +5,6 @@
     haskell-language-server
     ghc
     ghcid
-    cabal
+    cabal-install
   ];
 }
