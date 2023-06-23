@@ -14,6 +14,7 @@
 
     # secret management
     gnome.gnome-keyring
+    libsecret
 
     qemu_kvm
     qemu-utils
