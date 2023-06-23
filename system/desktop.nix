@@ -23,6 +23,8 @@
     spice-gtk
   ];
 
+  services.gnome.gnome-keyring.enable = true;
+
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
@@ -64,6 +66,7 @@
 
   # secret management
   security.pam.services."gnome_keyring" = {
+    enableGnomeKeyring = true;
     text = ''
       auth     optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
       session  optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
