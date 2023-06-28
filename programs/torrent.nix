@@ -37,9 +37,9 @@
       # [TODO: not hardcoded gateway]
       ExecStartPre = pkgs.writers.writeBash "acquire-port-vpn" ''
         echo "getting udp"
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .*/UDPPORT=\1/' > /run/proton_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*to local port ([0-9]+) .*/UDPPORT=\1/' > /run/proton_incoming"
         echo "getting tcp"
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 tcp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .*/TCPPORT=\1/' >> /run/proton_incoming && chown rtorrent:rtorrent /run/proton_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 tcp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*to local port ([0-9]+) .*/TCPPORT=\1/' >> /run/proton_incoming && chown rtorrent:rtorrent /run/proton_incoming"
       '';
       ExecStart = pkgs.writers.writeBash "keep-port-vpn" ''
        echo "looping to keep"
