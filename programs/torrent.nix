@@ -37,9 +37,9 @@
       # [TODO: not hardcoded gateway]
       ExecStartPre = pkgs.writers.writeBash "acquire-port-vpn" ''
         echo "getting udp"
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) to local port ([0-9]+) .*/UDPPORTPUBLIC=\1\nUDPPORTPRIVATE=\2/' > /run/proton_incoming"
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .* to local port ([0-9]+) .*/UDPPORTPUBLIC=\1\nUDPPORTPRIVATE=\2/' > /run/proton_incoming"
         echo "getting tcp"
-        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) to local port ([0-9]+) .*/TCPPORTPUBLIC=\1\nTCPPORTPRIVATE=\2/' >> /run/proton_incoming" && chown rtorrent:rtorrent /run/proton_incoming
+        eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .* to local port ([0-9]+) .*/TCPPORTPUBLIC=\1\nTCPPORTPRIVATE=\2/' >> /run/proton_incoming" && chown rtorrent:rtorrent /run/proton_incoming
       '';
       ExecStart = pkgs.writers.writeBash "keep-port-vpn" ''
        echo "looping to keep"
@@ -98,7 +98,7 @@
   in {
     bindsTo = [ "netns@vpn.service" ];
     requires = [ "network-online.target" "protonvpn.service" "natpmp-proton.service" ];
-    after = [ "protonvpn.service" "natpmp-proton.service" ];
+    after = [ "protonvpn.service" "natpmp-proton.service" "natpmp-forward-tcp" "natpmp-forward-udp" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
