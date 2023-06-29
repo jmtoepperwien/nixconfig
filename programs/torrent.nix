@@ -53,7 +53,7 @@
     };
   };
 
-  systemd.services."natpmp-forward-tcp" = {
+  systemd.services."natpmp-forward" = {
     enable = true;
     description = "Port forward natpmp open port so that public port matches private port";
     requires = [ "natpmp-proton.service" ];
@@ -64,33 +64,16 @@
       User = "root";
       NetworkNamespacePath = "/var/run/netns/vpn";
       ExecStart = pkgs.writers.writeBash "forward-port-vpn-tcp" ''
-        echo "Mapping $TCPPORTPRIVATE to $TCPPORTPUBLIC"
-        ${pkgs.socat}/bin/socat TCP-LISTEN:$TCPPORTPRIVATE,fork TCP:localhost:$TCPPORTPUBLIC
+        echo "forwarding TCP $TCPPORTPRIVATE to $TCPPORTPUBLIC and UDP $UDPPORTPRIVATE to $UDPPORTPUBLIC"
+        ${pkgs.nftables}/bin/nft add table ip nat
+        ${pkgs.nftables}/bin/nft -- add chain ip nat prerouting { type nat hook prerouting priority -100 \; }
+        ${pkgs.nftables}/bin/nft add rule ip nat prerouting tcp dport $TCPPORTPRIVATE redirect to :$TCPPORTPUBLIC
+        ${pkgs.nftables}/bin/nft add rule ip nat prerouting udp dport $UDPPORTPRIVATE redirect to :$UDPPORTPUBLIC
       '';
-      Type = "simple";
+      Type = "oneshot";
       Restart = "always";
     };
   };
-
-  systemd.services."natpmp-forward-udp" = {
-    enable = true;
-    description = "Port forward natpmp open port so that public port matches private port";
-    requires = [ "natpmp-proton.service" ];
-    after = [ "natpmp-proton.service" ];
-    bindsTo = [ "natpmp-proton.service" ];
-    serviceConfig = {
-      EnvironmentFile = "/run/proton_incoming";
-      User = "root";
-      NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = pkgs.writers.writeBash "forward-port-vpn-udp" ''
-        echo "Mapping $UDPPORTPRIVATE to $UDPPORTPUBLIC"
-        ${pkgs.socat}/bin/socat TCP-LISTEN:$UDPPORTPRIVATE,fork TCP:localhost:$UDPPORTPUBLIC
-      '';
-      Type = "simple";
-      Restart = "always";
-    };
-  };
-
 
   systemd.services.rtorrent = let
     configFile = pkgs.writeText "rtorrent.rc" config.services.rtorrent.configText;
