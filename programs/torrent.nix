@@ -6,7 +6,7 @@ let
     TORRENT_PATH=$2
     TORRENT_HASH=$3
     
-    unrar x $TORRENT_PATH/$TORRENT_NAME/*rar
+    unrar x $TORRENT_PATH/$TORRENT_NAME/*rar $TORRENT_PATH/
   '';
 
 in
