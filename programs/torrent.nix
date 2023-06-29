@@ -67,6 +67,8 @@
         echo "Mapping $TCPPORTPRIVATE to $TCPPORTPUBLIC"
         ${pkgs.socat}/bin/socat TCP-LISTEN:$TCPPORTPRIVATE,fork TCP:localhost:$TCPPORTPUBLIC
       '';
+      Type = "simple";
+      Restart = "always";
     };
   };
 
@@ -84,6 +86,8 @@
         echo "Mapping $UDPPORTPRIVATE to $UDPPORTPUBLIC"
         ${pkgs.socat}/bin/socat TCP-LISTEN:$UDPPORTPRIVATE,fork TCP:localhost:$UDPPORTPUBLIC
       '';
+      Type = "simple";
+      Restart = "always";
     };
   };
 
