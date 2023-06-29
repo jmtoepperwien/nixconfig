@@ -6,8 +6,13 @@ let
     TORRENT_PATH=$2
     TORRENT_HASH=$3
     
+    echo "name=$TORRENT_NAME" >> /tmp/unpack_log
+    echo "path=$TORRENT_PATH" >> /tmp/unpack_log
+    echo "hash=$TORRENT_HASH" >> /tmp/unpack_log
     for file in $TORRENT_PATH/$TORRENT_NAME/**/*rar; do
+      echo "unpacking $file into ''${file%.rar}"
       unrar x $file ''${file%.rar}
+    done
   '';
 
 in
