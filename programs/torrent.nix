@@ -38,7 +38,7 @@ in
 
       system.umask.set = 0002
 
-      method.set_key = event.download.finished,unpack,"execute=${unpack},$d.name=,$d.base_path,$d.hash="
+      method.set_key = event.download.finished,unpack,"log.execute={${unpack},$d.name=,$d.base_path=,$d.hash=}"
     '';
   };
 
