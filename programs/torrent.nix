@@ -1,5 +1,15 @@
 { config, lib, pkgs, agenix, ... }:
+let
+  unpack = pkgs.writers.writeBash "unpack_torrents" ''
+    #!/bin/bash
+    TORRENT_NAME=$1
+    TORRENT_PATH=$2
+    TORRENT_HASH=$3
+    
+    unrar x $TORRENT_PATH/$TORRENT_NAME/*rar
+  '';
 
+in
 {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
@@ -22,6 +32,8 @@
       trackers.use_udp.set = yes
 
       system.umask.set = 0002
+
+      method.set_key = event.download.finished,unpack,"execute2={${unpack},$d.name=,$d.base_path,$d.hash=}"
     '';
   };
 
