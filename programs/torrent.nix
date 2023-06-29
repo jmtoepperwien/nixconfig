@@ -56,9 +56,9 @@
   systemd.services."natpmp-forward-tcp" = {
     enable = true;
     description = "Port forward natpmp open port so that public port matches private port";
-    requires = [ "natpmp-proton" ];
-    after = [ "natpmp-proton" ];
-    bindsTo = [ "natpmp-proton" ];
+    requires = [ "natpmp-proton.service" ];
+    after = [ "natpmp-proton.service" ];
+    bindsTo = [ "natpmp-proton.service" ];
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
       User = "root";
@@ -73,9 +73,9 @@
   systemd.services."natpmp-forward-udp" = {
     enable = true;
     description = "Port forward natpmp open port so that public port matches private port";
-    requires = [ "natpmp-proton" ];
-    after = [ "natpmp-proton" ];
-    bindsTo = [ "natpmp-proton" ];
+    requires = [ "natpmp-proton.service" ];
+    after = [ "natpmp-proton.service" ];
+    bindsTo = [ "natpmp-proton.service" ];
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
       User = "root";
