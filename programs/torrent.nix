@@ -1,7 +1,7 @@
 { config, lib, pkgs, agenix, ... }:
 let
   unpack = pkgs.writers.writeBash "unpack_torrents" ''
-    #!/bin/bash
+    #!${pkgs.bash}/bin/bash
     TORRENT_NAME=$1
     TORRENT_PATH=$2
     TORRENT_HASH=$3
