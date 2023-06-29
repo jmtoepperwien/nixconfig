@@ -83,7 +83,6 @@ in
         ${pkgs.nftables}/bin/nft add rule ip nat prerouting udp dport $UDPPORTPRIVATE redirect to :$UDPPORTPUBLIC
       '';
       Type = "oneshot";
-      Restart = "always";
     };
   };
 
