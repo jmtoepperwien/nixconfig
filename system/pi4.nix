@@ -64,6 +64,7 @@
     hostName = "pi4"; # Define your hostname.
     useDHCP = true;
     firewall.enable = true;
+    nftables.enable = true;
     firewall.allowedTCPPorts = [ 53589 ];
   };
   #age.secrets.wifipassword.file = ../secrets/wifipassword.age;
