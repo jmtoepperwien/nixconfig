@@ -11,7 +11,7 @@ let
     echo "hash=$TORRENT_HASH" >> /tmp/unpack_log
     for file in $TORRENT_PATH/$TORRENT_NAME/**/*rar; do
       echo "unpacking $file into ''${file%.rar}"
-      unrar x $file ''${file%.rar}
+      ${pkgs.unrar}/bin/unrar x $file ''${file%.rar}
     done
   '';
 
