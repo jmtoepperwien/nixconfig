@@ -42,8 +42,10 @@ in {
     font-awesome # needed for waybar icons
     ungoogled-chromium
     (python3.withPackages python-packages)
+    poetry
     virtualenv
     ripgrep
+    pdfgrep
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "SourceCodePro" ]; })
     zathura
     wl-clipboard
