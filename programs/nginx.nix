@@ -30,10 +30,10 @@
 	    root = "/var/www/";
 	    extraConfig = ''
               disable_symlinks off;
+              autoindex on;
               auth_basic           "Leander Serien";
               auth_basic_user_file /etc/nginx/.htpasswd;
               access_log /var/log/nginx/leander-files.log;
-              autoindex on;
               proxy_max_temp_file_size 0;
               aio threads;
               directio 16M;
@@ -57,6 +57,26 @@
             proxyPass = "http://localhost:3000/";
           };
         };
+      };
+      "pi4.home.lan" = {
+        forceSSL = false;
+	locations = {
+	  "/books/" = {
+	    root = "/export/";
+            extraConfig = ''
+              disable_symlinks off;
+	      allow 192.168.1.0/24;
+	      deny all;
+              autoindex on;
+              proxy_max_temp_file_size 0;
+              aio threads;
+              directio 16M;
+              output_buffers 2 1M;
+              sendfile on;
+              sendfile_max_chunk 512k;
+	    '';
+	  };
+	};
       };
     };
   };
