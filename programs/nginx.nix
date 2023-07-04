@@ -39,7 +39,9 @@
               directio 16M;
               output_buffers 2 1M;
               sendfile on;
-              sendfile_max_chunk 512k;
+              sendfile_max_chunk 1M;
+              tcp_nopush on;
+              tcp_nodelay on;
 	    '';
 	  };
 	  "/sabnzbd/".proxyPass = "http://localhost:6789";
@@ -73,7 +75,9 @@
               directio 16M;
               output_buffers 2 1M;
               sendfile on;
-              sendfile_max_chunk 512k;
+              sendfile_max_chunk 1M;
+              tcp_nopush on;
+              tcp_nodelay on;
 	    '';
 	  };
 	};
