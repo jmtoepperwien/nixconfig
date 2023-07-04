@@ -7,7 +7,7 @@
     group = "nextcloud";
   };
   services.nextcloud = {
-    package = pkgs.nextcloud26;
+    package = pkgs.nextcloud27;
     enable = true;
     https = true;
     hostName = "mosinextcloud.duckdns.org";
