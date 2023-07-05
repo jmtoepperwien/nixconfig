@@ -108,7 +108,7 @@
       Group = "rtorrent";
     };
   };
-  networking.firewall.allowedTCPPorts = [ 5678 ];
+  networking.firewall.allowedTCPPorts = [ 5678 5656 ];
 
   users.groups."unpackerr" = {};
   users.users."unpackerr" = {
@@ -117,13 +117,19 @@
     extraGroups = [ "rtorrent" "usenet" ];
   };
 
+  age.secrets.unpackerrConfig = {
+    file = ../secrets/unpackerrConfig.age;
+    owner = "unpackerr";
+    group = "unpackerr";
+  };
+
   systemd.services.unpackerr = {
     after = [ "rtorrent.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "unpackerr";
       Group = "usenet";
-      ExecStart = "${pkgs.unpackerr}/bin/unpackerr";
+      ExecStart = "${pkgs.unpackerr}/bin/unpackerr --config=${config.age.secrets.unpackerrConfig.path}";
       Type = "simple";
     };
   };
