@@ -1,20 +1,5 @@
 { config, lib, pkgs, agenix, ... }:
-let
-  unpack = pkgs.writers.writeBash "unpack_torrents" ''
-    TORRENT_NAME=$1
-    TORRENT_PATH=$2
-    TORRENT_HASH=$3
-    
-    echo "name=$TORRENT_NAME" >> /tmp/unpack_log
-    echo "path=$TORRENT_PATH" >> /tmp/unpack_log
-    echo "hash=$TORRENT_HASH" >> /tmp/unpack_log
-    for file in $TORRENT_PATH/**/*rar; do
-      echo "unpacking $file into ''${file%.rar}"
-      ${pkgs.unrar}/bin/unrar x $file $(${pkgs.toybox}/bin/dirname $file)
-    done
-  '';
 
-in
 {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
@@ -23,7 +8,7 @@ in
     extraGroups= [ "usenet" ];
   };
 
-  environment.systemPackages = [ pkgs.flood ];
+  environment.systemPackages = [ pkgs.flood pkgs.unpackerr ];
 
   services.rtorrent = {
     enable = true;
@@ -37,8 +22,6 @@ in
       trackers.use_udp.set = yes
 
       system.umask.set = 0002
-
-      method.set_key = event.download.finished,unpack,"execute2={${unpack},$d.name=,$d.base_path=,$d.hash=}"
     '';
   };
 
