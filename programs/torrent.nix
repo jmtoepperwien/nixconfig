@@ -110,7 +110,10 @@
   };
   networking.firewall.allowedTCPPorts = [ 5678 ];
 
+  users.groups."unpackerr" = {};
   users.users."unpackerr" = {
+    isSystemUser = true;
+    group = "unpackerr";
     extraGroups = [ "rtorrent" "usenet" ];
   };
 
