@@ -110,6 +110,10 @@
   };
   networking.firewall.allowedTCPPorts = [ 5678 ];
 
+  user.users."unpackerr" = {
+    extraGroups = [ "rtorrent" "usenet" ];
+  };
+
   systemd.services.unpackerr = {
     serviceConfig = {
       Group = "usenet";
