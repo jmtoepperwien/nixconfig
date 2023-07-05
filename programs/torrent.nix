@@ -115,8 +115,13 @@
   };
 
   systemd.services.unpackerr = {
+    after = [ "rtorrent.service" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
+      User = "unpackerr";
       Group = "usenet";
+      ExecStart = "${pkgs.unpackerr}/bin/unpackerr";
+      Type = "simple";
     };
   };
 }
