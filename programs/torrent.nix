@@ -4,8 +4,8 @@
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
     isSystemUser = true;
-    group = "rtorrent";
-    extraGroups= [ "usenet" ];
+    group = "usenet";
+    extraGroups= [ "rtorrent" ];
   };
 
   environment.systemPackages = [ pkgs.flood pkgs.unpackerr ];
@@ -13,6 +13,7 @@
   services.rtorrent = {
     enable = true;
     user = "rtorrent";
+    group = "usenet";
     dataPermissions = "0775";
     downloadDir = "/mnt/kodi_lib/downloads_torrent";
     configText = ''
@@ -108,4 +109,10 @@
     };
   };
   networking.firewall.allowedTCPPorts = [ 5678 ];
+
+  systemd.services.unpackerr = {
+    serviceConfig = {
+      Group = "usenet";
+    };
+  };
 }
