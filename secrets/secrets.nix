@@ -12,5 +12,5 @@ in {
   "wifipassword.age".publicKeys = [ maltepc maltepchost maltexps maltexpshost pi3host pi4host ];
   "nextcloud-adminpass.age".publicKeys = [ maltepc pi4host ];
   "protonvpn.age".publicKeys = [ maltepc maltexps pi4host ];
-  "unpackerConfig.age".publicKeys = [ maltepc maltexps pi4host ];
+  "unpackerrConfig.age".publicKeys = [ maltepc maltexps pi4host ];
 }
