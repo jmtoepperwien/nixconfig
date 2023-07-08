@@ -42,7 +42,7 @@ in {
     font-awesome # needed for waybar icons
     ungoogled-chromium
     (python3.withPackages python-packages)
-    poetry
+    # poetry ignore for now due to dependency missing
     virtualenv
     ripgrep
     pdfgrep
