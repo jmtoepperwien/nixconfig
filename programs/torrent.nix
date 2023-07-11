@@ -81,7 +81,7 @@
   in {
     bindsTo = [ "netns@vpn.service" ];
     requires = [ "network-online.target" "protonvpn.service" "natpmp-proton.service" ];
-    after = [ "protonvpn.service" "natpmp-proton.service" "natpmp-forward-tcp.service" "natpmp-forward-udp.service" ];
+    after = [ "protonvpn.service" "natpmp-proton.service" "natpmp-forward.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
