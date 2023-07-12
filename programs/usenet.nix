@@ -77,5 +77,5 @@
     enable = true;
     openFirewall = true;
   };
-  networking.firewall.allowedTCPPorts = [ 6789 ];
+  networking.firewall.allowedTCPPorts = [ 6789 5000 ];
 }
