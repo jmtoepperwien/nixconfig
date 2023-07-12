@@ -72,5 +72,10 @@
     enable = true;
     group = "usenet";
   };
+
+  services.ombi = {
+    enable = true;
+    openFirewall = true;
+  }
   networking.firewall.allowedTCPPorts = [ 6789 ];
 }
