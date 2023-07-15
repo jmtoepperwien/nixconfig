@@ -1,7 +1,19 @@
 { config, lib, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ (perl.withPackages(ps: with ps; [ libwwwperl ])) ];
+  nixpkgs.overlays = [ (final: prev: {
+    irssi =  prev.irssi.overrideAttrs ( oldAttrs: rec {
+      buildInputs = with pkgs; [
+        glib
+        libgcrypt
+        libintl
+        libotr
+        ncurses
+        openssl
+        (perl.withPackages ( ps: with ps; [ libwwwperl ] ))
+      ];
+      } );
+  })];
   systemd.services."irssi" = {
     enable = true;
     description = "irssi irc client inside tmux";
