@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
+  environment.systemPackages = [ (perl.withPackages(ps: with ps; [ libwwwperl ])) ];
   systemd.services."irssi" = {
     enable = true;
     description = "irssi irc client inside tmux";
