@@ -40,6 +40,7 @@
     smartmontools
     usbutils
     rename
+    irssi
   ];
 
   programs.gnupg.agent = {
