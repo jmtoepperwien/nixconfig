@@ -20,6 +20,6 @@
         ${pkgs.bash}/bin/bash -c '${pkgs.toybox}/bin/timeout 3 ${pkgs.toybox}/bin/tail --pid=$(${pkgs.toybox}/bin/cat %t/irssi.pid || ${pkgs.toybox}/bin/echo 0) -f /dev/null'
         -${pkgs.tmux}/bin/tmux -L %p kill-session -t irssi
       '';
-    }
+    };
   };
 }
