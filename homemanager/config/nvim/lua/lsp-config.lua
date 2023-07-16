@@ -10,8 +10,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local on_attach = function(client, bufnr) require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client }) end
 
 -- Python
-require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on_attach
-  settings = {
+require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on_attach, settings = {
     exclude = { ".venv" },
     venvPath = ".",
     venv = ".venv"
@@ -21,7 +20,7 @@ require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on
 require('lspconfig').lua_ls.setup { capabilities = capabilities, on_attach = on_attach }
 
 -- Haskell
-require('lspconfig').hls.setup { capabilities = capabilities, on_attach = on_attach
+require('lspconfig').hls.setup { capabilities = capabilities, on_attach = on_attach,
   filetypes = { 'haskell', 'lhaskell', 'cabal' } }
 
 -- C/C++
