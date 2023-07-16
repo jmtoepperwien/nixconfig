@@ -4,10 +4,7 @@ vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>")
 vim.keymap.set("n", "<leader>qc", ":lclose<CR>") -- close quickfix window
-vim.keymap.set("n", "<leader>qo", ":lopen<CR>") -- open quickfix window
-
--- LSP
-vim.keymap.set("n", "<Leader>rn", function() vim.lsp.buf.rename() end)
+vim.keymap.set("n", "<leader>qo", ":lopen<CR>")  -- open quickfix window
 
 -- Telescope bindings
 local builtin = require('telescope.builtin')
