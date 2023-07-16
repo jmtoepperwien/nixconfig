@@ -7,9 +7,10 @@ end
 
 -- to enable nvim-cmp (use in setup of lsps)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local on_attach = function(client, bufnr) require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client }) end
 
 -- Python
-require('lspconfig').pyright.setup { capabilities = capabilities,
+require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on_attach
   settings = {
     exclude = { ".venv" },
     venvPath = ".",
@@ -17,11 +18,11 @@ require('lspconfig').pyright.setup { capabilities = capabilities,
   } }
 
 -- Lua
-require('lspconfig').lua_ls.setup { capabilities = capabilities }
+require('lspconfig').lua_ls.setup { capabilities = capabilities, on_attach = on_attach }
 
 -- Haskell
-require('lspconfig').hls.setup { capabilities = capabilities,
+require('lspconfig').hls.setup { capabilities = capabilities, on_attach = on_attach
   filetypes = { 'haskell', 'lhaskell', 'cabal' } }
 
 -- C/C++
-require('lspconfig').clangd.setup {}
+require('lspconfig').clangd.setup { capabilities = capabilities, on_attach = on_attach, }
