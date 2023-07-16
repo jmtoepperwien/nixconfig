@@ -47,10 +47,21 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/pi4" = {
+  fileSystems."/mnt/pi4/books" = {
     device = "pi4.home.lan:/export/books";
     fsType = "nfs";
   };
+
+  fileSystems."/mnt/pi4/series" = {
+    device = "pi4.home.lan:/export/series";
+    fsType = "nfs";
+  };
+
+  fileSystems."/mnt/pi4/movies" = {
+    device = "pi4.home.lan:/export/movies";
+    fsType = "nfs";
+  };
+
 
   swapDevices = [ ];
 
