@@ -89,6 +89,7 @@
 	    '';
 	  };
           "/transmission/".proxyPass = "http://transmission/";
+          "/transmission".proxyPass = "http://transmission/";
 	};
       };
     };
