@@ -10,7 +10,7 @@
 
   environment.systemPackages = [ pkgs.flood pkgs.unpackerr ];
 
-  systemd.tmpfiles.rules = [ "d /run/rtorrent 0750 rtorrent rtorrent" "f /run/rtorrent/rpc.sock 0770 rtorrent rtorrent"];
+  systemd.tmpfiles.rules = [ "d /run/rtorrent 0750 rtorrent rtorrent" ];
   services.rtorrent = {
     enable = true;
     package = pkgs.jesec-rtorrent;
