@@ -169,7 +169,8 @@ return require("lazy").setup({
     config = function()
       require('navigator').setup({
         lsp = {
-          disable_lsp = 'all' -- buggy with haskell, lsp-config.lua manually attaches navigator
+          disable_lsp = 'all', -- buggy with haskell, lsp-config.lua manually attaches navigator
+          format_on_save = false;
         }
       })
     end
