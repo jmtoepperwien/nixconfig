@@ -88,7 +88,7 @@
               tcp_nodelay on;
 	    '';
 	  };
-          "/transmission/".proxyPass = "http://transmission/";
+          "/transmission/".proxyPass = "http://unix:/run/transmission/transmission.sock:/transmission/";
 	};
       };
     };
