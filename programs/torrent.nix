@@ -19,7 +19,7 @@ in {
     user = "transmission";
     group = "usenet";
     settings.umask = 2;
-    settings.rpc-bind-address = "unix:/run/transmission.sock";
+    settings.rpc-bind-address = "unix:/run/transmission/transmission.sock";
     settings.download-dir = "/mnt/kodi_lib/tmp";
     openRPCPort = true;
   };
@@ -131,7 +131,7 @@ in {
     after = [ "transmission.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.flood}/bin/flood --trurl unix:/run/transmission.sock --host 0.0.0.0";
+      ExecStart = "${pkgs.flood}/bin/flood --trurl unix:/run/transmission/transmission.sock --host 0.0.0.0";
       Restart = "on-failure";
       Type = "simple";
       User = "transmission";
