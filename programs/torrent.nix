@@ -13,7 +13,6 @@ in {
 
   environment.systemPackages = [ pkgs.flood pkgs.unpackerr ];
 
-  systemd.tmpfiles.rules = [ "d /run/rtorrent 0750 rtorrent rtorrent" ];
   services.rtorrent = {
     enable = true;
     package = rtorrent;
