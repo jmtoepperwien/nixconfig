@@ -5,6 +5,10 @@
   security.acme.defaults.email = "m.toepperwien@protonmail.com";
   security.acme.defaults.webroot = "/var/www/mosihome";
   security.acme.certs."mosihome.duckdns.org".extraDomainNames = [ "mosigit.duckdns.org" "mosinextcloud.duckdns.org" ];
+  users.users.nginx = {
+    isSystemUser = true;
+    extraGroups = [ "transmission" ];
+  };
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
