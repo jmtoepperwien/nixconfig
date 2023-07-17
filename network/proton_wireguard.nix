@@ -53,8 +53,11 @@
   };
 
   systemd.tmpfiles.rules = [ "d /etc/netns 0755 root root" "d /etc/netns/vpn 0755 root root" "f /etc/netns/vpn/resolv.conf 0644 root root"];
-  environment.etc."netns/vpn/resolv.conf" = ''
-    nameserver 10.2.0.1
-  '';
+  environment.etc."netns/vpn/resolv.conf" = {
+    text = ''
+      nameserver 10.2.0.1
+    '';
+    mode = "0644";
+  };
 
 }
