@@ -21,6 +21,7 @@ in {
     settings.umask = 2;
     settings.rpc-bind-address = "unix:/run/transmission/transmission.sock";
     settings.download-dir = "/mnt/kodi_lib/tmp";
+    settings."rpc-host-whitelist" = "localhost,pi4.home.lan";
     openRPCPort = true;
   };
 
