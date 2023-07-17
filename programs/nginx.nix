@@ -88,7 +88,7 @@
               tcp_nodelay on;
 	    '';
 	  };
-          "/transmission/".proxyPass = "http://transmission:9091/";
+          "/transmission/".proxyPass = "http://transmission/";
 	};
       };
     };
