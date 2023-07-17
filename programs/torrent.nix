@@ -17,7 +17,6 @@
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
-    rpcSocket = "/run/rtorrent/rpc.sock";
     downloadDir = "/mnt/kodi_lib/downloads_torrent";
     configText = ''
       dht.mode.set = auto
