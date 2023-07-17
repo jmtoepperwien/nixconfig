@@ -1,7 +1,8 @@
 { config, lib, pkgs, agenix, ... }:
 
 let
-  rtorrent = pkgs.callPackage ./rtorrent.nix {};
+  libtorrent = pkgs.callPackage ./libtorrent.nix {};
+  rtorrent = pkgs.callPackage ./rtorrent.nix { libtorrent = libtorrent; };
 in {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {

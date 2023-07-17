@@ -8,7 +8,7 @@
 , curl
 , libsigcxx
 , libtool
-, libtorrent-rasterbar
+, libtorrent
 , ncurses
 , openssl
 , pkg-config
@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
   };
 
   passthru = {
-    inherit libtorrent-rasterbar;
+    inherit libtorrent;
   };
 
   nativeBuildInputs = [
@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
     curl
     libsigcxx
     libtool
-    libtorrent-rasterbar
+    libtorrent
     ncurses
     openssl
     xmlrpc_c
