@@ -1,6 +1,8 @@
 { config, lib, pkgs, agenix, ... }:
 
-{
+let
+  rtorrent = pkgs.callPackage ./rtorrent.nix {};
+in {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
     isSystemUser = true;
@@ -13,7 +15,7 @@
   systemd.tmpfiles.rules = [ "d /run/rtorrent 0750 rtorrent rtorrent" ];
   services.rtorrent = {
     enable = true;
-    package = pkgs.jesec-rtorrent;
+    package = rtorrent;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
