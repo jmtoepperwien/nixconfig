@@ -120,8 +120,9 @@ in {
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
+      Environment = "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt"
       NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --peerport $TCPPORTPUBLIC --no-portmap --log-level=debug --logfile /var/lib/transmission/log.txt";
+      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --peerport $TCPPORTPUBLIC --no-portmap --log-level=debug --logfile /var/lib/transmission/log.txt  /etc/ssl/certs/ca-certificates.crt";
     };
   };
 
