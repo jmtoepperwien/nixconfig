@@ -59,7 +59,6 @@
     description = "Port forward natpmp open port so that public port matches private port";
     requires = [ "natpmp-proton.service" ];
     after = [ "natpmp-proton.service" ];
-    bindsTo = [ "natpmp-proton.service" ];
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
       User = "root";
