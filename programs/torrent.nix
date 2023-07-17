@@ -121,7 +121,7 @@ in {
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
       NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --peerport $TCPPORTPUBLIC --no-portmap --log-level=debug";
+      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --peerport $TCPPORTPUBLIC --no-portmap --log-level=debug --logfile /var/lib/transmission/log.txt";
     };
   };
 
