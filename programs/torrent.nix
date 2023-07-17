@@ -10,12 +10,14 @@
 
   environment.systemPackages = [ pkgs.flood pkgs.unpackerr ];
 
+  systemd.tmpfiles.rules = [ "d /run/rtorrent 0750 rtorrent rtorrent" ];
   services.rtorrent = {
     enable = true;
     package = pkgs.jesec-rtorrent;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
+    rpcSocket = "/run/rtorrent/rpc.sock";
     downloadDir = "/mnt/kodi_lib/downloads_torrent";
     configText = ''
       dht.mode.set = auto
