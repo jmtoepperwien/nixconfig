@@ -14,7 +14,7 @@
     recommendedProxySettings = true;
     proxyTimeout = "10m";
     upstreams."transmission" = {
-      servers = { "unix:/run/transmission/transmission.sock": {}; };
+      servers = { "unix:/run/transmission/transmission.sock" = {}; };
     };
     virtualHosts = {
       "mosihome.duckdns.org" = {
