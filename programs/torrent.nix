@@ -121,7 +121,7 @@ in {
     serviceConfig = {
       EnvironmentFile = "/run/proton_incoming";
       NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --peerport $TCPPORTPUBLIC --no-portmap";
+      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --peerport $TCPPORTPUBLIC --no-portmap --log-level=debug";
     };
   };
 
@@ -132,7 +132,7 @@ in {
     after = [ "transmission.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.flood}/bin/flood --trurl unix:/run/transmission/transmission.sock --host 0.0.0.0";
+      ExecStart = "${pkgs.flood}/bin/flood --trurl unix:/run/transmission/transmission.sock --host 0.0.0.0 ";
       Restart = "on-failure";
       Type = "simple";
       User = "transmission";
