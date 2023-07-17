@@ -71,6 +71,11 @@
         ${pkgs.nftables}/bin/nft add rule ip nat prerouting tcp dport $TCPPORTPRIVATE redirect to :$TCPPORTPUBLIC
         ${pkgs.nftables}/bin/nft add rule ip nat prerouting udp dport $UDPPORTPRIVATE redirect to :$UDPPORTPUBLIC
       '';
+      ExecStop = pkgs.writers.writeBash "stop-forward-port-vpn-tcp" ''
+        echo "stopping forwarding"
+        ${pkgs.nftables}/bin/nft delete rule ip nat prerouting tcp dport $TCPPORTPRIVATE redirect to :$TCPPORTPUBLIC
+        ${pkgs.nftables}/bin/nft delete rule ip nat prerouting udp dport $UDPPORTPRIVATE redirect to :$UDPPORTPUBLIC
+      '';
       Type = "oneshot";
     };
   };
