@@ -119,7 +119,7 @@ in {
     after = [ "protonvpn.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      Environment = "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt";
+      Environment = "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt TR_CURL_VERBOSE=1";
       NetworkNamespacePath = "/var/run/netns/vpn";
       ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --portmap --log-level=debug --logfile /var/lib/transmission/log.txt";
     };
