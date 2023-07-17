@@ -43,7 +43,7 @@ in {
 #  };
 
   systemd.services."natpmp-proton" = {
-    enable = true;
+    enable = false;
     description = "Acquire incoming port from protonvpn natpmp";
     requires = [ "protonvpn.service" ];
     after = [ "protonvpn.service" ];
@@ -71,7 +71,7 @@ in {
   };
 
   systemd.services."natpmp-forward" = {
-    enable = true;
+    enable = false;
     description = "Port forward natpmp open port so that public port matches private port";
     requires = [ "natpmp-proton.service" ];
     after = [ "natpmp-proton.service" ];
@@ -115,14 +115,13 @@ in {
 
   systemd.services.transmission = {
     bindsTo = [ "netns@vpn.service" ];
-    requires = [ "network-online.target" "protonvpn.service" "natpmp-proton.service" "natpmp-forward.service" ];
-    after = [ "protonvpn.service" "natpmp-proton.service" "natpmp-forward.service" ];
+    requires = [ "network-online.target" "protonvpn.service" ];
+    after = [ "protonvpn.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      EnvironmentFile = "/run/proton_incoming";
       Environment = "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt";
       NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --peerport $TCPPORTPUBLIC --no-portmap --log-level=debug --logfile /var/lib/transmission/log.txt";
+      ExecStart = lib.mkForce "${config.services.transmission.package}/bin/transmission-daemon -f -g ${config.services.transmission.home}/.config/transmission-daemon ${lib.escapeShellArgs config.services.transmission.extraFlags} --portmap --log-level=debug --logfile /var/lib/transmission/log.txt";
     };
   };
 
