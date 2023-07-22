@@ -134,6 +134,11 @@ in {
       ];
     };
   };
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
 
   # default applications
   xdg.mime.enable = true;
