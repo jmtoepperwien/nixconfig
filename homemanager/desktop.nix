@@ -112,8 +112,6 @@ in {
       for i
           do (xdg-open "$i" > /dev/null 2> /dev/null &)
       done
-
-      eval "$(zoxide init zsh)"
     }'';
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
@@ -133,6 +131,7 @@ in {
       plugins = [
         "git"
         "wd"
+        "zoxide"
       ];
     };
   };
