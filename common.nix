@@ -41,6 +41,7 @@
     usbutils
     rename
     irssi
+    zoxide
   ];
 
   programs.gnupg.agent = {
