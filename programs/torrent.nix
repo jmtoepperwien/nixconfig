@@ -61,7 +61,7 @@ in {
     isSystemUser = lib.mkForce false;
     isNormalUser = lib.mkForce true;
     group = "usenet";
-    extraGroups= [ "rtorrent" ];
+    extraGroups= [ "rtorrent" "autobrr" ];
   };
 
   environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr ];
