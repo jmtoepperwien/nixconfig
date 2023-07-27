@@ -2,7 +2,7 @@
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   autobrrPackage = pkgs.callPackage ./autobrr.nix {};
-  autobrrFreeSpace = pkgs.writeBash "autobrr-free-space" ''
+  autobrrFreeSpace = pkgs.writeShellScriptBin "autobrr-free-space" ''
     #!/bin/sh
     set -e
     
