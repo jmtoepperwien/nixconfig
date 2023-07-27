@@ -145,13 +145,14 @@ in {
     extraGroups = [ "rtorrent" "usenet" ];
   };
 
-  age.secrets."config.toml" = {
+  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0750 autobrr autobrr" ];
+  age.secrets."autobrrConfig" = {
     file = ../secrets/autobrrConfig.age;
     owner = "autobrr";
     group = "autobrr";
+    path = "/var/lib/autobrr/config.toml";
   };
 
-  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0750 autobrr autobrr" ];
   systemd.services.autobrr = {
     after = [ "flood.service" ];
     requires = [ "flood.service" ];
