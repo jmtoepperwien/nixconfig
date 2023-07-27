@@ -50,7 +50,12 @@
 	  "/radarr/".proxyPass = "http://localhost:7878";
           "/readarr/".proxyPass = "http://localhost:8787";
 	  "/prowlarr/".proxyPass = "http://localhost:9696";
-          "/autobrr/".proxyPass = "http://localhost:7474";
+          "/autobrr/" = {
+            proxyPass = "http://localhost:7474";
+            extraConfig = ''
+              rewrite ^/autobrr/(.*) /$1 break;
+            '';
+          };
 	};
       };
       "mosigit.duckdns.org" = {
