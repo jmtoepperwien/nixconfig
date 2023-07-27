@@ -2,6 +2,59 @@
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   autobrrPackage = pkgs.callPackage ./autobrr.nix {};
+  autobrrFreeSpace = pkgs.writeBash "autobrr-free-space" ''
+    #!/bin/sh
+    set -e
+    
+    # argument 1: torrent payload size; bytes.
+    if ! [[ "$1" =~ ^[0-9]*$ ]]; then
+      exit 5 # invalid 'size' argument.
+    fi
+    if [[ $(($1)) -gt 0 ]]; then
+      if [[ $1 -gt 102400 ]]; then
+        size=$(($1/1024))
+      else # if the size is too small it may not be for the payload.
+        size=$((5*1024*1024)) # use larger size.
+      fi
+    else
+      size=0 # ignore torrent size.
+    fi
+    
+    # argument 2: space to keep free; GiB, integer.
+    if ! [[ "$2" =~ ^[0-9]*$ ]]; then
+      exit 4 # invalid 'keep' argument.
+    fi
+    if [[ $(($2)) -gt 0 ]]; then
+      keep=$2
+    else
+      keep=100 # default, change as needed.
+    fi
+    
+    # argument 3: torrent save path.
+    if [[ -z "$3" ]]; then
+      path="/torrents" # default, change as needed.
+    else
+      path=$3
+    fi
+    if ! [[ -d "$path" ]]; then
+      exit 3 # invalid 'path' argument.
+    fi
+    
+    # get free space available.
+    have=$((`df "$path" | awk 'END{print $4}'`))
+    
+    # get minimum free space required.
+    need=$((($keep*1024*1024)+$size))
+    
+    # check if the needed free space is available.
+    if [[ $have -eq 0 ]]; then
+      exit 2 # no free space.
+    elif [[ $have -lt $need ]]; then
+      exit 1 # not enough free space.
+    else
+      exit 0 # free space available.
+    fi
+  '';
 in {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
@@ -161,6 +214,7 @@ in {
       User = "autobrr";
       Group = "usenet";
       WorkingDirectory = "/var/lib/autobrr";
+      ExecStartPre = "cp ${autobrrFreeSpace} /var/lib/autobrr/freespace.sh";
       ExecStart = "${autobrrPackage}/bin/autobrr --config=/var/lib/autobrr";
       Type = "simple";
     };
