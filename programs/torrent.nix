@@ -59,6 +59,7 @@ in {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
     isSystemUser = lib.mkForce false;
+    isNormalUser = lib.mkForce true;
     group = "usenet";
     extraGroups= [ "rtorrent" ];
   };
