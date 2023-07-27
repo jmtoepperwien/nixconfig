@@ -104,6 +104,9 @@
               tcp_nodelay on;
             '';
           };
+          "/RPC2" = {
+            proxyPass = "http://unix:/run/rtorrent/rpc.sock";
+          };
 	};
       };
     };
