@@ -1,6 +1,7 @@
 { config, lib, pkgs, agenix, ... }:
-
-{
+let
+  rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
+in {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
     isSystemUser = true;
@@ -12,6 +13,7 @@
 
   services.rtorrent = {
     enable = true;
+    package = rtorrentPackage;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
