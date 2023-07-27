@@ -97,7 +97,7 @@ in {
       #     the string before the 1st comma is unique for all entries (watch_directory in example)
       #     the number after the 1st comman is unique for all entries (1 in example)
 
-      schedule2 = watch_directory,1,5,"load.start=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.set_custom1=autobrr"
+      schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.set_custom1=autobrr"
     '';
   };
 
