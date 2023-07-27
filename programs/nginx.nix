@@ -108,7 +108,7 @@
           "/RPC2" = {
             extraConfig = ''
               include scgi_params;
-              scgi_pass unix:/run/rtorrent/rpc.sock
+              scgi_pass unix:/run/rtorrent/rpc.sock;
             '';
           };
 	};
