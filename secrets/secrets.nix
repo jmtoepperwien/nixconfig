@@ -13,4 +13,5 @@ in {
   "nextcloud-adminpass.age".publicKeys = [ maltepc pi4host ];
   "protonvpn.age".publicKeys = [ maltepc maltexps pi4host ];
   "unpackerrConfig.age".publicKeys = [ maltepc maltexps pi4host ];
+  "autobrrConfig.age".publicKeys = [ maltepc maltexps pi4host ];
 }

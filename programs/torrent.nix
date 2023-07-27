@@ -1,6 +1,7 @@
 { config, lib, pkgs, inputs, agenix, ... }:
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
+  autobrrPackage = pkgs.callPackage ./autobrr.nix {};
 in {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
@@ -132,6 +133,32 @@ in {
       User = "unpackerr";
       Group = "usenet";
       ExecStart = "${pkgs.unpackerr}/bin/unpackerr --config=${config.age.secrets.unpackerrConfig.path}";
+      Type = "simple";
+    };
+  };
+
+
+  users.groups."autobrr" = {};
+  users.users."autobrr" = {
+    isSystemUser = true;
+    group = "autobrr";
+    extraGroups = [ "rtorrent" "usenet" ];
+  };
+
+  age.secrets."config.toml" = {
+    file = ../secrets/autobrrConfig.age;
+    owner = "autobrr";
+    group = "autobrr";
+  };
+
+  systemd.services.autobrr = {
+    after = [ "flood.service" ];
+    requires = [ "flood.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "autobrr";
+      Group = "usenet";
+      ExecStart = "${autobrrPackage}/bin/autobrr --config=${config.age.secretsDir}";
       Type = "simple";
     };
   };
