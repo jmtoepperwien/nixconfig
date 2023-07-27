@@ -58,7 +58,7 @@ let
 in {
   users.groups."rtorrent" = {};
   users.users."rtorrent" = {
-    isSystemUser = true;
+    isSystemUser = false;
     group = "usenet";
     extraGroups= [ "rtorrent" ];
   };
