@@ -161,7 +161,7 @@ in {
       User = "autobrr";
       Group = "usenet";
       WorkingDirectory = "/var/lib/autobrr";
-      ExecStart = "${autobrrPackage}/bin/autobrr --config=${config.age.secretsDir}";
+      ExecStart = "${autobrrPackage}/bin/autobrr --config=/var/lib/autobrr";
       Type = "simple";
     };
   };
