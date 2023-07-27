@@ -106,7 +106,10 @@
             '';
           };
           "/RPC2" = {
-            proxyPass = "http://unix:/run/rtorrent/rpc.sock";
+            extraConfig = ''
+              include scgi_params;
+              scgi_pass unix:/run/rtorrent/rpc.sock
+            '';
           };
 	};
       };
