@@ -1,16 +1,17 @@
 {
   inputs = {
-    nixpkgs = { url = "github:nixos/nixpkgs/nixos-23.05"; };
-    home-manager = { url = "github:nix-community/home-manager/release-23.05"; inputs.nixpkgs.follows = "nixpkgs"; };
+    nixpkgs-stable = { url = "github:nixos/nixpkgs/nixos-23.05"; };
+    nixpkgs-unstable = { url = "github:nixos/nixpkgs/nixos-unstable"; };
+    home-manager = { url = "github:nix-community/home-manager/release-23.05"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     agenix = { url = "github:ryantm/agenix"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
   };
 
-  outputs = { self, nixpkgs, agenix, home-manager, nixos-hardware, ... }@attrs: rec {
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, ... }@inputs: rec {
     nixosConfigurations = {
-      maltepc = nixpkgs.lib.nixosSystem {
+      maltepc = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = attrs;
+        specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
 	  ./system/maltepc.nix
           ./graphical/sway.nix
@@ -24,9 +25,9 @@
           }
         ];
       };
-      maltexps = nixpkgs.lib.nixosSystem {
+      maltexps = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = attrs;
+        specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
           ./system/maltexps.nix
           ./graphical/sway.nix
@@ -42,9 +43,9 @@
           nixos-hardware.nixosModules.dell-xps-13-9370
         ];
       };
-      pi3 = nixpkgs.lib.nixosSystem {
+      pi3 = nixpkgs-stable.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = attrs;
+        specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
           ./system/pi3.nix
           ./ssh.nix
@@ -52,9 +53,9 @@
           agenix.nixosModules.default
         ];
       };
-      pi4 = nixpkgs.lib.nixosSystem  {
+      pi4 = nixpkgs-stable.lib.nixosSystem  {
         system = "aarch64-linux";
-        specialArgs = attrs;
+        specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
           ./system/pi4.nix
           ./ssh.nix

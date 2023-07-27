@@ -1,4 +1,4 @@
-{ config, lib, pkgs, agenix, ... }:
+{ config, lib, pkgs, inputs, agenix, ... }:
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
 in {
@@ -9,11 +9,11 @@ in {
     extraGroups= [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ pkgs.flood pkgs.unpackerr ];
+  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr ];
 
   services.rtorrent = {
     enable = true;
-    package = pkgs.jesec-rtorrent;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jesec-rtorrent;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";

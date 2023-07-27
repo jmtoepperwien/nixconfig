@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   environment.systemPackages = [ pkgs.par2cmdline ];
@@ -14,6 +14,7 @@
 
   services.sonarr = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
     openFirewall = true;
   };
 
@@ -27,6 +28,7 @@
 
   services.radarr = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.radarr;
     openFirewall = true;
   };
 
@@ -40,11 +42,12 @@
 
   services.readarr = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.readarr;
     openFirewall = true;
   };
   ## Calibre Server for Readarr
   services.calibre-server = {
-    enable = true;
+    enable = false;
     user = "readarr";
     group = "readarr";
     libraries = [ "/mnt/kodi_lib/books/" ];

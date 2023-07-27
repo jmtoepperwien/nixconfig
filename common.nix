@@ -1,4 +1,4 @@
-{ config, lib, modulesPath, pkgs, agenix, ... }:
+{ config, lib, modulesPath, pkgs, inputs, agenix, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
