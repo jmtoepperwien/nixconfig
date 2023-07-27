@@ -164,8 +164,9 @@ in {
       ExecStart = lib.mkForce (pkgs.writers.writeBash "start-rtorrent" ''
         echo "${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
 "
-        ${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
+        ${pkgs.tmux}/bin/tmux -L rtorrent new -d -s rtorrent ${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
       '');
+      ExecStop = lib.mkForce "${pkgs.tmux}/bin/tmux -L rtorrent kill-session -t rtorrent";
     };
   };
 
