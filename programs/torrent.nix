@@ -167,6 +167,7 @@ in {
         ${pkgs.tmux}/bin/tmux -L rtorrent new -d -s rtorrent ${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=false -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
       '');
       ExecStop = lib.mkForce "${pkgs.tmux}/bin/tmux -L rtorrent kill-session -t rtorrent";
+      Type = "forking";
     };
   };
 
