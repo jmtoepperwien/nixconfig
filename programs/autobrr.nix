@@ -3,8 +3,8 @@
 let
   version = "1.27.1";
   src = fetchzip {
-    url = "https://github.com/autobrr/autobrr/releases/download/v1.27.1/autobrr_1.27.1_linux_x86_64.tar.gz";
-    hash = "sha256-Qh75rNXZNjNE1iYOEtvMiagQ1VT5PU9tlC/lsHm8OQg=";
+    url = "https://github.com/autobrr/autobrr/releases/download/v1.27.1/autobrr_1.27.1_linux_arm64.tar.gz";
+    hash = "sha256-M5MIw7hyKhd9EALqmAXAtGmPC2flv1ULAejCg/O61uE=";
     stripRoot = false;
   };
 in stdenv.mkDerivation {
