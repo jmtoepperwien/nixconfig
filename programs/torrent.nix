@@ -32,7 +32,7 @@ let
     
     # argument 3: torrent save path.
     if [[ -z "$3" ]]; then
-      path="/torrents" # default, change as needed.
+      path="/mnt/kodi_lib" # default, change as needed.
     else
       path=$3
     fi
@@ -214,7 +214,7 @@ in {
       User = "autobrr";
       Group = "usenet";
       WorkingDirectory = "/var/lib/autobrr";
-      ExecStartPre = "cp ${autobrrFreeSpace} /var/lib/autobrr/freespace.sh";
+      ExecStartPre = "${pkgs.toybox}/bin/cp ${autobrrFreeSpace} /var/lib/autobrr/freespace.sh";
       ExecStart = "${autobrrPackage}/bin/autobrr --config=/var/lib/autobrr";
       Type = "simple";
     };
