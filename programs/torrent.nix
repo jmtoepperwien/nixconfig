@@ -214,7 +214,7 @@ in {
       User = "autobrr";
       Group = "usenet";
       WorkingDirectory = "/var/lib/autobrr";
-      ExecStartPre = "${pkgs.toybox}/bin/cp ${autobrrFreeSpace} /var/lib/autobrr/freespace.sh";
+      ExecStartPre = "${pkgs.coreutils}/bin/cp ${autobrrFreeSpace} /var/lib/autobrr/freespace.sh";
       ExecStart = "${autobrrPackage}/bin/autobrr --config=/var/lib/autobrr";
       Type = "simple";
     };
