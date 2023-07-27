@@ -41,7 +41,7 @@ let
     fi
     
     # get free space available.
-    have=$((`df "$path" | awk 'END{print $4}'`))
+    have=$((`${pkgs.busybox}/bin/df "$path" | ${pkgs.busybox}/bin/awk 'END{print $4}'`))
     
     # get minimum free space required.
     need=$((($keep*1024*1024)+$size))
@@ -79,6 +79,25 @@ in {
       trackers.use_udp.set = yes
 
       system.umask.set = 0002
+      # The following line can be added to .rtorrent.rc to set up watch directories
+      #
+      # Replace:
+      #     [WATCH_DIR] with the directory to watch for torrent files
+      #     [DOWNLOAD_DIR] with the directory to save the files into
+      #     [LABEL] with a label to apply to torrents added via this watch dir
+      #        Important: Thus far i have not worked out how to use spaces in label names
+      #                   Do not include spaces for .torrent files will not be imported into rtorrent if you do
+      #
+      # Remove:
+      #     d.set_custom1=[LABEL] - to not add a label to the torrent
+      #     d.delete_tied= - to not delete the .torrent file after it has been added to rtorrent
+      #
+      # Notes:
+      #     When adding multiple watch directories ensure,
+      #     the string before the 1st comma is unique for all entries (watch_directory in example)
+      #     the number after the 1st comman is unique for all entries (1 in example)
+
+      schedule2 = watch_directory,1,5,"load.start=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.set_custom1=autobrr"
     '';
   };
 
@@ -198,7 +217,7 @@ in {
     extraGroups = [ "rtorrent" "usenet" ];
   };
 
-  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0750 autobrr autobrr" ];
+  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 autobrr autobrr" "d /var/lib/autobrr/watch 0755 autobrr rtorrent" ];
   age.secrets."autobrrConfig" = {
     file = ../secrets/autobrrConfig.age;
     owner = "autobrr";
@@ -214,7 +233,7 @@ in {
       User = "autobrr";
       Group = "usenet";
       WorkingDirectory = "/var/lib/autobrr";
-      ExecStartPre = "${pkgs.coreutils}/bin/cp ${autobrrFreeSpace}/bin/autobrr-free-space /var/lib/autobrr/freespace.sh";
+      ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/rm -f /var/lib/autobrr/freespace.sh; ${pkgs.coreutils}/bin/cp ${autobrrFreeSpace}/bin/autobrr-free-space /var/lib/autobrr/freespace.sh'";
       ExecStart = "${autobrrPackage}/bin/autobrr --config=/var/lib/autobrr";
       Type = "simple";
     };
