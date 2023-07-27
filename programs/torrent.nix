@@ -151,6 +151,7 @@ in {
     group = "autobrr";
   };
 
+  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0750 autobrr autobrr" ];
   systemd.services.autobrr = {
     after = [ "flood.service" ];
     requires = [ "flood.service" ];
@@ -158,6 +159,7 @@ in {
     serviceConfig = {
       User = "autobrr";
       Group = "usenet";
+      WorkingDirectory = "/var/lib/autobrr";
       ExecStart = "${autobrrPackage}/bin/autobrr --config=${config.age.secretsDir}";
       Type = "simple";
     };
