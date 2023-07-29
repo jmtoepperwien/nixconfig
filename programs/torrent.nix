@@ -80,6 +80,7 @@ in {
       trackers.use_udp.set = yes
 
       system.umask.set = 0002
+
       # The following line can be added to .rtorrent.rc to set up watch directories
       #
       # Replace:
@@ -99,6 +100,8 @@ in {
       #     the number after the 1st comman is unique for all entries (1 in example)
 
       schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
+      # set added time
+      method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
     '';
   };
 
