@@ -26,6 +26,7 @@
     ripgrep
     fd
     glances
+    mediainfo
     ncdu
     pass
     gnupg
@@ -33,8 +34,10 @@
     tmux
     tree
     tealdeer
+    unrar
     unzip
     unp
+    sshfs
     zsh
     findutils
     smartmontools
