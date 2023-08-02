@@ -235,7 +235,7 @@ return require("lazy").setup({
   { 'Aasim-A/scrollEOF.nvim',         config = function() require('scrollEOF').setup() end },
   { 'tpope/vim-eunuch' },
 
-  { 'CrunchyFlakes/nix-develop.nvim' }, -- TODO: change back to figsoda
+  { 'figsoda/nix-develop.nvim' }, -- TODO: change back to figsoda
 
   {
     "folke/which-key.nvim",
