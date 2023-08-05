@@ -41,6 +41,8 @@
     sshfs
     zsh
     findutils
+    protonvpn-gui
+    protonvpn-cli
     smartmontools
     usbutils
     rename
