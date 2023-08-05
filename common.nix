@@ -25,6 +25,7 @@
     curl
     ripgrep
     fd
+    fzf
     glances
     mediainfo
     ncdu
