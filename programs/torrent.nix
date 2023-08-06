@@ -61,7 +61,7 @@ in {
     isSystemUser = lib.mkForce false;
     isNormalUser = lib.mkForce true;
     group = "usenet";
-    extraGroups= [ "rtorrent" "autobrr" ];
+    extraGroups= [ "rtorrent" ];
   };
 
   environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr ];
@@ -216,18 +216,11 @@ in {
   };
 
 
-  users.groups."autobrr" = {};
-  users.users."autobrr" = {
-    isSystemUser = true;
-    group = "autobrr";
-    extraGroups = [ "rtorrent" "usenet" ];
-  };
-
-  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 autobrr autobrr" "d /var/lib/autobrr/watch 0775 autobrr rtorrent" ];
+  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 rtorrent rtorrent" "d /var/lib/autobrr/watch 0775 rtorrent rtorrent" ];
   age.secrets."autobrrConfig" = {
     file = ../secrets/autobrrConfig.age;
-    owner = "autobrr";
-    group = "autobrr";
+    owner = "rtorrent";
+    group = "rtorrent";
     path = "/var/lib/autobrr/config.toml";
   };
 
@@ -236,7 +229,7 @@ in {
     requires = [ "flood.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      User = "autobrr";
+      User = "rtorrent";
       Group = "usenet";
       WorkingDirectory = "/var/lib/autobrr";
       ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/rm -f /var/lib/autobrr/freespace.sh; ${pkgs.coreutils}/bin/cp ${autobrrFreeSpace}/bin/autobrr-free-space /var/lib/autobrr/freespace.sh'";
