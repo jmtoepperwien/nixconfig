@@ -7,7 +7,7 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = ''
+      ExecStart = pkgs.writers.writeBash "netns-withbridge" ''
         ${pkgs.iproute2}/bin/ip netns add %I
         ${pkgs.iproute2}/bin/ip link add brvpn0 type veth peer name brvpn1
         ${pkgs.iproute2}/bin/ip link set brvpn1 netns %I
