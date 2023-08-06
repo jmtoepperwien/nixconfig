@@ -2,13 +2,25 @@
 
 {
   systemd.services."netns@" = {
-    description = "%I network namespace";
+    description = "%I network namespace with bridge to normal network";
     before = [ "network.target" ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = "${pkgs.iproute2}/bin/ip netns add %I";
-      ExecStop = "${pkgs.iproute2}/bin/ip netns del %I";
+      ExecStart = ''
+        ${pkgs.iproute2}/bin/ip netns add %I
+        ${pkgs.iproute2}/bin/ip link add brvpn0 type veth peer name brvpn1
+        ${pkgs.iproute2}/bin/ip link set brvpn1 netns %I
+        ${pkgs.iproute2}/bin/ip addr add 169.254.251.1/16 dev brvpn0
+        ${pkgs.iproute2}/bin/ip -n vpn addr add 169.254.251.2/16 dev brvpn1
+        ${pkgs.iproute2}/bin/ip -n vpn link set brvpn1 up
+        ${pkgs.iproute2}/bin/ip route add 169.254.251.2 dev brvpn0
+        ${pkgs.iproute2}/bin/ip -n vpn route add 169.254.251.1 dev brvpn1
+      '';
+      ExecStop = ''
+        ${pkgs.iproute2}/bin/ip link del veth0
+        ${pkgs.iproute2}/bin/ip netns del %I
+      '';
     };
   };
 
