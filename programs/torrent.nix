@@ -3,6 +3,7 @@ let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
   autotorrent2Package = pkgs.callPackage ./autotorrent2.nix {};
+  prunerrPackage = pkgs.callPackage ./prunerr.nix {};
   autobrrPackage = pkgs.callPackage ./autobrr.nix {};
   autobrrFreeSpace = pkgs.writeShellScriptBin "autobrr-free-space" ''
     #!/bin/sh
@@ -66,7 +67,7 @@ in {
     extraGroups= [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage pkgs.unrar autotorrent2Package ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent 
+  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage pkgs.unrar autotorrent2Package prunerrPackage ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent 
 
   services.rtorrent = {
     enable = true;
