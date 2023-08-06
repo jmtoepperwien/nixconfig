@@ -223,7 +223,7 @@ in {
     extraGroups = [ "rtorrent" "usenet" ];
   };
 
-  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 autobrr autobrr" "d /var/lib/autobrr/watch 0755 autobrr rtorrent" ];
+  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 autobrr autobrr" "d /var/lib/autobrr/watch 0775 autobrr rtorrent" ];
   age.secrets."autobrrConfig" = {
     file = ../secrets/autobrrConfig.age;
     owner = "autobrr";
