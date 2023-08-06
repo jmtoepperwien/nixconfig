@@ -1,16 +1,16 @@
 { config, lib, modulesPath, pkgs, agenix, ... }:
 
 {
-  systemd.services."netns@" = {
-    description = "%I network namespace with bridge to normal network";
+  systemd.services."netns-vpn" = {
+    description = "vpn network namespace with bridge to normal network";
     before = [ "network.target" ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
       ExecStart = pkgs.writers.writeBash "netns-withbridge-up" ''
-        ${pkgs.iproute2}/bin/ip netns add %I
+        ${pkgs.iproute2}/bin/ip netns add vpn
         ${pkgs.iproute2}/bin/ip link add brvpn0 type veth peer name brvpn1
-        ${pkgs.iproute2}/bin/ip link set brvpn1 netns %I
+        ${pkgs.iproute2}/bin/ip link set brvpn1 netns vpn
         ${pkgs.iproute2}/bin/ip addr add 169.254.251.1/16 dev brvpn0
         ${pkgs.iproute2}/bin/ip -n vpn addr add 169.254.251.2/16 dev brvpn1
         ${pkgs.iproute2}/bin/ip -n vpn link set brvpn1 up
@@ -19,7 +19,7 @@
       '';
       ExecStop = pkgs.writers.writeBash "netns-withbridge-down" ''
         ${pkgs.iproute2}/bin/ip link del veth0
-        ${pkgs.iproute2}/bin/ip netns del %I
+        ${pkgs.iproute2}/bin/ip netns del vpn
       '';
     };
   };
@@ -31,9 +31,9 @@
   };
   systemd.services."protonvpn" = {
     description = "ProtonVPN in own network namespace";
-    bindsTo = [ "netns@vpn.service" ];
+    bindsTo = [ "netns-vpn.service" ];
     requires = [ "network-online.target" ];
-    after = [ "netns@vpn.service" ];
+    after = [ "netns-vpn.service" ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;

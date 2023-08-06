@@ -160,7 +160,7 @@ in {
     configFile = pkgs.writeText "rtorrent.rc" config.services.rtorrent.configText;
     rtorrentPackage = config.services.rtorrent.package;
   in {
-    bindsTo = [ "netns@vpn.service" ];
+    bindsTo = [ "netns-vpn.service" ];
     requires = [ "network-online.target" "protonvpn.service" "natpmp-proton.service" "natpmp-forward.service" ];
     after = [ "protonvpn.service" "natpmp-proton.service" "natpmp-forward.service" ];
     wantedBy = [ "multi-user.target" ];
