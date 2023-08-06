@@ -50,7 +50,7 @@
 	  "/sonarr/".proxyPass = "http://localhost:8989";
 	  "/radarr/".proxyPass = "http://localhost:7878";
           "/readarr/".proxyPass = "http://localhost:8787";
-	  "/prowlarr/".proxyPass = "http://localhost:9696";
+	  "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''
