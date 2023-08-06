@@ -66,7 +66,7 @@ in {
     extraGroups= [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage pkgs.torrenttools pkgs.mktorrent pkgs.unrar autotorrent2Package ];
+  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage pkgs.unrar autotorrent2Package ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent 
 
   services.rtorrent = {
     enable = true;
