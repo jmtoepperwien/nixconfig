@@ -2,6 +2,7 @@
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
+  autotorrent2Package = pkgs.callPackage ./autotorrent2.nix {};
   autobrrPackage = pkgs.callPackage ./autobrr.nix {};
   autobrrFreeSpace = pkgs.writeShellScriptBin "autobrr-free-space" ''
     #!/bin/sh
@@ -65,7 +66,7 @@ in {
     extraGroups= [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage pkgs.torrenttools pkgs.mktorrent pkgs.unrar ];
+  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage pkgs.torrenttools pkgs.mktorrent pkgs.unrar autotorrent2Package ];
 
   services.rtorrent = {
     enable = true;
