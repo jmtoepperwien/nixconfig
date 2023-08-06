@@ -65,7 +65,7 @@ in {
     extraGroups= [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage ];
+  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage pkgs.torrenttools pkgs.mktorrent pkgs.unrar ];
 
   services.rtorrent = {
     enable = true;
