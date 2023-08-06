@@ -1,6 +1,7 @@
 { config, lib, pkgs, inputs, agenix, ... }:
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
+  cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
   autobrrPackage = pkgs.callPackage ./autobrr.nix {};
   autobrrFreeSpace = pkgs.writeShellScriptBin "autobrr-free-space" ''
     #!/bin/sh
@@ -64,7 +65,7 @@ in {
     extraGroups= [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr ];
+  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr cross-seedPackage ];
 
   services.rtorrent = {
     enable = true;
