@@ -64,6 +64,11 @@
     enable = true;
     openFirewall = true;
   };
+  systemd.services.prowlarr = {
+    serviceConfig = {
+      NetworkNamespacePath = "/var/run/netns/vpn";
+    };
+  };
 
   # Sabnzbd
   users.users."sabnzbd" = {
