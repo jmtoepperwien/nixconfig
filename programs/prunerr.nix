@@ -22,7 +22,7 @@ let
       url = "https://files.pythonhosted.org/packages/be/4b/a96bad7e8048f437e0b91f276f8411b9149e43cb4f48b7decf34c02001c5/transmission_rpc-3.4.2-py3-none-any.whl";
       sha256 = "sha256-BpYSjD2yO6OhKm8zeQDhknGr48jLEKlExGOxKiubQuA=";
     };
-    propagatedBuildInputs = [ python3Packages.poetry ];
+    propagatedBuildInputs = [ python3Packages.poetry-core python3Packages.typing-extensions python3Packages.requests ];
   };
   arrapi = python3Packages.buildPythonPackage {
     pname = "arrapi";
