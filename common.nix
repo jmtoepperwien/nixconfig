@@ -21,6 +21,7 @@
 
   environment.systemPackages = with pkgs; [
     bat
+    btrfs-progs
     wget
     curl
     ripgrep
