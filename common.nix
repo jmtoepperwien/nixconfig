@@ -28,6 +28,7 @@
     fd
     fzf
     glances
+    hdparm
     mediainfo
     ncdu
     pass
