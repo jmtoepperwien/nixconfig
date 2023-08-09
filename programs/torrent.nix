@@ -240,4 +240,19 @@ in {
       Type = "simple";
     };
   };
+
+
+  systemd.tmpfiles.rules = [ "d /var/lib/cross-seed 0755 rtorrent rtorrent" "d /var/lib/cross-seed/watch 0775 rtorrent rtorrent" ];
+  systemd.services.cross-seed = {
+    after = [ "rtorrent.service" ];
+    requires = [ "rtorrent.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "rtorrent";
+      Group = "rtorrent";
+      WorkingDirectory = "/var/lib/cross-seed";
+      ExecStart = "${cross-seedPackage}/bin/cross-seed daemon";
+      Restart = "always";
+    };
+  };
 }

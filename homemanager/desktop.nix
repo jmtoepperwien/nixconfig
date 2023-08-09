@@ -5,6 +5,9 @@ let
     numpy
     pynvim
     ipython
+    matplotlib
+    plotly
+    scikit-learn
   ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
 in {
