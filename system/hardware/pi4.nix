@@ -23,6 +23,10 @@
       fsType = "btrfs";
       options = [ "subvol=@" "defaults" ];
     };
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+  };
 
   swapDevices = [ ];
 
