@@ -19,8 +19,9 @@
     };
 
   fileSystems."/mnt/kodi_lib" =
-    { device = "/dev/disk/by-uuid/4899f233-1842-4a91-8509-7b06b852c027";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/af71a65d-c25d-40c8-98fa-792c61de0630";
+      fsType = "btrfs";
+      options = [ "subvol=@" "defaults" ];
     };
 
   swapDevices = [ ];
