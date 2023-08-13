@@ -22,7 +22,7 @@
   environment.systemPackages = with pkgs; [
     bat
     exa
-    dust
+    du-dust
     duf
     fzf
     fd
