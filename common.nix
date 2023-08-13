@@ -21,12 +21,18 @@
 
   environment.systemPackages = with pkgs; [
     bat
+    exa
+    dust
+    duf
+    fzf
+    fd
+    ripgrep
+    zoxide
+    mcfly
+    dig
     btrfs-progs
     wget
     curl
-    ripgrep
-    fd
-    fzf
     glances
     hdparm
     mediainfo
@@ -47,7 +53,6 @@
     usbutils
     rename
     irssi
-    zoxide
   ];
 
   programs.gnupg.agent = {
