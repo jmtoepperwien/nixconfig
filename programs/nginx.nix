@@ -68,6 +68,17 @@
           };
         };
       };
+      "192.168.1.234" = {
+        forceSSL = false;
+        locations = {
+          "/RPC2" = {
+            extraConfig = ''
+              include ${pkgs.nginx}/conf/scgi_params;
+              scgi_pass unix:/run/rtorrent/rpc.sock;
+            '';
+          };
+        };
+      };
       "pi4.home.lan" = {
         forceSSL = false;
 	locations = {
