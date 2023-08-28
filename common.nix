@@ -92,4 +92,12 @@
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   networking.networkmanager.dns = "none";
   networking.dhcpcd.extraConfig = "nohook resolv.conf";
+
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      dockerCompat = true;
+    };
+  };
 }
