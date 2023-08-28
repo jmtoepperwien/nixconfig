@@ -219,7 +219,7 @@ in {
   };
 
 
-  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 rtorrent rtorrent" "d /var/lib/autobrr/watch 0775 rtorrent rtorrent" ];
+  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 rtorrent rtorrent" "d /var/lib/autobrr/watch 0775 rtorrent rtorrent" "d /var/lib/cross-seed 0755 rtorrent rtorrent" "d /var/lib/cross-seed/watch 0775 rtorrent rtorrent" "d /var/lib/rtorrent/at2-queue 0775 rtorrent rtorrent" ];
   age.secrets."autobrrConfig" = {
     file = ../secrets/autobrrConfig.age;
     owner = "rtorrent";
@@ -242,17 +242,26 @@ in {
   };
 
 
-  #systemd.tmpfiles.rules = [ "d /var/lib/cross-seed 0755 rtorrent rtorrent" "d /var/lib/cross-seed/watch 0775 rtorrent rtorrent" ];
-  #systemd.services.cross-seed = {
-  #  after = [ "rtorrent.service" ];
-  #  requires = [ "rtorrent.service" ];
-  #  wantedBy = [ "multi-user.target" ];
-  #  serviceConfig = {
-  #    User = "rtorrent";
-  #    Group = "rtorrent";
-  #    WorkingDirectory = "/var/lib/cross-seed";
-  #    ExecStart = "${cross-seedPackage}/bin/cross-seed daemon";
-  #    Restart = "always";
-  #  };
-  #};
+  systemd.services.cross-seed = let
+    trackers = "http://169.254.251.2:9696/17/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/26/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/8/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/21/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/19/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/18/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/23/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/27/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535";
+    search-cadence = "2w";
+    rss-cadence = "30min";
+    delay = "10";
+    snatch-timeout = "5min";
+    search-timeout = "5min";
+    torrent-dir = "/var/lib/rtorrent/session";
+    output-dir = "/var/lib/rtorrent/at2-queue";
+  in {
+    after = [ "rtorrent.service" ];
+    requires = [ "rtorrent.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "rtorrent";
+      Group = "rtorrent";
+      WorkingDirectory = "/var/lib/cross-seed";
+      NetworkNamespacePath = "/var/run/netns/vpn";
+      ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --action save";
+      Restart = "always";
+    };
+  };
 }
