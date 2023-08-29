@@ -2,6 +2,10 @@
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
+  cross-seedHook = pkgs.writeShellScriptBin ''
+    #!/bin/sh
+    curl -XPOST http://localhost:2468/api/webhook --data-urlencode "name=$1"
+  '';
   autotorrent2Package = pkgs.callPackage ./autotorrent2.nix {};
   prunerrPackage = pkgs.callPackage ./prunerr.nix {};
   autobrrPackage = pkgs.callPackage ./autobrr.nix {};
@@ -105,6 +109,9 @@ in {
       schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
       # set added time
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
+
+      # automatically execute cross-seed search on finished downloads
+      method.set_key=event.download.finished,cross_seed,"execute={'${cross-seedHook}',$d.name=}"
     '';
   };
 
