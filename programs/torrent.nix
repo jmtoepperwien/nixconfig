@@ -271,4 +271,22 @@ in {
       Restart = "always";
     };
   };
+
+  systemd.timers.autotorrent2 = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "5m";
+      Unit = "autotorrent2.service";
+    };
+  };
+  systemd.services.autotorrent2 = {
+    requires = [ "rtorrent.service" ];
+    script = "${autotorrent2Package}/bin/at2 scan && at2 add rtorrent '/var/lib/rtorrent/at2-queue'";
+    serviceConfig = {
+      User = "rtorrent";
+      Group = "rtorrent";
+      Type = "oneshot";
+    };
+  };
 }
