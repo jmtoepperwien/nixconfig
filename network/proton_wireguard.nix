@@ -17,6 +17,7 @@
         ${pkgs.iproute2}/bin/ip route add 169.254.251.2 dev brvpn0
         ${pkgs.iproute2}/bin/ip -n vpn route add 169.254.251.1 dev brvpn1
 
+        ${pkgs.iproute2}/bin/ip -n vpn addr add 127.0.0.1/8 dev lo
         ${pkgs.iproute2}/bin/ip -n vpn link set lo up
         ${pkgs.iproute2}/bin/ip -n vpn route add 127.0.0.1 via dev lo
       '';
