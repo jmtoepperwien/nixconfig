@@ -286,7 +286,7 @@ in {
       at2AddScript = pkgs.writeShellScriptBin "at2-add-script" ''
         #!/bin/sh
         ${autotorrent2Package}/bin/at2 scan
-        ${autotorrent2Package}/bin/at2 add rtorrent '/var/lib/rtorrent/at2-queue/*.torrent'
+        ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
       '';
     in "${at2AddScript}/bin/at2-add-script";
     serviceConfig = {
