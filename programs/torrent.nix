@@ -283,7 +283,7 @@ in {
   systemd.services.autotorrent2 = {
     requires = [ "rtorrent.service" ];
     script = let
-      at2AddScript = pks.writeShellScriptBin "at2-add-script" ''
+      at2AddScript = pkgs.writeShellScriptBin "at2-add-script" ''
         #!/bin/sh
         ${autotorrent2Package}/bin/at2 scan
         ${autotorrent2Package}/bin/at2 add rtorrent '/var/lib/rtorrent/at2-queue/*.torrent'
