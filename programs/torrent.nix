@@ -2,7 +2,7 @@
 let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
-  cross-seedHook = pkgs.writeShellScriptBin ''
+  cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
     #!/bin/sh
     curl -XPOST http://localhost:2468/api/webhook --data-urlencode "name=$1"
   '';
