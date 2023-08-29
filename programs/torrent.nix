@@ -250,7 +250,7 @@ in {
 
 
   systemd.services.cross-seed = let
-    trackers = "http://169.254.251.2:9696/17/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/26/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/8/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/21/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/19/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/18/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/23/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://169.254.251.2:9696/27/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535";
+    trackers = "http://127.0.0.1:9696/17/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/26/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/8/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/21/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/19/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/18/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/23/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/27/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535";
     search-cadence = "2w";
     rss-cadence = "30min";
     delay = "10";
