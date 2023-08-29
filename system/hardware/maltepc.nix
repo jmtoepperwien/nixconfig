@@ -2,8 +2,9 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
-
-{
+let
+  pi4ip = "192.168.1.234";
+in {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -48,17 +49,17 @@
     };
 
   fileSystems."/mnt/pi4/books" = {
-    device = "pi4.home.lan:/export/books";
+    device = "${pi4ip}:/export/books";
     fsType = "nfs";
   };
 
   fileSystems."/mnt/pi4/series" = {
-    device = "pi4.home.lan:/export/series";
+    device = "${pi4ip}:/export/series";
     fsType = "nfs";
   };
 
   fileSystems."/mnt/pi4/movies" = {
-    device = "pi4.home.lan:/export/movies";
+    device = "${pi4ip}:/export/movies";
     fsType = "nfs";
   };
 
