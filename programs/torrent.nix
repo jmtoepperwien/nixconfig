@@ -4,7 +4,7 @@ let
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
   cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
     #!/bin/sh
-    curl -XPOST http://localhost:2468/api/webhook --data-urlencode "name=$1"
+    curl -XPOST http://127.0.0.1:2468/api/webhook --data-urlencode "name=$1"
   '';
   autotorrent2Package = pkgs.callPackage ./autotorrent2.nix {};
   prunerrPackage = pkgs.callPackage ./prunerr.nix {};

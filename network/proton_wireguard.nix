@@ -16,6 +16,9 @@
         ${pkgs.iproute2}/bin/ip -n vpn link set brvpn1 up
         ${pkgs.iproute2}/bin/ip route add 169.254.251.2 dev brvpn0
         ${pkgs.iproute2}/bin/ip -n vpn route add 169.254.251.1 dev brvpn1
+
+        ${pkgs.iproute2}/bin/ip -n vpn link set lo up
+        ${pkgs.iproute2}/bin/ip -n vpn route add 127.0.0.1 via dev lo
       '';
       ExecStop = pkgs.writers.writeBash "netns-withbridge-down" ''
         ${pkgs.iproute2}/bin/ip link del veth0
