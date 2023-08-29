@@ -111,7 +111,7 @@ in {
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
       # automatically execute cross-seed search on finished downloads
-      method.set_key=event.download.finished,cross_seed,"execute={'${cross-seedHook}',$d.name=}"
+      method.set_key=event.download.finished,cross_seed,"execute={'${cross-seedHook}/bin/cross-seed-hook',$d.name=}"
     '';
   };
 
@@ -288,7 +288,7 @@ in {
         ${autotorrent2Package}/bin/at2 scan
         ${autotorrent2Package}/bin/at2 add rtorrent '/var/lib/rtorrent/at2-queue/*.torrent'
       '';
-    in "${at2AddScript}";
+    in "${at2AddScript}/bin/at2-add-script";
     serviceConfig = {
       User = "rtorrent";
       Group = "rtorrent";
