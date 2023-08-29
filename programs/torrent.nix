@@ -282,7 +282,7 @@ in {
   };
   systemd.services.autotorrent2 = {
     requires = [ "rtorrent.service" ];
-    script = "${autotorrent2Package}/bin/at2 scan && at2 add rtorrent '/var/lib/rtorrent/at2-queue'";
+    script = "${autotorrent2Package}/bin/at2 scan && ${autotorrent2Package}/bin/at2 add rtorrent '/var/lib/rtorrent/at2-queue'";
     serviceConfig = {
       User = "rtorrent";
       Group = "rtorrent";
