@@ -114,7 +114,7 @@ in {
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
       # automatically execute cross-seed search on finished downloads
-      method.set_key=event.download.finished,cross_seed,"execute2={'${cross-seedHook}/bin/cross-seed-hook',$d.name=}"
+      method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
       # rtorrent finished debug
       method.set_key = event.download.finished, finished_try, "print=finished-triggered!"
       log.open_file = "rtorrent.log", (cat,/tmp/rtorrent.log.,(system.pid))  
