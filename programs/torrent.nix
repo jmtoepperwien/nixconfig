@@ -115,6 +115,8 @@ in {
 
       # automatically execute cross-seed search on finished downloads
       method.set_key=event.download.finished,cross_seed,"execute2={'${cross-seedHook}/bin/cross-seed-hook',$d.name=}"
+      # rtorrent finished debug
+      method.set_key = event.download.finished, finished_try, "print=finished-triggered!"
     '';
   };
 
