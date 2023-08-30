@@ -3,8 +3,11 @@ let
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
   cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
-    #!/bin/sh
+    echo "searching for" >> /var/lib/rtorrent/scriptlog.txt
+    echo $1 >> /var/lib/rtorrent/scriptlog.txt
     ${pkgs.curl}/bin/curl -XPOST http://127.0.0.1:2468/api/webhook --data-urlencode "name=$1"
+    echo "searched for" >> /var/lib/rtorrent/scriptlog.txt
+    echo $1 >> /var/lib/rtorrent/scriptlog.txt
   '';
   autotorrent2Package = pkgs.callPackage ./autotorrent2.nix {};
   prunerrPackage = pkgs.callPackage ./prunerr.nix {};
