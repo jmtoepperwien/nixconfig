@@ -119,6 +119,7 @@ in {
       method.set_key = event.download.finished, finished_try, "print=finished-triggered!"
       log.open_file = "rtorrent.log", (cat,/tmp/rtorrent.log.,(system.pid))  
       log.add_output = "debug", "rtorrent.log"
+      log.execute = (cat, (cfg.logs), "rtorrent.log")
     '';
   };
 
