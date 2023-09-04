@@ -78,7 +78,7 @@ in {
 
   services.rtorrent = {
     enable = true;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jesec-rtorrent;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.rtorrent;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
