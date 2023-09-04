@@ -87,9 +87,9 @@ in {
       #dht.mode.set = auto
       #protocol.pex.set = yes
 
-      #trackers.use_udp.set = yes
+      trackers.use_udp.set = yes
 
-      #system.umask.set = 0002
+      system.umask.set = 0002
 
       ## The following line can be added to .rtorrent.rc to set up watch directories
       ##
@@ -109,12 +109,12 @@ in {
       ##     the string before the 1st comma is unique for all entries (watch_directory in example)
       ##     the number after the 1st comman is unique for all entries (1 in example)
 
-      #schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
+      schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
       ## set added time
-      #method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
+      method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
       ## automatically execute cross-seed search on finished downloads
-      #method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
+      method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
 
       ##network.max_open_files.set = 512
       ##network.http.max_open_set = 256
