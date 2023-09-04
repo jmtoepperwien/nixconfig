@@ -78,65 +78,65 @@ in {
 
   services.rtorrent = {
     enable = true;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.rtorrent;
+    package = pkgs.rtorrent;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
     downloadDir = "/mnt/kodi_lib/downloads_torrent";
     configText = ''
-      dht.mode.set = auto
-      protocol.pex.set = yes
+      #dht.mode.set = auto
+      #protocol.pex.set = yes
 
-      trackers.use_udp.set = yes
+      #trackers.use_udp.set = yes
 
-      system.umask.set = 0002
+      #system.umask.set = 0002
 
-      # The following line can be added to .rtorrent.rc to set up watch directories
-      #
-      # Replace:
-      #     [WATCH_DIR] with the directory to watch for torrent files
-      #     [DOWNLOAD_DIR] with the directory to save the files into
-      #     [LABEL] with a label to apply to torrents added via this watch dir
-      #        Important: Thus far i have not worked out how to use spaces in label names
-      #                   Do not include spaces for .torrent files will not be imported into rtorrent if you do
-      #
-      # Remove:
-      #     d.set_custom1=[LABEL] - to not add a label to the torrent
-      #     d.delete_tied= - to not delete the .torrent file after it has been added to rtorrent
-      #
-      # Notes:
-      #     When adding multiple watch directories ensure,
-      #     the string before the 1st comma is unique for all entries (watch_directory in example)
-      #     the number after the 1st comman is unique for all entries (1 in example)
+      ## The following line can be added to .rtorrent.rc to set up watch directories
+      ##
+      ## Replace:
+      ##     [WATCH_DIR] with the directory to watch for torrent files
+      ##     [DOWNLOAD_DIR] with the directory to save the files into
+      ##     [LABEL] with a label to apply to torrents added via this watch dir
+      ##        Important: Thus far i have not worked out how to use spaces in label names
+      ##                   Do not include spaces for .torrent files will not be imported into rtorrent if you do
+      ##
+      ## Remove:
+      ##     d.set_custom1=[LABEL] - to not add a label to the torrent
+      ##     d.delete_tied= - to not delete the .torrent file after it has been added to rtorrent
+      ##
+      ## Notes:
+      ##     When adding multiple watch directories ensure,
+      ##     the string before the 1st comma is unique for all entries (watch_directory in example)
+      ##     the number after the 1st comman is unique for all entries (1 in example)
 
-      schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
-      # set added time
-      method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
+      #schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
+      ## set added time
+      #method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
-      # automatically execute cross-seed search on finished downloads
-      method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
+      ## automatically execute cross-seed search on finished downloads
+      #method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
 
+      ##network.max_open_files.set = 512
+      ##network.http.max_open_set = 256
+      #max_peers = 512
+      #max_uploads = 512
+      #download_rate = 0
+      #upload_rate = 0
       #network.max_open_files.set = 512
-      #network.http.max_open_set = 256
-      max_peers = 512
-      max_uploads = 512
-      download_rate = 0
-      upload_rate = 0
-      network.max_open_files.set = 512
-      network.http.max_open.set = 256
-      pieces.memory.max.set = 28000M
-      network.xmlrpc.size_limit.set = 4M
-      network.max_open_sockets.set = 1024
-      throttle.global_up.max_rate.set_kb = 0
-      throttle.global_down.max_rate.set_kb = 0
-      pieces.preload.type.set = 1
-      pieces.preload.min_size.set = 262144
-      pieces.preload.min_rate.set = 5120
-      network.send_buffer.size.set = 4M
-      network.receive_buffer.size.set = 128K
-      ## logging
-      #log.open_file = "log.txt", "/var/lib/rtorrent/log.txt"
-      #log.add_output = "debug", "log.txt"
+      #network.http.max_open.set = 256
+      #pieces.memory.max.set = 28000M
+      #network.xmlrpc.size_limit.set = 4M
+      #network.max_open_sockets.set = 1024
+      #throttle.global_up.max_rate.set_kb = 0
+      #throttle.global_down.max_rate.set_kb = 0
+      #pieces.preload.type.set = 1
+      #pieces.preload.min_size.set = 262144
+      #pieces.preload.min_rate.set = 5120
+      #network.send_buffer.size.set = 4M
+      #network.receive_buffer.size.set = 128K
+      ### logging
+      ##log.open_file = "log.txt", "/var/lib/rtorrent/log.txt"
+      ##log.add_output = "debug", "log.txt"
     '';
   };
 
