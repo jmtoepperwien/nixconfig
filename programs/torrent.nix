@@ -116,11 +116,11 @@ in {
       # automatically execute cross-seed search on finished downloads
       method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
 
-      network.max_open_files.set = 512
-      network.http.max_open_set = 256
-      # logging
-      log.open_file = "log.txt", "/var/lib/rtorrent/log.txt"
-      log.add_output = "debug", "log.txt"
+      #network.max_open_files.set = 512
+      #network.http.max_open_set = 256
+      ## logging
+      #log.open_file = "log.txt", "/var/lib/rtorrent/log.txt"
+      #log.add_output = "debug", "log.txt"
     '';
   };
 
