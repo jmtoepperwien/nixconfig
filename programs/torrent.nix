@@ -118,6 +118,22 @@ in {
 
       #network.max_open_files.set = 512
       #network.http.max_open_set = 256
+      max_peers = 512
+      max_uploads = 512
+      download_rate = 0
+      upload_rate = 0
+      network.max_open_files.set = 512
+      network.http.max_open.set = 256
+      pieces.memory.max.set = 28000M
+      network.xmlrpc.size_limit.set = 4M
+      network.max_open_sockets.set = 1024
+      throttle.global_up.max_rate.set_kb = 0
+      throttle.global_down.max_rate.set_kb = 0
+      pieces.preload.type.set = 1
+      pieces.preload.min_size.set = 262144
+      pieces.preload.min_rate.set = 5120
+      network.send_buffer.size.set = 4M
+      network.receive_buffer.size.set = 128K
       ## logging
       #log.open_file = "log.txt", "/var/lib/rtorrent/log.txt"
       #log.add_output = "debug", "log.txt"
