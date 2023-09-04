@@ -270,7 +270,7 @@ in {
       Group = "rtorrent";
       WorkingDirectory = "/var/lib/cross-seed";
       NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --action save --match-mode risky --verbose";
+      ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --include-non-videos --action save --match-mode risky --verbose";
       Restart = "always";
     };
   };
