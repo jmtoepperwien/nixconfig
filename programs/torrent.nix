@@ -134,9 +134,9 @@ in {
       #pieces.preload.min_rate.set = 5120
       #network.send_buffer.size.set = 4M
       #network.receive_buffer.size.set = 128K
-      ### logging
-      ##log.open_file = "log.txt", "/var/lib/rtorrent/log.txt"
-      ##log.add_output = "debug", "log.txt"
+      # logging
+      log.open_file = "log.txt", "/var/lib/rtorrent/log.txt"
+      log.add_output = "debug", "log.txt"
     '';
   };
 
