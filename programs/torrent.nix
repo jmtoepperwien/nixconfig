@@ -261,6 +261,7 @@ in {
     search-timeout = "5min";
     torrent-dir = "/var/lib/rtorrent/session";
     output-dir = "/var/lib/rtorrent/at2-queue";
+    fuzzy-thr = "0.1";
   in {
     after = [ "rtorrent.service" ];
     requires = [ "rtorrent.service" ];
@@ -270,7 +271,7 @@ in {
       Group = "rtorrent";
       WorkingDirectory = "/var/lib/cross-seed";
       NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --include-non-videos --action save --match-mode risky --verbose";
+      ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --include-non-videos --action save --match-mode risky --verbose --fuzzy-size-threshold ${fuzzy-thr}";
       Restart = "always";
     };
   };
