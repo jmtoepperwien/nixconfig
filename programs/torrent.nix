@@ -276,27 +276,31 @@ in {
     };
   };
 
-  systemd.timers.autotorrent2 = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "5m";
-      Unit = "autotorrent2.service";
-    };
-  };
+#  systemd.timers.autotorrent2 = {
+#    wantedBy = [ "timers.target" ];
+#    timerConfig = {
+#      OnBootSec = "5m";
+#      OnUnitActiveSec = "5m";
+#      Unit = "autotorrent2.service";
+#    };
+#  };
   systemd.services.autotorrent2 = {
     requires = [ "rtorrent.service" ];
     script = let
       at2AddScript = pkgs.writeShellScriptBin "at2-add-script" ''
         #!/bin/sh
-        ${autotorrent2Package}/bin/at2 scan
-        ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
+        ${pkgs.inotify-tools}/bin/inotifywait --recursive --monitor --event create,moved_to,modify /var/lib/rtorrent/at2-queue \
+        | while read changed; do
+          ${autotorrent2Package}/bin/at2 scan
+          ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
+        done
       '';
     in "${at2AddScript}/bin/at2-add-script";
     serviceConfig = {
       User = "rtorrent";
       Group = "rtorrent";
       Type = "oneshot";
+      Restart = "always";
     };
   };
 }
