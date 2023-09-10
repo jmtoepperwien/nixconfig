@@ -289,7 +289,7 @@ in {
     script = let
       at2AddScript = pkgs.writeShellScriptBin "at2-add-script" ''
         #!/bin/sh
-        ${pkgs.inotify-tools}/bin/inotifywait --recursive --monitor --event create,moved_to,modify /var/lib/rtorrent/at2-queue \
+        ${pkgs.inotify-tools}/bin/inotifywait --monitor --event create,moved_to,modify /var/lib/rtorrent/at2-queue \
         | while read changed; do
           ${autotorrent2Package}/bin/at2 scan
           ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
