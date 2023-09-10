@@ -299,7 +299,7 @@ in {
     serviceConfig = {
       User = "rtorrent";
       Group = "rtorrent";
-      Type = "oneshot";
+      Type = "simple";
       Restart = "always";
     };
   };
