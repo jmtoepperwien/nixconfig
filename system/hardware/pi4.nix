@@ -40,6 +40,7 @@
     requires = [ "mnt-lib0.mount" "mnt-lib1.mount" ];
     wantedBy = [ "default.target" ];
     serviceConfig = {
+      User = "root";
       Type = "simple";
       KillMode = "none";
       ExecStart = "${pkgs.mergerfs}/bin/mergerfs -o cache.files=partial,dropcacheonclose=true,category.create=mfs /mnt/lib0:/mnt/lib1 /mnt/kodi_lib";
