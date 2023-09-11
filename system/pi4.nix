@@ -57,6 +57,9 @@
     pkgs.alsa-utils
     pkgs.libraspberrypi
     pkgs.mediainfo
+    pkgs.mergerfs
+    pkgs.mergerfs-tools
+    pkgs.fuse
   ];
   services.taskserver.enable = true;
 
