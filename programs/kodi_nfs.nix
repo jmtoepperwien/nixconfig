@@ -2,11 +2,11 @@
 
 {
   fileSystems."/export/movies" = {
-    device = "/mnt/kodi_lib/movies";
+    device = "/mnt/lib0/movies";
     options = [ "bind" ];
   };
   fileSystems."/export/series" = {
-    device = "/mnt/kodi_lib/series";
+    device = "/mnt/lib0/series";
     options = [ "bind" ];
   };
   fileSystems."/export/books" = {
