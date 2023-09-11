@@ -240,8 +240,8 @@ in {
   };
 
   systemd.services.autobrr = {
-    after = [ "flood.service" "network.target" ];
-    requires = [ "flood.service" ];
+    after = [ "flood.service" "network.target" "rtorrent.service" ];
+    requires = [ "flood.service" "rtorrent.service" "autotorrent2.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "rtorrent";
@@ -287,7 +287,9 @@ in {
 #    };
 #  };
   systemd.services.autotorrent2 = {
-    requires = [ "rtorrent.service" ];
+    requires = [ "rtorrent.service" "rtorrent.service" ];
+    after = [ "rtorrent.service" "rtorrent.service" ];
+    wantedBy = [ "multi-user.target" ];
     script = let
       at2AddScript = pkgs.writeShellScriptBin "at2-add-script" ''
         #!/bin/sh
