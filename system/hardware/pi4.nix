@@ -38,7 +38,7 @@
   systemd.services.mergerfskodilib = {
     after = [ "mnt-lib0.mount" "mnt-lib1.mount" ];
     requires = [ "mnt-lib0.mount" "mnt-lib1.mount" ];
-    wantedBy = [ "default.target" ];
+    wantedBy = [ "local-fs.target" ];
     serviceConfig = {
       User = "root";
       Type = "oneshot";
