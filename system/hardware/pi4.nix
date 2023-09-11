@@ -39,7 +39,7 @@
     after = [ "mnt-lib0.mount" "mnt-lib1.mount" ];
     requires = [ "mnt-lib0.mount" "mnt-lib1.mount" ];
     wantedBy = [ "local-fs.target" ];
-    before = [ "local-fs.target" ];
+    before = [ "export-books.mount" "export-movies.mount" "export-series.mount" ];
     serviceConfig = {
       User = "root";
       Type = "oneshot";
