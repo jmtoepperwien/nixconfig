@@ -48,16 +48,16 @@
     };
   };
 
-  systemd.services.exportkodilib = {
-    after = [ "mergerfskodilib.service" ];
-    requires = [ "mergerfskodilib.service" ];
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      User = "root";
-      Type = "oneshot";
-      ExecStart = "${pkgs.mount}/bin/mount --bind /mnt/kodi_lib/movies /export/movies; ${pkgs.mount}/bin/mount --bind /mnt/kodi_lib/series /export/series; ${pkgs.mount}/bin/mount --bind /mnt/kodi_lib/books /export/books";
-    };
-  };
+#  systemd.services.exportkodilib = {
+#    after = [ "mergerfskodilib.service" ];
+#    requires = [ "mergerfskodilib.service" ];
+#    wantedBy = [ "default.target" ];
+#    serviceConfig = {
+#      User = "root";
+#      Type = "oneshot";
+#      ExecStart = "${pkgs.mount}/bin/mount --bind /mnt/kodi_lib/movies /export/movies; ${pkgs.mount}/bin/mount --bind /mnt/kodi_lib/series /export/series; ${pkgs.mount}/bin/mount --bind /mnt/kodi_lib/books /export/books";
+#    };
+#  };
 
   swapDevices = [ ];
 

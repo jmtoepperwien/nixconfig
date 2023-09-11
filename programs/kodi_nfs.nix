@@ -10,7 +10,7 @@
     options = [ "bind" ];
   };
   fileSystems."/export/books" = {
-    device = "/mnt/kodi_lib/books";
+    device = "/mnt/lib0/books";
     options = [ "bind" ];
   };
 
