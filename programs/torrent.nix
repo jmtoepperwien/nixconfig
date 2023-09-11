@@ -240,7 +240,7 @@ in {
   };
 
   systemd.services.autobrr = {
-    after = [ "flood.service" ];
+    after = [ "flood.service" "network.target" ];
     requires = [ "flood.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
