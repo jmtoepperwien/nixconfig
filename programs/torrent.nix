@@ -91,6 +91,8 @@ in {
 
       system.umask.set = 0002
 
+      pieces.hash.on_completion.set = no
+
       ## The following line can be added to .rtorrent.rc to set up watch directories
       ##
       ## Replace:
