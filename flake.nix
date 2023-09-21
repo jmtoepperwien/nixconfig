@@ -70,6 +70,7 @@
           ./network/proton_wireguard.nix
           ./programs/torrent.nix
           ./programs/irssi.nix
+          ./programs/irc.nix
 
           agenix.nixosModules.default
 	  nixos-hardware.nixosModules.raspberry-pi-4
