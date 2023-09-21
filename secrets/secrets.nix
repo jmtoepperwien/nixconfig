@@ -14,4 +14,5 @@ in {
   "protonvpn.age".publicKeys = [ maltepc maltexps pi4host ];
   "unpackerrConfig.age".publicKeys = [ maltepc maltexps pi4host ];
   "autobrrConfig.age".publicKeys = [ maltepc maltexps pi4host ];
+  "znc_config.age".publicKeys = [ maltepc maltexps pi4host ];
 }
