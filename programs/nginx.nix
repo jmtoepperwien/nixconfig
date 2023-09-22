@@ -9,7 +9,7 @@
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
-    proxyTimeout = "10m";
+    proxyTimeout = "30m";
     virtualHosts = {
       "mosihome.duckdns.org" = {
         forceSSL = true;
