@@ -57,6 +57,12 @@
               rewrite ^/autobrr/(.*) /$1 break;
             '';
           };
+          "/flood/" = {
+            proxyPass = "http://localhost:5678";
+            extraConfig = ''
+              rewrite ^/flood/(.*) /$1 break;
+            '';
+          };
 	};
       };
       "mosigit.duckdns.org" = {
