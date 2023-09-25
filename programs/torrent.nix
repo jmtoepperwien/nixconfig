@@ -117,6 +117,27 @@ in {
 
       ## automatically execute cross-seed search on finished downloads
       method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
+
+      ### performance
+      # Network limits
+      network.http.max_open.set = 50
+      network.max_open_files.set = 600
+      network.max_open_sockets.set = 100
+
+      # Peer settings
+      throttle.min_peers.normal.set = 39
+      throttle.max_peers.normal.set = 40
+      throttle.min_peers.seed.set = -1
+      throttle.max_peers.seed.set = -1
+      throttle.max_downloads.global.set = 100
+      throttle.max_uploads.global.set = 100
+      throttle.max_downloads.set = 20
+      throttle.max_uploads.set = 20
+      trackers.numwant.set = 40
+
+      # Miscellaneous settings
+      pieces.memory.max.set = 1000M
+      schedule2 = session_save, 240, 300, ((session.save))
     '';
   };
 
