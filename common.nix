@@ -53,6 +53,7 @@
     usbutils
     rename
     irssi
+    wcalc
   ];
 
   programs.gnupg.agent = {
