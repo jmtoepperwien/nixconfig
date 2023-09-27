@@ -78,7 +78,7 @@ in {
 
   services.rtorrent = {
     enable = true;
-    package = pkgs.rtorrent;
+    package = pkgs.jesec-rtorrent;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
