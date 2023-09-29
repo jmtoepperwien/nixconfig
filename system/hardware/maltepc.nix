@@ -49,19 +49,19 @@ in {
     };
 
   fileSystems."/mnt/pi4/books" = {
-    device = "${pi4ip}:/books";
+    device = "${pi4ip}:/export/books";
     fsType = "nfs";
     options = [ "x-systemd.automount" "x-systemd.idle-timeout=600" "nfsvers=4" "noauto" ];
   };
 
   fileSystems."/mnt/pi4/series" = {
-    device = "${pi4ip}:/series";
+    device = "${pi4ip}:/export/series";
     fsType = "nfs";
     options = [ "x-systemd.automount" "x-systemd.idle-timeout=600" "nfsvers=4" "noauto" ];
   };
 
   fileSystems."/mnt/pi4/movies" = {
-    device = "${pi4ip}:/movies";
+    device = "${pi4ip}:/export/movies";
     fsType = "nfs";
     options = [ "x-systemd.automount" "x-systemd.idle-timeout=600" "nfsvers=4" "noauto" ];
   };
