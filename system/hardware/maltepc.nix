@@ -48,22 +48,23 @@ in {
       fsType = "vfat";
     };
 
+  services.rpcbind.enable = true; # needed for NFS
   fileSystems."/mnt/pi4/books" = {
     device = "${pi4ip}:/export/books";
     fsType = "nfs";
-    options = [ "x-systemd.automount" "x-systemd.idle-timeout=600" "nfsvers=4" "noauto" ];
+    options = [ "x-systemd.automount" "x-systemd.idle-timeout=600s" ];
   };
 
   fileSystems."/mnt/pi4/series" = {
     device = "${pi4ip}:/export/series";
     fsType = "nfs";
-    options = [ "x-systemd.automount" "x-systemd.idle-timeout=600" "nfsvers=4" "noauto" ];
+    options = [ "x-systemd.automount" "x-systemd.idle-timeout=600s" ];
   };
 
   fileSystems."/mnt/pi4/movies" = {
     device = "${pi4ip}:/export/movies";
     fsType = "nfs";
-    options = [ "x-systemd.automount" "x-systemd.idle-timeout=600" "nfsvers=4" "noauto" ];
+    options = [ "x-systemd.automount" "x-systemd.idle-timeout=600s" ];
   };
 
 
