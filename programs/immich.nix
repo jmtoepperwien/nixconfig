@@ -116,6 +116,7 @@ in {
   systemd.services."immich" = {
     enable = true;
     wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.podman ];
     serviceConfig = {
       Type = "forking";
       User = "immich";
