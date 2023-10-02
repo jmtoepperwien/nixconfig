@@ -105,6 +105,7 @@ in {
   users.users."immich" = {
     isSystemUser = true;
     group = "immich";
+    home = "/var/lib/immich";
   };
   systemd.tmpfiles.rules = [ "d /var/lib/immich 0751 immich immich" "d /mnt/kodi_lib/photos 0751 immich immich" ];
 
