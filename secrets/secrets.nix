@@ -15,4 +15,5 @@ in {
   "unpackerrConfig.age".publicKeys = [ maltepc maltexps pi4host ];
   "autobrrConfig.age".publicKeys = [ maltepc maltexps pi4host ];
   "znc_config.age".publicKeys = [ maltepc maltexps pi4host ];
+  "immich_env.age".publicKeys = [ maltepc maltexps pi4host ];
 }
