@@ -44,7 +44,7 @@
     enable = true;
     package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.lidarr;
     openFirewall = true;
-  }
+  };
 
   # Readarr
   users.groups."readarr" = {};
