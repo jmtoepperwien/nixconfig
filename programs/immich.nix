@@ -103,7 +103,7 @@ let
 in {
   users.groups."immich" = {};
   users.users."immich" = {
-    isSystemUser = false;
+    isNormalUser = true;
     group = "immich";
     home = "/var/lib/immich";
   };
