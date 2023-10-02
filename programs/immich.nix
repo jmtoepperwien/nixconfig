@@ -6,10 +6,10 @@ let
     services:
       immich-server:
         container_name: immich_server
-        image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+        image: ghcr.io/immich-app/immich-server:''${IMMICH_VERSION:-release}
         command: [ "start.sh", "immich" ]
         volumes:
-          - ${UPLOAD_LOCATION}:/usr/src/app/upload
+          - ''${UPLOAD_LOCATION}:/usr/src/app/upload
         env_file:
           - .env
         depends_on:
@@ -20,13 +20,13 @@ let
 
       immich-microservices:
         container_name: immich_microservices
-        image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+        image: ghcr.io/immich-app/immich-server:''${IMMICH_VERSION:-release}
         # extends:
         #   file: hwaccel.yml
         #   service: hwaccel
         command: [ "start.sh", "microservices" ]
         volumes:
-          - ${UPLOAD_LOCATION}:/usr/src/app/upload
+          - ''${UPLOAD_LOCATION}:/usr/src/app/upload
         env_file:
           - .env
         depends_on:
@@ -37,7 +37,7 @@ let
 
       immich-machine-learning:
         container_name: immich_machine_learning
-        image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
+        image: ghcr.io/immich-app/immich-machine-learning:''${IMMICH_VERSION:-release}
         volumes:
           - model-cache:/cache
         env_file:
@@ -46,7 +46,7 @@ let
 
       immich-web:
         container_name: immich_web
-        image: ghcr.io/immich-app/immich-web:${IMMICH_VERSION:-release}
+        image: ghcr.io/immich-app/immich-web:''${IMMICH_VERSION:-release}
         env_file:
           - .env
         restart: always
@@ -55,7 +55,7 @@ let
         container_name: immich_typesense
         image: typesense/typesense:0.24.1@sha256:9bcff2b829f12074426ca044b56160ca9d777a0c488303469143dd9f8259d4dd
         environment:
-          - TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
+          - TYPESENSE_API_KEY=''${TYPESENSE_API_KEY}
           - TYPESENSE_DATA_DIR=/data
           # remove this to get debug messages
           - GLOG_minloglevel=1
@@ -74,16 +74,16 @@ let
         env_file:
           - .env
         environment:
-          POSTGRES_PASSWORD: ${DB_PASSWORD}
-          POSTGRES_USER: ${DB_USERNAME}
-          POSTGRES_DB: ${DB_DATABASE_NAME}
+          POSTGRES_PASSWORD: ''${DB_PASSWORD}
+          POSTGRES_USER: ''${DB_USERNAME}
+          POSTGRES_DB: ''${DB_DATABASE_NAME}
         volumes:
           - pgdata:/var/lib/postgresql/data
         restart: always
 
       immich-proxy:
         container_name: immich_proxy
-        image: ghcr.io/immich-app/immich-proxy:${IMMICH_VERSION:-release}
+        image: ghcr.io/immich-app/immich-proxy:''${IMMICH_VERSION:-release}
         environment:
           # Make sure these values get passed through from the env file
           - IMMICH_SERVER_URL
