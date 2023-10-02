@@ -52,12 +52,7 @@
           "/lidarr".proxyPass = "http://localhost:8686";
           "/readarr/".proxyPass = "http://localhost:8787";
 	  "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
-          "/navidrome" = {
-            proxyPass = "http://localhost:3333";
-            extraConfig = ''
-              rewrite ^/navidrome/(.*) /$1 break;
-            '';
-          };
+          "/navidrome".proxyPass = "http://localhost:3333";
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''

@@ -7,6 +7,7 @@
       Address = "0.0.0.0";
       Port = "3333";
       MusicFolder = "/mnt/kodi_lib/music";
+      BaseUrl = "/navidrome";
     };
   };
 }
