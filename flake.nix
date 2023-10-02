@@ -72,6 +72,7 @@
           ./programs/irssi.nix
           ./programs/irc.nix
           ./programs/immich.nix
+          ./programs/navidrome.nix
 
           agenix.nixosModules.default
 	  nixos-hardware.nixosModules.raspberry-pi-4
