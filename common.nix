@@ -95,6 +95,7 @@
   networking.dhcpcd.extraConfig = "nohook resolv.conf";
 
   virtualisation = {
+    oci-containers.backend = "podman";
     podman = {
       enable = true;
 

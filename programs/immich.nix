@@ -112,7 +112,7 @@ in {
     file = ../secrets/immich_env.age;
     owner = "immich";
     group = "immich";
-  }
+  };
   systemd.services."immich" = {
     enable = true;
     wantedBy = [ "multi-user.target" ];
