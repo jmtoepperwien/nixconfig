@@ -32,6 +32,20 @@
     openFirewall = true;
   };
 
+  # Lidarr
+  users.groups."lidarr" = {};
+  users.users."lidarr" = {
+    isSystemUser = true;
+    group = "lidarr";
+    extraGroups = [ "usenet" "rtorrent" ];
+  };
+
+  services.lidarr = {
+    enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.lidarr;
+    openFirewall = true;
+  }
+
   # Readarr
   users.groups."readarr" = {};
   users.users."readarr" = {
