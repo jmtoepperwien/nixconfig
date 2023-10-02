@@ -120,9 +120,9 @@ in {
 
       ### performance
       # Network limits
-      network.http.max_open.set = 25
-      network.max_open_files.set = 300
-      network.max_open_sockets.set = 100
+      network.http.max_open.set = 50
+      network.max_open_files.set = 600
+      network.max_open_sockets.set = 200
 
       # Peer settings
       throttle.min_peers.normal.set = 39
