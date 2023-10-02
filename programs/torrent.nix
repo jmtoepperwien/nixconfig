@@ -141,9 +141,9 @@ in {
       system.file.allocate = 1
       pieces.preload.type = 2
 
-      log.open_file = "debug_log:, (cat,/var/lib/rtorrent/debug_log.txt.,(system.pid))
-      log.add_output = "debug", "debug_log"
-      log.add_output = "tracker_debug", "debug_log"
+      #log.open_file = "debug_log:, (cat,/var/lib/rtorrent/debug_log.txt.,(system.pid))
+      #log.add_output = "debug", "debug_log"
+      #log.add_output = "tracker_debug", "debug_log"
     '';
   };
 
