@@ -129,7 +129,7 @@ in {
       throttle.max_peers.normal.set = 40
       throttle.min_peers.seed.set = -1
       throttle.max_peers.seed.set = -1
-      throttle.max_downloads.global.set = 50
+      throttle.max_downloads.global.set = 100
       throttle.max_uploads.global.set = 100
       throttle.max_downloads.set = 20
       throttle.max_uploads.set = 20
