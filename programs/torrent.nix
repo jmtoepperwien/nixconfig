@@ -111,7 +111,7 @@ in {
       ##     the string before the 1st comma is unique for all entries (watch_directory in example)
       ##     the number after the 1st comman is unique for all entries (1 in example)
 
-      schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
+      #schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
       ## set added time
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
@@ -120,8 +120,8 @@ in {
 
       ### performance
       # Network limits
-      network.http.max_open.set = 50
-      network.max_open_files.set = 600
+      network.http.max_open.set = 25
+      network.max_open_files.set = 300
       network.max_open_sockets.set = 100
 
       # Peer settings
@@ -136,7 +136,7 @@ in {
       trackers.numwant.set = 40
 
       # Miscellaneous settings
-      pieces.memory.max.set = 1000M
+      pieces.memory.max.set = 2000M
       schedule2 = session_save, 240, 300, ((session.save))
       system.file.allocate = 1
       pieces.preload.type = 2
