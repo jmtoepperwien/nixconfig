@@ -1,6 +1,6 @@
 { config, lib, pkgs, agenix, ... }:
 {
-  systemd.tmpfiles.rules = [ "d /mnt/kodi_lib/music 0755 pi4 usenet" ];
+  systemd.tmpfiles.rules = [ "d /mnt/kodi_lib/music 0755 lidarr lidarr" ];
   services.navidrome = {
     enable = true;
     settings = {
