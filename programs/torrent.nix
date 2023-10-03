@@ -320,6 +320,7 @@ in {
         #!/bin/sh
         ${pkgs.inotify-tools}/bin/inotifywait --monitor --event create,moved_to,modify /var/lib/rtorrent/at2-queue \
         | while read changed; do
+          ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
           ${autotorrent2Package}/bin/at2 scan
           ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
         done
