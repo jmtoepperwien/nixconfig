@@ -61,6 +61,7 @@ in {
     pass
 
     libreoffice-fresh
+    grim
     pdftk
     pandoc
     xournalpp

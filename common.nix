@@ -54,6 +54,13 @@
     rename
     irssi
     wcalc
+    wireguard-tools
+    steam-run
+    speedtest-cli
+    poetry
+    pyrosimple
+    imagemagick
+    openseachest
   ];
 
   programs.gnupg.agent = {
