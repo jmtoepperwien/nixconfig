@@ -170,7 +170,7 @@ return require("lazy").setup({
       require('navigator').setup({
         lsp = {
           disable_lsp = 'all', -- buggy with haskell, lsp-config.lua manually attaches navigator
-          format_on_save = false;
+          format_on_save = false,
         }
       })
     end
@@ -235,7 +235,7 @@ return require("lazy").setup({
   { 'Aasim-A/scrollEOF.nvim',         config = function() require('scrollEOF').setup() end },
   { 'tpope/vim-eunuch' },
 
-  { 'figsoda/nix-develop.nvim' }, -- TODO: change back to figsoda
+  { 'figsoda/nix-develop.nvim' },
 
   {
     "folke/which-key.nvim",
@@ -249,7 +249,16 @@ return require("lazy").setup({
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     }
-  }
+  },
   --{ "Exafunction/codeium.vim" }
+
+  -- # Jupyter Notebooks in Neovim {{{
+  { "goerz/jupytext.vim" },
+  { "dccsillag/magma-nvim", build = ":UpdateRemotePlugins", config = function()
+
+    vim.g.magma_automatically_open_output = false
+    vim.g.magma_image_provider = "ueberzug"
+  end },
+  -- }}} Jupyter Notebooks in Neovim
 
 })

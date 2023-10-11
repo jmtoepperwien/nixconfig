@@ -8,6 +8,13 @@ let
     matplotlib
     plotly
     scikit-learn
+    # for neovim jupyter notebook integration
+    jupytext
+    jupyter-client
+    ueberzug
+    pillow
+    cairosvg
+    pnglatex
   ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
 in {
@@ -32,6 +39,9 @@ in {
     lua-language-server
     clang-tools
     nodePackages_latest.pyright
+    ueberzug
+    cairo
+    pnglatex
     # }}} neovim and plugin dependencies
     lazygit
     # Latex

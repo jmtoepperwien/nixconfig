@@ -40,3 +40,13 @@ vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, {
 
 -- Neogen bindings
 vim.keymap.set("n", "<Leader>d", function() require('neogen').generate() end, { noremap = true, silent = true })
+
+-- # Jupyter Notebooks {{{
+-- Magma
+vim.keymap.set('n', '<Leader>r', ':MagmaEvaluateOperator<CR>', { silent = true, expr = true, noremap = true } )
+vim.keymap.set('n', '<Leader>rr', ':MagmaEvaluateLine<CR>', { silent = true, noremap = true })
+vim.keymap.set('x', '<Leader>r', ':<C-u>MagmaEvaluateVisual<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>rc', ':MagmaReevaluateCell<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>rd', ':MagmaDelete<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>ro', ':MagmaShowOutput<CR>', { noremap = true, silent = true })
+-- }}} Jupyter Notebooks
