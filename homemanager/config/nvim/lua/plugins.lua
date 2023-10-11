@@ -253,12 +253,14 @@ return require("lazy").setup({
   --{ "Exafunction/codeium.vim" }
 
   -- # Jupyter Notebooks in Neovim {{{
-  { "goerz/jupytext.vim" },
+  { "goerz/jupytext.vim", config = function()
+    vim.g.jupytext_fmt = "py:percent"
+  end },
   { "dccsillag/magma-nvim", build = ":UpdateRemotePlugins", config = function()
-
     vim.g.magma_automatically_open_output = false
     vim.g.magma_image_provider = "ueberzug"
   end },
+  { "GCBallesteros/vim-textobj-hydrogen", dependencies = { {'kana/vim-textobj-user' } } }
   -- }}} Jupyter Notebooks in Neovim
 
 })
