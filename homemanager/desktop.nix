@@ -15,6 +15,7 @@ let
     pillow
     cairosvg
     pnglatex
+    ipykernel
   ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
 in {
