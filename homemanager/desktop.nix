@@ -39,9 +39,7 @@ in {
     lua-language-server
     clang-tools
     nodePackages_latest.pyright
-    ueberzug
     cairo
-    pnglatex
     # }}} neovim and plugin dependencies
     lazygit
     # Latex
