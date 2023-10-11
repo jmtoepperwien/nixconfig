@@ -101,7 +101,7 @@ in {
       if(status) then
         ts_install.compilers = { "${pkgs.gcc_multi}/bin/gcc" }
       end
-      vim.g.python3_host_prog = ${pkgs.python3/bin/python3}
+      vim.g.python3_host_prog = "/usr/bin/env python3"
     '';
   };
 
