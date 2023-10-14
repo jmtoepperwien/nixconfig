@@ -44,7 +44,7 @@
     after = [ "mnt-lib0.mount" "mnt-lib1.mount" ];
     requires = [ "mnt-lib0.mount" "mnt-lib1.mount" ];
     wantedBy = [ "local-fs.target" ];
-    before = [ "export-books.mount" "export-movies.mount" "export-series.mount" ];
+    before = [ "export-books.mount" "export-movies.mount" "export-series.mount" "export-music.mount" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig = {
       User = "root";
