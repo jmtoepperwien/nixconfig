@@ -55,7 +55,6 @@
     irssi
     wcalc
     wireguard-tools
-    steam-run
     speedtest-cli
     poetry
     pyrosimple
