@@ -1,0 +1,150 @@
+* {
+    border: none;
+    border-radius: 0;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Source Sans Pro Regular;
+    font-size: 12px;
+    min-height: 0;
+}
+
+@import "everforest.css";
+
+window#waybar {
+    background-color: @bg0;
+    border-bottom: 3px solid @grey1;
+    color: @fg;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+#workspaces button {
+    padding: 0;
+    background-color: @bg2;
+    color: @fg;
+    box-shadow: inset 0 -3px @grey1;
+}
+
+#workspaces button:hover {
+    background: @bg_dim;
+    box-shadow: inset 0 -3px @aqua;
+}
+
+#workspaces button.focused {
+    background-color: @bg5;
+    box-shadow: inset 0 -3px @green;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+
+#window {
+    padding: 0 10px;
+}
+
+#cpu {
+    padding: 0 5;
+    background-color: @yellow;
+    color: @bg_yellow;
+    border-bottom: 3px solid @grey1;
+}
+
+#memory {
+    padding: 0 5;
+    background-color: @yellow;
+    color: @bg_yellow;
+    border-bottom: 3px solid @grey1;
+}
+
+#temperature {
+    padding: 0 5;
+    background-color: @yellow;
+    color: @bg_yellow;
+    border-bottom: 3px solid @grey1;
+}
+#temperature.critical {
+    background-color: @red;
+}
+
+#disk {
+    padding: 0 5;
+    margin-right: 5;
+    background-color: @yellow;
+    color: @bg_yellow;
+    border-bottom: 3px solid @grey1;
+}
+
+#battery {
+    padding: 0 5;
+    background-color: @aqua;
+    color: @bg_yellow;
+    border-bottom: 3px solid @grey1;
+}
+#battery.plugged {
+    color: @fg;
+    background-color: @bg_green;
+}
+#battery.charging {
+    color: @fg;
+    background-color: @bg_green;
+}
+#battery.critical:not(.charging) {
+    background-color: @red;
+    color: @fg;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#backlight {
+    padding: 0 5;
+    margin-left: 5;
+    background-color: @blue;
+    color: @bg_yellow;
+    border-bottom: 3px solid @grey1;
+}
+
+#pulseaudio {
+    padding: 0 5;
+    background-color: @blue;
+    color: @bg_yellow;
+    border-bottom: 3px solid @grey1;
+}
+
+#pulseaudio.muted {
+    background-color: #90b1b1;
+    color: #2a5c45;
+}
+
+#tray {
+    padding: 0 5;
+    margin-left: 5;
+    color: @bg_yellow;
+    background-color: @grey1;
+    border-bottom: 3px solid @grey1;
+}
+
+#idle_inhibitor {
+    padding: 0 5;
+    margin-left: 5;
+    color: @grey1;
+    border-bottom: 3px solid @grey1;
+}
+#idle_inhibitor.activated {
+    background-color: @grey1;
+    color: @bg_yellow;
+}
+
+#clock {
+    padding: 0 5;
+    margin-left: 5;
+}
+

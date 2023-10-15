@@ -1,9 +1,9 @@
 {
     "height": 24, // Waybar height (to be removed for auto height)
     // Choose the order of the modules
-    "modules-left": [ "cpu", "memory", "disk", "temperature" ],
-    "modules-center": [ "sway/workspaces" ],
-    "modules-right": ["battery", "battery#bat2", "backlight", "pulseaudio", "tray", "idle_inhibitor", "clock"],
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["cpu", "memory", "temperature", "disk", "battery", "battery#bat2", "backlight", "pulseaudio", "tray", "idle_inhibitor", "clock"],
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
