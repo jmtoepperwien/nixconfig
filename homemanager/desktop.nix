@@ -27,6 +27,7 @@ in {
     discord
     mako
     mpv
+    steam-run
     # neovim and plugin dependencies {{{
     neovim-remote
     luajitPackages.jsregexp # dependency of luasnip neovim plugin
