@@ -260,7 +260,8 @@ return require("lazy").setup({
     vim.g.magma_automatically_open_output = false
     vim.g.magma_image_provider = "ueberzug"
   end },
-  { "GCBallesteros/vim-textobj-hydrogen", dependencies = { {'kana/vim-textobj-user' } } }
+  { "GCBallesteros/vim-textobj-hydrogen", dependencies = { {'kana/vim-textobj-user' } } },
+  { "untitled-ai/jupyter_ascending.vim" },
   -- }}} Jupyter Notebooks in Neovim
 
 })
