@@ -117,7 +117,7 @@ window#waybar.empty #window {
 
 
 #battery {
-    padding: 0px 5px;
+    padding: 0px 15px;
     background-color: @aqua;
     color: @bg_yellow;
 }
