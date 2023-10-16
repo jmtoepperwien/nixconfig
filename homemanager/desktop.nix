@@ -8,6 +8,7 @@ let
     matplotlib
     plotly
     scikit-learn
+    scipy
     # for neovim jupyter notebook integration
     jupytext
     jupyter-client
