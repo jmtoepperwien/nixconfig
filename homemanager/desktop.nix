@@ -18,7 +18,7 @@ let
     cairosvg
     pnglatex
     ipykernel
-  ];
+  ] ++ [ pkgs.callPackage ../programs/kaleido.nix {} ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
 in {
   imports = [ ./devel.nix ];
@@ -79,6 +79,7 @@ in {
     xournalpp
     taskwarrior
     taskwarrior-tui
+    jupyter
   ];
 
   home.sessionVariables = {
@@ -105,7 +106,7 @@ in {
       if(status) then
         ts_install.compilers = { "${pkgs.gcc_multi}/bin/gcc" }
       end
-      vim.g.python3_host_prog = "/home/mtoepperwien/.venv/bin/python"
+      vim.g.python3_host_prog = "/etc/profiles/per-user/mtoepperwien/bin/python3"
     '';
   };
 
