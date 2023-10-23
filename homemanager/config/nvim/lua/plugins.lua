@@ -120,22 +120,26 @@ return require("lazy").setup({
   },
   { "nvim-telescope/telescope-project.nvim", config = function() require('telescope').load_extension('project') end },
   {
-    "HiPhish/nvim-ts-rainbow2",
+    "HiPhish/rainbow-delimiters.nvim",
     dependencies = { "nvim-treesitter" },
     config = function()
       require("nvim-treesitter.configs").setup({
-        rainbow = {
-          enable = true,
-          query = "rainbow-parens",
-          hlgroups = {
-            "TSRainbowRed",
-            "TSRainbowYellow",
-            "TSRainbowBlue",
-            "TSRainbowGreen",
-            "TSRainbowCyan",
-            "TSRainbowOrange",
-            "TSRainbowViolet",
-          },
+        strategy = {
+          [''] = rainbow_delimiters.strategy['global'],
+          vim = rainbow_delimiters.strategy['local'],
+        },
+        query = {
+          [''] = 'rainbow-delimiters',
+          lua = 'rainbow-blocks',
+        },
+        highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
         },
       })
     end,
@@ -253,14 +257,21 @@ return require("lazy").setup({
   --{ "Exafunction/codeium.vim" }
 
   -- # Jupyter Notebooks in Neovim {{{
-  { "goerz/jupytext.vim", config = function()
-    vim.g.jupytext_fmt = "py:percent"
-  end },
-  { "dccsillag/magma-nvim", build = ":UpdateRemotePlugins", config = function()
-    vim.g.magma_automatically_open_output = false
-    vim.g.magma_image_provider = "ueberzug"
-  end },
-  { "GCBallesteros/vim-textobj-hydrogen", dependencies = { {'kana/vim-textobj-user' } } },
+  {
+    "goerz/jupytext.vim",
+    config = function()
+      vim.g.jupytext_fmt = "py:percent"
+    end
+  },
+  {
+    "dccsillag/magma-nvim",
+    build = ":UpdateRemotePlugins",
+    config = function()
+      vim.g.magma_automatically_open_output = false
+      vim.g.magma_image_provider = "ueberzug"
+    end
+  },
+  { "GCBallesteros/vim-textobj-hydrogen", dependencies = { { 'kana/vim-textobj-user' } } },
   { "untitled-ai/jupyter_ascending.vim" },
   -- }}} Jupyter Notebooks in Neovim
 
