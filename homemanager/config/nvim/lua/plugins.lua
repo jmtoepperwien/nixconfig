@@ -123,7 +123,7 @@ return require("lazy").setup({
     "HiPhish/rainbow-delimiters.nvim",
     dependencies = { "nvim-treesitter" },
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("rainbow-delimiters.setup").setup({
         strategy = {
           [''] = rainbow_delimiters.strategy['global'],
           vim = rainbow_delimiters.strategy['local'],
