@@ -91,7 +91,7 @@
 
   users.users.pi4 = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "usenet" "rtorrent" ];
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
     ];
