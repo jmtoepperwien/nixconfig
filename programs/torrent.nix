@@ -121,7 +121,7 @@ in {
       ### performance
       # Network limits
       network.http.max_open.set = 50
-      network.max_open_files.set = 600
+      #network.max_open_files.set = 600
       network.max_open_sockets.set = 200
 
       # Peer settings
@@ -138,8 +138,9 @@ in {
       # Miscellaneous settings
       pieces.memory.max.set = 2000M
       schedule2 = session_save, 240, 300, ((session.save))
-      system.file.allocate = 1
-      pieces.preload.type = 2
+      system.file.allocate.set = 1
+      pieces.preload.type.set = 2
+      network.xmlrpc.size_limit.set = 2M
 
       #log.open_file = "debug_log:, (cat,/var/lib/rtorrent/debug_log.txt.,(system.pid))
       #log.add_output = "debug", "debug_log"

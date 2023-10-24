@@ -28,12 +28,12 @@
   fileSystems."/mnt/lib0" =
     { device = "/dev/disk/by-uuid/af71a65d-c25d-40c8-98fa-792c61de0630";
       fsType = "btrfs";
-      options = [ "subvol=@" "defaults" ];
+      options = [ "subvol=@" "defaults" "noatime" ];
     };
   fileSystems."/mnt/lib1" =
     { device = "/dev/disk/by-uuid/0dc95e30-d5bc-4385-b883-15ba5aaa172d";
       fsType = "btrfs";
-      options = [ "subvol=@" "defaults" ];
+      options = [ "subvol=@" "defaults" "noatime" ];
     };
   services.btrfs.autoScrub = {
     enable = true;

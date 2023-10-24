@@ -8,6 +8,17 @@
   ];
 
   boot = {
+    kernel.sysctl = {
+      # networking tweaks (bigger buffers)
+      "net.core.rmem_max" = 16777216;
+      "net.ipv4.tcp_rmem" = "4096 12582912 16777216";
+      "net.core.wmem_max" = 16777216;
+      "net.ipv4.tcp_wmem" = "4096 12582912 16777216";
+      "net.ipv4.tcp_slow_start_after_idle" = 0;
+      "net.ipv4.tcp_tw_reuse" = 1;
+      "net.ipv4.tcp_tw_recycle" = 1;
+      "net.ipv4.tcp_fin_timeout" = 30;
+    };
     kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     # ttyAMA0 is the serial console broken out to the GPIO
