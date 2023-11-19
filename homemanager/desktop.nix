@@ -9,15 +9,7 @@ let
     plotly
     scikit-learn
     scipy
-    # for neovim jupyter notebook integration
-    jupytext
-    jupyter-client
-    ueberzug
-    pillow
-    cairosvg
-    pnglatex
-    ipykernel
-  ] ++ [ pkgs.callPackage ../programs/kaleido.nix {} ];
+  ] ++ [ pkgs.callPackage ../programs/kaleido.nix {} pkgs.callPackage ../programs/jupyter_ascending.nix {} ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
 in {
   imports = [ ./devel.nix ];
