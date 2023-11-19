@@ -70,7 +70,6 @@ in {
     xournalpp
     taskwarrior
     taskwarrior-tui
-    jupyter
   ];
 
   home.sessionVariables = {
