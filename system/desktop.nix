@@ -45,7 +45,7 @@
     isNormalUser = true;
     home = "/home/mtoepperwien";
     group = "mtoepperwien";
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" "audio" ];
     shell = pkgs.zsh;
   };
   security.sudo.extraRules = [
