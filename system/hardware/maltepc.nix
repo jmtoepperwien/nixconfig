@@ -14,6 +14,16 @@ in {
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # more gpu stuff
+  systemd.tmpfiles.rules = [
+      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
+    ];
+  hardware.opengl.extraPackages = with pkgs; [
+    rocm-opencl-icd
+    rocm-opencl-runtime
+  ];
+  environment.systemPackages = with pkgs; [ rocm-runtime rocm-device-libs rocm-core rocm-smi rocminfo ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/0ef999fd-b03a-47eb-8c9b-373f7a391d77";
       fsType = "btrfs";
