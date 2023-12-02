@@ -276,4 +276,12 @@ return require("lazy").setup({
   { "untitled-ai/jupyter_ascending.vim" },
   -- }}} Jupyter Notebooks in Neovim
 
+  {
+    'nvim-focus/focus.nvim',
+    version = false,
+    config = function()
+      require("focus").setup()
+    end
+  },
+  { 'metakirby5/codi.vim' },
 })
