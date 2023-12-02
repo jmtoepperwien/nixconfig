@@ -283,5 +283,4 @@ return require("lazy").setup({
       require("focus").setup()
     end
   },
-  { 'metakirby5/codi.vim' },
 })
