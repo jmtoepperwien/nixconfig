@@ -163,7 +163,7 @@ return require("lazy").setup({
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "hrsh7th/cmp-nvim-lua",
   { "onsails/lspkind-nvim" },
-  { "L3MON4D3/LuaSnip" },
+  { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" },
   "saadparwaiz1/cmp_luasnip",
   { "hrsh7th/nvim-cmp",      config = function() require('lsp-cmp-setup') end },
   -- nvim-lsp setup }}}
