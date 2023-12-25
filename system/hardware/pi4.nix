@@ -50,7 +50,7 @@
       User = "root";
       Type = "oneshot";
       KillMode = "none";
-      ExecStart = "${pkgs.mergerfs}/bin/mergerfs -o cache.files=partial,dropcacheonclose=true,category.create=mfs /mnt/lib0:/mnt/lib1 /mnt/kodi_lib";
+      ExecStart = "${pkgs.mergerfs}/bin/mergerfs -o cache.files=partial,dropcacheonclose=true,category.create=mfs,category.search=newest /mnt/lib0:/mnt/lib1 /mnt/kodi_lib";
       Restart = "on-failure";
     };
   };
