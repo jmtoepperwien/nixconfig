@@ -127,7 +127,7 @@ in {
       "tt" = "taskwarrior-tui";
       "cp" = "cp --reflink=auto";
       "cd" = "z";
-      "ls" = "exa";
+      "ls" = "eza";
     };
     plugins = [
       {
