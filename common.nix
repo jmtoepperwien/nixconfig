@@ -21,7 +21,7 @@
 
   environment.systemPackages = with pkgs; [
     bat
-    exa
+    eza
     du-dust
     duf
     fzf
