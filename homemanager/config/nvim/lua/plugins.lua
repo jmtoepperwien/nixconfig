@@ -68,6 +68,7 @@ return require("lazy").setup({
         build = 'make'
       }, },
     config = function()
+      vim.api.nvim_create_autocmd("FileType", { pattern = "TelescopeResults", command = "setlocal nofoldenable", })
       require('telescope').setup({
         pickers = {
           find_files = {
