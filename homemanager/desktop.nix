@@ -74,6 +74,12 @@ in {
 
   home.sessionVariables = {
     VISUAL = "nvim";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
   };
 
   # use config folder
