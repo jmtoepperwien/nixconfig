@@ -13,7 +13,7 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "cage gtkgreet";
+        command = "${pkgs.dbus}/bin/dbus-run-session cage -s gtkgreet";
       };
     };
   };
