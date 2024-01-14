@@ -13,7 +13,7 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.dbus}/bin/dbus-run-session cage -s gtkgreet";
+        command = "${pkgs.coreutils}/bin/env GTK_USE_PORTAL=0 ${pkgs.dbus}/bin/dbus-run-session cage -s gtkgreet";
       };
     };
   };
