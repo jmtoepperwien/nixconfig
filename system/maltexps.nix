@@ -8,6 +8,12 @@
     ./desktop.nix
   ];
 
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [
+    gutenprint
+    gutenprintBin
+  ];
+
   services.tlp.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
