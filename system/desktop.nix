@@ -21,6 +21,9 @@
     spice
     spice-protocol
     spice-gtk
+
+    wlr-randr
+    wl-mirror
   ];
 
   services.gnome.gnome-keyring.enable = true;
