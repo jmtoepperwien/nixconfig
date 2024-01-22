@@ -14,6 +14,9 @@
     gutenprintBin
   ];
 
+  # fix suspend/wakeup
+  systemd.sleep.extraConfig = "SuspendState=freeze";
+
   services.tlp.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
