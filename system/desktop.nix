@@ -84,4 +84,7 @@
     enable = true;
     dockerCompat = true;
   };
+
+  # cross compilation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }
