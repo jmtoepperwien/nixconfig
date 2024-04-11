@@ -26,6 +26,14 @@
     vulkan-loader
   ];
 
+  # virtualisation
+  virtualisation.vmware.host.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   nix.settings.max-jobs = 6;
   nix.settings.cores = 6;
 
