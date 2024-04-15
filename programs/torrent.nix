@@ -155,6 +155,7 @@ in {
     after = [ "protonvpn.service" ];
     bindsTo = [ "protonvpn.service" ];
     serviceConfig = {
+      TimeoutSec = 60;
       User = "root";
       NetworkNamespacePath = "/var/run/netns/vpn";
       # [TODO: not hardcoded gateway]

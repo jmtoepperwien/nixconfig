@@ -34,8 +34,8 @@
       "openssl.cafile" = "/etc/ssl/certs/ca-certificates.crt";
       short_open_tag = "Off";
       # custom
-      upload_max_filesize = "25G";
-      post_max_size = "25G";
+      upload_max_filesize = lib.mkForce "25G";
+      post_max_size = lib.mkForce "25G";
     };
   };
 
