@@ -4,8 +4,6 @@ let
 in {
   environment.systemPackages = [
     pkgs.greetd.greetd
-    pkgs.greetd.gtkgreet
-    pkgs.cage
     sway-run
   ]; 
   security.polkit.enable = true; # needed for seat management; couldn't get seatd to work
@@ -13,10 +11,11 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.coreutils}/bin/env GTK_USE_PORTAL=0 ${pkgs.dbus}/bin/dbus-run-session cage -s gtkgreet";
+        command = "${pkgs.coreutils}/bin/env GTK_USE_PORTAL=0 ${pkgs.dbus}/bin/dbus-run-session ${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
       };
     };
   };
+  programs.regreet.enable = true;
   environment.etc."greetd/environments".text = lib.mkDefault ''
     sway-run
     zsh
