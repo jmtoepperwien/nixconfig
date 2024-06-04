@@ -176,7 +176,7 @@ in {
   };
   services.gpg-agent = {
     enable = true;
-    pinentryFlavor = pkgs.pinentry-curses;
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   # emails
