@@ -27,7 +27,7 @@
   ];
 
   # virtualisation
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = false;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   virtualisation.virtualbox.host.enableExtensionPack = true;
   virtualisation.libvirtd.enable = true;
