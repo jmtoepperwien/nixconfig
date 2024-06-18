@@ -21,6 +21,7 @@ in {
     mako
     mpv
     steam-run
+    feh
     # neovim and plugin dependencies {{{
     neovim-remote
     luajitPackages.jsregexp # dependency of luasnip neovim plugin
@@ -167,6 +168,7 @@ in {
       "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
       "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "image/png" = ["feh.desktop"];
     };
   };
 
