@@ -43,6 +43,7 @@ in {
     qutebrowser
     spotify
     sway
+    hyprland
     wofi # for sway
     playerctl # sway audio button bindings
     waybar

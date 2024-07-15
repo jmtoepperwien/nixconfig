@@ -3,9 +3,15 @@
 {
   environment.systemPackages = with pkgs; [
     sway
+    hyprland
     wayland
     wl-clipboard
   ];
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   # xdg desktop portal for screensharing
   xdg.portal = {

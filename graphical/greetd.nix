@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   sway-run = pkgs.writeShellScriptBin "sway-run" (builtins.readFile ./sway-run.sh);
+  hyprland-run = pkgs.writeShellScriptBin "hyprland-run" (builtins.readFile ./hyprland-run.sh);
 in {
   environment.systemPackages = [
     pkgs.greetd.greetd
@@ -18,6 +19,7 @@ in {
   programs.regreet.enable = true;
   environment.etc."greetd/environments".text = lib.mkDefault ''
     sway-run
+    hyprland-run
     zsh
     bash
   '';

@@ -14,7 +14,7 @@
         specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
 	  ./system/maltepc.nix
-          ./graphical/sway.nix
+          ./graphical/window_manager.nix
           ./common.nix
           ./ssd.nix
           agenix.nixosModules.default
@@ -30,7 +30,7 @@
         specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
           ./system/maltexps.nix
-          ./graphical/sway.nix
+          ./graphical/window_manager.nix
           ./common.nix
           ./ssd.nix
           ./programs/ppti.nix
