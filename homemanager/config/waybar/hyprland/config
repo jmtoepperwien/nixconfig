@@ -1,0 +1,102 @@
+{
+    "height": 24, // Waybar height (to be removed for auto height)
+    // Choose the order of the modules
+    "modules-left": [ "hyprland/workspaces" ],
+    "modules-center": [ "clock" ],
+    "modules-right": ["tray", "battery", "battery#bat2", "backlight", "pulseaudio", "network"],
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "calendar-weeks-pos": "right",
+        "today-format": "<span color='#E67E80' weight='ultrabold'>{}</span>",
+        "format-calendar": "<span color='#D3C6AA' weight='normal'>{}</span>",
+        "format-calendar-weeks": "<span color='#7FBBB3'><b>W{:%V}</b></span>",
+        "format-calendar-weekdays": "<span color='#A7C080'><b>{}</b></span>",
+        "on-scroll": {
+                    "calendar": 1
+                     }
+    },
+    "network": {
+      "format-wifi": "{essid}",
+      "format-ethernet": "{ifname}",
+      "format-disconnected": "Disconnected"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "disk": {
+        "interval": 30,
+        "format": "{free} ",
+        "path": "/"
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+    	"thermal-zone": 2,
+        "format": "{temperatureC}°C ",
+    },
+    "backlight": {
+        "format": "{percent}% ",
+    },
+    "battery": {
+        "bat": "BAT0",
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT1",
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}
