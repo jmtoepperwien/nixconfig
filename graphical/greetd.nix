@@ -6,6 +6,7 @@ in {
   environment.systemPackages = [
     pkgs.greetd.greetd
     sway-run
+    hyprland-run
   ]; 
   security.polkit.enable = true; # needed for seat management; couldn't get seatd to work
   services.greetd = {
@@ -18,8 +19,8 @@ in {
   };
   programs.regreet.enable = true;
   environment.etc."greetd/environments".text = lib.mkDefault ''
-    sway-run
     hyprland-run
+    sway-run
     zsh
     bash
   '';
