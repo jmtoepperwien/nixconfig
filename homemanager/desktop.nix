@@ -11,7 +11,7 @@ let
     scipy
   ] ++ [ pkgs.callPackage ../programs/kaleido.nix {} pkgs.callPackage ../programs/jupyter_ascending.nix {} ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
-  wallpaper = builtins.readFile ./config/hypr/wallpaper/nixos-logo-gruvbox-wallpaper/png/gruvbox-dark-blue.png;
+  wallpaper = ./config/hypr/wallpaper/nixos-logo-gruvbox-wallpaper/png/gruvbox-dark-blue.png;
 in {
   imports = [ ./devel.nix ];
 
