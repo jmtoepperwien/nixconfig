@@ -11,6 +11,7 @@ let
     scipy
   ] ++ [ pkgs.callPackage ../programs/kaleido.nix {} pkgs.callPackage ../programs/jupyter_ascending.nix {} ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
+  wallpaper = builtins.readFile ./config/hypr/wallpaper/nixos-logo-gruvbox-wallpaper/png/gruvbox-dark-blue.png;
 in {
   imports = [ ./devel.nix ];
 
@@ -169,7 +170,16 @@ in {
       "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
       "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-      "image/png" = ["feh.desktop"];
+      "image/png" = [ "feh.desktop" ];
+    };
+  };
+
+  # Hyprland
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = "${wallpaper}";
+      wallpaper = ",${wallpaper}";
     };
   };
 

@@ -1,0 +1,3 @@
+[submodule "homemanager/config/hypr/wallpaper/nixos-logo-gruvbox-wallpaper"]
+	path = homemanager/config/hypr/wallpaper/nixos-logo-gruvbox-wallpaper
+	url = https://github.com/lunik1/nixos-logo-gruvbox-wallpaper

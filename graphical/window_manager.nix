@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     sway
     hyprland
+    hyprpaper
     wayland
     wl-clipboard
   ];
