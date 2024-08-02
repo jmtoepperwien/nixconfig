@@ -8,7 +8,9 @@ vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 10
 
 vim.cmd [[filetype plugin indent on]]
-vim.opt.foldmethod = "indent"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
 
 vim.opt.ignorecase = true
 
