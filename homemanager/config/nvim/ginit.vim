@@ -1,5 +1,5 @@
 " Enable Mouse
-set mouse=a
+set mouse=
 
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
