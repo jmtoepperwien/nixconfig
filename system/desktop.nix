@@ -50,6 +50,9 @@
     group = "mtoepperwien";
     extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" "audio" "render" ];
     shell = pkgs.zsh;
+    openssh.authorizedKeys.keyFiles = [
+      ../authorized_keys
+    ];
   };
   security.sudo.extraRules = [
     {
