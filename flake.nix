@@ -17,6 +17,7 @@
           ./graphical/window_manager.nix
           ./common.nix
           ./ssd.nix
+          ./ssh.nix
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
