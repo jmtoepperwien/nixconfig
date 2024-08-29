@@ -13,24 +13,24 @@
     virtualHosts = {
       "mosihome.duckdns.org" = {
         forceSSL = true;
-	enableACME = true;
-	locations = {
-	  "/files/" = {
-	    root = "/var/www/";
-	    extraConfig = ''
+        enableACME = true;
+        locations = {
+          "/files/" = {
+            root = "/var/www/";
+            extraConfig = ''
               access_log /var/log/nginx/public-files.log;
-	      autoindex on;
-	      proxy_max_temp_file_size 0;
-	      aio threads;
-	      directio 16M;
-	      output_buffers 2 1M;
-	      sendfile on;
-	      sendfile_max_chunk 512k;
-	    '';
-	  };
+              autoindex on;
+              proxy_max_temp_file_size 0;
+              aio threads;
+              directio 16M;
+              output_buffers 2 1M;
+              sendfile on;
+              sendfile_max_chunk 512k;
+            '';
+          };
           "/leander/" = {
-	    root = "/var/www/";
-	    extraConfig = ''
+            root = "/var/www/";
+            extraConfig = ''
               disable_symlinks off;
               autoindex on;
               auth_basic           "Leander Serien";
@@ -44,14 +44,14 @@
               sendfile_max_chunk 1M;
               tcp_nopush on;
               tcp_nodelay on;
-	    '';
-	  };
-	  "/sabnzbd/".proxyPass = "http://localhost:6789";
-	  "/sonarr/".proxyPass = "http://localhost:8989";
-	  "/radarr/".proxyPass = "http://localhost:7878";
+            '';
+          };
+          "/sabnzbd/".proxyPass = "http://localhost:6789";
+          "/sonarr/".proxyPass = "http://localhost:8989";
+          "/radarr/".proxyPass = "http://localhost:7878";
           "/lidarr".proxyPass = "http://localhost:8686";
           "/readarr/".proxyPass = "http://localhost:8787";
-	  "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
+          "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
           "/navidrome".proxyPass = "http://localhost:3333";
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
@@ -65,11 +65,11 @@
               rewrite ^/flood/(.*) /$1 break;
             '';
           };
-	};
+        };
       };
       "mosigit.duckdns.org" = {
         forceSSL = true;
-	useACMEHost = "mosihome.duckdns.org";
+        useACMEHost = "mosihome.duckdns.org";
         locations = {
           "/" = {
             proxyPass = "http://localhost:3000/";
@@ -85,17 +85,36 @@
               scgi_pass unix:/run/rtorrent/rpc.sock;
             '';
           };
+          "/sabnzbd/".proxyPass = "http://localhost:6789";
+          "/sonarr/".proxyPass = "http://localhost:8989";
+          "/radarr/".proxyPass = "http://localhost:7878";
+          "/lidarr".proxyPass = "http://localhost:8686";
+          "/readarr/".proxyPass = "http://localhost:8787";
+          "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
+          "/navidrome".proxyPass = "http://localhost:3333";
+          "/autobrr/" = {
+            proxyPass = "http://localhost:7474";
+            extraConfig = ''
+              rewrite ^/autobrr/(.*) /$1 break;
+            '';
+          };
+          "/flood/" = {
+            proxyPass = "http://localhost:5678";
+            extraConfig = ''
+              rewrite ^/flood/(.*) /$1 break;
+            '';
+          };
         };
       };
       "pi4.home.lan" = {
         forceSSL = false;
-	locations = {
-	  "/books/" = {
-	    root = "/export/";
+        locations = {
+          "/books/" = {
+            root = "/export/";
             extraConfig = ''
               disable_symlinks off;
-	      allow 192.168.1.0/24;
-	      deny all;
+              allow 192.168.1.0/24;
+              deny all;
               autoindex on;
               proxy_max_temp_file_size 0;
               aio threads;
@@ -105,14 +124,14 @@
               sendfile_max_chunk 1M;
               tcp_nopush on;
               tcp_nodelay on;
-	    '';
-	  };
+            '';
+          };
           "/otherfiles/" = {
             root = "/export/";
             extraConfig = ''
               disable_symlinks off;
-	      allow 192.168.1.0/24;
-	      deny all;
+              allow 192.168.1.0/24;
+              deny all;
               autoindex on;
               proxy_max_temp_file_size 0;
               aio threads;
@@ -130,7 +149,7 @@
               scgi_pass unix:/run/rtorrent/rpc.sock;
             '';
           };
-	};
+        };
       };
     };
   };
