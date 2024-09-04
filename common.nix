@@ -36,6 +36,7 @@
     glances
     hdparm
     mediainfo
+    ffmpeg
     ncdu
     pass
     gnupg
