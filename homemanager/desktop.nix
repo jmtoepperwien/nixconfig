@@ -29,6 +29,9 @@ in {
     tree-sitter
     nextcloud-client
     neovim-qt
+    jq
+    inkscape
+    imv
     nodejs
     nodePackages.npm
     wget
