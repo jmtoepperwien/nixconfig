@@ -6,16 +6,16 @@
 }:
 
 let 
-  version = "v5.4.5";
+  version = "v5.9.2";
   src = fetchzip {
     url = "https://github.com/cross-seed/cross-seed/archive/refs/tags/${version}.tar.gz";
-    hash = "sha256-V2citKz4rqkSXVqsKZj6vB2XVh9uim67J/MXe+z2GBg=";
+    hash = "sha256-E0AlsFV9RP01YVwjw6ZQ8Lf1IVyuudxrb5oJ61EfIyo=";
   };
 in buildNpmPackage {
   pname = "cross-seed";
   inherit version;
   inherit src;
-  npmDepsHash = "sha256-C2j4Fq2+Ob1ra3Z7IQb/ZYGp3uz0PAQBCRM7WRHTEUs=";
+  npmDepsHash = "sha256-hZKLv+bzRFiMjNemydCUC1d7xul7Mm+vOPtCUD7p9XQ=";
 
   buildInputs = [ python3 ];
   nativeBuildInputs = [ python3 ];
