@@ -23,6 +23,7 @@ in {
     mpv
     steam-run
     feh
+    obsidian
     # neovim and plugin dependencies {{{
     neovim-remote
     luajitPackages.jsregexp # dependency of luasnip neovim plugin
