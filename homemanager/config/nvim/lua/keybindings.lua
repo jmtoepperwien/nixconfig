@@ -2,7 +2,6 @@
 vim.keymap.set("i", "kj", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "U", "<C-r>")
-vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>")
 vim.keymap.set("n", "<leader>qc", ":lclose<CR>") -- close quickfix window
 vim.keymap.set("n", "<leader>qo", ":lopen<CR>")  -- open quickfix window
 
@@ -14,6 +13,12 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>fp", project.project, {})
+
+-- Obsidian bindings
+vim.keymap.set("n", "<leader>n", ":ObsidianToday<CR>", {})
+vim.keymap.set("n", "<leader>fn", ":ObsidianQuickSwitch<CR>", {})
+vim.keymap.set("n", "<leader>fm", ":ObsidianSearch<CR>", {})
+vim.keymap.set("n", "<leader>cn", ":ObsidianNew<CR>", {})
 
 -- Hop bindings
 local hop = require('hop')
