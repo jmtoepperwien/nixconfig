@@ -19,8 +19,8 @@ in {
   };
   programs.regreet.enable = true;
   environment.etc."greetd/environments".text = lib.mkDefault ''
-    hyprland-run
     sway-run
+    hyprland-run
     zsh
     bash
   '';
