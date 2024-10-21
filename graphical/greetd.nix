@@ -10,6 +10,8 @@ let
     -b 'Reboot' 'systemctl reboot'
 
     include /etc/sway/config.d/*
+    exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
+    exec dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
   '';
 in {
   environment.systemPackages = [
