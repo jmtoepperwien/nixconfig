@@ -7,7 +7,7 @@
     group = "nextcloud";
   };
   services.nextcloud = {
-    package = pkgs.nextcloud30;
+    package = pkgs.nextcloud29;
     enable = true;
     home = "/mnt/kodi_lib/nextcloud";
     https = true;
