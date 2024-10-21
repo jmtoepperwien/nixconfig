@@ -25,12 +25,6 @@
       ../authorized_keys
     ];
   };
-  security.sudo.extraRules = [
-    {
-      users = [ "pi3" ];
-      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
-    }
-  ];
 
   environment.systemPackages = with pkgs; [ libraspberrypi ];
 

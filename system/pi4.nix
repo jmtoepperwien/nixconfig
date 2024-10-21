@@ -96,12 +96,6 @@
       ../authorized_keys
     ];
   };
-  security.sudo.extraRules = [
-    {
-      users = [ "pi4" ];
-      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
-    }
-  ];
 
   nix = {
     settings.auto-optimise-store = true;

@@ -54,12 +54,6 @@
       ../authorized_keys
     ];
   };
-  security.sudo.extraRules = [
-    {
-      users = [ "mtoepperwien" ];
-      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
-    }
-  ];
 
   # sound settings
   security.rtkit.enable = true;
