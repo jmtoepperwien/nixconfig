@@ -50,6 +50,8 @@ in {
     sway
     hyprland
     wofi # for sway
+    slurp
+    grim
     playerctl # sway audio button bindings
     waybar
     font-awesome # needed for waybar icons
