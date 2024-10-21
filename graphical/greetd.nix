@@ -21,7 +21,7 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --config ${sway-greetd-config}";
+        command = "${pkgs.dbus}/bin/dbus-run-session -- ${pkgs.sway}/bin/sway --config ${sway-greetd-config}";
       };
     };
   };
