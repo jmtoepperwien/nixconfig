@@ -9,7 +9,6 @@
   services.nextcloud = {
     package = pkgs.nextcloud29;
     enable = true;
-    home = "/mnt/kodi_lib/nextcloud";
     https = true;
     hostName = "mosinextcloud.duckdns.org";
     config = {
