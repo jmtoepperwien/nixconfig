@@ -259,7 +259,6 @@ in {
     enable = true;
     vimKeys = true;
     extraConfig = ''
-      set sidebar_visible
       set mail_check_stats
 
       # Group reply
