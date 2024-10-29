@@ -96,9 +96,11 @@
   };
   programs.tmux = {
     enable = true;
-    plugins = with pkgs.tmuxPlugins; [ gruvbox ];
+    plugins = with pkgs.tmuxPlugins; [ gruvbox sensible jump tilish tmux-fzf ];
     extraConfig = ''
+      set -g repeat-time 0
       set -g @tmux-gruvbox 'dark'
+      set -g @tilish-default 'main-vertical'
     '';
   };
   xdg.mime.enable = true;
