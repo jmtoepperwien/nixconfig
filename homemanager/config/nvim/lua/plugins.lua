@@ -64,13 +64,13 @@ return require("lazy").setup({
     'nmac427/guess-indent.nvim',
     config = function()
       require('guess-indent').setup {
-        auto_cmd = true,  -- Set to false to disable automatic execution
+        auto_cmd = true,               -- Set to false to disable automatic execution
         override_editorconfig = false, -- Set to true to override settings set by .editorconfig
-        filetype_exclude = {  -- A list of filetypes for which the auto command gets disabled
+        filetype_exclude = {           -- A list of filetypes for which the auto command gets disabled
           "netrw",
           "tutor",
         },
-        buftype_exclude = {  -- A list of buffer types for which the auto command gets disabled
+        buftype_exclude = { -- A list of buffer types for which the auto command gets disabled
           "help",
           "nofile",
           "terminal",
@@ -82,7 +82,7 @@ return require("lazy").setup({
           ["softtabstop"] = 2,
           ["shiftwidth"] = 2,
         },
-        on_space_options = { -- A table of vim options when spaces are detected
+        on_space_options = {        -- A table of vim options when spaces are detected
           ["expandtab"] = true,
           ["tabstop"] = "detected", -- If the option value is 'detected', The value is set to the automatically detected indent size.
           ["softtabstop"] = "detected",
@@ -178,7 +178,7 @@ return require("lazy").setup({
       })
     end,
   },
-  { "lervag/vimtex",                         lazy = true },
+  { "lervag/vimtex",         lazy = true },
   {
     "lewis6991/gitsigns.nvim",
     config = function()
@@ -196,7 +196,7 @@ return require("lazy").setup({
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "hrsh7th/cmp-nvim-lua",
   { "onsails/lspkind-nvim" },
-  { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" },
+  { "L3MON4D3/LuaSnip",    version = "v2.*", build = "make install_jsregexp" },
   "saadparwaiz1/cmp_luasnip",
   { "hrsh7th/nvim-cmp",      config = function() require('lsp-cmp-setup') end },
   -- nvim-lsp setup }}}
@@ -318,7 +318,7 @@ return require("lazy").setup({
   },
   {
     "epwalsh/obsidian.nvim",
-    version = "*",  -- recommended, use latest release instead of latest commit
+    version = "*", -- recommended, use latest release instead of latest commit
     lazy = false,
     ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -354,6 +354,23 @@ return require("lazy").setup({
         local path = spec.dir / spec.title
         return path:with_suffix(".md")
       end,
+    },
+  },
+  {
+    "tris203/hawtkeys.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = {
+      leader = ",",
+      keyboardLayout = "qwerty",
+      ["wk.register"] = {
+          method = "which_key",
+      },
+      ["lazy"] = {
+          method = "lazy",
+      },
     },
   },
 })
