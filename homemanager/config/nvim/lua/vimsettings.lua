@@ -14,6 +14,7 @@ vim.opt.foldenable = false
 
 vim.opt.ignorecase = true
 
+-- somewhat unused as these values also get set via guess-indent plugin
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
