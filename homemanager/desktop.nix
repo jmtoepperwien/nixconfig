@@ -157,7 +157,6 @@ in {
         "git"
         "wd"
         "zoxide"
-        "tmux"
       ];
     };
   };
