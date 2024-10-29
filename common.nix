@@ -94,6 +94,13 @@
       user.email = "m.toepperwien@protonmail.com";
     };
   };
+  programs.tmux = {
+    enable = true;
+    plugins = with pkgs.tmuxPlugins; [ gruvbox ];
+    extraConfig = ''
+      set -g @tmux-gruvbox 'dark'
+    '';
+  };
   xdg.mime.enable = true;
 
   # drive health checks
