@@ -135,6 +135,8 @@ in {
       for i
           do (xdg-open "$i" > /dev/null 2> /dev/null &)
       done
+
+      ZSH_TMUX_AUTOSTART=true
     }'';
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
@@ -157,6 +159,7 @@ in {
         "git"
         "wd"
         "zoxide"
+        "tmux"
       ];
     };
   };
