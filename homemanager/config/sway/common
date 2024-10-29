@@ -7,7 +7,7 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
+set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -43,7 +43,7 @@ seat * hide_cursor when-typing enable
 input type:keyboard {
   xkb_layout us,gb
   xkb_variant ,colemak_dh
-  xkb_options compose:rwin
+  xkb_options compose:rwin,caps:super
   repeat_delay 175
   repeat_rate 50
 }
