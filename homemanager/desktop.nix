@@ -104,9 +104,9 @@ in {
     extraLuaConfig = ''
       vim.loader.enable()
       vim.g.mapleader = ","
+      require("vimsettings")
       require("bootstrap/lazy")
       require("plugins")
-      require("vimsettings")
       require("keybindings")
       local status, ts_install = pcall(require, "nvim-treesitter.install")
       if(status) then
