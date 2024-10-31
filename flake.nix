@@ -13,7 +13,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
-	  ./system/maltepc.nix
+          ./system/maltepc.nix
           ./graphical/window_manager.nix
           ./common.nix
           ./ssd.nix
@@ -23,6 +23,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.mtoepperwien = import ./homemanager/maltepc.nix;
+            home-manager.extraSpecialArgs = { inherit nixpkgs-unstable; };
           }
         ];
       };
@@ -40,6 +41,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.mtoepperwien = import ./homemanager/maltexps.nix;
+            home-manager.extraSpecialArgs = { inherit nixpkgs-unstable; };
           }
           nixos-hardware.nixosModules.dell-xps-13-9370
         ];
@@ -61,13 +63,13 @@
           ./system/pi4.nix
           ./ssh.nix
           ./common.nix
-	  ./programs/nginx.nix
-	  ./programs/mariadb.nix
-	  ./programs/postgresql.nix
-	  ./programs/gitea.nix
-	  ./programs/kodi_nfs.nix
-	  ./programs/usenet.nix
-	  ./programs/nextcloud.nix
+          ./programs/nginx.nix
+          ./programs/mariadb.nix
+          ./programs/postgresql.nix
+          ./programs/gitea.nix
+          ./programs/kodi_nfs.nix
+          ./programs/usenet.nix
+          ./programs/nextcloud.nix
           ./network/proton_wireguard.nix
           ./programs/torrent.nix
           ./programs/irssi.nix
@@ -76,7 +78,7 @@
           ./programs/navidrome.nix
 
           agenix.nixosModules.default
-	  nixos-hardware.nixosModules.raspberry-pi-4
+          nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
     };

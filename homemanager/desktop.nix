@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs-unstable, ... }:
 let
   python-packages = p: with p; [
     pandas
@@ -101,12 +101,12 @@ in {
 
   programs.neovim = {
     enable = true;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
+    package = nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
     extraLuaConfig = ''
       vim.g.mapleader = ","
-      require("vimsettings")
       require("bootstrap/lazy")
       require("plugins")
+      require("vimsettings")
       require("keybindings")
       local status, ts_install = pcall(require, "nvim-treesitter.install")
       if(status) then
