@@ -85,6 +85,7 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim;
   };
   programs.git = {
     enable = true;
