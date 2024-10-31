@@ -29,7 +29,6 @@ in {
     luajitPackages.jsregexp # dependency of luasnip neovim plugin
     tree-sitter
     nextcloud-client
-    neovim-qt
     jq
     inkscape
     imv
@@ -79,7 +78,7 @@ in {
     xournalpp
     taskwarrior
     taskwarrior-tui
-  ];
+  ] ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [ neovim-qt ]);
 
   home.sessionVariables = {
     VISUAL = "nvim";
