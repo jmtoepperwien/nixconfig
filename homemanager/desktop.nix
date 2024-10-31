@@ -101,6 +101,7 @@ in {
 
   programs.neovim = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
     extraLuaConfig = ''
       vim.g.mapleader = ","
       require("vimsettings")
