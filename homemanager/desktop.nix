@@ -78,7 +78,7 @@ in {
     xournalpp
     taskwarrior
     taskwarrior-tui
-  ] ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [ neovim-qt ]);
+  ] ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [ neovim-qt neovide ]);
 
   home.sessionVariables = {
     VISUAL = "nvim";

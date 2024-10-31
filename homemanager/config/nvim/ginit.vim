@@ -1,6 +1,15 @@
 " Enable Mouse
 set mouse=
 
+if exists("g:neovide")
+    set guifont=SauceCodePro\ Nerd\ Font\ Mono:h18
+    let g:neovide_cursor_animation_length = 0.0
+    let g:neovide_cursor_trail_size = 0
+    let g:neovide_scroll_animation_far_lines = 0
+    let g:neovide_scroll_animation_length = 0
+    let g:neovide_hide_mouse_when_typing = v:true
+endif
+
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
     GuiFont SauceCodePro\ Nerd\ Font\ Mono:h18
