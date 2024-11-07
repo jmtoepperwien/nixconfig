@@ -48,7 +48,7 @@
     isNormalUser = true;
     home = "/home/mtoepperwien";
     group = "mtoepperwien";
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" "audio" "render" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" "audio" "render" "libvirtd" ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
