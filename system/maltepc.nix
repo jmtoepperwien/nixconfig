@@ -35,7 +35,7 @@
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true;
-      swtp.enable = true;
+      swtpm.enable = true;
       ovmf = {
         enable = true;
         packages = [(pkgs.OVMF.override {
