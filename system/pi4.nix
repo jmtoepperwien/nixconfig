@@ -81,13 +81,13 @@
     nftables.enable = true;
     firewall.allowedTCPPorts = [ 53589 ];
   };
-  #age.secrets.wifipassword.file = ../secrets/wifipassword.age;
-  #networking.wireless = {
-  #  environmentFile = config.age.secrets.wifipassword.path;
-  #  enable = true;
-  #  userControlled.enable = true;
-  #  networks."Mosi".psk = "@MOSI_PASSWORD@";
-  #};
+  age.secrets.wifipassword.file = ../secrets/wifipassword.age;
+  networking.wireless = {
+    environmentFile = config.age.secrets.wifipassword.path;
+    enable = true;
+    userControlled.enable = true;
+    networks."Mosi".psk = "@MOSI_PASSWORD@";
+  };
 
   users.users.pi4 = {
     isNormalUser = true;
