@@ -24,6 +24,8 @@
 
     wlr-randr
     wl-mirror
+
+    apptainer
   ];
 
   services.gnome.gnome-keyring.enable = true;
