@@ -81,6 +81,9 @@
     enable = true;
     dockerCompat = true;
   };
+  programs.singularity = {
+    enable = true;
+  };
 
   # cross compilation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
