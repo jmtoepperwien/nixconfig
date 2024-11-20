@@ -20,6 +20,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    su
     bat
     eza
     du-dust
