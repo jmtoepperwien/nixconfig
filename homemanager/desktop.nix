@@ -125,8 +125,10 @@ in {
     autocd = true;
     history.save = 1000;
     history.size = 1000;
-    initExtra = ''
+    initExtraFirst = ''
       ZSH_DISABLE_COMPFIX=true
+    '';
+    initExtra = ''
       setopt extended_glob
 
       bindkey 'kj' vi-cmd-mode
@@ -138,7 +140,6 @@ in {
             do (xdg-open "$i" > /dev/null 2> /dev/null &)
         done
       }
-      ZSH_DISABLE_COMPFIX=true
     '';
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
