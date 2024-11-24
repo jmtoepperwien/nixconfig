@@ -62,6 +62,7 @@
     pyrosimple
     imagemagick
     openseachest
+    distrobox
   ];
 
   programs.nix-ld.enable = true;
