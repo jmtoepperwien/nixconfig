@@ -126,6 +126,7 @@ in {
     history.save = 1000;
     history.size = 1000;
     initExtra = ''
+      ZSH_DISABLE_COMPFIX=true
       setopt extended_glob
 
       bindkey 'kj' vi-cmd-mode
@@ -133,11 +134,12 @@ in {
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
       function open {
-      for i
-          do (xdg-open "$i" > /dev/null 2> /dev/null &)
-      done
+        for i
+            do (xdg-open "$i" > /dev/null 2> /dev/null &)
+        done
+      }
       ZSH_DISABLE_COMPFIX=true
-    }'';
+    '';
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
       "tree" = "tree -C";
