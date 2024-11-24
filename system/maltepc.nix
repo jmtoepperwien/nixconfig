@@ -10,6 +10,7 @@
     virt-manager
     virtiofsd
     gnome.gnome-boxes
+    clinfo
   ];
 
   hardware.cpu.amd.updateMicrocode = true;
@@ -24,6 +25,8 @@
     vulkan-tools
     vulkan-headers
     vulkan-loader
+    rocmPackages.clr.icd
+    amdvlk
   ];
 
   # virtualisation
