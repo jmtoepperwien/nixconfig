@@ -136,6 +136,7 @@ in {
       for i
           do (xdg-open "$i" > /dev/null 2> /dev/null &)
       done
+      ZSH_DISABLE_COMPFIX=true
     }'';
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
