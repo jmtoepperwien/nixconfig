@@ -40,9 +40,6 @@ vim.keymap.set('', '<leader>j', function()
 end, { remap = true })
 vim.keymap.set('', '<Leader>w', function() hop.hint_words() end, { remap = true })
 
--- Codeium
-vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true })
-
 -- Neogen bindings
 vim.keymap.set("n", "<Leader>d", function() require('neogen').generate() end, { noremap = true, silent = true })
 
