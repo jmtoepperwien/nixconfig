@@ -59,4 +59,14 @@ vim.keymap.set("n", "<Leader>rr", ":MoltenReevaluateCell<CR>", { desc = "re-eval
 vim.keymap.set("v", "<Leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv<ESC>", { desc = "execute visual selection", silent = true })
 vim.keymap.set("n", "<Leader>oh", ":MoltenHideOutput<CR>", { desc = "close output window", silent = true })
 vim.keymap.set("n", "<Leader>md", ":MoltenDelete<CR>", { desc = "delete Molten cell", silent = true })
+-- Quarto
+local runner = require("quarto.runner")
+vim.keymap.set("n", "<Leader>rc", runner.run_cell,  { desc = "run cell", silent = true })
+vim.keymap.set("n", "<Leader>ra", runner.run_above, { desc = "run cell and above", silent = true })
+vim.keymap.set("n", "<Leader>rA", runner.run_all,   { desc = "run all cells", silent = true })
+vim.keymap.set("n", "<Leader>rl", runner.run_line,  { desc = "run line", silent = true })
+vim.keymap.set("v", "<Leader>r",  runner.run_range, { desc = "run visual range", silent = true })
+vim.keymap.set("n", "<Leader>RA", function()
+  runner.run_all(true)
+end, { desc = "run all cells of all languages", silent = true })
 -- }}} Jupyter Notebooks
