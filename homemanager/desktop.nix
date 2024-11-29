@@ -101,6 +101,8 @@ in {
   programs.neovim = {
     enable = true;
     package = nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
+    extraLuaPackages = ps: [ ps.magick ps.luarocks ];
+    extraPackages = [ pkgs.imagemagick ];
     extraLuaConfig = ''
       vim.loader.enable()
       vim.g.mapleader = ","
