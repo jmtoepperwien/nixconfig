@@ -392,23 +392,42 @@ return require("lazy").setup({
     end,
   },
   {
-    "3rd/image.nvim",
-    opts = {},
+    "amitds1997/remote-nvim.nvim",
+    version = "*",                     -- Pin to GitHub releases
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- For standard functions
+      "MunifTanjim/nui.nvim",          -- To build the plugin UI
+      "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+    },
     config = function()
-      require("image").setup(
-      -- image nvim options table. Pass to `require('image').setup`
-        {
-          backend = "kitty",                        -- Kitty will provide the best experience, but you need a compatible terminal
-          integrations = {},                        -- do whatever you want with image.nvim's integrations
-          max_width = 100,                          -- tweak to preference
-          max_height = 12,                          -- ^
-          max_height_window_percentage = math.huge, -- this is necessary for a good experience
-          max_width_window_percentage = math.huge,
-          window_overlap_clear_enabled = true,
-          window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-        })
+      require("remote-nvim").setup({
+        -- Offline mode configuration. For more details, see the "Offline mode" section below.
+        offline_mode = {
+          -- Should offline mode be enabled?
+          enabled = true,
+          -- Do not connect to GitHub at all. Not even to get release information.
+          no_github = false,
+        },
+      })
     end,
-  },
+  }, {
+  "3rd/image.nvim",
+  opts = {},
+  config = function()
+    require("image").setup(
+    -- image nvim options table. Pass to `require('image').setup`
+      {
+        backend = "kitty",                        -- Kitty will provide the best experience, but you need a compatible terminal
+        integrations = {},                        -- do whatever you want with image.nvim's integrations
+        max_width = 100,                          -- tweak to preference
+        max_height = 12,                          -- ^
+        max_height_window_percentage = math.huge, -- this is necessary for a good experience
+        max_width_window_percentage = math.huge,
+        window_overlap_clear_enabled = true,
+        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+      })
+  end,
+},
   {
     "benlubas/molten-nvim",
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
