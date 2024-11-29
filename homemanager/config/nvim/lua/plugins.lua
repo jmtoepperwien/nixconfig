@@ -269,13 +269,13 @@ return require("lazy").setup({
   },
   -- # Jupyter Notebooks in Neovim {{{
   {
-    "goerz/jupytext.vim",
+    "GCBallesteros/jupytext.nvim",
     enabled = true,
     config = function()
       require("jupytext").setup({
-          style = "markdown",
-          output_extension = "md",
-          force_ft = "markdown",
+        style = "markdown",
+        output_extension = "md",
+        force_ft = "markdown",
       })
     end
   },
@@ -398,10 +398,10 @@ return require("lazy").setup({
       require("image").setup(
       -- image nvim options table. Pass to `require('image').setup`
         {
-          backend = "kitty",                      -- Kitty will provide the best experience, but you need a compatible terminal
-          integrations = {},                      -- do whatever you want with image.nvim's integrations
-          max_width = 100,                        -- tweak to preference
-          max_height = 12,                        -- ^
+          backend = "kitty",                        -- Kitty will provide the best experience, but you need a compatible terminal
+          integrations = {},                        -- do whatever you want with image.nvim's integrations
+          max_width = 100,                          -- tweak to preference
+          max_height = 12,                          -- ^
           max_height_window_percentage = math.huge, -- this is necessary for a good experience
           max_width_window_percentage = math.huge,
           window_overlap_clear_enabled = true,
@@ -411,7 +411,7 @@ return require("lazy").setup({
   },
   {
     "benlubas/molten-nvim",
-    version = "^1.0.0",     -- use version <2.0.0 to avoid breaking changes
+    version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
     dependencies = { "3rd/image.nvim" },
     build = ":UpdateRemotePlugins",
     init = function()
@@ -422,6 +422,6 @@ return require("lazy").setup({
   },
 }, {
   rocks = {
-    hererocks = false,     -- recommended if you do not have global installation of Lua 5.1.
+    hererocks = false, -- recommended if you do not have global installation of Lua 5.1.
   },
 })
