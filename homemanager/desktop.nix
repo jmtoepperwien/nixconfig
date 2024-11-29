@@ -12,6 +12,7 @@ let
     plotly
     scikit-learn
     scipy
+    jupyter-client
   ] ++ [ pkgs.callPackage ../programs/kaleido.nix {} pkgs.callPackage ../programs/jupyter_ascending.nix {} ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
   wallpaper = ./config/hypr/wallpaper/gruvbox-dark-blue.png;
