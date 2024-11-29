@@ -45,10 +45,18 @@ vim.keymap.set("n", "<Leader>d", function() require('neogen').generate() end, { 
 
 -- # Jupyter Notebooks {{{
 -- Magma
-vim.keymap.set('n', '<Leader>r', ':MagmaEvaluateOperator<CR>', { silent = true, expr = true, noremap = true } )
-vim.keymap.set('n', '<Leader>rr', ':MagmaEvaluateLine<CR>', { silent = true, noremap = true })
-vim.keymap.set('x', '<Leader>r', ':<C-u>MagmaEvaluateVisual<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Leader>rc', ':MagmaReevaluateCell<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Leader>rd', ':MagmaDelete<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Leader>ro', ':MagmaShowOutput<CR>', { noremap = true, silent = true })
+--vim.keymap.set('n', '<Leader>r', ':MagmaEvaluateOperator<CR>', { silent = true, expr = true, noremap = true } )
+--vim.keymap.set('n', '<Leader>rr', ':MagmaEvaluateLine<CR>', { silent = true, noremap = true })
+--vim.keymap.set('x', '<Leader>r', ':<C-u>MagmaEvaluateVisual<CR>', { noremap = true, silent = true })
+--vim.keymap.set('n', '<Leader>rc', ':MagmaReevaluateCell<CR>', { noremap = true, silent = true })
+--vim.keymap.set('n', '<Leader>rd', ':MagmaDelete<CR>', { noremap = true, silent = true })
+--vim.keymap.set('n', '<Leader>ro', ':MagmaShowOutput<CR>', { noremap = true, silent = true })
+-- Molten
+vim.keymap.set("n", "<Leader>e", ":MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
+vim.keymap.set("n", "<Leader>os", ":noautocmd MoltenEnterOutput<CR>", { desc = "open output window", silent = true })
+
+vim.keymap.set("n", "<Leader>rr", ":MoltenReevaluateCell<CR>", { desc = "re-eval cell", silent = true })
+vim.keymap.set("v", "<Leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv<ESC>", { desc = "execute visual selection", silent = true })
+vim.keymap.set("n", "<Leader>oh", ":MoltenHideOutput<CR>", { desc = "close output window", silent = true })
+vim.keymap.set("n", "<Leader>md", ":MoltenDelete<CR>", { desc = "delete Molten cell", silent = true })
 -- }}} Jupyter Notebooks

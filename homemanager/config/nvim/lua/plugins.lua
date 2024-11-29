@@ -270,12 +270,18 @@ return require("lazy").setup({
   -- # Jupyter Notebooks in Neovim {{{
   {
     "goerz/jupytext.vim",
+    enabled = true,
     config = function()
-      vim.g.jupytext_fmt = "py:percent"
+      require("jupytext").setup({
+          style = "markdown",
+          output_extension = "md",
+          force_ft = "markdown",
+      })
     end
   },
   {
     "dccsillag/magma-nvim",
+    enabled = false,
     build = ":UpdateRemotePlugins",
     config = function()
       vim.g.magma_automatically_open_output = false
