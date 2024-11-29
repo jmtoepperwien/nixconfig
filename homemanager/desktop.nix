@@ -1,5 +1,8 @@
 { config, pkgs, nixpkgs-unstable, ... }:
 let
+  lua-packages = p: with p; [
+    luarocks
+  ];
   python-packages = p: with p; [
     pandas
     numpy
@@ -56,6 +59,7 @@ in {
     font-awesome # needed for waybar icons
     ungoogled-chromium
     (python3.withPackages python-packages)
+    (lua5_1.withPackages lua-packages)
     # poetry ignore for now due to dependency missing
     virtualenv
     ripgrep
