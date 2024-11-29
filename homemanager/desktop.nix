@@ -21,6 +21,7 @@ in {
   home.packages = with pkgs; [
     alacritty
     kitty
+    rio
     element-desktop
     discord
     mako
