@@ -440,7 +440,7 @@ return require("lazy").setup({
       require("quarto").setup({
         lspFeatures = {
           -- NOTE: put whatever languages you want here:
-          languages = { "r", "python", "rust" },
+          languages = { "r", "python", "rust", "html" },
           chunks = "all",
           diagnostics = {
             enabled = true,
