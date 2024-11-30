@@ -150,7 +150,7 @@ in {
       name = "SauceCodePro Nerd Font Mono";
       size = 15;
     };
-    theme = "Gruvbox Material Dark Hard";
+    theme = "Gruvbox Material Dark Medium";
     settings = {
       cursor_shape = "block";
       cursor_blink_interval = 0;
