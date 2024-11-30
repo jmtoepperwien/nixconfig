@@ -117,6 +117,20 @@ in {
     package = nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
     extraLuaPackages = ps: [ ps.magick ps.luarocks ];
     extraPackages = [ pkgs.imagemagick ];
+    extraPython3Packages = ps: with ps; [
+      pynvim
+      ipython
+      jupyter-client
+      cairosvg
+      pnglatex
+      plotly
+      pyperclip
+      nbformat
+      pillow
+      requests
+      websocket-client
+      kaleido
+    ];
     extraLuaConfig = ''
       vim.loader.enable()
       vim.g.mapleader = ","
@@ -128,7 +142,6 @@ in {
       if(status) then
         ts_install.compilers = { "${pkgs.gcc_multi}/bin/gcc" }
       end
-      vim.g.python3_host_prog = "/etc/profiles/per-user/mtoepperwien/bin/python3"
     '';
   };
   programs.kitty = {
