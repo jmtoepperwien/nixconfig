@@ -151,6 +151,14 @@ in {
       size = 15;
     };
     theme = "Gruvbox Material Dark Hard";
+    settings = {
+      cursor_shape = "block";
+      cursor_blink_interval = 0;
+      disable_ligatures = "always";
+      repaint_delay = 7;  # this is approx 144hz
+      enable_audio_bell = false;
+      notify_on_cmd_finish = "always 60.0";
+    };
   };
   programs.rio = {
     enable = true;
