@@ -124,6 +124,22 @@ in {
       vim.g.python3_host_prog = "/etc/profiles/per-user/mtoepperwien/bin/python3"
     '';
   };
+  programs.rio = {
+    enable = true;
+    settings = {
+      theme = "GruvboxDark";
+      renderer = {
+        performance = "High";
+        backend = "Automatic";
+        disable-renderer-when-unfocused = false;
+        target-fps = 144;
+      };
+      fonts = {
+        family = "SauceCodePro Nerd Font Mono";
+        size = "25";
+      };
+    };
+  };
 
   # allow homemanager fonts
   fonts.fontconfig.enable = true;
@@ -196,7 +212,7 @@ in {
 
   # Hyprland
   services.hyprpaper = {
-    enable = true;
+    enable = false;
     settings = {
       preload = "${wallpaper}";
       wallpaper = ",${wallpaper}";
