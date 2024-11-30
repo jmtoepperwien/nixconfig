@@ -31,7 +31,6 @@ in {
   home.packages = with pkgs; [
     alacritty
     kitty
-    rio
     element-desktop
     discord
     mako
@@ -135,6 +134,7 @@ in {
   };
   programs.rio = {
     enable = true;
+    package = nixpkgs-unstable.legacyPackages.${pkgs.system}.rio;
     settings = {
       theme = "GruvboxDark";
       renderer = {
