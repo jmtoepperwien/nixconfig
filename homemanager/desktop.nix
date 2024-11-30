@@ -157,7 +157,7 @@ in {
       disable_ligatures = "always";
       repaint_delay = 7;  # this is approx 144hz
       enable_audio_bell = false;
-      notify_on_cmd_finish = "always 60.0";
+      notify_on_cmd_finish = "unfocused 60.0";
     };
     keybindings = {
       "alt+enter" = "new_window_with_cwd";
