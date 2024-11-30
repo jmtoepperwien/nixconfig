@@ -30,7 +30,6 @@ in {
 
   home.packages = with pkgs; [
     alacritty
-    kitty
     element-desktop
     discord
     mako
@@ -131,6 +130,14 @@ in {
       end
       vim.g.python3_host_prog = "/etc/profiles/per-user/mtoepperwien/bin/python3"
     '';
+  };
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = "SauceCodePro Nerd Font Mono";
+      size = 15;
+    };
+    theme = "Gruvbox Material Dark Medium";
   };
   programs.rio = {
     enable = true;
