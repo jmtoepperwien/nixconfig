@@ -202,7 +202,6 @@ in {
             do (xdg-open "$i" > /dev/null 2> /dev/null &)
         done
       }
-      # enable kitty shell integration also in tmux
     '';
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";

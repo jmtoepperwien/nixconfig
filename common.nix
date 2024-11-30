@@ -106,6 +106,8 @@
       set -g @tilish-default 'main-vertical'
       set -gq allow-passthrough on
       set -g visual-activity off
+      set -g base-index 1
+      setw -g pane-base-index 1
     '';
   };
   xdg.mime.enable = true;
