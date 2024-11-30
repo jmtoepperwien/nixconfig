@@ -137,7 +137,7 @@ in {
       name = "SauceCodePro Nerd Font Mono";
       size = 15;
     };
-    theme = "Gruvbox Material Dark Medium";
+    theme = "Gruvbox Material Dark Hard";
   };
   programs.rio = {
     enable = true;
