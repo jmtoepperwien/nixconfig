@@ -104,6 +104,8 @@
       set -g repeat-time 0
       set -g @tmux-gruvbox 'dark'
       set -g @tilish-default 'main-vertical'
+      set -gq allow-passthrough on
+      set -g visual-activity off
     '';
   };
   xdg.mime.enable = true;
