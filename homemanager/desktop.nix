@@ -136,7 +136,7 @@ in {
       };
       fonts = {
         family = "SauceCodePro Nerd Font Mono";
-        size = "25";
+        size = 25;
       };
     };
   };
