@@ -33,13 +33,6 @@
 
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
-  boot.loader.raspberryPi = {
-    enable = false;
-    version = 4;
-    firmwareConfig = ''
-      dtparam=audio=on
-    '';
-  };
 
   # Required for the Wireless firmware
   hardware.enableRedistributableFirmware = true;
@@ -50,9 +43,8 @@
   };
   #sound.enable = true;
   #hardware.pulseaudio.enable = true;
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    setLdLibraryPath = true;
     package = pkgs.mesa_drivers;
   };
   # sound settings

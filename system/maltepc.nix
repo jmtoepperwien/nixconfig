@@ -9,7 +9,7 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     virtiofsd
-    gnome.gnome-boxes
+    gnome-boxes
     clinfo
   ];
 
@@ -17,11 +17,9 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # gpu
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   # vulkan
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.extraPackages = with pkgs; [ 
+  hardware.graphics.extraPackages = with pkgs; [
     vulkan-tools
     vulkan-headers
     vulkan-loader

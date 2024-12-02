@@ -12,7 +12,7 @@
     cmake
     virt-manager
     virtiofsd
-    gnome.gnome-boxes
+    gnome-boxes
 
   ];
 }

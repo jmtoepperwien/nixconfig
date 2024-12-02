@@ -6,14 +6,14 @@
     pulsemixer
 
     # gnome icon themes (needed for some programs)
-    gnome3.adwaita-icon-theme
+    adwaita-icon-theme
     
     # cisco anyconnect uni vpn
     openconnect
     networkmanager-openconnect
 
     # secret management
-    gnome.gnome-keyring
+    gnome-keyring
     libsecret
 
     qemu_kvm
@@ -70,10 +70,10 @@
   security.pam.services."gnome_keyring" = {
     enableGnomeKeyring = true;
     text = ''
-      auth     optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
-      session  optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+      auth     optional    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
+      session  optional    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
 
-      password  optional    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+      password  optional    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
     '';
     gnupg.enable = true;
   };

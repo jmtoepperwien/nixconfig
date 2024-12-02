@@ -22,9 +22,7 @@
   hardware.cpu.intel.updateMicrocode = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       intel-compute-runtime

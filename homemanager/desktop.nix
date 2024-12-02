@@ -51,7 +51,7 @@ in {
     curl
     lua-language-server
     clang-tools
-    nodePackages_latest.pyright
+    pyright
     cairo
     # }}} neovim and plugin dependencies
     lazygit
@@ -150,7 +150,7 @@ in {
       name = "SauceCodePro Nerd Font Mono";
       size = 15;
     };
-    theme = "Gruvbox Material Dark Medium";
+    themeFile = "GruvboxMaterialDarkMedium";
     settings = {
       cursor_shape = "block";
       cursor_blink_interval = 0;
