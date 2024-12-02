@@ -43,6 +43,10 @@ vim.keymap.set('', '<Leader>w', function() hop.hint_words() end, { remap = true 
 -- Neogen bindings
 vim.keymap.set("n", "<Leader>d", function() require('neogen').generate() end, { noremap = true, silent = true })
 
+-- LSP
+vim.keymap.set("n", "<leader>?", vim.lsp.buf.hover, {})
+
+
 -- # Jupyter Notebooks {{{
 -- Magma
 --vim.keymap.set('n', '<Leader>r', ':MagmaEvaluateOperator<CR>', { silent = true, expr = true, noremap = true } )

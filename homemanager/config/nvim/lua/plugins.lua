@@ -484,6 +484,12 @@ return require("lazy").setup({
       })
     end,
   },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  }
 }, {
   rocks = {
     hererocks = false, -- recommended if you do not have global installation of Lua 5.1.

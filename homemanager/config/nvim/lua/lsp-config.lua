@@ -7,7 +7,10 @@ end
 
 -- to enable nvim-cmp (use in setup of lsps)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local on_attach = function(client, bufnr) require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client }) end
+local on_attach = function(client, bufnr) 
+  require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
+  require "lsp_signature".on_attach({}, bufnr)
+end
 
 -- Python
 require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on_attach, settings = {
