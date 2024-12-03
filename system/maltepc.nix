@@ -48,8 +48,8 @@
   };
   programs.virt-manager.enable = true;
 
-  nix.settings.max-jobs = 6;
-  nix.settings.cores = 6;
+  nix.settings.max-jobs = 10;
+  nix.settings.cores = 10;
 
   networking.hostName = "maltepc";
 

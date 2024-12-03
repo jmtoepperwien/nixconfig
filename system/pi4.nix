@@ -45,7 +45,7 @@
   #hardware.pulseaudio.enable = true;
   hardware.graphics = {
     enable = true;
-    package = pkgs.mesa_drivers;
+    package = pkgs.mesa.drivers;
   };
   # sound settings
   security.rtkit.enable = true;
