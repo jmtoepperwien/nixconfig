@@ -4,6 +4,7 @@ vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set("n", "<leader>qc", ":lclose<CR>") -- close quickfix window
 vim.keymap.set("n", "<leader>qo", ":lopen<CR>")  -- open quickfix window
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
 -- Telescope bindings
 local builtin = require('telescope.builtin')

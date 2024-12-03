@@ -337,6 +337,23 @@ return require("lazy").setup({
         local path = spec.dir / spec.title
         return path:with_suffix(".md")
       end,
+      -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
+      completion = {
+        -- Set to false to disable completion.
+        nvim_cmp = true,
+        -- Trigger completion at 2 chars.
+        min_chars = 2,
+      },
+      -- Where to put new notes. Valid options are
+      --  * "current_dir" - put new notes in same directory as the current buffer.
+      --  * "notes_subdir" - put new notes in the default notes subdirectory.
+      new_notes_location = "current_dir",
+      wiki_link_func = "prepend_note_path",
+      -- Optional, sort search results by "path", "modified", "accessed", or "created".
+      -- The recommend value is "modified" and `true` for `sort_reversed`, which means, for example,
+      -- that `:ObsidianQuickSwitch` will show the notes sorted by latest modified time
+      sort_by = "modified",
+      sort_reversed = true,
     },
   },
   {
