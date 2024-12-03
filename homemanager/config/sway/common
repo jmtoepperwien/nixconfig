@@ -48,7 +48,7 @@ input type:keyboard {
 }
 
 # Wallpaper
-output * bg ~/.config/sway/wallpapers/gruvbox-dark-rainbow-square.png fit
+output * bg ~/.config/sway/wallpapers/gruvbox-dark-rainbow-square.png fill
 
 ### Key bindings
 #
