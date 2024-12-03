@@ -47,6 +47,9 @@ input type:keyboard {
   repeat_rate 50
 }
 
+# Wallpaper
+output * bg ~/.config/sway/wallpapers/gruvbox-dark-rainbow-square.png fit
+
 ### Key bindings
 #
 # Basics:
@@ -223,7 +226,6 @@ for_window [class="^.*"] border pixel 2
 
 
 # Program Startups {{{
-exec --no-startup-id swaymsg "workspace 9; exec thunderbird; exec spotify; workspace 1"
 # Program Startups }}}
 
 # Miscellanous {{{
