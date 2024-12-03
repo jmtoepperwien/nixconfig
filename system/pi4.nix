@@ -75,10 +75,10 @@
   };
   age.secrets.wifipassword.file = ../secrets/wifipassword.age;
   networking.wireless = {
-    environmentFile = config.age.secrets.wifipassword.path;
+    secretsFile = config.age.secrets.wifipassword.path;
     enable = true;
     userControlled.enable = true;
-    networks."Mosi".psk = "@MOSI_PASSWORD@";
+    networks."Mosi".psk = "ext:MOSI_PASSWORD";
   };
 
   users.users.pi4 = {
