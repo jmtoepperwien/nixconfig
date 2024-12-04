@@ -130,6 +130,7 @@ in {
       requests
       websocket-client
       kaleido
+      pylatexenc
     ];
     extraLuaConfig = ''
       vim.loader.enable()

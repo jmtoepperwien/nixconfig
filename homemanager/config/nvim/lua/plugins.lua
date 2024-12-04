@@ -320,6 +320,7 @@ return require("lazy").setup({
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {
+      ui = { enable = false },
       workspaces = {
         {
           name = "personal",
@@ -506,7 +507,16 @@ return require("lazy").setup({
     event = "VeryLazy",
     opts = {},
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
-  }
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
 }, {
   rocks = {
     hererocks = false, -- recommended if you do not have global installation of Lua 5.1.
