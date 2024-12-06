@@ -18,6 +18,8 @@ vim.opt.ignorecase = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
+-- markdown recommended style sets it back to 4, disable that:
+vim.opt.markdown_recommended_style = 0
 
 vim.opt.updatetime = 100
 
