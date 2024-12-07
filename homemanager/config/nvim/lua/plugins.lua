@@ -230,6 +230,8 @@ return require("lazy").setup({
   },
   {
     "AckslD/nvim-neoclip.lua",
+    lazy = true,
+    event = "CursorHold",
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('neoclip').setup();
@@ -301,8 +303,9 @@ return require("lazy").setup({
   },
   {
     "epwalsh/obsidian.nvim",
+    lazy = true,
+    event = "CursorHold",
     version = "*", -- recommended, use latest release instead of latest commit
-    lazy = false,
     ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- event = {
@@ -431,6 +434,8 @@ return require("lazy").setup({
   }, {
   "3rd/image.nvim",
   opts = {},
+  lazy = true,
+  event = "CursorHold",
   config = function()
     require("image").setup(
     -- image nvim options table. Pass to `require('image').setup`
@@ -448,6 +453,8 @@ return require("lazy").setup({
 },
   {
     "benlubas/molten-nvim",
+    lazy = true,
+    ft = { "markdown", "quarto", "rmd" },
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
     dependencies = { "3rd/image.nvim" },
     build = ":UpdateRemotePlugins",
