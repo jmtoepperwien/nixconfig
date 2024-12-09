@@ -17,7 +17,10 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # gpu
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
   # vulkan
   hardware.graphics.extraPackages = with pkgs; [
     vulkan-tools
