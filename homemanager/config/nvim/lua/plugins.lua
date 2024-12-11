@@ -524,6 +524,7 @@ return require("lazy").setup({
     ---@type render.md.UserConfig
     opts = {},
   },
+  { "Exafunction/codeium.vim" }
 }, {
   rocks = {
     hererocks = false, -- recommended if you do not have global installation of Lua 5.1.
