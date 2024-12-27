@@ -106,6 +106,12 @@ in {
     package = pkgs.vscode.fhs;
   };
 
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   # use config folder
   home.file.".config" = {
     source = ./config;
