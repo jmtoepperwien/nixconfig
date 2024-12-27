@@ -512,7 +512,7 @@ return require("lazy").setup({
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = { doc_lines = 30 },
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
   {
