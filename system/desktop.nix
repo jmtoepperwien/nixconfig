@@ -50,7 +50,7 @@
     isNormalUser = true;
     home = "/home/mtoepperwien";
     group = "mtoepperwien";
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" "audio" "render" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" "audio" "render" "libvirtd" "adbusers" ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
@@ -89,4 +89,7 @@
 
   # cross compilation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # Android ADB
+  programs.adb.enable = true;
 }
