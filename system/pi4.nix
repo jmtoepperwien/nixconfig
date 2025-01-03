@@ -76,7 +76,7 @@
   age.secrets.wifipassword.file = ../secrets/wifipassword.age;
   networking.wireless = {
     secretsFile = config.age.secrets.wifipassword.path;
-    enable = true;
+    enable = false;
     userControlled.enable = true;
     networks."Mosi".psk = "ext:mosipassword";
   };
