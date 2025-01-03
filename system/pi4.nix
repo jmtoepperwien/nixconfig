@@ -78,7 +78,7 @@
     secretsFile = config.age.secrets.wifipassword.path;
     enable = true;
     userControlled.enable = true;
-    networks."Mosi".pskRaw = "ext:mosipassword";
+    networks."Mosi".psk = "ext:mosipassword";
   };
 
   users.users.pi4 = {
