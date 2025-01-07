@@ -524,7 +524,29 @@ return require("lazy").setup({
     ---@type render.md.UserConfig
     opts = {},
   },
-  { "Exafunction/codeium.vim" }
+  { "Exafunction/codeium.vim" },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua",              -- optional
+      "echasnovski/mini.pick",         -- optional
+    },
+    config = true
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  },
 }, {
   rocks = {
     hererocks = false, -- recommended if you do not have global installation of Lua 5.1.

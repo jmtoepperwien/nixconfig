@@ -14,6 +14,7 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>fp", project.project, {})
+vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", {})
 
 -- Obsidian bindings
 vim.keymap.set("n", "<leader>n", ":ObsidianToday<CR>", {})
