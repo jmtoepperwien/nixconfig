@@ -34,7 +34,7 @@
     btrfs-progs
     wget
     curl
-    glances
+    btop
     hdparm
     mediainfo
     ffmpeg
