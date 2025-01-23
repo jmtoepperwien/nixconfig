@@ -39,6 +39,7 @@ in {
     steam-run
     feh
     obsidian
+    sqlite
     # neovim and plugin dependencies {{{
     neovim-remote
     luajitPackages.jsregexp # dependency of luasnip neovim plugin
