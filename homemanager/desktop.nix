@@ -93,6 +93,7 @@ in {
     pdftk
     pandoc
     xournalpp
+    timewarrior
     taskwarrior3
     taskwarrior-tui
   ] ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [ neovim-qt neovide ]);
