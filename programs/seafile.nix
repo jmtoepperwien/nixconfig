@@ -22,9 +22,8 @@
     };
   };
 
-  services.nginx.virtualHosts.'mosiseafile.duckdns.org' = {
+  services.nginx.virtualHosts."mosiseafile.duckdns.org" = {
     forceSSL = true;
-    enableACME = true;
     useACMEHost = "mosihome.duckdns.org";
     locations = {
       "/" = {

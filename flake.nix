@@ -64,7 +64,6 @@
           ./ssh.nix
           ./common.nix
           ./programs/nginx.nix
-          ./programs/mariadb.nix
           ./programs/postgresql.nix
           ./programs/gitea.nix
           ./programs/kodi_nfs.nix
