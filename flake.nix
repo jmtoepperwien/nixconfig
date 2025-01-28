@@ -69,7 +69,7 @@
           ./programs/gitea.nix
           ./programs/kodi_nfs.nix
           ./programs/usenet.nix
-          ./programs/nextcloud.nix
+          ./programs/seafile.nix
           ./network/proton_wireguard.nix
           ./programs/torrent.nix
           ./programs/irssi.nix

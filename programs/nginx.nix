@@ -4,7 +4,7 @@
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "m.toepperwien@protonmail.com";
   security.acme.defaults.webroot = "/var/www/mosihome";
-  security.acme.certs."mosihome.duckdns.org".extraDomainNames = [ "mosigit.duckdns.org" "mosinextcloud.duckdns.org" ];
+  security.acme.certs."mosihome.duckdns.org".extraDomainNames = [ "mosigit.duckdns.org" "mosinextcloud.duckdns.org", "mosiseafile.duckdns.org" ];
   users.users.nginx.extraGroups = [ "rtorrent" ];
   services.nginx = {
     enable = true;
