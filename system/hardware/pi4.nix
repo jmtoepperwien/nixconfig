@@ -18,11 +18,6 @@
       fsType = "ext4";
     };
 
-  swapDevices = [ {
-    device = "/swap";
-    size = 8*1024;
-  } ];
-
 
   systemd.tmpfiles.rules = [ "d /mnt/lib0 0775 pi4 usenet" "d /mnt/lib1 0775 pi4 usenet" "d /mnt/kodi_lib 0775 pi4 usenet" ];
   fileSystems."/mnt/lib0" =
