@@ -6,7 +6,7 @@ let
   maltepchost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2uFpFcaacIH9yLyyABE0u2K1zuV/fph7RDA76zZ0wJ";
   maltexpshost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ92znHGW5UwpOfOJD/fejUKrsQLpSwSh4dt1xtIrLLs";
   pi3host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTx5o298UgZ3gIBzFWwE+eOW3ACy0gXtdx71fcLdNvS";
-  pi4host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICGDf5ouwaiRlKetP7zb1OxmeronwE2/8S+YwS7tY0g6";
+  pi4host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjw17ehQfBSpD6F1AQev8GOCzksHTuT/hdtCeQgBtfL";
   systems = [ maltepchost pi3host pi4host ];
 in {
   "wifipassword.age".publicKeys = [ maltepc maltepchost maltexps maltexpshost pi3host pi4host ];
