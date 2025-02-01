@@ -524,7 +524,6 @@ return require("lazy").setup({
     ---@type render.md.UserConfig
     opts = {},
   },
-  { "Exafunction/codeium.vim" },
   {
     "NeogitOrg/neogit",
     dependencies = {
