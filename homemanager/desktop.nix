@@ -96,6 +96,7 @@ in {
     timewarrior
     taskwarrior3
     taskwarrior-tui
+    pdfpc
   ] ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [ neovim-qt neovide ]);
 
   home.sessionVariables = {
