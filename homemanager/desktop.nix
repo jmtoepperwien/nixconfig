@@ -71,6 +71,7 @@ in {
     waybar
     font-awesome # needed for waybar icons
     ungoogled-chromium
+    firefox
     (python3.withPackages python-packages)
     (lua5_1.withPackages lua-packages)
     # poetry ignore for now due to dependency missing
