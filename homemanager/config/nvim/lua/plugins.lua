@@ -546,6 +546,13 @@ return require("lazy").setup({
       -- refer to the configuration section below
     }
   },
+  {
+    -- This is a fork of the original pretty-fold.nvim. No indication if this will be further supported.
+    "bbjornstad/pretty-fold.nvim",
+    config = function()
+      require("pretty-fold").setup()
+    end,
+  },
 }, {
   rocks = {
     hererocks = false, -- recommended if you do not have global installation of Lua 5.1.
