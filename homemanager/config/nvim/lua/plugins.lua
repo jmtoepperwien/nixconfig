@@ -547,11 +547,15 @@ return require("lazy").setup({
     }
   },
   {
-    -- This is a fork of the original pretty-fold.nvim. No indication if this will be further supported.
-    "bbjornstad/pretty-fold.nvim",
+    "kevinhwang91/nvim-ufo",
+    dependencies = { { 'kevinhwang91/promise-async' } },
     config = function()
-      require("pretty-fold").setup()
-    end,
+      require('ufo').setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return { 'treesitter', 'indent' }
+        end
+      })
+    end
   },
 }, {
   rocks = {
