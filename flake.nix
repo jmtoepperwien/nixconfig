@@ -79,6 +79,28 @@
           nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
+      server = nixpkgs-stable.lib.nixosSystem  {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; inherit nixpkgs-stable; };
+        modules = [
+          ./ssh.nix
+          ./common.nix
+          ./programs/nginx.nix
+          ./programs/postgresql.nix
+          ./programs/gitea.nix
+          ./programs/kodi_nfs.nix
+          ./programs/usenet.nix
+          ./network/proton_wireguard.nix
+          ./programs/torrent.nix
+          ./programs/irssi.nix
+          ./programs/irc.nix
+          ./programs/immich.nix
+          ./programs/navidrome.nix
+
+          agenix.nixosModules.default
+        ];
+      };
+
     };
   };
 }
