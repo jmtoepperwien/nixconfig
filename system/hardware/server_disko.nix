@@ -106,7 +106,7 @@
           xattr = "sa";
           atime = "off";
           compression = "lz4";
-        }
+        };
         options.ashift = 12;
 
         mode = {

@@ -5,9 +5,10 @@
     home-manager = { url = "github:nix-community/home-manager/release-24.11"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     agenix = { url = "github:ryantm/agenix"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
+    disko = { url = "github:nix-community/disko"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, ... }@inputs: rec {
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, disko, ... }@inputs: rec {
     nixosConfigurations = {
       maltepc = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
@@ -83,6 +84,9 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; inherit nixpkgs-stable; };
         modules = [
+          disko.nixosModules.disko
+          ./system/server.nix
+          ./system/hardware/server.nix
           ./ssh.nix
           ./common.nix
           ./programs/nginx.nix
