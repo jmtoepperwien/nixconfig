@@ -88,18 +88,18 @@
           ./system/server.nix
           ./system/hardware/server.nix
           ./ssh.nix
-          ./common.nix
-          ./programs/nginx.nix
-          ./programs/postgresql.nix
-          ./programs/gitea.nix
-          ./programs/kodi_nfs.nix
-          ./programs/usenet.nix
-          ./network/proton_wireguard.nix
-          ./programs/torrent.nix
-          ./programs/irssi.nix
-          ./programs/irc.nix
-          ./programs/immich.nix
-          ./programs/navidrome.nix
+          #./common.nix
+          #./programs/nginx.nix
+          #./programs/postgresql.nix
+          #./programs/gitea.nix
+          #./programs/kodi_nfs.nix
+          #./programs/usenet.nix
+          #./network/proton_wireguard.nix
+          #./programs/torrent.nix
+          #./programs/irssi.nix
+          #./programs/irc.nix
+          #./programs/immich.nix
+          #./programs/navidrome.nix
 
           agenix.nixosModules.default
         ];
