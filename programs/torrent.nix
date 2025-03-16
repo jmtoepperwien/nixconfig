@@ -152,7 +152,7 @@ in {
       pieces.preload.type.set = 2
       network.xmlrpc.size_limit.set = 2M
 
-      log.open_file = "debug_log", (cat,/var/log/rtorrent/debug_log.txt.,(system.time).,(system.pid))
+      log.open_file = "debug_log", (cat,/var/log/rtorrent/debug_log.txt.,(system.time),.,(system.pid))
       log.add_output = "error", "debug_log"
       #log.add_output = "info", "debug_log"
       #log.add_output = "debug", "debug_log"
