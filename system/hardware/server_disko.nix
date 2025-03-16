@@ -132,26 +132,26 @@
         datasets = {
           "media" = {
             type = "zfs_fs";
-            mountpoint = "/mnt/media";
+            #mountpoint = "/mnt/media";
             options = {
               canmount = "on";
-              mountpoint = "legacy";
+              mountpoint = "/mnt/media";
             };
           };
           "git" = {
             type = "zfs_fs";
-            mountpoint = "/mnt/git";
+            #mountpoint = "/mnt/git";
             options = {
               canmount = "on";
-              mountpoint = "legacy";
+              mountpoint = "/mnt/git";
             };
           };
           "cloud" = {
             type = "zfs_fs";
-            mountpoint = "/mnt/cloud";
+            #mountpoint = "/mnt/cloud";
             options = {
               canmount = "on";
-              mountpoint = "legacy";
+              mountpoint = "/mnt/cloud";
             };
           };
         };

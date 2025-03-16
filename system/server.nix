@@ -12,6 +12,7 @@
       forceImportRoot = true;
       forceImportAll = true;
       devNodes = "/dev/disk/by-path";
+      extraPools = [ "zstorage" ];
     };
     kernel.sysctl = {
       # networking tweaks (bigger buffers)
@@ -74,6 +75,7 @@
     ];
     initialHashedPassword = "$y$j9T$lHlU2dP/P0DpciBq98Vq1/$zvzvVNzmzjrgWepOP7f2OC0keKPtxfGr/bzpL1UONh2";
   };
+  users.users.root.initialHashedPassword = "$y$j9T$lHlU2dP/P0DpciBq98Vq1/$zvzvVNzmzjrgWepOP7f2OC0keKPtxfGr/bzpL1UONh2";
 
   services.fwupd.enable = true;
   hardware.enableRedistributableFirmware = true;
