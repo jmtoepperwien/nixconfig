@@ -227,6 +227,14 @@ in {
     };
   };
 
+  services.rutorrent = {
+    enable = true;
+    user = "rtorrent";
+    group = "rtorrent";
+    hostName = "0.0.0.0";
+    nginx.enable = true;
+  };
+
   systemd.services.flood = {
     enable = true;
     description = "Flood frontend for rtorrent";
