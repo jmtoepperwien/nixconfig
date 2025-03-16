@@ -85,6 +85,7 @@ in {
     "d /var/lib/cross-seed 0755 rtorrent rtorrent"
     "d /var/lib/cross-seed/watch 0775 rtorrent rtorrent"
     "d /var/lib/rtorrent/at2-queue 0775 rtorrent rtorrent"
+    "d /var/log/rtorrent 0770 rtorrent root"
   ];
   services.rtorrent = {
     enable = true;
@@ -152,11 +153,11 @@ in {
       pieces.preload.type.set = 2
       network.xmlrpc.size_limit.set = 2M
 
-      log.open_file = "debug_log", (cat,/var/lib/rtorrent/debug_log.txt.,(system.pid))
+      log.open_file = "debug_log", (cat,/var/log/rtorrent/debug_log.txt.,(system.time).,(system.pid))
       log.add_output = "error", "debug_log"
-      log.add_output = "info", "debug_log"
-      log.add_output = "debug", "debug_log"
-      log.add_output = "tracker_debug", "debug_log"
+      #log.add_output = "info", "debug_log"
+      #log.add_output = "debug", "debug_log"
+      #log.add_output = "tracker_debug", "debug_log"
     '';
   };
 
