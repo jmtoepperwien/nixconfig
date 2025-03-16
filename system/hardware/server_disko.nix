@@ -23,48 +23,11 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
-            root = {
+            zfs = {
               size = "100%";
               content = {
-                type = "btrfs";
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  "/rootfs" = {
-                    mountpoint = "/";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/var/lib" = {
-                    mountpoint = "/var/lib";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/var/log" = {
-                    mountpoint = "/var/log";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/var/cache" = {
-                    mountpoint = "/var/cache";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/home" = {
-                    mountpoint = "/home";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                };
+                type = "zfs";
+                pool = "zroot";
               };
             };
           };
@@ -104,16 +67,100 @@
       };
     };
     zpool = {
+      zroot = {
+        type = "zpool";
+        rootFsOptions = {
+          acltype = "posixacl";
+          xattr = "sa";
+          atime = "off";
+          compression = "lz4";
+        };
+        options.ashift = "12";
+        mode = {
+          topology = {
+            type = "topology";
+            vdev = [
+              {
+                members = [
+                  "main"
+                ];
+              }
+            ];
+          };
+        };
+        datasets = {
+          "root" = {
+            type = "zfs_fs";
+            mountpoint = "/";
+            options = {
+              canmount = "on";
+              mountpoint = "legacy";
+            };
+          };
+          "nix" = {
+            type = "zfs_fs";
+            mountpoint = "/nix";
+            options = {
+              canmount = "on";
+              mountpoint = "legacy";
+            };
+          };
+          "swap" = {
+            type = "zfs_volume";
+            size = "1GiB";
+            content = {
+              type = "swap";
+            };
+            options = {
+              compression = "zle";
+              logbias = "throughput";
+              sync = "always";
+              primarycache = "metadata";
+              secondarycache = "none";
+              "com.sun:auto-snapshot" = "false";
+            };
+          };
+          "home" = {
+            type = "zfs_fs";
+            mountpoint = "/home";
+            options.mountpoint = "legacy";
+          };
+          "var/lib" = {
+            type = "zfs_fs";
+            mountpoint = "/var/lib";
+            options.mountpoint = "legacy";
+          };
+          "var/log" = {
+            type = "zfs_fs";
+            mountpoint = "/var/log";
+            options.mountpoint = "legacy";
+          };
+          "var/cache" = {
+            type = "zfs_fs";
+            mountpoint = "/var/cache";
+            options.mountpoint = "legacy";
+          };
+          "tmp" = {
+            type = "zfs_fs";
+            mountpoint = "/tmp";
+            options.mountpoint = "legacy";
+          };
+          "snapshots" = {
+            type = "zfs_fs";
+            mountpoint = "/snapshots";
+            options.mountpoint = "legacy";
+          };
+        };
+      };
       zstorage = {
         type = "zpool";
-        #rootFsOptions = {
-        #  acltype = "posixacl";
-        #  xattr = "sa";
-        #  atime = "off";
-        #  compression = "lz4";
-        #};
+        rootFsOptions = {
+          acltype = "posixacl";
+          xattr = "sa";
+          atime = "off";
+          compression = "lz4";
+        };
         options.ashift = "12";
-        options.cachefile = "none";
         mode = {
           topology = {
             type = "topology";
@@ -132,26 +179,26 @@
         datasets = {
           "media" = {
             type = "zfs_fs";
-            #mountpoint = "/mnt/media";
+            mountpoint = "/mnt/media";
             options = {
               canmount = "on";
-              mountpoint = "/mnt/media";
+              mountpoint = "legacy";
             };
           };
           "git" = {
             type = "zfs_fs";
-            #mountpoint = "/mnt/git";
+            mountpoint = "/mnt/git";
             options = {
               canmount = "on";
-              mountpoint = "/mnt/git";
+              mountpoint = "legacy";
             };
           };
           "cloud" = {
             type = "zfs_fs";
-            #mountpoint = "/mnt/cloud";
+            mountpoint = "/mnt/cloud";
             options = {
               canmount = "on";
-              mountpoint = "/mnt/cloud";
+              mountpoint = "legacy";
             };
           };
         };
@@ -160,8 +207,9 @@
   };
   systemd.tmpfiles.rules = [
     "d /mnt 0755 root root"
-    "d /mnt/media 0755 root"
-    "d /mnt/git 0755 root"
-    "d /mnt/cloud 0755 root"
+    "d /mnt/media 0770 rtorrent usenet"
+    "d /mnt/git 0750 gitea gitea"
+    "d /mnt/cloud 0750 root root"
+    "d /snapshots 0770 root root"
   ];
 }

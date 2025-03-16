@@ -9,10 +9,9 @@
     initrd.supportedFilesystems = [ "zfs" ];
     supportedFilesystems = [ "zfs" ];
     zfs = {
-      forceImportRoot = true;
-      forceImportAll = true;
+      forceImportRoot = false;
+      forceImportAll = false;
       devNodes = "/dev/disk/by-path";
-      extraPools = [ "zstorage" ];
     };
     kernel.sysctl = {
       # networking tweaks (bigger buffers)
@@ -51,8 +50,6 @@
     pkgs.pulsemixer
     pkgs.alsa-utils
     pkgs.mediainfo
-    pkgs.mergerfs
-    pkgs.mergerfs-tools
     pkgs.fuse
   ];
 
