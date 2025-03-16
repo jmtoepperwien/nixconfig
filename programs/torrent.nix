@@ -80,6 +80,11 @@ in {
   systemd.tmpfiles.rules = [
     "d ${media_folder}/downloads 0770 rtorrent usenet"
     "d ${media_folder}/downloads/torrent 0770 rtorrent usenet"
+    "d /var/lib/autobrr 0755 rtorrent rtorrent"
+    "d /var/lib/autobrr/watch 0775 rtorrent rtorrent"
+    "d /var/lib/cross-seed 0755 rtorrent rtorrent"
+    "d /var/lib/cross-seed/watch 0775 rtorrent rtorrent"
+    "d /var/lib/rtorrent/at2-queue 0775 rtorrent rtorrent"
   ];
   services.rtorrent = {
     enable = true;
@@ -263,7 +268,6 @@ in {
   };
 
 
-  systemd.tmpfiles.rules = [ "d /var/lib/autobrr 0755 rtorrent rtorrent" "d /var/lib/autobrr/watch 0775 rtorrent rtorrent" "d /var/lib/cross-seed 0755 rtorrent rtorrent" "d /var/lib/cross-seed/watch 0775 rtorrent rtorrent" "d /var/lib/rtorrent/at2-queue 0775 rtorrent rtorrent" ];
   age.secrets."autobrrConfig" = {
     file = ../secrets/autobrrConfig.age;
     owner = "rtorrent";
