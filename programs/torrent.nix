@@ -152,8 +152,8 @@ in {
       pieces.preload.type.set = 2
       network.xmlrpc.size_limit.set = 2M
 
-      #log.open_file = "debug_log:, (cat,/var/lib/rtorrent/debug_log.txt.,(system.pid))
-      #log.add_output = "debug", "debug_log"
+      log.open_file = "debug_log:, (cat,/var/lib/rtorrent/debug_log.txt.,(system.pid))
+      log.add_output = "error", "debug_log"
       #log.add_output = "tracker_debug", "debug_log"
     '';
   };
@@ -228,8 +228,7 @@ in {
   };
 
   services.rutorrent = {
-    enable = true;
-    user = "rtorrent";
+    enable = false;
     group = "rtorrent";
     hostName = "0.0.0.0";
     nginx.enable = true;
