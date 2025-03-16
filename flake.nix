@@ -105,6 +105,7 @@
           #./programs/irssi.nix
           #./programs/irc.nix
           ./programs/navidrome.nix
+          ./programs/monitoring.nix
 
           agenix.nixosModules.default
         ];
