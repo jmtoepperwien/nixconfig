@@ -154,7 +154,9 @@ in {
 
       log.open_file = "debug_log", (cat,/var/lib/rtorrent/debug_log.txt.,(system.pid))
       log.add_output = "error", "debug_log"
-      #log.add_output = "tracker_debug", "debug_log"
+      log.add_output = "info", "debug_log"
+      log.add_output = "debug", "debug_log"
+      log.add_output = "tracker_debug", "debug_log"
     '';
   };
 
