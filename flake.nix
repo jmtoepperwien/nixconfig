@@ -10,6 +10,12 @@
 
   outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, disko, ... }@inputs: rec {
     nixosConfigurations = {
+      installerIso = nixpkgs-stable.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./system/installerIso.nix
+        ];
+      };
       maltepc = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; inherit nixpkgs-stable; };
