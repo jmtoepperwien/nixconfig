@@ -79,7 +79,6 @@
           ./programs/torrent.nix
           ./programs/irssi.nix
           ./programs/irc.nix
-          ./programs/immich.nix
           ./programs/navidrome.nix
 
           agenix.nixosModules.default
@@ -104,7 +103,6 @@
           ./programs/torrent.nix
           #./programs/irssi.nix
           #./programs/irc.nix
-          #./programs/immich.nix
           ./programs/navidrome.nix
 
           agenix.nixosModules.default
