@@ -6,9 +6,10 @@
     agenix = { url = "github:ryantm/agenix"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
     disko = { url = "github:nix-community/disko"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
+    deploy-rs = { url = "github:serokell/deploy-rs"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, disko, ... }@inputs: rec {
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, disko, deploy-rs, ... }@inputs: rec {
     nixosConfigurations = {
       installerIso = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
@@ -109,6 +110,15 @@
         ];
       };
 
+    };
+    deploy.nodes.server = {
+      hostname = "192.168.122.154";
+      profiles.system = {
+        sshUser = "mtoepperwien";
+        interactiveSudo = true;
+        user = "root";
+        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server;
+      };
     };
   };
 }
