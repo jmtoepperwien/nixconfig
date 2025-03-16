@@ -1,5 +1,6 @@
 { config, lib, pkgs, inputs, agenix, ... }:
 let
+  media_folder = "/mnt/media";
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
   cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
@@ -42,7 +43,7 @@ let
     
     # argument 3: torrent save path.
     if [[ -z "$3" ]]; then
-      path="/mnt/kodi_lib" # default, change as needed.
+      path=${media_folder} # default, change as needed.
     else
       path=$3
     fi
@@ -76,13 +77,17 @@ in {
 
   environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.recyclarr cross-seedPackage pkgs.unrar autotorrent2Package prunerrPackage ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent 
 
+  systemd.tmpfiles.rules = [
+    "d ${media_folder}/downloads 0770 rtorrent usenet"
+    "d ${media_folder}/downloads/torrent 0770 rtorrent usenet"
+  ];
   services.rtorrent = {
     enable = true;
     package = pkgs.jesec-rtorrent;
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
-    downloadDir = "/mnt/kodi_lib/downloads_torrent";
+    downloadDir = "${media_folder}/downloads/torrent";
     configText = ''
       dht.mode.set = auto
       protocol.pex.set = yes
