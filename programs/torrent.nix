@@ -340,4 +340,7 @@ in {
       Restart = "always";
     };
   };
+  services.jellyfin = {
+    enable = true;
+  };
 }

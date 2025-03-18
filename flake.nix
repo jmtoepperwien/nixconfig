@@ -5,9 +5,10 @@
     home-manager = { url = "github:nix-community/home-manager/release-24.11"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     agenix = { url = "github:ryantm/agenix"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
+    deploy-rs = { url = "github:serokell/deploy-rs"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, ... }@inputs: rec {
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, agenix, home-manager, nixos-hardware, deploy-rs, ... }@inputs: rec {
     nixosConfigurations = {
       maltepc = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
@@ -79,6 +80,16 @@
           nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
+    };
+    deploy.nodes.pi4 = {
+      hostname = "pi4";
+      profiles.system = {
+        sshUser = "pi4";
+        user = "root";
+        interactiveSudo = true;
+        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.pi4;
+      };
+      #checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
   };
 }
