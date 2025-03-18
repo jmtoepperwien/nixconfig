@@ -63,6 +63,7 @@
     imagemagick
     openseachest
     distrobox
+    deploy-rs
   ];
 
   programs.nix-ld.enable = true;
