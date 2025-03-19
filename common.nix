@@ -1,6 +1,7 @@
 { config, lib, modulesPath, pkgs, inputs, agenix, ... }:
 
 {
+  nix.registry = { nixpkgs.flake = inputs.nixpkgs-stable; unstable.flake = inputs.nixpkgs-unstable; }; 
   nixpkgs.config.allowUnfree = true;
   nix = {
     settings.auto-optimise-store = true;
