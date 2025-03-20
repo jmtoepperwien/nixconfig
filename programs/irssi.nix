@@ -15,7 +15,7 @@
   #    } );
   #})];
   systemd.services."weechat" = {
-    enable = true;
+    enable = false;
     description = "weechat irc client inside tmux";
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
