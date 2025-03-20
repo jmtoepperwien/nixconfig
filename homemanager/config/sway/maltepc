@@ -24,3 +24,5 @@ workspace 6 output $monitor_two
 workspace 8 output $monitor_two
 workspace 10 output $monitor_two
 
+# Floating windows
+for_window [class="awakened-poe-trade"] floating enable
