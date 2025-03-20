@@ -267,6 +267,7 @@ in {
   };
 
   systemd.services.unpackerr = {
+    enable = false;
     after = [ "rtorrent.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
