@@ -74,7 +74,7 @@ in {
     extraGroups= [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.recyclarr cross-seedPackage pkgs.unrar autotorrent2Package prunerrPackage ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent 
+  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.recyclarr cross-seedPackage pkgs.unrar autotorrent2Package prunerrPackage pkgs.jellyfin pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent 
 
   services.rtorrent = {
     enable = true;
