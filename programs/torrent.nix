@@ -7,9 +7,6 @@
   ...
 }:
 let
-  rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix {
-    libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix { };
-  };
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix { };
   cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
     echo "searching for" >> /var/lib/rtorrent/scriptlog.txt
@@ -231,7 +228,6 @@ in
   systemd.services.rtorrent =
     let
       configFile = pkgs.writeText "rtorrent.rc" config.services.rtorrent.configText;
-      rtorrentPackage = config.services.rtorrent.package;
     in
     {
       bindsTo = [ "netns-vpn.service" ];
@@ -253,9 +249,8 @@ in
         NetworkNamespacePath = "/var/run/netns/vpn";
         ExecStart = lib.mkForce (
           pkgs.writers.writeBash "start-rtorrent" ''
-                    echo "${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
-            "
-                    ${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC
+            echo "${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC"
+            ${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC
           ''
         );
       };
