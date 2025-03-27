@@ -21,6 +21,7 @@ let
       plotly
       scikit-learn
       scipy
+      kaleido
       # For molten.nvim
       jupyter-client
       cairosvg
@@ -33,11 +34,6 @@ let
       websocket-client
       # for markdown rendering in nvim
       pylatexenc
-    ]
-    ++ [
-      pkgs.callPackage
-      ../programs/kaleido.nix
-      { }
     ];
   neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix { };
   wallpaper = ./config/hypr/wallpaper/gruvbox-dark-blue.png;
