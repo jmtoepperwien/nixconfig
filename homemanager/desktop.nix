@@ -122,6 +122,12 @@ in {
     nix-direnv.enable = true;
   };
 
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
   # use config folder
   home.file.".config" = {
     source = ./config;
