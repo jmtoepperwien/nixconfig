@@ -7,7 +7,6 @@
   ...
 }:
 let
-  media_folder = "/mnt/media";
   rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix {
     libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix { };
   };
@@ -52,7 +51,7 @@ let
 
     # argument 3: torrent save path.
     if [[ -z "$3" ]]; then
-      path=${media_folder} # default, change as needed.
+      path=${config.server.media_folder} # default, change as needed.
     else
       path=$3
     fi
@@ -96,8 +95,8 @@ in
   ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent
 
   systemd.tmpfiles.rules = [
-    "d ${media_folder}/downloads 0770 rtorrent usenet"
-    "d ${media_folder}/downloads/torrent 0770 rtorrent usenet"
+    "d ${config.server.media_folder}/downloads 0770 rtorrent usenet"
+    "d ${config.server.media_folder}/downloads/torrent 0770 rtorrent usenet"
     "d /var/lib/autobrr 0755 rtorrent rtorrent"
     "d /var/lib/autobrr/watch 0775 rtorrent rtorrent"
     "d /var/lib/cross-seed 0755 rtorrent rtorrent"
@@ -110,7 +109,7 @@ in
     user = "rtorrent";
     group = "usenet";
     dataPermissions = "0775";
-    downloadDir = "${media_folder}/downloads/torrent";
+    downloadDir = "${config.server.media_folder}/downloads/torrent";
     configText = ''
       dht.mode.set = auto
       protocol.pex.set = yes
@@ -139,7 +138,7 @@ in
       ##     the string before the 1st comma is unique for all entries (watch_directory in example)
       ##     the number after the 1st comman is unique for all entries (1 in example)
 
-      #schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=/mnt/kodi_lib/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
+      #schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=${config.server.media_folder}/downloads_torrent/,d.delete_tied=,d.custom1.set=autobrr"
       ## set added time
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 

@@ -111,6 +111,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./system/server_variables.nix
             ./system/pi4.nix
             ./ssh.nix
             ./common.nix
@@ -136,6 +137,7 @@
           };
           modules = [
             disko.nixosModules.disko
+            ./system/server_variables.nix
             ./system/server.nix
             ./system/hardware/server.nix
             ./ssh.nix
