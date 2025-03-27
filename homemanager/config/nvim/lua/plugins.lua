@@ -291,7 +291,6 @@ return require("lazy").setup({
     end
   },
   { "GCBallesteros/vim-textobj-hydrogen", dependencies = { { 'kana/vim-textobj-user' } } },
-  { "untitled-ai/jupyter_ascending.vim" },
   -- }}} Jupyter Notebooks in Neovim
 
   {
