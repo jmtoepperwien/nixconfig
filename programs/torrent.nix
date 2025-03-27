@@ -77,7 +77,7 @@ in
   users.users."rtorrent" = {
     isSystemUser = lib.mkForce false;
     isNormalUser = lib.mkForce true;
-    group = "usenet";
+    group = "media";
     extraGroups = [ "rtorrent" ];
   };
 
@@ -92,8 +92,8 @@ in
   ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent
 
   systemd.tmpfiles.rules = [
-    "d ${config.server.media_folder}/downloads 0770 rtorrent usenet"
-    "d ${config.server.media_folder}/downloads/torrent 0770 rtorrent usenet"
+    "d ${config.server.media_folder}/downloads 0770 rtorrent media"
+    "d ${config.server.media_folder}/downloads/torrent 0770 rtorrent media"
     "d /var/lib/autobrr 0755 rtorrent rtorrent"
     "d /var/lib/autobrr/watch 0775 rtorrent rtorrent"
     "d /var/lib/cross-seed 0755 rtorrent rtorrent"
@@ -104,7 +104,7 @@ in
   services.rtorrent = {
     enable = true;
     user = "rtorrent";
-    group = "usenet";
+    group = "media";
     dataPermissions = "0775";
     downloadDir = "${config.server.media_folder}/downloads/torrent";
     configText = ''
@@ -288,7 +288,7 @@ in
     group = "unpackerr";
     extraGroups = [
       "rtorrent"
-      "usenet"
+      "media"
     ];
   };
 
@@ -304,7 +304,7 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "unpackerr";
-      Group = "usenet";
+      Group = "media";
       ExecStart = "${pkgs.unpackerr}/bin/unpackerr --config=${config.age.secrets.unpackerrConfig.path}";
       Type = "simple";
     };
@@ -331,7 +331,7 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "rtorrent";
-      Group = "usenet";
+      Group = "media";
       WorkingDirectory = "/var/lib/autobrr";
       ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/rm -f /var/lib/autobrr/freespace.sh; ${pkgs.coreutils}/bin/cp ${autobrrFreeSpace}/bin/autobrr-free-space /var/lib/autobrr/freespace.sh'";
       ExecStart = "${autobrrPackage}/bin/autobrr --config=/var/lib/autobrr";
