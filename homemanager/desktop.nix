@@ -10,9 +10,7 @@ let
       luarocks
     ];
   python-packages =
-    p:
-    with p;
-    [
+    p: with p; [
       pandas
       numpy
       pynvim
