@@ -61,6 +61,7 @@ in {
     clang-tools
     pyright
     nixd
+    nixfmt
     cairo
     # }}} neovim and plugin dependencies
     lazygit
