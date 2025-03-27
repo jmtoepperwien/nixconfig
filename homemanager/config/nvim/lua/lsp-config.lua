@@ -62,3 +62,6 @@ require('lspconfig').hls.setup { capabilities = capabilities, on_attach = on_att
 
 -- C/C++
 require('lspconfig').clangd.setup { capabilities = capabilities, on_attach = on_attach, }
+
+-- Nix
+require('lspconfig').nixd.setup { capabilities = capabilities, on_attach = on_attach, }

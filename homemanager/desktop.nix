@@ -60,6 +60,7 @@ in {
     lua-language-server
     clang-tools
     pyright
+    nixd
     cairo
     # }}} neovim and plugin dependencies
     lazygit
