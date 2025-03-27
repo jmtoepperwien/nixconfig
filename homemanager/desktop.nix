@@ -82,7 +82,7 @@ in
       clang-tools
       pyright
       nixd
-      nixfmt
+      nixfmt-rfc-style
       cairo
       # }}} neovim and plugin dependencies
       lazygit
