@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, agenix, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  agenix,
+  ...
+}:
 
 {
   age.secrets."zncconfig" = {

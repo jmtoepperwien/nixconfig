@@ -8,7 +8,7 @@
   disko.devices = {
     disk = {
       main = {
-        device = "/dev/vda";  # not important after setting up
+        device = "/dev/vda"; # not important after setting up
         type = "disk";
         content = {
           type = "gpt";
@@ -34,7 +34,7 @@
         };
       };
       storage_0 = {
-        device = "/dev/vdb";  # not important after setting up
+        device = "/dev/vdb"; # not important after setting up
         type = "disk";
         content = {
           type = "gpt";
@@ -50,7 +50,7 @@
         };
       };
       storage_1 = {
-        device = "/dev/vdc";  # not important after setting up
+        device = "/dev/vdc"; # not important after setting up
         type = "disk";
         content = {
           type = "gpt";

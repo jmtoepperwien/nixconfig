@@ -1,8 +1,17 @@
-{ config, lib, pkgs, inputs, agenix, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  agenix,
+  ...
+}:
 let
   media_folder = "/mnt/media";
-  rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix { libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix {}; };
-  cross-seedPackage = pkgs.callPackage ./cross-seed.nix {};
+  rtorrentPackage = pkgs.callPackage ./rtorrent/default.nix {
+    libtorrent = pkgs.callPackage ./rtorrent/libtorrent.nix { };
+  };
+  cross-seedPackage = pkgs.callPackage ./cross-seed.nix { };
   cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
     echo "searching for" >> /var/lib/rtorrent/scriptlog.txt
     echo $1 >> /var/lib/rtorrent/scriptlog.txt
@@ -10,13 +19,13 @@ let
     echo "searched for" >> /var/lib/rtorrent/scriptlog.txt
     echo $1 >> /var/lib/rtorrent/scriptlog.txt
   '';
-  autotorrent2Package = pkgs.callPackage ./autotorrent2.nix {};
-  prunerrPackage = pkgs.callPackage ./prunerr.nix {};
-  autobrrPackage = pkgs.callPackage ./autobrr.nix {};
+  autotorrent2Package = pkgs.callPackage ./autotorrent2.nix { };
+  prunerrPackage = pkgs.callPackage ./prunerr.nix { };
+  autobrrPackage = pkgs.callPackage ./autobrr.nix { };
   autobrrFreeSpace = pkgs.writeShellScriptBin "autobrr-free-space" ''
     #!/bin/sh
     set -e
-    
+
     # argument 1: torrent payload size; bytes.
     if ! [[ "$1" =~ ^[0-9]*$ ]]; then
       exit 5 # invalid 'size' argument.
@@ -30,7 +39,7 @@ let
     else
       size=0 # ignore torrent size.
     fi
-    
+
     # argument 2: space to keep free; GiB, integer.
     if ! [[ "$2" =~ ^[0-9]*$ ]]; then
       exit 4 # invalid 'keep' argument.
@@ -40,7 +49,7 @@ let
     else
       keep=100 # default, change as needed.
     fi
-    
+
     # argument 3: torrent save path.
     if [[ -z "$3" ]]; then
       path=${media_folder} # default, change as needed.
@@ -50,13 +59,13 @@ let
     if ! [[ -d "$path" ]]; then
       exit 3 # invalid 'path' argument.
     fi
-    
+
     # get free space available.
     have=$((`${pkgs.busybox}/bin/df "$path" | ${pkgs.busybox}/bin/awk 'END{print $4}'`))
-    
+
     # get minimum free space required.
     need=$((($keep*1024*1024)+$size))
-    
+
     # check if the needed free space is available.
     if [[ $have -eq 0 ]]; then
       exit 2 # no free space.
@@ -66,16 +75,25 @@ let
       exit 0 # free space available.
     fi
   '';
-in {
-  users.groups."rtorrent" = {};
+in
+{
+  users.groups."rtorrent" = { };
   users.users."rtorrent" = {
     isSystemUser = lib.mkForce false;
     isNormalUser = lib.mkForce true;
     group = "usenet";
-    extraGroups= [ "rtorrent" ];
+    extraGroups = [ "rtorrent" ];
   };
 
-  environment.systemPackages = [ inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood pkgs.unpackerr inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.recyclarr cross-seedPackage pkgs.unrar autotorrent2Package prunerrPackage ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent 
+  environment.systemPackages = [
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood
+    pkgs.unpackerr
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.recyclarr
+    cross-seedPackage
+    pkgs.unrar
+    autotorrent2Package
+    prunerrPackage
+  ]; # broken dependencies: pkgs.torrenttools pkgs.mktorrent
 
   systemd.tmpfiles.rules = [
     "d ${media_folder}/downloads 0770 rtorrent usenet"
@@ -178,11 +196,11 @@ in {
         eval "${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 | ${pkgs.busybox}/bin/grep 'Mapped public port' | ${pkgs.busybox}/bin/sed -E 's/.*Mapped public port ([0-9]+) .* to local port ([0-9]+) .*/TCPPORTPUBLIC=\1\nTCPPORTPRIVATE=\2/' >> /run/proton_incoming" && chown rtorrent:rtorrent /run/proton_incoming
       '';
       ExecStart = pkgs.writers.writeBash "keep-port-vpn" ''
-       echo "looping to keep"
-        while true ; do
-          ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 tcp 60
-          sleep 45
-        done
+        echo "looping to keep"
+         while true ; do
+           ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 udp 60 && ${pkgs.libnatpmp}/bin/natpmpc -g 10.2.0.1 -a 0 34828 tcp 60
+           sleep 45
+         done
       '';
       Type = "simple";
       Restart = "always";
@@ -211,24 +229,38 @@ in {
     };
   };
 
-  systemd.services.rtorrent = let
-    configFile = pkgs.writeText "rtorrent.rc" config.services.rtorrent.configText;
-    rtorrentPackage = config.services.rtorrent.package;
-  in {
-    bindsTo = [ "netns-vpn.service" ];
-    requires = [ "network-online.target" "protonvpn.service" "natpmp-proton.service" "natpmp-forward.service" ];
-    after = [ "protonvpn.service" "natpmp-proton.service" "natpmp-forward.service" "nss-lookup.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      EnvironmentFile = "/run/proton_incoming";
-      NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = lib.mkForce (pkgs.writers.writeBash "start-rtorrent" ''
-        echo "${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
-"
-        ${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC
-      '');
+  systemd.services.rtorrent =
+    let
+      configFile = pkgs.writeText "rtorrent.rc" config.services.rtorrent.configText;
+      rtorrentPackage = config.services.rtorrent.package;
+    in
+    {
+      bindsTo = [ "netns-vpn.service" ];
+      requires = [
+        "network-online.target"
+        "protonvpn.service"
+        "natpmp-proton.service"
+        "natpmp-forward.service"
+      ];
+      after = [
+        "protonvpn.service"
+        "natpmp-proton.service"
+        "natpmp-forward.service"
+        "nss-lookup.target"
+      ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        EnvironmentFile = "/run/proton_incoming";
+        NetworkNamespacePath = "/var/run/netns/vpn";
+        ExecStart = lib.mkForce (
+          pkgs.writers.writeBash "start-rtorrent" ''
+                    echo "${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
+            "
+                    ${rtorrentPackage}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC
+          ''
+        );
+      };
     };
-  };
 
   services.rutorrent = {
     enable = false;
@@ -251,13 +283,19 @@ in {
       Group = "rtorrent";
     };
   };
-  networking.firewall.allowedTCPPorts = [ 5678 5656 ];
+  networking.firewall.allowedTCPPorts = [
+    5678
+    5656
+  ];
 
-  users.groups."unpackerr" = {};
+  users.groups."unpackerr" = { };
   users.users."unpackerr" = {
     isSystemUser = true;
     group = "unpackerr";
-    extraGroups = [ "rtorrent" "usenet" ];
+    extraGroups = [
+      "rtorrent"
+      "usenet"
+    ];
   };
 
   age.secrets.unpackerrConfig = {
@@ -278,7 +316,6 @@ in {
     };
   };
 
-
   age.secrets."autobrrConfig" = {
     file = ../secrets/autobrrConfig.age;
     owner = "rtorrent";
@@ -287,8 +324,16 @@ in {
   };
 
   systemd.services.autobrr = {
-    after = [ "flood.service" "network.target" "rtorrent.service" ];
-    requires = [ "flood.service" "rtorrent.service" "autotorrent2.service" ];
+    after = [
+      "flood.service"
+      "network.target"
+      "rtorrent.service"
+    ];
+    requires = [
+      "flood.service"
+      "rtorrent.service"
+      "autotorrent2.service"
+    ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "rtorrent";
@@ -300,59 +345,68 @@ in {
     };
   };
 
-
-  systemd.services.cross-seed = let
-    trackers = "http://127.0.0.1:9696/17/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/26/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/8/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/21/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/19/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/18/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/23/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/27/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/30/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/31/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/32/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/33/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/34/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/35/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/36/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/38/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/39/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/40/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/41/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/42/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/43/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/44/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/46/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/47/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535";
-    search-cadence = "2w";
-    rss-cadence = "30min";
-    delay = "60";
-    snatch-timeout = "5min";
-    search-timeout = "5min";
-    torrent-dir = "/var/lib/rtorrent/session";
-    output-dir = "/var/lib/rtorrent/at2-queue";
-    fuzzy-thr = "0.1";
-  in {
-    after = [ "rtorrent.service" ];
-    requires = [ "rtorrent.service" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      User = "rtorrent";
-      Group = "rtorrent";
-      WorkingDirectory = "/var/lib/cross-seed";
-      NetworkNamespacePath = "/var/run/netns/vpn";
-      ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --include-non-videos --action save --match-mode risky --verbose --fuzzy-size-threshold ${fuzzy-thr}";
-      Restart = "always";
+  systemd.services.cross-seed =
+    let
+      trackers = "http://127.0.0.1:9696/17/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/26/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/8/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/21/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/19/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/18/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/23/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/27/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/30/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/31/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/32/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/33/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/34/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/35/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/36/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/38/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/39/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/40/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/41/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/42/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/43/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/44/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/46/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/47/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535";
+      search-cadence = "2w";
+      rss-cadence = "30min";
+      delay = "60";
+      snatch-timeout = "5min";
+      search-timeout = "5min";
+      torrent-dir = "/var/lib/rtorrent/session";
+      output-dir = "/var/lib/rtorrent/at2-queue";
+      fuzzy-thr = "0.1";
+    in
+    {
+      after = [ "rtorrent.service" ];
+      requires = [ "rtorrent.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        User = "rtorrent";
+        Group = "rtorrent";
+        WorkingDirectory = "/var/lib/cross-seed";
+        NetworkNamespacePath = "/var/run/netns/vpn";
+        ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --include-non-videos --action save --match-mode risky --verbose --fuzzy-size-threshold ${fuzzy-thr}";
+        Restart = "always";
+      };
     };
-  };
 
-#  systemd.timers.autotorrent2 = {
-#    wantedBy = [ "timers.target" ];
-#    timerConfig = {
-#      OnBootSec = "5m";
-#      OnUnitActiveSec = "5m";
-#      Unit = "autotorrent2.service";
-#    };
-#  };
+  #  systemd.timers.autotorrent2 = {
+  #    wantedBy = [ "timers.target" ];
+  #    timerConfig = {
+  #      OnBootSec = "5m";
+  #      OnUnitActiveSec = "5m";
+  #      Unit = "autotorrent2.service";
+  #    };
+  #  };
   systemd.services.autotorrent2 = {
-    requires = [ "rtorrent.service" "rtorrent.service" ];
-    after = [ "rtorrent.service" "rtorrent.service" ];
+    requires = [
+      "rtorrent.service"
+      "rtorrent.service"
+    ];
+    after = [
+      "rtorrent.service"
+      "rtorrent.service"
+    ];
     wantedBy = [ "multi-user.target" ];
-    script = let
-      at2AddScript = pkgs.writeShellScriptBin "at2-add-script" ''
-        #!/bin/sh
-        mkdir /var/lib/rtorrent/at2-queue/processed
-        ${pkgs.inotify-tools}/bin/inotifywait --monitor --event create,moved_to,modify /var/lib/rtorrent/at2-queue \
-        | while read changed; do
-          ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
-          ${autotorrent2Package}/bin/at2 scan
-          ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
-          for file in /var/lib/rtorrent/at2-queue/*.torrent; do
-            ${autotorrent2Package}/bin/at2 add rtorrent "$file"
-            mv "$file" /var/lib/rtorrent/at2-queue/processed
+    script =
+      let
+        at2AddScript = pkgs.writeShellScriptBin "at2-add-script" ''
+          #!/bin/sh
+          mkdir /var/lib/rtorrent/at2-queue/processed
+          ${pkgs.inotify-tools}/bin/inotifywait --monitor --event create,moved_to,modify /var/lib/rtorrent/at2-queue \
+          | while read changed; do
+            ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
+            ${autotorrent2Package}/bin/at2 scan
+            ${autotorrent2Package}/bin/at2 add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
+            for file in /var/lib/rtorrent/at2-queue/*.torrent; do
+              ${autotorrent2Package}/bin/at2 add rtorrent "$file"
+              mv "$file" /var/lib/rtorrent/at2-queue/processed
+            done
           done
-        done
-      '';
-    in "${at2AddScript}/bin/at2-add-script";
+        '';
+      in
+      "${at2AddScript}/bin/at2-add-script";
     serviceConfig = {
       User = "rtorrent";
       Group = "rtorrent";

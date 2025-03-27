@@ -1,4 +1,11 @@
-{ config, lib, modulesPath, pkgs, agenix, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  agenix,
+  ...
+}:
 
 {
   systemd.services."netns-vpn" = {

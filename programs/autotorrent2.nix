@@ -1,11 +1,12 @@
-{ lib
-, stdenv
-, fetchzip
-, python3Packages
-, fetchPypi
+{
+  lib,
+  stdenv,
+  fetchzip,
+  python3Packages,
+  fetchPypi,
 }:
 
-let 
+let
   pname = "autotorrent2";
   version = "1.3.0";
   src = fetchzip {
@@ -30,16 +31,30 @@ let
       version = "1.3.4";
       sha256 = "sha256-llp8QQlqadADEilV4mY+vJ5cyNuQgKSdbx1BsbefmSc=";
     };
-    propagatedBuildInputs = [ python3Packages.pytz python3Packages.deluge-client python3Packages.publicsuffixlist python3Packages.requests python3Packages.click python3Packages.tabulate python3Packages.appdirs ];
+    propagatedBuildInputs = [
+      python3Packages.pytz
+      python3Packages.deluge-client
+      python3Packages.publicsuffixlist
+      python3Packages.requests
+      python3Packages.click
+      python3Packages.tabulate
+      python3Packages.appdirs
+    ];
     doCheck = false; # was failing, just skip
   };
-in python3Packages.buildPythonPackage rec {
+in
+python3Packages.buildPythonPackage rec {
   inherit pname version;
   format = "pyproject";
   src = fetchPypi {
     inherit pname version;
     sha256 = "sha256-TTE/9iqDVuwU68itfXtUb93MguOyIdrJvYAeybjQyTc=";
   };
-  propagatedBuildInputs = [ python3Packages.setuptools python3Packages.toml python3Packages.click libtc chardet ];
+  propagatedBuildInputs = [
+    python3Packages.setuptools
+    python3Packages.toml
+    python3Packages.click
+    libtc
+    chardet
+  ];
 }
-

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   users.users."gitea".extraGroups = [ "mysql" ];
@@ -7,17 +12,17 @@
     user = "gitea";
     settings = {
       server = {
-       ROOT_URL = "https://mosigit.duckdns.org/";
-       DOMAIN = "https://mosigit.duckdns.org/";
-       HTTP_ADDR = "localhost";
-       HTTP_PORT = 3000;
-       SSH_PORT = 22;
+        ROOT_URL = "https://mosigit.duckdns.org/";
+        DOMAIN = "https://mosigit.duckdns.org/";
+        HTTP_ADDR = "localhost";
+        HTTP_PORT = 3000;
+        SSH_PORT = 22;
       };
     };
     lfs = {
       enable = true;
     };
-    database ={
+    database = {
       user = "gitea";
       name = "gitea";
       type = "postgres";

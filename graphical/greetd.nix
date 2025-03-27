@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   sway-run = pkgs.writeShellScriptBin "sway-run" (builtins.readFile ./sway-run.sh);
   sway-greetd-config = pkgs.writeText "sway-greetd-config" ''
@@ -13,11 +18,12 @@ let
     exec dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
     exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
   '';
-in {
+in
+{
   environment.systemPackages = [
     pkgs.greetd.greetd
     sway-run
-  ]; 
+  ];
   security.polkit.enable = true; # needed for seat management; couldn't get seatd to work
   services.greetd = {
     enable = true;

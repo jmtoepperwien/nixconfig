@@ -1,8 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
- # This configuration worked on 09-03-2021 nixos-unstable @ commit 102eb68ceec
- # The image used https://hydra.nixos.org/build/134720986
+  # This configuration worked on 09-03-2021 nixos-unstable @ commit 102eb68ceec
+  # The image used https://hydra.nixos.org/build/134720986
   imports = [
     ./hardware/pi4.nix
   ];
@@ -20,14 +25,17 @@
       "net.ipv4.tcp_fin_timeout" = 30;
     };
     kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
-    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = [
+      "usbhid"
+      "usb_storage"
+    ];
     # ttyAMA0 is the serial console broken out to the GPIO
     kernelParams = [
-        "8250.nr_uarts=1"
-        "console=ttyAMA0,115200"
-        "console=tty1"
-        # A lot GUI programs need this, nearly all wayland applications
-        "cma=512M"
+      "8250.nr_uarts=1"
+      "console=ttyAMA0,115200"
+      "console=tty1"
+      # A lot GUI programs need this, nearly all wayland applications
+      "cma=512M"
     ];
   };
 
@@ -83,7 +91,13 @@
 
   users.users.pi4 = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "usenet" "rtorrent" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "audio"
+      "usenet"
+      "rtorrent"
+    ];
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
     ];

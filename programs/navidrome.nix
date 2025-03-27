@@ -1,4 +1,10 @@
-{ config, lib, pkgs, agenix, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  agenix,
+  ...
+}:
 {
   systemd.tmpfiles.rules = [ "d /mnt/kodi_lib/music 0755 lidarr lidarr" ];
   services.navidrome = {

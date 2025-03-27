@@ -1,112 +1,143 @@
-{ config, pkgs, nixpkgs-unstable, ... }:
+{
+  config,
+  pkgs,
+  nixpkgs-unstable,
+  ...
+}:
 let
-  lua-packages = p: with p; [
-    luarocks
-  ];
-  python-packages = p: with p; [
-    pandas
-    numpy
-    pynvim
-    ipython
-    matplotlib
-    plotly
-    scikit-learn
-    scipy
-    # For molten.nvim
-    jupyter-client
-    cairosvg
-    pnglatex
-    plotly
-    pyperclip
-    nbformat
-    pillow
-    requests
-    websocket-client
-    # for markdown rendering in nvim
-    pylatexenc
-  ] ++ [ pkgs.callPackage ../programs/kaleido.nix {} pkgs.callPackage ../programs/jupyter_ascending.nix {} ];
-  neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix {};
+  lua-packages =
+    p: with p; [
+      luarocks
+    ];
+  python-packages =
+    p:
+    with p;
+    [
+      pandas
+      numpy
+      pynvim
+      ipython
+      matplotlib
+      plotly
+      scikit-learn
+      scipy
+      # For molten.nvim
+      jupyter-client
+      cairosvg
+      pnglatex
+      plotly
+      pyperclip
+      nbformat
+      pillow
+      requests
+      websocket-client
+      # for markdown rendering in nvim
+      pylatexenc
+    ]
+    ++ [
+      pkgs.callPackage
+      ../programs/kaleido.nix
+      { }
+      pkgs.callPackage
+      ../programs/jupyter_ascending.nix
+      { }
+    ];
+  neomutt_gruvboxtheme = pkgs.callPackage ./neomutt_gruvboxtheme.nix { };
   wallpaper = ./config/hypr/wallpaper/gruvbox-dark-blue.png;
-  aspell-dicts = p: with p; [
-    en
-    en-computers
-    en-science
-  ];
-in {
+  aspell-dicts =
+    p: with p; [
+      en
+      en-computers
+      en-science
+    ];
+in
+{
   imports = [ ./devel.nix ];
 
-  home.packages = with pkgs; [
-    alacritty
-    element-desktop
-    discord
-    mako
-    mpv
-    steam-run
-    feh
-    obsidian
-    sqlite
-    # neovim and plugin dependencies {{{
-    neovim-remote
-    luajitPackages.jsregexp # dependency of luasnip neovim plugin
-    tree-sitter
-    nextcloud-client
-    jq
-    inkscape
-    imv
-    nodejs
-    nodePackages.npm
-    wget
-    curl
-    lua-language-server
-    clang-tools
-    pyright
-    nixd
-    nixfmt
-    cairo
-    # }}} neovim and plugin dependencies
-    lazygit
-    # Latex
-    texlive.combined.scheme-full
-    (aspellWithDicts aspell-dicts)
-    qutebrowser
-    spotify
-    sway
-    hyprland
-    wofi # for sway
-    slurp
-    grim
-    playerctl # sway audio button bindings
-    waybar
-    font-awesome # needed for waybar icons
-    ungoogled-chromium
-    firefox
-    (python3.withPackages python-packages)
-    (lua5_1.withPackages lua-packages)
-    # poetry ignore for now due to dependency missing
-    virtualenv
-    ripgrep
-    pdfgrep
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "SourceCodePro" ]; })
-    zathura
-    wl-clipboard
-    nerdfonts
-    xdg-utils
-    unzip
-    # gnupg
-    gnupg
-    pinentry-curses
-    pass
+  home.packages =
+    with pkgs;
+    [
+      alacritty
+      element-desktop
+      discord
+      mako
+      mpv
+      steam-run
+      feh
+      obsidian
+      sqlite
+      # neovim and plugin dependencies {{{
+      neovim-remote
+      luajitPackages.jsregexp # dependency of luasnip neovim plugin
+      tree-sitter
+      nextcloud-client
+      jq
+      inkscape
+      imv
+      nodejs
+      nodePackages.npm
+      wget
+      curl
+      lua-language-server
+      clang-tools
+      pyright
+      nixd
+      nixfmt
+      cairo
+      # }}} neovim and plugin dependencies
+      lazygit
+      # Latex
+      texlive.combined.scheme-full
+      (aspellWithDicts aspell-dicts)
+      qutebrowser
+      spotify
+      sway
+      hyprland
+      wofi # for sway
+      slurp
+      grim
+      playerctl # sway audio button bindings
+      waybar
+      font-awesome # needed for waybar icons
+      ungoogled-chromium
+      firefox
+      (python3.withPackages python-packages)
+      (lua5_1.withPackages lua-packages)
+      # poetry ignore for now due to dependency missing
+      virtualenv
+      ripgrep
+      pdfgrep
+      (nerdfonts.override {
+        fonts = [
+          "FiraCode"
+          "DroidSansMono"
+          "SourceCodePro"
+        ];
+      })
+      zathura
+      wl-clipboard
+      nerdfonts
+      xdg-utils
+      unzip
+      # gnupg
+      gnupg
+      pinentry-curses
+      pass
 
-    libreoffice-fresh
-    grim
-    pdftk
-    pandoc
-    xournalpp
-    timewarrior
-    taskwarrior3
-    taskwarrior-tui
-    pdfpc
-  ] ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [ neovim-qt neovide ]);
+      libreoffice-fresh
+      grim
+      pdftk
+      pandoc
+      xournalpp
+      timewarrior
+      taskwarrior3
+      taskwarrior-tui
+      pdfpc
+    ]
+    ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [
+      neovim-qt
+      neovide
+    ]);
 
   home.sessionVariables = {
     VISUAL = "nvim";
@@ -141,23 +172,27 @@ in {
   programs.neovim = {
     enable = true;
     package = nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
-    extraLuaPackages = ps: [ ps.magick ps.luarocks ];
-    extraPackages = [ pkgs.imagemagick ];
-    extraPython3Packages = ps: with ps; [
-      pynvim
-      ipython
-      jupyter-client
-      cairosvg
-      pnglatex
-      plotly
-      pyperclip
-      nbformat
-      pillow
-      requests
-      websocket-client
-      kaleido
-      pylatexenc
+    extraLuaPackages = ps: [
+      ps.magick
+      ps.luarocks
     ];
+    extraPackages = [ pkgs.imagemagick ];
+    extraPython3Packages =
+      ps: with ps; [
+        pynvim
+        ipython
+        jupyter-client
+        cairosvg
+        pnglatex
+        plotly
+        pyperclip
+        nbformat
+        pillow
+        requests
+        websocket-client
+        kaleido
+        pylatexenc
+      ];
     extraLuaConfig = ''
       vim.loader.enable()
       vim.g.mapleader = ","
@@ -182,7 +217,7 @@ in {
       cursor_shape = "block";
       cursor_blink_interval = 0;
       disable_ligatures = "always";
-      repaint_delay = 7;  # this is approx 144hz
+      repaint_delay = 7; # this is approx 144hz
       enable_audio_bell = false;
       notify_on_cmd_finish = "unfocused 60.0";
     };
@@ -325,32 +360,38 @@ in {
     #  smtp.tls.enable = true;
     #  smtp.tls.useStartTls = true;
     #};
-    "university" = let
-      mailboxFolders = [ "Inbox" "Sent" "Archive" ];
-    in {
-      address = "m.toepperwien@stud.uni-hannover.de";
-      userName = "m.toepperwien@stud.uni-hannover.de";
-      realName = "Jan Malte Töpperwien";
-      imap.host = "mail.stud.uni-hannover.de";
-      mbsync = {
-        enable = true;
-        create = "maildir";
+    "university" =
+      let
+        mailboxFolders = [
+          "Inbox"
+          "Sent"
+          "Archive"
+        ];
+      in
+      {
+        address = "m.toepperwien@stud.uni-hannover.de";
+        userName = "m.toepperwien@stud.uni-hannover.de";
+        realName = "Jan Malte Töpperwien";
+        imap.host = "mail.stud.uni-hannover.de";
+        mbsync = {
+          enable = true;
+          create = "maildir";
+        };
+        msmtp.enable = true;
+        notmuch.enable = true;
+        smtp = {
+          host = "smtp.uni-hannover.de";
+          port = 587;
+          tls.enable = true;
+          tls.useStartTls = true;
+        };
+        neomutt = {
+          enable = true;
+          extraMailboxes = mailboxFolders;
+        };
+        passwordCommand = "pass unimail";
+        primary = true;
       };
-      msmtp.enable = true;
-      notmuch.enable = true;
-      smtp = {
-        host = "smtp.uni-hannover.de";
-        port = 587;
-        tls.enable = true;
-        tls.useStartTls = true;
-      };
-      neomutt = {
-        enable = true;
-        extraMailboxes = mailboxFolders;
-      };
-      passwordCommand = "pass unimail";
-      primary = true;
-    };
     "gmail" = {
       address = "m.toepperwien@gmail.com";
       userName = "m.toepperwien@gmail.com";
@@ -367,7 +408,7 @@ in {
       };
       msmtp.enable = true;
       notmuch.enable = true;
-   };
+    };
   };
   programs.neomutt = {
     enable = true;

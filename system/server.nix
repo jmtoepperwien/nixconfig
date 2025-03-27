@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -34,8 +39,6 @@
     systemd-boot.enable = true;
   };
 
-
-
   #sound.enable = true;
   #hardware.pulseaudio.enable = true;
   # sound settings
@@ -62,11 +65,17 @@
     networkmanager.enable = true;
   };
 
-  users.groups.mtoepperwien = {};
+  users.groups.mtoepperwien = { };
   users.users.mtoepperwien = {
     isNormalUser = true;
     group = "mtoepperwien";
-    extraGroups = [ "wheel" "networkmanager" "audio" "usenet" "rtorrent" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "audio"
+      "usenet"
+      "rtorrent"
+    ];
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
     ];

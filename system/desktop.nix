@@ -1,4 +1,10 @@
-{ config, lib, modulesPath, pkgs, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  ...
+}:
 
 {
   environment.systemPackages = with pkgs; [
@@ -7,7 +13,7 @@
 
     # gnome icon themes (needed for some programs)
     adwaita-icon-theme
-    
+
     # cisco anyconnect uni vpn
     openconnect
     networkmanager-openconnect
@@ -45,12 +51,21 @@
   };
   networking.networkmanager.enable = true;
 
-  users.groups.mtoepperwien = {};
+  users.groups.mtoepperwien = { };
   users.users.mtoepperwien = {
     isNormalUser = true;
     home = "/home/mtoepperwien";
     group = "mtoepperwien";
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" "audio" "render" "libvirtd" "adbusers" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "libvirtd"
+      "video"
+      "audio"
+      "render"
+      "libvirtd"
+      "adbusers"
+    ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys

@@ -1,15 +1,24 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   environment.systemPackages = [ pkgs.par2cmdline ];
-  users.groups."usenet" = {};
+  users.groups."usenet" = { };
 
   # Sonarr
-  users.groups."sonarr" = {};
+  users.groups."sonarr" = { };
   users.users."sonarr" = {
     isSystemUser = true;
     group = "sonarr";
-    extraGroups = [ "usenet" "rtorrent" ];
+    extraGroups = [
+      "usenet"
+      "rtorrent"
+    ];
   };
 
   services.sonarr = {
@@ -19,11 +28,14 @@
   };
 
   # Radarr
-  users.groups."radarr" = {};
+  users.groups."radarr" = { };
   users.users."radarr" = {
     isSystemUser = true;
     group = "radarr";
-    extraGroups = [ "usenet" "rtorrent" ];
+    extraGroups = [
+      "usenet"
+      "rtorrent"
+    ];
   };
 
   services.radarr = {
@@ -33,11 +45,14 @@
   };
 
   # Lidarr
-  users.groups."lidarr" = {};
+  users.groups."lidarr" = { };
   users.users."lidarr" = {
     isSystemUser = true;
     group = "lidarr";
-    extraGroups = [ "usenet" "rtorrent" ];
+    extraGroups = [
+      "usenet"
+      "rtorrent"
+    ];
   };
 
   services.lidarr = {
@@ -47,11 +62,14 @@
   };
 
   # Readarr
-  users.groups."readarr" = {};
+  users.groups."readarr" = { };
   users.users."readarr" = {
     isSystemUser = true;
     group = "readarr";
-    extraGroups = [ "usenet" "rtorrent" ];
+    extraGroups = [
+      "usenet"
+      "rtorrent"
+    ];
   };
 
   services.readarr = {
@@ -68,11 +86,14 @@
   };
 
   # Prowlarr
-  users.groups."prowlarr" = {};
+  users.groups."prowlarr" = { };
   users.users."prowlarr" = {
     isSystemUser = true;
     group = "prowlarr";
-    extraGroups = [ "usenet" "rtorrent" ];
+    extraGroups = [
+      "usenet"
+      "rtorrent"
+    ];
   };
   services.prowlarr = {
     enable = true;

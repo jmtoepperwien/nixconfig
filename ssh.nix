@@ -1,4 +1,11 @@
-{ config, pkgs, lib, modulesPath, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  inputs,
+  ...
+}:
 
 {
   programs.ssh.package = pkgs.openssh_hpn;
@@ -11,5 +18,5 @@
     settings.PermitRootLogin = lib.mkForce "no"; # nixos-generators will try to put this to true for first install
     settings.X11Forwarding = true;
   };
-  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedTCPPorts = [ 22 ];
 }

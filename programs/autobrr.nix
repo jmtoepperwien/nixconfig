@@ -1,4 +1,11 @@
-{ stdenv, lib, fetchzip, git, nodePackages, ... }:
+{
+  stdenv,
+  lib,
+  fetchzip,
+  git,
+  nodePackages,
+  ...
+}:
 
 let
   version = "1.46.1";
@@ -7,7 +14,8 @@ let
     hash = "sha256-T3G471y5nn4xyZpgd6tTXzgmELaFFRE4rkJDbzigJfk=";
     stripRoot = false;
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "autobrr";
   version = version;
   src = src;

@@ -1,9 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   services.postgresql = {
     enable = true;
-    ensureDatabases = [ "nextcloud" "gitea" ];
+    ensureDatabases = [
+      "nextcloud"
+      "gitea"
+    ];
     ensureUsers = [
       {
         name = "nextcloud";

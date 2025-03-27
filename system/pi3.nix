@@ -1,5 +1,12 @@
-
-{ config, lib, modulesPath, pkgs, agenix, nixpkgs, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  agenix,
+  nixpkgs,
+  ...
+}:
 
 {
   imports = [
@@ -20,7 +27,7 @@
   users.users.pi3 = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with nixpkgs; [];
+    packages = with nixpkgs; [ ];
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
     ];

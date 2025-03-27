@@ -1,12 +1,13 @@
-{ lib
-, stdenv
-, fetchurl
-, fetchzip
-, fetchPypi
-, python3Packages
+{
+  lib,
+  stdenv,
+  fetchurl,
+  fetchzip,
+  fetchPypi,
+  python3Packages,
 }:
 
-let 
+let
   pname = "kaleido";
   version = "0.2.1";
   format = "wheel";
@@ -14,7 +15,8 @@ let
     url = "https://github.com/plotly/Kaleido/releases/download/v0.2.1/kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl";
     hash = "sha256-qiHPG/HHj4+lCp99ReEAPDh709b+CnZ8+780S5W9w6g=";
   };
-in python3Packages.buildPythonPackage {
+in
+python3Packages.buildPythonPackage {
   inherit version pname format;
   #src = fetchPypi {
   #  inherit version pname format;
@@ -24,4 +26,3 @@ in python3Packages.buildPythonPackage {
   src = wheelsrc;
   propagatedBuildInputs = [ python3Packages.setuptools ];
 }
-

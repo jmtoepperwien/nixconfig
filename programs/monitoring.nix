@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, agenix, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  agenix,
+  ...
+}:
 
 {
   services.prometheus = {
@@ -15,13 +22,14 @@
     scrapeConfigs = [
       {
         job_name = "node";
-        static_configs = [{
-          targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
-        }];
+        static_configs = [
+          {
+            targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
+          }
+        ];
       }
     ];
   };
-
 
   services.grafana = {
     enable = true;

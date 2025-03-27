@@ -1,12 +1,13 @@
-{ lib
-, stdenv
-, fetchurl
-, fetchzip
-, fetchPypi
-, python3Packages
+{
+  lib,
+  stdenv,
+  fetchurl,
+  fetchzip,
+  fetchPypi,
+  python3Packages,
 }:
 
-let 
+let
   pname = "prunerr";
   version = "1.1.13";
   format = "wheel";
@@ -22,7 +23,11 @@ let
       url = "https://files.pythonhosted.org/packages/be/4b/a96bad7e8048f437e0b91f276f8411b9149e43cb4f48b7decf34c02001c5/transmission_rpc-3.4.2-py3-none-any.whl";
       sha256 = "sha256-BpYSjD2yO6OhKm8zeQDhknGr48jLEKlExGOxKiubQuA=";
     };
-    propagatedBuildInputs = [ python3Packages.poetry-core python3Packages.typing-extensions python3Packages.requests ];
+    propagatedBuildInputs = [
+      python3Packages.poetry-core
+      python3Packages.typing-extensions
+      python3Packages.requests
+    ];
   };
   arrapi = python3Packages.buildPythonPackage {
     pname = "arrapi";
@@ -42,7 +47,11 @@ let
       version = "0.1.1";
       sha256 = "sha256-c+m5MRuvLIClSmL89A37ipYCkK/kDaeScGatuX1TA0s=";
     };
-    propagatedBuildInputs = [ python3Packages.setuptools python3Packages.setuptools-scm python3Packages.six ];
+    propagatedBuildInputs = [
+      python3Packages.setuptools
+      python3Packages.setuptools-scm
+      python3Packages.six
+    ];
   };
   service-logging = python3Packages.buildPythonPackage {
     pname = "service-logging";
@@ -53,9 +62,14 @@ let
       sha256 = "sha256-YilxEUm2FIGI2U2VIYv4LfU1Q4IdTBbAED5pJhPOv0s=";
     };
 
-    propagatedBuildInputs = [ python3Packages.setuptools python3Packages.setuptools-scm main-wrapper ];
+    propagatedBuildInputs = [
+      python3Packages.setuptools
+      python3Packages.setuptools-scm
+      main-wrapper
+    ];
   };
-in python3Packages.buildPythonPackage {
+in
+python3Packages.buildPythonPackage {
   inherit version pname format;
   #src = fetchPypi {
   #  inherit version pname format;
@@ -63,6 +77,14 @@ in python3Packages.buildPythonPackage {
   #  python = "py3";
   #};
   src = wheelsrc;
-  propagatedBuildInputs = [ python3Packages.setuptools transmission-rpc python3Packages.argcomplete python3Packages.tenacity service-logging python3Packages.setuptools-scm python3Packages.pyyaml arrapi ];
+  propagatedBuildInputs = [
+    python3Packages.setuptools
+    transmission-rpc
+    python3Packages.argcomplete
+    python3Packages.tenacity
+    service-logging
+    python3Packages.setuptools-scm
+    python3Packages.pyyaml
+    arrapi
+  ];
 }
-

@@ -1,7 +1,18 @@
-{ config, lib, modulesPath, pkgs, inputs, agenix, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  inputs,
+  agenix,
+  ...
+}:
 
 {
-  nix.registry = { nixpkgs.flake = inputs.nixpkgs-stable; unstable.flake = inputs.nixpkgs-unstable; }; 
+  nix.registry = {
+    nixpkgs.flake = inputs.nixpkgs-stable;
+    unstable.flake = inputs.nixpkgs-unstable;
+  };
   nixpkgs.config.allowUnfree = true;
   nix = {
     settings.auto-optimise-store = true;
@@ -109,7 +120,13 @@
   };
   programs.tmux = {
     enable = true;
-    plugins = with pkgs.tmuxPlugins; [ gruvbox sensible jump tilish tmux-fzf ];
+    plugins = with pkgs.tmuxPlugins; [
+      gruvbox
+      sensible
+      jump
+      tilish
+      tmux-fzf
+    ];
     extraConfig = ''
       set -g repeat-time 0
       set -g @tmux-gruvbox 'dark'
@@ -125,7 +142,10 @@
   # drive health checks
   services.smartd.enable = true;
 
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
   networking.networkmanager.dns = "none";
   networking.dhcpcd.extraConfig = "nohook resolv.conf";
 

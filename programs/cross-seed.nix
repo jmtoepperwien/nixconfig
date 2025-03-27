@@ -1,17 +1,19 @@
-{ lib
-, stdenv
-, fetchzip
-, buildNpmPackage
-, python3
+{
+  lib,
+  stdenv,
+  fetchzip,
+  buildNpmPackage,
+  python3,
 }:
 
-let 
+let
   version = "v5.9.2";
   src = fetchzip {
     url = "https://github.com/cross-seed/cross-seed/archive/refs/tags/${version}.tar.gz";
     hash = "sha256-E0AlsFV9RP01YVwjw6ZQ8Lf1IVyuudxrb5oJ61EfIyo=";
   };
-in buildNpmPackage {
+in
+buildNpmPackage {
   pname = "cross-seed";
   inherit version;
   inherit src;
@@ -20,4 +22,3 @@ in buildNpmPackage {
   buildInputs = [ python3 ];
   nativeBuildInputs = [ python3 ];
 }
-
