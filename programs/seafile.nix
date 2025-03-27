@@ -11,7 +11,7 @@
     adminEmail = "m.toepperwien@protonmail.com";
     initialAdminPassword = "changethisseafilepassword";
 
-    dataDir = "/mnt/kodi_lib/seafile/data";
+    dataDir = "${config.server.cloud_folder}/seafile/data";
 
     ccnetSettings.General.SERVICE_URL = "https://mosiseafile.duckdns.org";
     seafileSettings = {

@@ -33,7 +33,9 @@
   systemd.tmpfiles.rules = [
     "d /mnt/lib0 0775 pi4 usenet"
     "d /mnt/lib1 0775 pi4 usenet"
-    "d /mnt/kodi_lib 0775 pi4 usenet"
+    "d ${config.server.media_folder} 0775 pi4 usenet"
+    "d ${config.server.git_folder} 0775 ${config.services.gitea.user} ${config.services.gitea.group}"
+    "d ${config.server.cloud_folder} 0775 pi4 usenet"
   ];
   fileSystems."/mnt/lib0" = {
     device = "/dev/disk/by-uuid/af71a65d-c25d-40c8-98fa-792c61de0630";
@@ -79,7 +81,7 @@
       User = "root";
       Type = "oneshot";
       KillMode = "none";
-      ExecStart = "${pkgs.mergerfs}/bin/mergerfs -o cache.files=partial,dropcacheonclose=true,category.create=mfs,category.search=newest /mnt/lib0:/mnt/lib1 /mnt/kodi_lib";
+      ExecStart = "${pkgs.mergerfs}/bin/mergerfs -o cache.files=partial,dropcacheonclose=true,category.create=mfs,category.search=newest /mnt/lib0:/mnt/lib1 ${config.server.media_folder}";
       Restart = "on-failure";
     };
   };

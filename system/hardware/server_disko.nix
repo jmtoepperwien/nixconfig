@@ -1,9 +1,8 @@
-# USAGE in your configuration.nix.
-# Update devices to match your hardware.
-# {
-#  imports = [ ./disko-config.nix ];
-#  disko.devices.disk.main.device = "/dev/sda";
-# }
+{
+  config,
+  ...
+}:
+
 {
   disko.devices = {
     disk = {
@@ -179,7 +178,7 @@
         datasets = {
           "media" = {
             type = "zfs_fs";
-            mountpoint = "/mnt/media";
+            mountpoint = config.server.media_folder;
             options = {
               canmount = "on";
               mountpoint = "legacy";
@@ -187,7 +186,7 @@
           };
           "git" = {
             type = "zfs_fs";
-            mountpoint = "/mnt/git";
+            mountpoint = config.server.git_folder;
             options = {
               canmount = "on";
               mountpoint = "legacy";
@@ -195,7 +194,7 @@
           };
           "cloud" = {
             type = "zfs_fs";
-            mountpoint = "/mnt/cloud";
+            mountpoint = config.server.cloud_folder;
             options = {
               canmount = "on";
               mountpoint = "legacy";

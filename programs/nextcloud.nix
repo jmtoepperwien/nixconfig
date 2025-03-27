@@ -13,7 +13,7 @@
   };
   services.nextcloud = {
     package = pkgs.nextcloud30;
-    home = "/mnt/kodi_lib/nextcloud";
+    home = "${config.server.cloud_folder}/nextcloud";
     enable = true;
     https = true;
     hostName = "mosinextcloud.duckdns.org";

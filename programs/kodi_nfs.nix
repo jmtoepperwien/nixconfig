@@ -7,19 +7,19 @@
 
 {
   fileSystems."/export/movies" = {
-    device = "/mnt/kodi_lib/movies";
+    device = "${config.server.media_folder}/movies";
     options = [ "bind" ];
   };
   fileSystems."/export/series" = {
-    device = "/mnt/kodi_lib/series";
+    device = "${config.server.media_folder}/series";
     options = [ "bind" ];
   };
   fileSystems."/export/books" = {
-    device = "/mnt/kodi_lib/books";
+    device = "${config.server.media_folder}/books";
     options = [ "bind" ];
   };
   fileSystems."/export/music" = {
-    device = "/mnt/kodi_lib/music";
+    device = "${config.server.media_folder}/music";
     options = [ "bind" ];
   };
 

@@ -82,7 +82,7 @@
     enable = false;
     user = "readarr";
     group = "readarr";
-    libraries = [ "/mnt/kodi_lib/books/" ];
+    libraries = [ "${config.server.media_folder}/books/" ];
   };
 
   # Prowlarr
