@@ -121,7 +121,6 @@
             ./programs/usenet.nix
             ./network/proton_wireguard.nix
             ./programs/torrent.nix
-            ./programs/irssi.nix
             ./programs/irc.nix
             ./programs/navidrome.nix
 
@@ -148,7 +147,6 @@
             ./programs/usenet.nix
             ./network/proton_wireguard.nix
             ./programs/torrent.nix
-            #./programs/irssi.nix
             #./programs/irc.nix
             ./programs/navidrome.nix
             ./programs/monitoring.nix
