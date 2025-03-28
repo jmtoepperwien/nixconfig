@@ -31,6 +31,8 @@
     };
   };
 
+  services.zfs.autoScrub.enable = true;
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
