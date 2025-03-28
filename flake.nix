@@ -153,6 +153,9 @@
             ./programs/navidrome.nix
             ./programs/monitoring.nix
 
+            # temporary
+            ./system/server_old_disks.nix
+
             agenix.nixosModules.default
           ];
         };
