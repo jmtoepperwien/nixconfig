@@ -62,6 +62,12 @@
           "/readarr/".proxyPass = "http://localhost:8787";
           "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
           "/navidrome".proxyPass = "http://localhost:3333";
+          "/jellyfin/" = {
+            proxyPass = "http://localhost:7474";
+            extraConfig = ''
+              rewrite ^/jellyfin/(.*) /$1 break;
+            '';
+          };
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''
@@ -106,6 +112,12 @@
           "/readarr/".proxyPass = "http://localhost:8787";
           "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
           "/navidrome".proxyPass = "http://localhost:3333";
+          "/jellyfin/" = {
+            proxyPass = "http://localhost:7474";
+            extraConfig = ''
+              rewrite ^/jellyfin/(.*) /$1 break;
+            '';
+          };
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''
