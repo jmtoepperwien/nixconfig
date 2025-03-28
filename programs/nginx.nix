@@ -65,7 +65,7 @@
           "/prowlarr/".proxyPass = "http://unix:/run/prowlarr/prowlarr.sock";
           "/navidrome".proxyPass = "http://localhost:3333";
           "/jellyfin/" = {
-            proxyPass = "http://localhost:7474";
+            proxyPass = "http://localhost:8096";
             extraConfig = ''
               rewrite ^/jellyfin/(.*) /$1 break;
             '';
@@ -123,7 +123,7 @@
           "/prowlarr/".proxyPass = "http://unix:/run/prowlarr/prowlarr.sock";
           "/navidrome".proxyPass = "http://localhost:3333";
           "/jellyfin/" = {
-            proxyPass = "http://localhost:7474";
+            proxyPass = "http://localhost:8096";
             extraConfig = ''
               rewrite ^/jellyfin/(.*) /$1 break;
             '';
