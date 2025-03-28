@@ -159,7 +159,7 @@
 
       };
       deploy.nodes.server = {
-        hostname = "192.168.122.154";
+        hostname = "mosihome.duckdns.org";
         profiles.system = {
           sshUser = "mtoepperwien";
           interactiveSudo = true;
