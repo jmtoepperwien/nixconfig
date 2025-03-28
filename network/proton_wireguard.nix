@@ -16,20 +16,20 @@
       RemainAfterExit = true;
       ExecStart = pkgs.writers.writeBash "netns-withbridge-up" ''
         ${pkgs.iproute2}/bin/ip netns add vpn
-        ${pkgs.iproute2}/bin/ip link add brvpn0 type veth peer name brvpn1
-        ${pkgs.iproute2}/bin/ip link set brvpn1 netns vpn
-        ${pkgs.iproute2}/bin/ip addr add 169.254.251.1/16 dev brvpn0
-        ${pkgs.iproute2}/bin/ip -n vpn addr add 169.254.251.2/16 dev brvpn1
-        ${pkgs.iproute2}/bin/ip -n vpn link set brvpn1 up
-        ${pkgs.iproute2}/bin/ip route add 169.254.251.2 dev brvpn0
-        ${pkgs.iproute2}/bin/ip -n vpn route add 169.254.251.1 dev brvpn1
+        #${pkgs.iproute2}/bin/ip link add brvpn0 type veth peer name brvpn1
+        #${pkgs.iproute2}/bin/ip link set brvpn1 netns vpn
+        #${pkgs.iproute2}/bin/ip addr add 169.254.251.1/16 dev brvpn0
+        #${pkgs.iproute2}/bin/ip -n vpn addr add 169.254.251.2/16 dev brvpn1
+        #${pkgs.iproute2}/bin/ip -n vpn link set brvpn1 up
+        #${pkgs.iproute2}/bin/ip route add 169.254.251.2 dev brvpn0
+        #${pkgs.iproute2}/bin/ip -n vpn route add 169.254.251.1 dev brvpn1
 
-        ${pkgs.iproute2}/bin/ip -n vpn addr add 127.0.0.1/8 dev lo
-        ${pkgs.iproute2}/bin/ip -n vpn link set lo up
-        ${pkgs.iproute2}/bin/ip -n vpn route add 127.0.0.1 via 127.0.0.1 dev lo
+        #${pkgs.iproute2}/bin/ip -n vpn addr add 127.0.0.1/8 dev lo
+        #${pkgs.iproute2}/bin/ip -n vpn link set lo up
+        #${pkgs.iproute2}/bin/ip -n vpn route add 127.0.0.1 via 127.0.0.1 dev lo
       '';
       ExecStop = pkgs.writers.writeBash "netns-withbridge-down" ''
-        ${pkgs.iproute2}/bin/ip link del veth0
+        #${pkgs.iproute2}/bin/ip link del veth0
         ${pkgs.iproute2}/bin/ip netns del vpn
       '';
     };

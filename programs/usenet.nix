@@ -104,6 +104,21 @@
       NetworkNamespacePath = "/var/run/netns/vpn";
     };
   };
+  systemd.services.prowlarrforward = {
+    bindsTo = [ "netns-vpn.service" ];
+    requires = [ "protonvpn.service" ];
+    after = [ "protonvpn.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      NetworkNamespacePath = "/var/run/netns/vpn";
+      ExecStart = ''
+        socat UNIX-LISTEN:/run/prowlarr.sock,fork,umask=0007 TCP:localhost:9696
+      '';
+      Type = "simple";
+      User = "prowlarr";
+      Group = "nginx";
+    };
+  };
 
   # Sabnzbd
   users.users."sabnzbd" = {

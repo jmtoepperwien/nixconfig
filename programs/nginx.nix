@@ -60,7 +60,7 @@
           "/radarr/".proxyPass = "http://localhost:7878";
           "/lidarr".proxyPass = "http://localhost:8686";
           "/readarr/".proxyPass = "http://localhost:8787";
-          "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
+          "/prowlarr/".proxyPass = "/run/prowlarr.sock";
           "/navidrome".proxyPass = "http://localhost:3333";
           "/jellyfin/" = {
             proxyPass = "http://localhost:7474";
@@ -110,7 +110,7 @@
           "/radarr/".proxyPass = "http://localhost:7878";
           "/lidarr".proxyPass = "http://localhost:8686";
           "/readarr/".proxyPass = "http://localhost:8787";
-          "/prowlarr/".proxyPass = "http://169.254.251.2:9696";
+          "/prowlarr/".proxyPass = "/run/prowlarr.sock";
           "/navidrome".proxyPass = "http://localhost:3333";
           "/jellyfin/" = {
             proxyPass = "http://localhost:7474";
