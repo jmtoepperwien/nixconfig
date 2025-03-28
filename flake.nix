@@ -152,6 +152,7 @@
             #./programs/irc.nix
             ./programs/navidrome.nix
             ./programs/monitoring.nix
+            ./programs/jellyfin.nix
 
             # temporary
             ./system/server_old_disks.nix
