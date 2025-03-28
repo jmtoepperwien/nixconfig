@@ -6,6 +6,9 @@
 }:
 
 {
+  systemd.tmpfiles.rules = [
+    "d /var/www 0755 nginx nginx"
+  ];
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "m.toepperwien@protonmail.com";
   security.acme.certs."mosihome.duckdns.org".extraDomainNames = [
@@ -94,6 +97,14 @@
             proxyPass = "http://localhost:3000/";
           };
         };
+      };
+      "mosinextcloud.duckdns.org" = {
+        forceSSL = true;
+        useACMEHost = "mosihome.duckdns.org";
+      };
+      "mosiseafile.duckdns.org" = {
+        forceSSL = true;
+        useACMEHost = "mosihome.duckdns.org";
       };
       "192.168.1.234" = {
         forceSSL = false;
