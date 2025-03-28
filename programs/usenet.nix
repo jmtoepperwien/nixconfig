@@ -104,6 +104,9 @@
       NetworkNamespacePath = "/var/run/netns/vpn";
     };
   };
+  systemd.tmpfiles.rules = [
+    "d /run/prowlarr 0755 prowlarr prowlarr"
+  ];
   systemd.services.prowlarrforward = {
     bindsTo = [ "netns-vpn.service" ];
     requires = [ "protonvpn.service" ];
@@ -112,7 +115,7 @@
     serviceConfig = {
       NetworkNamespacePath = "/var/run/netns/vpn";
       ExecStart = ''
-        ${pkgs.socat}/bin/socat UNIX-LISTEN:/run/prowlarr.sock,fork,umask=0007 TCP:localhost:9696
+        ${pkgs.socat}/bin/socat UNIX-LISTEN:/run/prowlarr/prowlarr.sock,fork,umask=0007 TCP:localhost:9696
       '';
       Type = "simple";
       User = "prowlarr";
