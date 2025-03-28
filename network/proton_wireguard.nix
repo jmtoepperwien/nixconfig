@@ -16,6 +16,7 @@
       RemainAfterExit = true;
       ExecStart = pkgs.writers.writeBash "netns-withbridge-up" ''
         ${pkgs.iproute2}/bin/ip netns add vpn
+        ${pkgs.iproute2}/bin/ip -n vpn link set dev lo up
         #${pkgs.iproute2}/bin/ip link add brvpn0 type veth peer name brvpn1
         #${pkgs.iproute2}/bin/ip link set brvpn1 netns vpn
         #${pkgs.iproute2}/bin/ip addr add 169.254.251.1/16 dev brvpn0
