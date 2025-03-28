@@ -8,9 +8,9 @@
 }:
 
 let
-  version = "1.46.1";
+  version = "1.60.0";
   src = fetchzip {
-    url = "https://github.com/autobrr/autobrr/releases/download/v${version}/autobrr_${version}_linux_arm64.tar.gz";
+    url = "https://github.com/autobrr/autobrr/releases/download/v${version}/autobrr_${version}_linux_x86_64.tar.gz";
     hash = "sha256-T3G471y5nn4xyZpgd6tTXzgmELaFFRE4rkJDbzigJfk=";
     stripRoot = false;
   };
