@@ -79,7 +79,12 @@
             '';
           };
           "/jellyfin/".proxyPass = "http://localhost:8096";
-          "/autobrr/".proxyPass = "http://localhost:7474";
+          "/autobrr/" = {
+            proxyPass = "http://localhost:7474";
+            extraConfig = ''
+              rewrite ^/autobrr/(.*)$ /$1 break;
+            '';
+          };
           "/flood/".proxyPass = "http://localhost:5678";
           "/grafana/" = {
             proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
@@ -137,7 +142,13 @@
 
           };
           "/jellyfin/".proxyPass = "http://localhost:8096";
-          "/autobrr/".proxyPass = "http://localhost:7474";
+          "/autobrr/" = {
+            proxyPass = "http://localhost:7474";
+            extraConfig = ''
+              rewrite ^/autobrr/(.*)$ /$1 break;
+            '';
+          };
+
           "/flood/".proxyPass = "http://localhost:5678";
           "/tempfiles/" = {
             root = "/var/www";
