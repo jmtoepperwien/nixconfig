@@ -33,6 +33,13 @@
 
   services.zfs.autoScrub.enable = true;
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      vpl-gpu-rt
+    ];
+  };
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;

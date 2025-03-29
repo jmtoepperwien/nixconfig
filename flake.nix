@@ -155,6 +155,7 @@
             ./programs/jellyfin.nix
             ./programs/seafile.nix
             ./programs/ldap.nix
+            ./programs/kodi.nix
 
             # temporary
             ./system/server_old_disks.nix
