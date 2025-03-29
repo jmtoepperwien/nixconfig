@@ -19,7 +19,7 @@
   };
   services.seafile = {
     enable = true;
-    adminEmail = "m.toepperwien@protonmail.com";
+    adminEmail = "admin@local.com";
     initialAdminPassword = "changethisseafilepassword";
 
     dataDir = "${config.server.cloud_folder}/seafile/data";
@@ -42,9 +42,9 @@
       LDAP_PROVIDER = "ldap"
       LDAP_LOGIN_ATTR = "uid"
       LDAP_CONTACT_EMAIL_ATTR = "mail"
-      LDAP_USER_ROLE_ATTR = "role"
-      LDAP_USER_FIRST_NAME_ATTR = "givenName"
-      LDAP_USER_LAST_NAME_ATTR = "sn"
+      LDAP_USER_ROLE_ATTR = ""
+      LDAP_USER_FIRST_NAME_ATTR = "first_name"
+      LDAP_USER_LAST_NAME_ATTR = "last_name"
       LDAP_USER_NAME_REVERSE = "False"
     '';
     gc = {
