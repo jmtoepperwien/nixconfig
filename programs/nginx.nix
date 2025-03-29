@@ -80,7 +80,41 @@
             '';
           };
           "/jellyfin/".proxyPass = "http://localhost:8096";
-          "/jellyseerr/".proxyPass = "http://localhost:5055";
+          "/jellyseerr/" = {
+            proxyPass = "http://localhost:5055";
+            extraConfig = ''
+              set $app 'jellyseerr';
+
+              # Remove /jellyseerr path to pass to the app
+              rewrite ^/jellyseerr/?(.*)$ /$1 break;
+
+              # Redirect location headers
+              proxy_redirect ^ /$app;
+              proxy_redirect /setup /$app/setup;
+              proxy_redirect /login /$app/login;
+
+              # Sub filters to replace hardcoded paths
+              proxy_set_header Accept-Encoding "";
+              sub_filter_once off;
+              sub_filter_types *;
+              sub_filter '</head>' '<script language="javascript">(()=>{let t="/$app",e=history.pushState;history.pushState=function r(){arguments[2]&&!arguments[2].startsWith(t)&&(arguments[2]=t+arguments[2]);let s=e.apply(this,arguments);return window.dispatchEvent(new Event("pushstate")),s};let r=history.replaceState;function s(){document.querySelectorAll("a[href]").forEach(e=>{let r=e.getAttribute("href");r.startsWith("/")&&!r.startsWith(t)&&e.setAttribute("href",t+r)})}history.replaceState=function e(){arguments[2]&&!arguments[2].startsWith(t)&&(arguments[2]=t+arguments[2]);let s=r.apply(this,arguments);return window.dispatchEvent(new Event("replacestate")),s},document.addEventListener("DOMContentLoaded",function(){let t=new MutationObserver(t=>{t.forEach(t=>{t.addedNodes.length&&s()})});t.observe(document.body,{childList:!0,subtree:!0}),s()})})();</script></head>';
+              sub_filter 'href="/"' 'href="/$app"';
+              sub_filter 'href="/login"' 'href="/$app/login"';
+              sub_filter 'href:"/"' 'href:"/$app"';
+              sub_filter '\/_next' '\/$app\/_next';
+              sub_filter '/_next' '/$app/_next';
+              sub_filter '/api/v1' '/$app/api/v1';
+              sub_filter '/login/plex/loading' '/$app/login/plex/loading';
+              sub_filter '/images/' '/$app/images/';
+              sub_filter '/imageproxy/' '/$app/imageproxy/';
+              sub_filter '/avatarproxy/' '/$app/avatarproxy/';
+              sub_filter '/android-' '/$app/android-';
+              sub_filter '/apple-' '/$app/apple-';
+              sub_filter '/favicon' '/$app/favicon';
+              sub_filter '/logo_' '/$app/logo_';
+              sub_filter '/site.webmanifest' '/$app/site.webmanifest';
+            '';
+          };
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''
@@ -149,7 +183,41 @@
 
           };
           "/jellyfin/".proxyPass = "http://localhost:8096";
-          "/jellyseerr/".proxyPass = "http://localhost:5055";
+          "/jellyseerr/" = {
+            proxyPass = "http://localhost:5055";
+            extraConfig = ''
+              set $app 'jellyseerr';
+
+              # Remove /jellyseerr path to pass to the app
+              rewrite ^/jellyseerr/?(.*)$ /$1 break;
+
+              # Redirect location headers
+              proxy_redirect ^ /$app;
+              proxy_redirect /setup /$app/setup;
+              proxy_redirect /login /$app/login;
+
+              # Sub filters to replace hardcoded paths
+              proxy_set_header Accept-Encoding "";
+              sub_filter_once off;
+              sub_filter_types *;
+              sub_filter '</head>' '<script language="javascript">(()=>{let t="/$app",e=history.pushState;history.pushState=function r(){arguments[2]&&!arguments[2].startsWith(t)&&(arguments[2]=t+arguments[2]);let s=e.apply(this,arguments);return window.dispatchEvent(new Event("pushstate")),s};let r=history.replaceState;function s(){document.querySelectorAll("a[href]").forEach(e=>{let r=e.getAttribute("href");r.startsWith("/")&&!r.startsWith(t)&&e.setAttribute("href",t+r)})}history.replaceState=function e(){arguments[2]&&!arguments[2].startsWith(t)&&(arguments[2]=t+arguments[2]);let s=r.apply(this,arguments);return window.dispatchEvent(new Event("replacestate")),s},document.addEventListener("DOMContentLoaded",function(){let t=new MutationObserver(t=>{t.forEach(t=>{t.addedNodes.length&&s()})});t.observe(document.body,{childList:!0,subtree:!0}),s()})})();</script></head>';
+              sub_filter 'href="/"' 'href="/$app"';
+              sub_filter 'href="/login"' 'href="/$app/login"';
+              sub_filter 'href:"/"' 'href:"/$app"';
+              sub_filter '\/_next' '\/$app\/_next';
+              sub_filter '/_next' '/$app/_next';
+              sub_filter '/api/v1' '/$app/api/v1';
+              sub_filter '/login/plex/loading' '/$app/login/plex/loading';
+              sub_filter '/images/' '/$app/images/';
+              sub_filter '/imageproxy/' '/$app/imageproxy/';
+              sub_filter '/avatarproxy/' '/$app/avatarproxy/';
+              sub_filter '/android-' '/$app/android-';
+              sub_filter '/apple-' '/$app/apple-';
+              sub_filter '/favicon' '/$app/favicon';
+              sub_filter '/logo_' '/$app/logo_';
+              sub_filter '/site.webmanifest' '/$app/site.webmanifest';
+            '';
+          };
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''
