@@ -34,6 +34,8 @@
     # Compare to the key published at https://nix-community.org/cache
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
+  # allow remote builds
+  nix.settings.trusted-users = [ "mtoepperwien" ];
 
   imports = [
     ./common/devel.nix
