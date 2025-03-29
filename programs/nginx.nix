@@ -15,6 +15,7 @@
     "mosigit.duckdns.org"
     "mosinextcloud.duckdns.org"
     "mosiseafile.duckdns.org"
+    "mosildap.duckdns.org"
   ];
   users.users.nginx.extraGroups = [ "rtorrent" "media" ];
   services.nginx = {
