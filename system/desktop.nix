@@ -104,6 +104,8 @@
 
   # cross compilation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  # enable nixos-enter into other architectures
+  boot.binfmt.preferStaticEmulators = true;
 
   # Android ADB
   programs.adb.enable = true;
