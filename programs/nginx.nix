@@ -16,7 +16,7 @@
     "mosinextcloud.duckdns.org"
     "mosiseafile.duckdns.org"
   ];
-  users.users.nginx.extraGroups = [ "rtorrent" ];
+  users.users.nginx.extraGroups = [ "rtorrent" "media" ];
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
