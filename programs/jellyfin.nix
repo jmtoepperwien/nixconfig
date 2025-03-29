@@ -10,4 +10,8 @@
   };
 
   users.users.jellyfin.extraGroups = [ "media" ];
+
+  services.jellyseerr = {
+    enable = true;
+  };
 }

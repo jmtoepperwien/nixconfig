@@ -80,6 +80,7 @@
             '';
           };
           "/jellyfin/".proxyPass = "http://localhost:8096";
+          "/jellyseerr/".proxyPass = "http://localhost:5055";
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''
@@ -148,6 +149,7 @@
 
           };
           "/jellyfin/".proxyPass = "http://localhost:8096";
+          "/jellyseerr/".proxyPass = "http://localhost:5055";
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
             extraConfig = ''
