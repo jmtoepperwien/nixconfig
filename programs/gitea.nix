@@ -10,6 +10,7 @@
   services.gitea = {
     enable = true;
     user = "gitea";
+    repositoryRoot = "${config.server.git_folder}";
     settings = {
       server = {
         ROOT_URL = "https://mosigit.duckdns.org/";
