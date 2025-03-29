@@ -270,7 +270,7 @@ in
     after = [ "rtorrent.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.flood}/bin/flood --rtsocket /run/rtorrent/rpc.sock --port 5678 --host 0.0.0.0 --baseuri flood";
+      ExecStart = "${pkgs.flood}/bin/flood --rtsocket /run/rtorrent/rpc.sock --port 5678 --host 0.0.0.0 --baseuri /flood";
       Restart = "on-failure";
       Type = "simple";
       User = "rtorrent";
