@@ -12,6 +12,11 @@
     "d ${config.server.cloud_folder}/seafile 0750 seafile seafile"
     "d ${config.server.cloud_folder}/seafile/data 0750 seafile seafile"
   ];
+  age.secrets.ldap_bind_passwd_seafile = {
+    file = ../secrets/ldap_bind_passwd.age;
+    owner = "seafile";
+    group = "seafile";
+  };
   services.seafile = {
     enable = true;
     adminEmail = "m.toepperwien@protonmail.com";
@@ -27,6 +32,21 @@
         web_token_expire_time = 18000; # Expire the token in 5h to allow longer uploads
       };
     };
+    seahubExtraConf = ''
+      ENABLE_LDAP = True
+      LDAP_SERVER_URL = "ldap://localhost:3890"
+      LDAP_BASE_DN = "ou=people,dc=mosi,dc=com"
+      LDAP_ADMIN_DN = "uid=binduser,ou=people,dc=mosi,dc=com"
+      with open("${config.age.secrets.ldap_bind_passwd_seafile.path}", "r") as f:
+          LDAP_ADMIN_PASSWORD = f.readline().rstrip()
+      LDAP_PROVIDER = "ldap"
+      LDAP_LOGIN_ATTR = "uid"
+      LDAP_CONTACT_EMAIL_ATTR = "mail"
+      LDAP_USER_ROLE_ATTR = "role"
+      LDAP_USER_FIRST_NAME_ATTR = "givenName"
+      LDAP_USER_LAST_NAME_ATTR = "sn"
+      LDAP_USER_NAME_REVERSE = "False"
+    '';
     gc = {
       enable = true;
       dates = [ "Sun 03:00:00" ];

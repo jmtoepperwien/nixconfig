@@ -55,4 +55,8 @@ in
     maltepc
     serverhost
   ];
+  "ldap_bind_passwd.age".publicKeys = [
+    maltepc
+    serverhost
+  ];
 }
