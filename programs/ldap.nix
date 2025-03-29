@@ -19,8 +19,13 @@
   services.lldap = {
     enable = true;
     settings = {
-      ldap_base_dn = "dc=example,dc=com";
+      ldap_base_dn = "dc=mosi,dc=com";
+      ldap_user_email = "m.toepperwien@protonmail.com";
+      ldap_user_dn = "admin";
       database_url = "postgres://%2Frun%2Fpostgresql/lldap";
+      http_url = "http://mosihome.duckdns.org";
+      http_port = 17170;
+      http_host = "0.0.0.0";
     };
   };
 }

@@ -64,11 +64,23 @@
           "/readarr/".proxyPass = "http://localhost:8787";
           "/prowlarr/".proxyPass = "http://unix:/run/prowlarr/prowlarr.sock";
           "/navidrome".proxyPass = "http://localhost:3333";
+          "/lldap" = {
+            proxyPass = "http://localhost:17170";
+            extraConfig = ''
+              rewrite ^/lldap/(.*) /$1 break;
+              rewrite ^/lldap$ / break;
+              proxy_redirect ^ /lldap;
+              proxy_set_header Accept-Encoding "";
+              sub_filter_once off;
+              sub_filter_types *;
+              sub_filter 'href="/"' 'href="/lldap"';
+              sub_filter '\'/pkg/' '\'/lldap/pkg/';
+              sub_filter '"static/' '"lldap/static/';
+            '';
+          };
+
           "/jellyfin/" = {
             proxyPass = "http://localhost:8096";
-            extraConfig = ''
-              rewrite ^/jellyfin/(.*) /$1 break;
-            '';
           };
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
@@ -122,11 +134,23 @@
           "/readarr/".proxyPass = "http://localhost:8787";
           "/prowlarr/".proxyPass = "http://unix:/run/prowlarr/prowlarr.sock";
           "/navidrome".proxyPass = "http://localhost:3333";
+          "/lldap" = {
+            proxyPass = "http://localhost:17170";
+            extraConfig = ''
+              rewrite ^/lldap/(.*) /$1 break;
+              rewrite ^/lldap$ / break;
+              proxy_redirect ^ /lldap;
+              proxy_set_header Accept-Encoding "";
+              sub_filter_once off;
+              sub_filter_types *;
+              sub_filter 'href="/"' 'href="/lldap"';
+              sub_filter '\'/pkg/' '\'/lldap/pkg/';
+              sub_filter '"static/' '"lldap/static/';
+            '';
+
+          };
           "/jellyfin/" = {
             proxyPass = "http://localhost:8096";
-            extraConfig = ''
-              rewrite ^/jellyfin/(.*) /$1 break;
-            '';
           };
           "/autobrr/" = {
             proxyPass = "http://localhost:7474";
