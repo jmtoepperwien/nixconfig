@@ -106,6 +106,11 @@
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
       };
+      "mosildap.duckdns.org" = {
+        forceSSL = true;
+        useACMEHost = "mosihome.duckdns.org";
+        locations."/".proxyPass = "http://localhost:17170";
+      };
       "mosiseafile.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
