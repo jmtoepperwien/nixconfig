@@ -206,9 +206,6 @@
   };
   systemd.tmpfiles.rules = [
     "d /mnt 0755 root root"
-    "d /mnt/media 0770 rtorrent usenet"
-    "d /mnt/git 0750 gitea gitea"
-    "d /mnt/cloud 0750 root root"
     "d /snapshots 0770 root root"
   ];
 }

@@ -153,6 +153,7 @@
             ./programs/navidrome.nix
             ./programs/monitoring.nix
             ./programs/jellyfin.nix
+            ./programs/seafile.nix
 
             # temporary
             ./system/server_old_disks.nix

@@ -106,7 +106,7 @@
   systemd.tmpfiles.rules = [
     "d ${config.server.media_folder} 0770 mtoepperwien media"
     "d ${config.server.git_folder} 0770 ${config.services.gitea.user} ${config.services.gitea.group}"
-    "d ${config.server.cloud_folder} 0770 mtoepperwien media"
+    "d ${config.server.cloud_folder} 0770 mtoepperwien cloud"
   ];
 
   system.stateVersion = "24.11";

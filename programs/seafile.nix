@@ -6,6 +6,12 @@
 }:
 
 {
+  users.groups.cloud = {};
+  users.users.seafile.extraGroups = [ "cloud" ];
+  systemd.tmpfiles.rules = [
+    "d ${config.server.cloud_folder}/seafile 0750 seafile seafile"
+    "d ${config.server.cloud_folder}/seafile/data 0750 seafile seafile"
+  ];
   services.seafile = {
     enable = true;
     adminEmail = "m.toepperwien@protonmail.com";
