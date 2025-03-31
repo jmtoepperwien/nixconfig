@@ -32,7 +32,7 @@
           };
         };
       };
-      storage_0 = {
+      storage18_0 = {
         device = "/dev/sdd"; # not important after setting up
         type = "disk";
         content = {
@@ -48,7 +48,7 @@
           };
         };
       };
-      storage_1 = {
+      storage18_1 = {
         device = "/dev/sdf"; # not important after setting up
         type = "disk";
         content = {
@@ -64,6 +64,71 @@
           };
         };
       };
+      storage10_0 = {
+        device = "/dev/sdc"; # not important after setting up
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "zstorage";
+              };
+            };
+          };
+        };
+      };
+      storage10_1 = {
+        device = "/dev/sde"; # not important after setting up
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "zstorage";
+              };
+            };
+          };
+        };
+      };
+      storage4_0 = {
+        device = "/dev/sda"; # not important after setting up
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "zstorage";
+              };
+            };
+          };
+        };
+      };
+      storage4_1 = {
+        device = "/dev/sdb"; # not important after setting up
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "zstorage";
+              };
+            };
+          };
+        };
+      };
+
     };
     zpool = {
       zroot = {
@@ -167,8 +232,22 @@
               {
                 mode = "mirror";
                 members = [
-                  "storage_0"
-                  "storage_1"
+                  "storage18_0"
+                  "storage18_1"
+                ];
+              }
+              {
+                mode = "mirror";
+                members = [
+                  "storage10_0"
+                  "storage10_1"
+                ];
+              }
+              {
+                mode = "mirror";
+                members = [
+                  "storage4_0"
+                  "storage4_1"
                 ];
               }
             ];
