@@ -106,6 +106,9 @@
   };
   systemd.tmpfiles.rules = [
     "d /run/prowlarr 0755 prowlarr prowlarr"
+    "d ${config.server.media_folder}/downloads/nzb 0750 sabnzbd media"
+    "d ${config.server.media_folder}/downloads/nzb/temporary 0750 sabnzbd media"
+    "d ${config.server.media_folder}/downloads/nzb/completed 0750 sabnzbd media"
   ];
   systemd.services.prowlarrforward = {
     bindsTo = [ "netns-vpn.service" ];
