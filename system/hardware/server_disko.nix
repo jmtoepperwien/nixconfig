@@ -32,7 +32,7 @@
           };
         };
       };
-      storage18_0 = {
+      storage_0 = {
         device = "/dev/sdd"; # not important after setting up
         type = "disk";
         content = {
@@ -48,7 +48,7 @@
           };
         };
       };
-      storage18_1 = {
+      storage_1 = {
         device = "/dev/sdf"; # not important after setting up
         type = "disk";
         content = {

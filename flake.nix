@@ -156,9 +156,6 @@
             ./programs/seafile.nix
             ./programs/ldap.nix
 
-            # temporary
-            ./system/server_old_disks.nix
-
             agenix.nixosModules.default
           ];
         };
