@@ -169,21 +169,6 @@
               mountpoint = "legacy";
             };
           };
-          "swap" = {
-            type = "zfs_volume";
-            size = "1GiB";
-            content = {
-              type = "swap";
-            };
-            options = {
-              compression = "zle";
-              logbias = "throughput";
-              sync = "always";
-              primarycache = "metadata";
-              secondarycache = "none";
-              "com.sun:auto-snapshot" = "false";
-            };
-          };
           "home" = {
             type = "zfs_fs";
             mountpoint = "/home";
