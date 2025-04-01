@@ -46,6 +46,7 @@
       LDAP_USER_FIRST_NAME_ATTR = "first_name"
       LDAP_USER_LAST_NAME_ATTR = "last_name"
       LDAP_USER_NAME_REVERSE = "False"
+      LDAP_FILTER = "memberof=cn=media,ou=groups,dc=mosi,dc=com"
     '';
     gc = {
       enable = true;
