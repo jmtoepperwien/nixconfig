@@ -426,10 +426,11 @@ in
             ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
             ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} scan
             ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
-            for file in /var/lib/rtorrent/at2-queue/*.torrent; do
-              ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} add rtorrent "$file"
-              mv "$file" /var/lib/rtorrent/at2-queue/processed
-            done
+            mv /var/lib/rtorrent/at2-queue/*.torrent /var/lib/rtorrent/at2-queue/processed
+            #for file in /var/lib/rtorrent/at2-queue/*.torrent; do
+            #  ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} add rtorrent "$file"
+            #  mv "$file" /var/lib/rtorrent/at2-queue/processed
+            #done
           done
         '';
       in
