@@ -136,11 +136,5 @@
     enable = true;
     group = "media";
   };
-
-  services.ombi = {
-    enable = true;
-    openFirewall = true;
-    port = 5001;
-  };
   networking.firewall.allowedTCPPorts = [ 6789 ];
 }
