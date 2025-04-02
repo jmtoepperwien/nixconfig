@@ -42,7 +42,7 @@ include solarized-dark-256.theme
 # Urgency score calculation
 urgency.user.tag.next.coefficient           = 18.0 # +next tag
 urgency.due.coefficient                     = 15.0 # overdue or near due date
-urgency.blocking.coefficient                =  8.0 # blocking other tasks
+urgency.blocking.coefficient                =  3.0 # blocking other tasks
 urgency.uda.priority.H.coefficient          =  6.0 # high Priority
 urgency.uda.priority.M.coefficient          =  3.9 # medium Priority
 urgency.uda.priority.L.coefficient          =  1.8 # low Priority
