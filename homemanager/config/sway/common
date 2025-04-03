@@ -41,7 +41,7 @@ input type:pointer {
 # hide mouse cursor
 seat * hide_cursor when-typing enable
 input type:keyboard {
-  xkb_layout us
+  xkb_layout us(colemak_dh)
   xkb_options compose:rwin,caps:super
   repeat_delay 175
   repeat_rate 50

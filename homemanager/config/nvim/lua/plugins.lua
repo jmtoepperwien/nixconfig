@@ -243,11 +243,11 @@ return require("lazy").setup({
   { "folke/twilight.nvim",         config = function() require("twilight").setup() end },
   { "kevinhwang91/nvim-bqf",       dependencies = { { "junegunn/fzf", build = function() vim.fn['fzf#install']() end } } },
   {
-    "phaazon/hop.nvim",
-    branch = "v2",
-    config = function()
-      require("hop").setup()
-    end
+    "smoka7/hop.nvim",
+    branch = "*",
+    opts = {
+      keys = "arsgmeiqwfpbjluyzxcdvkhtn"
+    },
   },
   { "rktjmp/highlight-current-n.nvim" },
   { "danilamihailov/beacon.nvim" },

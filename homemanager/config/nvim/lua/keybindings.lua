@@ -1,5 +1,5 @@
 -- QoL bindings
-vim.keymap.set("i", "kj", "<Esc>:noh<CR><Esc>")
+vim.keymap.set("i", "<leader>n", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set("n", "<leader>qc", ":lclose<CR>") -- close quickfix window
@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>fp", project.project, {})
 vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", {})
 
 -- Obsidian bindings
-vim.keymap.set("n", "<leader>n", ":ObsidianToday<CR>", {})
+vim.keymap.set("n", "<leader>dn", ":ObsidianToday<CR>", {})
 vim.keymap.set("n", "<leader>fn", ":ObsidianQuickSwitch<CR>", {})
 vim.keymap.set("n", "<leader>fm", ":ObsidianSearch<CR>", {})
 vim.keymap.set("n", "<leader>cn", ":ObsidianNew<CR>", {})
