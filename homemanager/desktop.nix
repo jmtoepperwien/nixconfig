@@ -2,6 +2,7 @@
   config,
   pkgs,
   nixpkgs-unstable,
+  lib,
   ...
 }:
 let
@@ -310,6 +311,7 @@ in
 
   # default applications
   xdg.mime.enable = true;
+  xdg.configFile."mimeapps.list" = lib.mkIf config.xdg.mimeApps.enable { force = true; };
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
