@@ -244,7 +244,6 @@ return require("lazy").setup({
   { "kevinhwang91/nvim-bqf",       dependencies = { { "junegunn/fzf", build = function() vim.fn['fzf#install']() end } } },
   {
     "smoka7/hop.nvim",
-    branch = "*",
     opts = {
       keys = "arsgmeiqwfpbjluyzxcdvkhtn"
     },

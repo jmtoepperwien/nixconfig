@@ -56,6 +56,8 @@ in
       steam-run
       feh
       obsidian
+      zotero
+      thunderbird
       sqlite
       # neovim and plugin dependencies {{{
       neovim-remote
