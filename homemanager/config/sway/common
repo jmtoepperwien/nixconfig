@@ -42,7 +42,7 @@ input type:pointer {
 seat * hide_cursor when-typing enable
 input type:keyboard {
   xkb_layout us
-  xkb_options caps:super
+  xkb_options caps:super,compose:menu
   repeat_delay 175
   repeat_rate 50
 }

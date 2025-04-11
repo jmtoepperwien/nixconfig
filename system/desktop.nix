@@ -109,4 +109,11 @@
 
   # Android ADB
   programs.adb.enable = true;
+
+  # Allows for direct unicode printing
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ anthy ];
+  };
 }
