@@ -260,6 +260,7 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = true; # not finished if system package completion is wanted (look at home manager documentation)
+    defaultKeymap = "viins";
     autocd = true;
     history.save = 1000;
     history.size = 1000;
@@ -268,8 +269,6 @@ in
     '';
     initExtra = ''
       setopt extended_glob
-
-      bindkey 'kj' vi-cmd-mode
 
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
