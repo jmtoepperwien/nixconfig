@@ -439,7 +439,11 @@ return require("lazy").setup({
     -- image nvim options table. Pass to `require('image').setup`
       {
         backend = "kitty",                        -- Kitty will provide the best experience, but you need a compatible terminal
-        integrations = {},                        -- do whatever you want with image.nvim's integrations
+        integrations = {
+          markdown = {
+            enabled = false,
+          },
+        },                        -- do whatever you want with image.nvim's integrations
         max_width = 100,                          -- tweak to preference
         max_height = 12,                          -- ^
         max_height_window_percentage = math.huge, -- this is necessary for a good experience
@@ -512,15 +516,6 @@ return require("lazy").setup({
     event = "VeryLazy",
     opts = { doc_lines = 30 },
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
-  },
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
   },
   {
     "NeogitOrg/neogit",

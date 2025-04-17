@@ -27,4 +27,4 @@ vim.opt.termguicolors = true
 -- enable loading of project specific configurations
 vim.o.exrc = true
 
-vim.opt.conceallevel = 2
+vim.opt.conceallevel = 0
