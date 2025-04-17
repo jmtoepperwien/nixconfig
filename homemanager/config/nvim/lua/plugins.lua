@@ -376,39 +376,7 @@ return require("lazy").setup({
     },
   },
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      -- configurations go here
-    },
-    config = function()
-      -- triggers CursorHold event faster
-      vim.opt.updatetime = 200
-
-      require("barbecue").setup({
-        create_autocmd = false, -- prevent barbecue from updating itself automatically
-      })
-
-      vim.api.nvim_create_autocmd({
-        "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
-        "BufWinEnter",
-        "CursorHold",
-        "InsertLeave",
-
-        -- include this if you have set `show_modified` to `true`
-        "BufModifiedSet",
-      }, {
-        group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-        callback = function()
-          require("barbecue.ui").update()
-        end,
-      })
-    end,
+    "nvim-treesitter/nvim-treesitter-context"
   },
   {
     "amitds1997/remote-nvim.nvim",
@@ -429,41 +397,15 @@ return require("lazy").setup({
         },
       })
     end,
-  }, {
-  "3rd/image.nvim",
-  opts = {},
-  lazy = true,
-  event = "CursorHold",
-  config = function()
-    require("image").setup(
-    -- image nvim options table. Pass to `require('image').setup`
-      {
-        backend = "kitty",                        -- Kitty will provide the best experience, but you need a compatible terminal
-        integrations = {
-          markdown = {
-            enabled = false,
-          },
-        },                        -- do whatever you want with image.nvim's integrations
-        max_width = 100,                          -- tweak to preference
-        max_height = 12,                          -- ^
-        max_height_window_percentage = math.huge, -- this is necessary for a good experience
-        max_width_window_percentage = math.huge,
-        window_overlap_clear_enabled = true,
-        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-      })
-  end,
-},
-  {
+  },  {
     "benlubas/molten-nvim",
     lazy = true,
     ft = { "markdown", "quarto", "rmd" },
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-    dependencies = { "3rd/image.nvim" },
     build = ":UpdateRemotePlugins",
     init = function()
       -- this guide will be using image.nvim
       -- Don't forget to setup and install the plugin if you want to view image outputs
-      vim.g.molten_image_provider = "image.nvim"
 
       -- optional, I like wrapping. works for virt text and the output window
       vim.g.molten_wrap_output = true
