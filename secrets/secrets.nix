@@ -59,4 +59,9 @@ in
     maltepc
     serverhost
   ];
+  "cross-seed.age".publicKeys = [
+    maltepc
+    maltexps
+    serverhost
+  ];
 }

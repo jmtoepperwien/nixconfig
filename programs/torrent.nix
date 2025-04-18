@@ -9,11 +9,11 @@
 let
   cross-seedPackage = pkgs.callPackage ./cross-seed.nix { };
   cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
-    echo "searching for" >> /var/lib/rtorrent/scriptlog.txt
-    echo $1 >> /var/lib/rtorrent/scriptlog.txt
-    ${pkgs.curl}/bin/curl -XPOST http://127.0.0.1:2468/api/webhook --data-urlencode "name=$1"
-    echo "searched for" >> /var/lib/rtorrent/scriptlog.txt
-    echo $1 >> /var/lib/rtorrent/scriptlog.txt
+    source ${config.age.secrets.cross-seed.path}
+    ${pkgs.curl}/bin/curl -XPOST http://127.0.0.1:2468/api/webhook \
+      -H "X-Api-Key: ''${apikey}" \
+      --data-urlencode "infoHash=$1" \
+      --data-urlencode 'includeSingleEpisodes=true'
   '';
   autotorrent2Config = pkgs.writeText "at2config" ''
     [autotorrent]
@@ -173,7 +173,7 @@ in
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
       ## automatically execute cross-seed search on finished downloads
-      method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.name=}"
+      method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.hash=}"
 
       ### performance
       # Network limits
@@ -372,6 +372,11 @@ in
     };
   };
 
+  age.secrets.cross-seed = {
+    file = ../secrets/cross-seed.age;
+    owner = "rtorrent";
+    group = "rtorrent";
+  };
   systemd.services.cross-seed =
     let
       trackers = "http://127.0.0.1:9696/17/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/26/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/8/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/21/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/19/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/18/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/23/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/27/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/13/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/30/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/31/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/32/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/33/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/34/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/35/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/36/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/38/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/39/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/40/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/41/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/42/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/43/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/44/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/46/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/47/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535 http://127.0.0.1:9696/49/api?apikey=3e3fcaccc58e414ca7fe8b76c4da0535";
