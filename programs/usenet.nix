@@ -61,6 +61,21 @@
     openFirewall = true;
   };
 
+  # Bazarr
+  users.groups."bazarr" = { };
+  users.users."bazarr" = {
+    isSystemUser = true;
+    group = "bazarr";
+    extraGroups = [
+      "media"
+    ];
+  };
+
+  services.bazarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Readarr
   users.groups."readarr" = { };
   users.users."readarr" = {
