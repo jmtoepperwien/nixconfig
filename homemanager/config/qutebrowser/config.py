@@ -10,6 +10,11 @@ c.downloads.position = 'bottom'
 css = './solarized-everything-css/css/gruvbox/gruvbox-all-sites.css'
 config.source('./gruvbox.py')
 
+config.bind('L', 'tab-next', mode='normal')
+config.bind('H', 'tab-prev', mode='normal')
+config.bind('K', 'forward', mode='normal')
+config.bind('J', 'back', mode='normal')
+
 # Tab binds
 config.bind('!', 'tab-focus 1', mode='normal')
 config.bind('@', 'tab-focus 2', mode='normal')
