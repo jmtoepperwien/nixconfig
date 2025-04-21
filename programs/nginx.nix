@@ -27,6 +27,9 @@
         forceSSL = true;
         enableACME = true;
         locations = {
+          "/.well-known/acme-challenge" = {
+            root = "/var/www";
+          };
           "/files/" = {
             root = "/var/www/";
             extraConfig = ''
@@ -141,15 +144,24 @@
       "mosinextcloud.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
+        locations."/.well-known/acme-challenge" = {
+          root = "/var/www";
+        };
       };
       "mosildap.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
         locations."/".proxyPass = "http://localhost:17170";
+        locations."/.well-known/acme-challenge" = {
+          root = "/var/www";
+        };
       };
       "mosiseafile.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
+        locations."/.well-known/acme-challenge" = {
+          root = "/var/www";
+        };
       };
       "192.168.1.234" = {
         forceSSL = false;
