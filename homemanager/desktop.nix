@@ -216,9 +216,6 @@ in
       notify_on_cmd_finish = "unfocused 60.0";
     };
     keybindings = {
-      "alt+enter" = "new_window_with_cwd";
-      "alt+j" = "next_window";
-      "alt+k" = "previous_window";
       "alt+t" = "new_tab";
       "alt+1" = "goto_tab 1";
       "alt+2" = "goto_tab 2";
