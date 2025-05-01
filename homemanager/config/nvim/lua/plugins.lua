@@ -92,6 +92,7 @@ return require("lazy").setup({
     end,
   },
   { "tpope/vim-sensible" },
+  { "tpope/vim-abolish" },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { { "nvim-lua/plenary.nvim" },
