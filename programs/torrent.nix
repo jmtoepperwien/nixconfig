@@ -175,30 +175,29 @@ in
       ## automatically execute cross-seed search on finished downloads
       method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.hash=}"
 
-      ### performance
       # Network limits
       network.http.max_open.set = 50
-      #network.max_open_files.set = 600
-      network.max_open_sockets.set = 200
+      network.max_open_files.set = 600
+      network.max_open_sockets.set = 100
 
       # Peer settings
       throttle.min_peers.normal.set = 39
       throttle.max_peers.normal.set = 40
       throttle.min_peers.seed.set = -1
       throttle.max_peers.seed.set = -1
-      throttle.max_downloads.global.set = 50
+      throttle.max_downloads.global.set = 100
       throttle.max_uploads.global.set = 100
       throttle.max_downloads.set = 20
       throttle.max_uploads.set = 20
       trackers.numwant.set = 40
-
+      ### performance
       network.receive_buffer.size.set =  16M
       network.send_buffer.size.set    = 16M
 
       # Miscellaneous settings
       pieces.memory.max.set = 2048M
       schedule2 = session_save, 3600, 3600, ((session.save))
-      system.file.allocate.set = 1
+      system.file.allocate.set = 0
       pieces.preload.type.set = 2
       network.xmlrpc.size_limit.set = 10M
 

@@ -116,4 +116,6 @@
     type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [ anthy ];
   };
+
+  services.preload.enable = true;
 }

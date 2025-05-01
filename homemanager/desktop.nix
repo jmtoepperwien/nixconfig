@@ -94,6 +94,8 @@ in
       waybar
       font-awesome # needed for waybar icons
       ungoogled-chromium
+      google-chrome
+      nautilus
       firefox
       (python3.withPackages python-packages)
       (lua5_1.withPackages lua-packages)
