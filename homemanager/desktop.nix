@@ -87,7 +87,6 @@ in
       spotify
       sway
       hyprland
-      wofi # for sway
       slurp
       grim
       playerctl # sway audio button bindings
@@ -140,6 +139,20 @@ in
     NIXOS_OZONE_WL = "1";
   };
 
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      colors = {
+        background = "282828ff";
+        text = "d4be98ff";
+        match = "e78a4eff";
+        selection = "45403dff";
+        selection-match = "e78a4eff";
+        selection-text = "d4be98ff";
+        border = "a9b665ff";
+      };
+    };
+  };
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.fhs;
@@ -234,23 +247,6 @@ in
       map --new-mode passthrough --on-unknown passthrough ctrl+shift+space
       map --mode passthrough ctrl+shift+space pop_keyboard_mode
     '';
-  };
-  programs.rio = {
-    enable = true;
-    package = nixpkgs-unstable.legacyPackages.${pkgs.system}.rio;
-    settings = {
-      theme = "GruvboxDark";
-      renderer = {
-        performance = "High";
-        backend = "Automatic";
-        disable-renderer-when-unfocused = false;
-        target-fps = 144;
-      };
-      fonts = {
-        family = "SauceCodePro Nerd Font Mono";
-        size = 21;
-      };
-    };
   };
 
   # allow homemanager fonts

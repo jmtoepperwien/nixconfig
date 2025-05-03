@@ -18,7 +18,7 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu exec wofi --show drun --gtk-dark --define drun-print_command=true | xargs swaymsg exec --
+set $menu exec fuzzel
 
 ### Idle configuration
 #
@@ -215,9 +215,9 @@ gaps inner 10
 gaps outer 10
 
 # Border    (border, backgr., text, indicator, child_border)
-client.focused #98971a #000000 #000000 #98971a #98971a
+client.focused #a9b665 #000000 #000000 #a9b665 #a9b665
 client.unfocused #928374 #000000 #000000 #928374 #928374
-client.urgent #cc241d #000000 #000000 #cc241d #cc241d 
+client.urgent #ea6962 #000000 #000000 #ea6962 #ea6962
 default_border pixel 2
 default_floating_border pixel 2
 for_window [class="^.*"] border pixel 2
