@@ -84,7 +84,6 @@ in
       texlive.combined.scheme-full
       (aspellWithDicts aspell-dicts)
       qutebrowser
-      spotify
       sway
       hyprland
       slurp

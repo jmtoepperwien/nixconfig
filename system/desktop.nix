@@ -2,6 +2,7 @@
   config,
   lib,
   modulesPath,
+  inputs,
   pkgs,
   ...
 }:
@@ -118,4 +119,18 @@
   };
 
   services.preload.enable = true;
+
+  programs.spicetify =
+  let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  in
+  {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      hidePodcasts
+      shuffle
+      fullAlbumDate
+    ];
+    theme = spicePkgs.themes.onepunch;  # gruvbox
+  };
 }

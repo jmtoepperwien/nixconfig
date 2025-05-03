@@ -24,6 +24,7 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix/24.11";
   };
 
   outputs =
@@ -32,6 +33,7 @@
       nixpkgs-stable,
       nixpkgs-unstable,
       agenix,
+      spicetify-nix,
       home-manager,
       nixos-hardware,
       disko,
@@ -59,6 +61,7 @@
             ./ssd.nix
             ./ssh.nix
             agenix.nixosModules.default
+            spicetify-nix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -81,6 +84,7 @@
             ./ssd.nix
             ./programs/ppti.nix
             agenix.nixosModules.default
+            spicetify-nix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
