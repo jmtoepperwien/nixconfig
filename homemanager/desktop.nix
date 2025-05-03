@@ -309,10 +309,10 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "x-scheme-handler/http" = [ "chromium-browser.desktop" ];
-      "x-scheme-handler/https" = [ "chromium-browser.desktop" ];
-      "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
-      "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/about" = [ "firefox.desktop" ];
+      "x-scheme-handler/unknown" = [ "firefox.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "image/png" = [ "feh.desktop" ];
     };
