@@ -11,7 +11,6 @@
 
   home.packages = with pkgs; [
     # Gaming {{{
-    steam
     # lutris notes
     # anno 1800
     # ubisoft connect "connection lost" -> "echo 2 | sudo tee /proc/sys/net/ipv4/tcp_mtu_probing"
