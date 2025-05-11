@@ -39,7 +39,8 @@
 
       # Enable CSP for your services.
       ## unsafe-inline needed for arr applications for now
-      add_header Content-Security-Policy "script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';" always;
+      ## LLDAP still wont work
+      #add_header Content-Security-Policy "script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';" always;
 
       # Minimize information leaked to other domains
       add_header 'Referrer-Policy' 'origin-when-cross-origin';
