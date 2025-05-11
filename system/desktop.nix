@@ -33,6 +33,13 @@
     wl-mirror
 
     apptainer
+    yubioath-flutter
+    keepassxc
+    yubikey-personalization
+    yubikey-manager
+    libfido2
+    opensc
+    pcsclite
   ];
 
   services.gnome.gnome-keyring.enable = true;
@@ -119,6 +126,12 @@
   };
 
   services.preload.enable = true;
+
+  # Yubikey
+  hardware.gpgSmartcards.enable = true;
+  hardware.ledger.enable = true;
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.pcscd.enable = true;
 
   programs.spicetify =
   let
