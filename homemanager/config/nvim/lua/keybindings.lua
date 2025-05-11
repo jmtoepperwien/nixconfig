@@ -4,7 +4,10 @@ vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR><Esc>")
 vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set("n", "<leader>qc", ":lclose<CR>") -- close quickfix window
 vim.keymap.set("n", "<leader>qo", ":lopen<CR>")  -- open quickfix window
+
+-- LSP bindings
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename)
 
 -- Windows
 vim.keymap.set("n", "<A-h>", "<C-w>h")

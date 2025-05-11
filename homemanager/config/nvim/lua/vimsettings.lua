@@ -11,6 +11,8 @@ vim.cmd [[filetype plugin indent on]]
 
 vim.opt.ignorecase = true
 
+vim.opt.foldenable = true
+
 -- somewhat unused as these values also get set via guess-indent plugin
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
