@@ -146,4 +146,10 @@
     ];
     theme = spicePkgs.themes.onepunch;  # gruvbox
   };
+
+  services.passSecretService.enable = true;
+  services.protonmail-bridge = {
+    enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.protonmail-bridge;
+  };
 }

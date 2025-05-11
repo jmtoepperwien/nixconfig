@@ -42,6 +42,7 @@ let
       en-computers
       en-science
     ];
+  keepass-database = "~/drive/Passwords.kdbx";
 in
 {
   imports = [ ./devel.nix ];
@@ -58,7 +59,6 @@ in
       feh
       obsidian
       zotero
-      thunderbird
       sqlite
       # neovim and plugin dependencies {{{
       neovim-remote
@@ -338,19 +338,38 @@ in
     pinentryPackage = pkgs.pinentry-curses;
   };
 
+
   # emails
+  programs.thunderbird = {
+    enable = true;
+    profiles = {
+      "main" = {
+        isDefault = true;
+      };
+    };
+  };
   accounts.email.accounts = {
-    #"protonmail" = {
-    #  address = "m.toepperwien@protonmail.com";
-    #  userName = "m.toepperwien@protonmail.com";
-    #  primary = true;
-    #  realName = "Jan Malte Töpperwien";
-    #  thunderbird.enable = true;
-    #  neomutt.enable = true;
-    #  passwordCommand = "pass protonmail";
-    #  smtp.tls.enable = true;
-    #  smtp.tls.useStartTls = true;
-    #};
+    "protonmail" = {
+      address = "m.toepperwien@protonmail.com";
+      userName = "m.toepperwien@protonmail.com";
+      primary = true;
+      realName = "Jan Malte Töpperwien";
+      thunderbird.enable = true;
+      neomutt.enable = true;
+      passwordCommand = "pass protonmail";
+      smtp = {
+        host = "127.0.0.1";
+        port = 1025;
+        tls.enable = true;
+        tls.useStartTls = true;
+      };
+      imap = {
+        host = "127.0.0.1";
+        port = 1143;
+        tls.enable = true;
+        tls.useStartTls = true;
+      };
+    };
     "university" =
       let
         mailboxFolders = [
@@ -363,42 +382,45 @@ in
         address = "m.toepperwien@stud.uni-hannover.de";
         userName = "m.toepperwien@stud.uni-hannover.de";
         realName = "Jan Malte Töpperwien";
-        imap.host = "mail.stud.uni-hannover.de";
         mbsync = {
           enable = true;
           create = "maildir";
         };
         msmtp.enable = true;
-        notmuch.enable = true;
         smtp = {
           host = "smtp.uni-hannover.de";
           port = 587;
           tls.enable = true;
           tls.useStartTls = true;
         };
+        imap = {
+          host = "mail.uni-hannover.de";
+          port = 993;
+          tls.enable = true;
+        };
         neomutt = {
           enable = true;
           extraMailboxes = mailboxFolders;
         };
-        passwordCommand = "pass unimail";
-        primary = true;
+        thunderbird.enable = true;
+        passwordCommand = "keepassxc-cli clip ${keepass-database} 'LUH Mail' -y 2:$(${pkgs.yubikey-manager}/bin/ykman list -s)";
       };
     "gmail" = {
       address = "m.toepperwien@gmail.com";
       userName = "m.toepperwien@gmail.com";
       realName = "Jan Malte Töpperwien";
-      neomutt.enable = true;
-      passwordCommand = "pass gmail";
-      imap.host = "imap.gmail.com";
-      smtp.host = "smtp.gmail.com";
-      smtp.tls.enable = true;
-      smtp.tls.useStartTls = false;
-      mbsync = {
-        enable = true;
-        create = "maildir";
+      thunderbird.enable = true;
+      imap = {
+        host = "imap.gmail.com";
+        port = 993;
+        tls.enable = true;
       };
-      msmtp.enable = true;
-      notmuch.enable = true;
+      smtp = {
+        host = "smtp.gmail.com";
+        port = 587;
+        tls.enable = true;
+        tls.useStartTls = true;
+      };
     };
   };
   programs.neomutt = {
@@ -423,11 +445,4 @@ in
   programs.mbsync.enable = true;
   services.mbsync.enable = true;
   programs.msmtp.enable = true;
-  programs.notmuch = {
-    enable = true;
-    hooks = {
-      preNew = "mbsync --all";
-    };
-  };
-
 }
