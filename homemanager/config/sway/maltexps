@@ -3,3 +3,11 @@ input type:touchpad {
   drag enabled
   tap enabled
 }
+
+input 1:1:AT_Translated_Set_2_keyboard {
+  xkb_layout us
+  xkb_variant colemak_dh
+  xkb_options caps:super,compose:menu
+  repeat_delay 175
+  repeat_rate 50
+}
