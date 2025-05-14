@@ -218,7 +218,7 @@ gaps inner 10
 gaps outer 10
 
 # Border    (border, backgr., text, indicator, child_border)
-client.focused #a9b665 #282828 #d4be98 #e78a4e #a9b665
+client.focused #a9b665 #282828 #d4be98 #a9b665 #a9b665
 client.unfocused #1b1b1b #282828 #d4be98 #1b1b1b #1b1b1b
 client.urgent #ea6962 #282828 #d4be98 #ea6962 #ea6962
 default_border pixel 2
