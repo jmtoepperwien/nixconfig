@@ -13,8 +13,6 @@
     ./desktop.nix
   ];
   environment.systemPackages = with pkgs; [
-    virt-manager
-    virtiofsd
     gnome-boxes
     clinfo
   ];
@@ -40,24 +38,6 @@
   virtualisation.virtualbox.host.enable = false;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   virtualisation.virtualbox.host.enableExtensionPack = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [
-          (pkgs.OVMF.override {
-            secureBoot = true;
-            tpmSupport = true;
-          }).fd
-        ];
-      };
-    };
-  };
-  programs.virt-manager.enable = true;
 
   nix.settings.max-jobs = 10;
   nix.settings.cores = 10;
