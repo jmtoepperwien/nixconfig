@@ -53,7 +53,7 @@ in
       alacritty
       element-desktop
       discord
-      mako
+      fnott
       mpv
       steam-run
       feh

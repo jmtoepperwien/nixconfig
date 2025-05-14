@@ -30,4 +30,8 @@
   ];
   documentation.dev.enable = true;
   documentation.man.generateCaches = true;
+
+  # allow on the fly editing of hosts file
+  # will be overwritten on reboot
+  environment.etc.hosts.mode = "0744";
 }
