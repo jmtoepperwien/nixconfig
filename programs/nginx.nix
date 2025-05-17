@@ -50,9 +50,6 @@
 
       # Prevent injection of code in other mime types (XSS Attacks)
       add_header X-Content-Type-Options nosniff;
-
-      # This might create errors
-      proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
     '';
     proxyTimeout = "30m";
     virtualHosts = {
