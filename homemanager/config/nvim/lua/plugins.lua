@@ -456,12 +456,6 @@ return require("lazy").setup({
     end,
   },
   {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = { doc_lines = 30 },
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
-  },
-  {
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",  -- required
