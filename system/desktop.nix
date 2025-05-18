@@ -19,10 +19,6 @@
     openconnect
     networkmanager-openconnect
 
-    # secret management
-    gnome-keyring
-    libsecret
-
     qemu_kvm
     qemu-utils
     spice
@@ -35,6 +31,7 @@
     apptainer
     yubioath-flutter
     keepassxc
+    libsecret
     yubikey-personalization
     yubikey-manager
     libfido2
@@ -42,7 +39,6 @@
     pcsclite
   ];
 
-  services.gnome.gnome-keyring.enable = true;
 
   virtualisation.libvirtd = {
     enable = true;
@@ -108,18 +104,6 @@
     pulse.enable = true;
   };
 
-  # secret management
-  security.pam.services."gnome_keyring" = {
-    enableGnomeKeyring = true;
-    text = ''
-      auth     optional    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
-      session  optional    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
-
-      password  optional    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
-    '';
-    gnupg.enable = true;
-  };
-
   # containers with podman
   virtualisation.podman = {
     enable = true;
@@ -166,7 +150,6 @@
     theme = spicePkgs.themes.onepunch;  # gruvbox
   };
 
-  services.passSecretService.enable = true;
   services.protonmail-bridge = {
     enable = true;
     package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.protonmail-bridge;
