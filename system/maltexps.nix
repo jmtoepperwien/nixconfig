@@ -14,6 +14,12 @@
     ./desktop.nix
   ];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
+
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [
     gutenprint
