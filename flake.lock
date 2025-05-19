@@ -232,7 +232,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "spicetify-nix": "spicetify-nix"
+        "spicetify-nix": "spicetify-nix",
+        "yeetmouse": "yeetmouse",
       }
     },
     "spicetify-nix": {
@@ -315,6 +316,28 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "yeetmouse": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-stable"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1744454082,
+        "narHash": "sha256-z8BMTMm4nqsm6Y45MT5OcCNw6l+vJTg3Nf57cTmxKBg=",
+        "owner": "AndyFilter",
+        "repo": "YeetMouse",
+        "rev": "2f1b8321e738fa8c8885e7641d0f129a55590dc6",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nix",
+        "owner": "AndyFilter",
+        "repo": "YeetMouse",
         "type": "github"
       }
     }

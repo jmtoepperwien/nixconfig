@@ -25,6 +25,10 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix/24.11";
+    yeetmouse = {
+      url = "github:AndyFilter/YeetMouse?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
   };
 
   outputs =
@@ -38,6 +42,7 @@
       nixos-hardware,
       disko,
       deploy-rs,
+      yeetmouse,
       ...
     }@inputs:
     rec {
@@ -69,6 +74,7 @@
               home-manager.users.mtoepperwien = import ./homemanager/maltepc.nix;
               home-manager.extraSpecialArgs = { inherit nixpkgs-unstable; };
             }
+            yeetmouse.nixosModules.default
           ];
         };
         maltexps = nixpkgs-stable.lib.nixosSystem {
