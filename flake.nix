@@ -1,17 +1,18 @@
 {
   inputs = {
     nixpkgs-stable = {
-      url = "github:nixos/nixpkgs/nixos-24.11";
+      url = "github:nixos/nixpkgs/nixos-25.05";
     };
     nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     agenix = {
       url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
@@ -24,9 +25,16 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix/24.11";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
     yeetmouse = {
       url = "github:AndyFilter/YeetMouse?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
@@ -43,6 +51,7 @@
       disko,
       deploy-rs,
       yeetmouse,
+      nix-index-database,
       ...
     }@inputs:
     rec {
@@ -75,6 +84,7 @@
               home-manager.extraSpecialArgs = { inherit nixpkgs-unstable; };
             }
             yeetmouse.nixosModules.default
+            nix-index-database.nixosModules.nix-index
           ];
         };
         maltexps = nixpkgs-stable.lib.nixosSystem {
@@ -98,7 +108,9 @@
               home-manager.users.mtoepperwien = import ./homemanager/maltexps.nix;
               home-manager.extraSpecialArgs = { inherit nixpkgs-unstable; };
             }
+            yeetmouse.nixosModules.default
             nixos-hardware.nixosModules.dell-xps-13-9370
+            nix-index-database.nixosModules.nix-index
           ];
         };
         pi3 = nixpkgs-stable.lib.nixosSystem {
@@ -112,6 +124,7 @@
             ./ssh.nix
             ./common.nix
             agenix.nixosModules.default
+            nix-index-database.nixosModules.nix-index
           ];
         };
         pi4 = nixpkgs-stable.lib.nixosSystem {
@@ -137,6 +150,7 @@
 
             agenix.nixosModules.default
             nixos-hardware.nixosModules.raspberry-pi-4
+            nix-index-database.nixosModules.nix-index
           ];
         };
         server = nixpkgs-stable.lib.nixosSystem {
@@ -167,6 +181,7 @@
             ./programs/ldap.nix
 
             agenix.nixosModules.default
+            nix-index-database.nixosModules.nix-index
           ];
         };
 

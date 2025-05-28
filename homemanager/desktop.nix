@@ -100,16 +100,11 @@ in
       virtualenv
       ripgrep
       pdfgrep
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "DroidSansMono"
-          "SourceCodePro"
-        ];
-      })
       zathura
       wl-clipboard
-      nerdfonts
+      nerd-fonts.sauce-code-pro
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
       xdg-utils
       unzip
       # gnupg
@@ -160,6 +155,40 @@ in
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
+  };
+
+  programs.broot = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.eza = {
+    enable = true;
+    git = true;
+    colors = "auto";
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Jan Malte Töpperwien";
+    userEmail = "m.toepperwien@protonmail.com";
+    signing = {
+      key = "0x4AD13F07CA26E224!";
+      signByDefault = true;
+    };
+    extraConfig = {
+      core = {
+        excludesfile = "/home/mtoepperwien/.config/git/ignore";
+      };
+      "filter \"sqlite3\"" = {
+        clean = "f() { tmpfile=$(mktemp); cat - > $tmpfile; sqlite3 $tmpfile .dump; rm $tmpfile; }; f";
+        smudge = "f() { tmpfile=$(mktemp); sqlite3 $tmpfile; cat $tmpfile; rm $tmpfile; }; f";
+        required = "true";
+      };
+    };
+    delta.enable = true;
+    #riff.enable = true;
+    #gitui.enable = true;
   };
 
   programs.atuin = {
@@ -256,20 +285,22 @@ in
     autocd = true;
     history.save = 1000;
     history.size = 1000;
-    initExtraFirst = ''
-      ZSH_DISABLE_COMPFIX=true
-    '';
-    initExtra = ''
-      setopt extended_glob
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        ZSH_DISABLE_COMPFIX=true
+      '')
+      (lib.mkAfter ''
+        setopt extended_glob
 
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-      function open {
-        for i
-            do (xdg-open "$i" > /dev/null 2> /dev/null &)
-        done
-      }
-    '';
+        function open {
+          for i
+              do (xdg-open "$i" > /dev/null 2> /dev/null &)
+          done
+        }
+      '')
+      ];
     shellAliases = {
       "bat" = "bat --theme gruvbox-dark";
       "tree" = "tree -C";
@@ -338,7 +369,7 @@ in
   };
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-curses;
   };
 
 

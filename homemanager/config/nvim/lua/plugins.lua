@@ -245,9 +245,19 @@ return require("lazy").setup({
   { "folke/twilight.nvim",         config = function() require("twilight").setup() end },
   { "kevinhwang91/nvim-bqf",       dependencies = { { "junegunn/fzf", build = function() vim.fn['fzf#install']() end } } },
   {
-    "smoka7/hop.nvim",
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
     opts = {
-      keys = "arsgmeiqwfpbjluyzxcdvkhtn"
+      labels = "arstgmneioqwfpbjluyzxcdvkh";
+    },
+    -- stylua: ignore
+    keys = {
+      { "<leader>s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "<leader>S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "<leader>r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "<leader>R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
   { "rktjmp/highlight-current-n.nvim" },
@@ -502,6 +512,9 @@ return require("lazy").setup({
     "akinsho/toggleterm.nvim",
     config = true,
   },
+  {
+    "chaoren/vim-wordmotion",
+  }
 }, {
   rocks = {
     hererocks = false, -- recommended if you do not have global installation of Lua 5.1.
