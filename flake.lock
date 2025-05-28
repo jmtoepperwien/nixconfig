@@ -148,7 +148,7 @@
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-stable"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
