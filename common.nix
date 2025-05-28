@@ -42,6 +42,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    comma
     su
     bat
     eza
