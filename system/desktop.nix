@@ -129,7 +129,7 @@
   };
 
   hardware.yeetmouse = {
-    enable = true;
+    enable = false;
     sensitivity = 1.0;
   };
 

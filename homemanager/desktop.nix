@@ -56,7 +56,6 @@ in
       fnott
       mpv
       steam-run
-      feh
       obsidian
       zotero
       sqlite
@@ -300,6 +299,10 @@ in
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+  };
+
+  programs.feh = {
+    enable = true;
   };
 
   # default applications
