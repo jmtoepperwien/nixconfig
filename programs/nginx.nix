@@ -7,15 +7,15 @@
 
 {
   systemd.tmpfiles.rules = [
-    "d /var/www 0755 nginx nginx"
+    "d /var/www 0750 nginx nginx"
   ];
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "m.toepperwien@protonmail.com";
   security.acme.certs."mosihome.duckdns.org".extraDomainNames = [
     "mosigit.duckdns.org"
-    "mosinextcloud.duckdns.org"
     "mosiseafile.duckdns.org"
     "mosildap.duckdns.org"
+    "mosiphotos.duckdns.org"
   ];
   users.users.nginx.extraGroups = [ "rtorrent" "media" ];
   services.nginx = {
@@ -58,7 +58,7 @@
         enableACME = true;
         locations = {
           "/.well-known/acme-challenge" = {
-            root = "/var/www";
+            root = "/var/lib/acme/";
           };
           "/files/" = {
             root = "/var/www/";
@@ -184,16 +184,12 @@
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
         locations = {
+          "/.well-known/acme-challenge" = {
+            root = "/var/lib/acme/";
+          };
           "/" = {
             proxyPass = "http://localhost:3000/";
           };
-        };
-      };
-      "mosinextcloud.duckdns.org" = {
-        forceSSL = true;
-        useACMEHost = "mosihome.duckdns.org";
-        locations."/.well-known/acme-challenge" = {
-          root = "/var/www";
         };
       };
       "mosildap.duckdns.org" = {
@@ -201,16 +197,26 @@
         useACMEHost = "mosihome.duckdns.org";
         locations."/".proxyPass = "http://localhost:17170";
         locations."/.well-known/acme-challenge" = {
-          root = "/var/www";
+          root = "/var/lib/acme/";
         };
       };
       "mosiseafile.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
         locations."/.well-known/acme-challenge" = {
-          root = "/var/www";
+          root = "/var/lib/acme/";
         };
       };
+      "mosiphotos.duckdns.org" = {
+        forceSSL = true;
+        useACMEHost = "mosihome.duckdns.org";
+        locations = {
+          "/.well-known/acme-challenge" = {
+            root = "/var/lib/acme/";
+          };
+        };
+      };
+
       "192.168.1.234" = {
         forceSSL = false;
         locations = {

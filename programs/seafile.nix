@@ -14,8 +14,8 @@
   ];
   age.secrets.ldap_bind_passwd_seafile = {
     file = ../secrets/ldap_bind_passwd.age;
-    owner = "seafile";
-    group = "seafile";
+    owner = "${config.services.seafile.user}";
+    group = "${config.services.seafile.group}";
   };
   services.seafile = {
     enable = true;

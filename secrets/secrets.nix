@@ -64,4 +64,9 @@ in
     maltexps
     serverhost
   ];
+  "webdav.age".publicKeys = [
+    maltepc
+    maltexps
+    serverhost
+  ];
 }

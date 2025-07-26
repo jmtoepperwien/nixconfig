@@ -12,6 +12,7 @@
       "nextcloud"
       "gitea"
       "lldap"
+      "immich"
     ];
     ensureUsers = [
       {
@@ -26,6 +27,10 @@
         name = "lldap";
         ensureDBOwnership = true;
       }
+      {
+        name = "immich";
+        ensureDBOwnership = true;
+      }
     ];
     identMap = ''
       superuser_map root postgres
@@ -35,6 +40,9 @@
     '';
     authentication = pkgs.lib.mkOverride 10 ''
       local sameuser all peer map=superuser_map
+      local all all trust
+      host  all all 127.0.0.1/32 trust
+      host  all all ::1/128      trust
     '';
   };
 }

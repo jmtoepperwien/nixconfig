@@ -7,7 +7,6 @@
   ...
 }:
 let
-  cross-seedPackage = pkgs.callPackage ./cross-seed.nix { };
   cross-seedHook = pkgs.writeShellScriptBin "cross-seed-hook" ''
     source ${config.age.secrets.cross-seed.path}
     ${pkgs.curl}/bin/curl -XPOST http://127.0.0.1:2468/api/webhook \
@@ -50,7 +49,7 @@ let
   '';
   autotorrent2Package = pkgs.callPackage ./autotorrent2.nix { };
   prunerrPackage = pkgs.callPackage ./prunerr.nix { };
-  autobrrPackage = pkgs.callPackage ./autobrr.nix { };
+  autobrrPackage = pkgs.autobrr;
   autobrrFreeSpace = pkgs.writeShellScriptBin "autobrr-free-space" ''
     #!/bin/sh
     set -e
@@ -118,7 +117,7 @@ in
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.flood
     pkgs.unpackerr
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.recyclarr
-    cross-seedPackage
+    pkgs.cross-seed
     pkgs.unrar
     autotorrent2Package
     prunerrPackage
@@ -136,6 +135,7 @@ in
   ];
   services.rtorrent = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.rtorrent;
     user = "rtorrent";
     group = "media";
     dataPermissions = "0775";
@@ -400,7 +400,7 @@ in
         Group = "rtorrent";
         WorkingDirectory = "/var/lib/cross-seed";
         NetworkNamespacePath = "/var/run/netns/vpn";
-        ExecStart = "${cross-seedPackage}/bin/cross-seed daemon --torznab ${trackers} --search-cadence ${search-cadence} --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-episodes --include-non-videos --action save --match-mode risky --verbose --fuzzy-size-threshold ${fuzzy-thr}";
+        ExecStart = "${pkgs.cross-seed}/bin/cross-seed daemon --torznab ${trackers} --exclude-older '720 days' --exclude-recent-search '90 days' --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-single-episodes --include-non-videos --action save --match-mode partial --verbose --fuzzy-size-threshold ${fuzzy-thr} --api-key 6ef14749144a954b3cd2735fbc7c4c9db8d4e28b1c9cb715";
         Restart = "always";
       };
     };
