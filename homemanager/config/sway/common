@@ -39,7 +39,8 @@ input type:pointer {
   pointer_accel 0
 }
 # hide mouse cursor
-seat * hide_cursor when-typing enable
+# disable for now, is buggy but patch not continuing currently (https://github.com/swaywm/sway/pull/8321)
+seat * hide_cursor when-typing disable
 input type:keyboard {
   xkb_layout us
   xkb_options caps:super,compose:menu

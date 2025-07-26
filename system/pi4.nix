@@ -55,6 +55,9 @@
     enable = true;
     package = pkgs.mesa;
   };
+  hardware.opengl = {
+    enable = true;
+  };
   # sound settings
   security.rtkit.enable = true;
   services.pipewire = {

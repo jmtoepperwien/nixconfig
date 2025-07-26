@@ -51,6 +51,7 @@ in
     with pkgs;
     [
       alacritty
+      warp-terminal
       element-desktop
       discord
       fnott
@@ -63,7 +64,6 @@ in
       neovim-remote
       luajitPackages.jsregexp # dependency of luasnip neovim plugin
       tree-sitter
-      nextcloud-client
       jq
       inkscape
       imv
@@ -95,6 +95,7 @@ in
       nautilus
       firefox
       (python3.withPackages python-packages)
+      uv
       (lua5_1.withPackages lua-packages)
       # poetry ignore for now due to dependency missing
       virtualenv
@@ -121,6 +122,8 @@ in
       taskwarrior3
       taskwarrior-tui
       pdfpc
+      qmk
+      amdgpu_top
     ]
     ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [
       neovim-qt
@@ -207,12 +210,12 @@ in
 
   programs.neovim = {
     enable = true;
-    package = nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
+    #package = nixpkgs-unstable.legacyPackages.${pkgs.system}.neovim-unwrapped;
     extraLuaPackages = ps: [
       ps.magick
       ps.luarocks
     ];
-    extraPackages = [ pkgs.imagemagick ];
+    extraPackages = [ pkgs.imagemagick pkgs.pyright pkgs.gcc_multi pkgs.nodejs_24 ];
     extraPython3Packages =
       ps: with ps; [
         pynvim
@@ -288,6 +291,7 @@ in
     initContent = lib.mkMerge [
       (lib.mkBefore ''
         ZSH_DISABLE_COMPFIX=true
+        skip_global_compinit=1
       '')
       (lib.mkAfter ''
         setopt extended_glob
@@ -321,7 +325,6 @@ in
       plugins = [
         "vi-mode"
         "git"
-        "wd"
         "zoxide"
       ];
     };
@@ -346,6 +349,7 @@ in
       "x-scheme-handler/https" = [ "firefox.desktop" ];
       "x-scheme-handler/about" = [ "firefox.desktop" ];
       "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+      "x-scheme-handler/steam" = [ "steam.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "image/png" = [ "feh.desktop" ];
     };

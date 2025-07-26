@@ -22,6 +22,7 @@
         vulkan-tools
         vulkan-headers
         vulkan-loader
+        mangohud
       ];
     })
     # wine
