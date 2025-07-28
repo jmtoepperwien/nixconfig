@@ -41,6 +41,7 @@ let
       en
       en-computers
       en-science
+      de
     ];
   keepass-database = "~/drive/Passwords.kdbx";
 in
