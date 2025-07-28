@@ -14,6 +14,8 @@
     gnumake
     cmake
     git
+    conform
+    pre-commit
     gnused
     xz
     zip
