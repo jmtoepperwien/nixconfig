@@ -398,9 +398,10 @@ in
       serviceConfig = {
         User = "rtorrent";
         Group = "rtorrent";
+        EnvironmentFile = "${config.age.secrets.cross-seed.path}";
         WorkingDirectory = "/var/lib/cross-seed";
         NetworkNamespacePath = "/var/run/netns/vpn";
-        ExecStart = "${pkgs.cross-seed}/bin/cross-seed daemon --torznab ${trackers} --exclude-older '720 days' --exclude-recent-search '90 days' --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-single-episodes --include-non-videos --action save --match-mode partial --verbose --fuzzy-size-threshold ${fuzzy-thr} --api-key 6ef14749144a954b3cd2735fbc7c4c9db8d4e28b1c9cb715";
+        ExecStart = "${pkgs.cross-seed}/bin/cross-seed daemon --torznab ${trackers} --exclude-older '720 days' --exclude-recent-search '90 days' --rss-cadence ${rss-cadence} --delay ${delay} --snatch-timeout ${snatch-timeout} --search-timeout ${search-timeout} --torrent-dir ${torrent-dir} --output-dir ${output-dir} --include-single-episodes --include-non-videos --action save --match-mode partial --verbose --fuzzy-size-threshold ${fuzzy-thr} --api-key $apikey";
         Restart = "always";
       };
     };
