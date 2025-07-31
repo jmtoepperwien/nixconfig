@@ -350,10 +350,7 @@
               allow 192.168.1.0/24;
               deny all;
               autoindex on;
-              proxy_max_temp_file_size 0;
               aio threads;
-              directio 16M;
-              output_buffers 2 1M;
               sendfile on;
               sendfile_max_chunk 1M;
               tcp_nopush on;
