@@ -57,6 +57,12 @@
         forceSSL = true;
         enableACME = true;
         locations = {
+          "/robots.txt" = {
+            extraConfig = ''
+              rewrite ^/(.*)  $1;
+              return 200 "User-agent: *\nDisallow: /";
+            '';
+          };
           "/.well-known/acme-challenge" = {
             root = "/var/lib/acme/";
           };
@@ -184,6 +190,12 @@
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
         locations = {
+          "/robots.txt" = {
+            extraConfig = ''
+              rewrite ^/(.*)  $1;
+              return 200 "User-agent: *\nDisallow: /";
+            '';
+          };
           "/.well-known/acme-challenge" = {
             root = "/var/lib/acme/";
           };
@@ -195,22 +207,44 @@
       "mosildap.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
-        locations."/".proxyPass = "http://localhost:17170";
-        locations."/.well-known/acme-challenge" = {
-          root = "/var/lib/acme/";
+        locations = {
+          "/".proxyPass = "http://localhost:17170";
+          "/robots.txt" = {
+            extraConfig = ''
+              rewrite ^/(.*)  $1;
+              return 200 "User-agent: *\nDisallow: /";
+            '';
+          };
+          "/.well-known/acme-challenge" = {
+            root = "/var/lib/acme/";
+          };
         };
       };
       "mosiseafile.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
-        locations."/.well-known/acme-challenge" = {
-          root = "/var/lib/acme/";
+        locations = {
+          "/robots.txt" = {
+            extraConfig = ''
+              rewrite ^/(.*)  $1;
+              return 200 "User-agent: *\nDisallow: /";
+            '';
+          };
+          "/.well-known/acme-challenge" = {
+            root = "/var/lib/acme/";
+          };
         };
       };
       "mosiphotos.duckdns.org" = {
         forceSSL = true;
         useACMEHost = "mosihome.duckdns.org";
         locations = {
+          "/robots.txt" = {
+            extraConfig = ''
+              rewrite ^/(.*)  $1;
+              return 200 "User-agent: *\nDisallow: /";
+            '';
+          };
           "/.well-known/acme-challenge" = {
             root = "/var/lib/acme/";
           };
