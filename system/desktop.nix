@@ -254,8 +254,15 @@
     theme = spicePkgs.themes.onepunch;  # gruvbox
   };
 
+  security.pam.services.login.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
+
   services.protonmail-bridge = {
     enable = true;
     package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.protonmail-bridge;
+  };
+  systemd.user.services.protonmail-bridge = {
+    wantedBy = [ "default.target" ];
+    after = [ "default.target" ];
   };
 }

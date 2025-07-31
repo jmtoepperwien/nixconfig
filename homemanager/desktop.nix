@@ -113,6 +113,7 @@ in
       gnupg
       pinentry-curses
       pass
+      gcr  # Provides org.gnome.keyring.SystemPrompter
 
       libreoffice-fresh
       grim
