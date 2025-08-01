@@ -168,7 +168,7 @@ in
       ##     the string before the 1st comma is unique for all entries (watch_directory in example)
       ##     the number after the 1st comman is unique for all entries (1 in example)
 
-      #schedule2 = watch_directory,1,5,"load.start_verbose=/var/lib/autobrr/watch/*.torrent,d.directory.set=${config.server.media_folder}/downloads/torrent/,d.delete_tied=,d.custom1.set=autobrr"
+      schedule2 = watch_directory,1,30,"load.start_verbose=/var/lib/rtorrent/watch/*.torrent,d.directory.set=${config.server.media_folder}/downloads/torrent/,d.delete_tied="
       ## set added time
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
