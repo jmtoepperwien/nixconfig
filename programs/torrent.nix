@@ -172,6 +172,12 @@ in
       ## set added time
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
+      # enable flood
+      method.redirect=load.throw,load.normal
+      method.redirect=load.start_throw,load.start
+      method.insert=d.down.sequential,value|const,0
+      method.insert=d.down.sequential.set,value|const,0
+
       ## automatically execute cross-seed search on finished downloads
       method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.hash=}"
 
