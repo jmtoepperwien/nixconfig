@@ -94,7 +94,6 @@ in
       ungoogled-chromium
       google-chrome
       nautilus
-      firefox
       (python3.withPackages python-packages)
       uv
       (lua5_1.withPackages lua-packages)
@@ -335,6 +334,11 @@ in
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+  };
+
+  programs.firefox = {
+    enable = true;
+    nativeMessagingHosts = [ pkgs.fnott ];
   };
 
   programs.feh = {

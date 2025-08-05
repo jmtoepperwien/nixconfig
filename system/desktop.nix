@@ -265,4 +265,17 @@
     wantedBy = [ "default.target" ];
     after = [ "default.target" ];
   };
+
+  systemd.user.services.fnott = {
+    serviceConfig = {
+      Type = "dbus";
+      BusName = "org.freedesktop.Notifications";
+      ExecStart = lib.getExe pkgs.fnott;
+    };
+
+    unitConfig = {
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+  };
 }
