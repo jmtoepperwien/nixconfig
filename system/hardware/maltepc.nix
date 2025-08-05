@@ -30,6 +30,8 @@ in
   hardware.amdgpu.opencl.enable = true;
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    "d /home/mtoepperwien/storage 0770 mtoepperwien mtoepperwien"
+    "d /home/mtoepperwien/storage/games 0770 mtoepperwien mtoepperwien"
   ];
 
   fileSystems."/" = {
@@ -80,6 +82,16 @@ in
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/66FF-13D9";
     fsType = "vfat";
+  };
+
+  fileSystems."/home/mtoepperwien/storage/games" = {
+    device = "/dev/disk/by-uuid/4009d1a8-5e11-4739-b05f-72ef61ae6369";
+    fsType = "btrfs";
+    options = [
+      "subvol=@games"
+      "defaults"
+      "compress=zstd"
+    ];
   };
 
   services.rpcbind.enable = true; # needed for NFS
