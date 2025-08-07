@@ -336,6 +336,10 @@ in
     enableZshIntegration = true;
   };
 
+  services.fnott = {
+    enable = true;
+  };
+
   programs.firefox = {
     enable = true;
     nativeMessagingHosts = [ pkgs.fnott ];
