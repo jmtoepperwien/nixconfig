@@ -8,7 +8,7 @@
 {
   services.immich = {
     enable = true;
-    settings.server.externalDomain = "https://mosihome.duckdns.org/jellyfin/";
+    settings.server.externalDomain = "https://mosiphotos.duckdns.org/";
   };
   services.nginx.virtualHosts."mosiphotos.duckdns.org" = {
     locations."/" = {
