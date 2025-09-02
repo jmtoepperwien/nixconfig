@@ -58,13 +58,20 @@
     pkgs.fuse
   ];
 
+  age.secrets.wifipassword.file = ../secrets/wifipassword.age;
   networking = {
     hostId = "1eb062bf";
     hostName = "server"; # Define your hostname.
     firewall.enable = true;
     nftables.enable = true;
     firewall.allowedTCPPorts = [ 53589 ];
-    networkmanager.enable = true;
+    wireless = {
+      enable  = true;
+      secretsFile = config.age.secrets.wifipassword.path;
+      userControlled.enable = true;
+      networks."Mosi".pskRaw = "ext:mosi_pskraw";
+    };
+    networkmanager.enable = false;
   };
 
   users.groups.mtoepperwien = { };

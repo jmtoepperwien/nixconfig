@@ -359,6 +359,7 @@ in
       "x-scheme-handler/https" = [ "firefox.desktop" ];
       "x-scheme-handler/about" = [ "firefox.desktop" ];
       "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+      "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
       "x-scheme-handler/steam" = [ "steam.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "image/png" = [ "feh.desktop" ];
