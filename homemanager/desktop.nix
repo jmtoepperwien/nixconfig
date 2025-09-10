@@ -248,6 +248,8 @@ in
   };
   programs.kitty = {
     enable = true;
+    shellIntegration.enableZshIntegration = true;
+    shellIntegration.enableBashIntegration = true;
     font = {
       name = "SauceCodePro Nerd Font Mono";
       size = 15;
