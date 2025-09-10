@@ -382,10 +382,6 @@ in
       disable-ccid = true;
     };
   };
-  services.gpg-agent = {
-    enable = true;
-    pinentry.package = pkgs.pinentry-curses;
-  };
 
 
   # emails

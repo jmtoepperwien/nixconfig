@@ -96,6 +96,7 @@
     enable = true;
     pinentryPackage = pkgs.pinentry-curses;
     enableSSHSupport = true;
+    enableExtraSocket = true;
   };
 
   programs.zsh = {
