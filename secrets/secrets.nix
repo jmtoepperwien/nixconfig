@@ -1,5 +1,5 @@
 let
-  maltepc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMIj8ipXRTEQYj+uPRlrSiJnybsC4lguYAA3KSS2/c3i";
+  maltepc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMq7G/30vynsSVY3P+F8XNe9h8/QdRP5R/TWw+jaKnr cardno:32_239_307";
   maltexps = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOBi7azxnZ0RhYXaIoE/axNkfuxnbaJ8Gs3CvLc3OT6 mtoepperwien@maltexps";
   users = [ maltepc ];
 
