@@ -307,11 +307,12 @@ return require("lazy").setup({
   -- }}} Jupyter Notebooks in Neovim
 
   {
-    'nvim-focus/focus.nvim',
-    version = false,
-    config = function()
-      require("focus").setup()
-    end
+    "folke/zen-mode.nvim",
+    opts = {
+      window = {
+        width = 0.85
+      }
+    }
   },
   {
     "epwalsh/obsidian.nvim",
