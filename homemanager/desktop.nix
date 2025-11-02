@@ -125,6 +125,7 @@ in
       pdfpc
       qmk
       amdgpu_top
+      solvespace  # nice and easy CAD program
     ]
     ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [
       neovim-qt
