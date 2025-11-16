@@ -130,11 +130,6 @@
     ibus.engines = with pkgs.ibus-engines; [ anthy ];
   };
 
-  hardware.yeetmouse = {
-    enable = false;
-    sensitivity = 1.0;
-  };
-
   services.preload.enable = true;
 
   # Yubikey

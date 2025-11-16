@@ -1,17 +1,13 @@
 let
   maltepc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMq7G/30vynsSVY3P+F8XNe9h8/QdRP5R/TWw+jaKnr cardno:32_239_307";
   maltexps = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOBi7azxnZ0RhYXaIoE/axNkfuxnbaJ8Gs3CvLc3OT6 mtoepperwien@maltexps";
-  users = [ maltepc ];
 
   maltepchost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2uFpFcaacIH9yLyyABE0u2K1zuV/fph7RDA76zZ0wJ";
   maltexpshost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ92znHGW5UwpOfOJD/fejUKrsQLpSwSh4dt1xtIrLLs";
   pi3host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTx5o298UgZ3gIBzFWwE+eOW3ACy0gXtdx71fcLdNvS";
   serverhost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEbDhNXRckcZW2FoQmR6CQFNG6XANuLcijh2vc3i1C3O";
-  systems = [
-    maltepchost
-    pi3host
-    serverhost
-  ];
+  workpchost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9Wf6CWb9Z5i3Y6XqUVfK7dWyCqG3SDAV/E5HAmJOj2";
+  worknotebookhost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGQLUJ+HHfsKHO2rqvj8ubCXoxZhCxlAG8i4bg8l1i1+";
 in
 {
   "wifipassword.age".publicKeys = [
