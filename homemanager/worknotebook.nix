@@ -16,7 +16,7 @@
 
   home.file.".config/sway/config" = {
     text = ''
-      include worklaptop
+      include worknotebook
       include common
     '';
   };

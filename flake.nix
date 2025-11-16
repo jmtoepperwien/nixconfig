@@ -56,6 +56,30 @@
     }@inputs:
     rec {
       nixosConfigurations = {
+        jmtoepperwiennotebook = nixpkgs-stable.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            inherit nixpkgs-stable;
+          };
+          modules = [
+            disko.nixosModules.disko
+            ./system/worknotebook.nix
+            ./graphical/window_manager.nix
+            ./common.nix
+            ./ssd.nix
+            agenix.nixosModules.default
+            spicetify-nix.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.mtoepperwien = import ./homemanager/worknotebook.nix;
+              home-manager.extraSpecialArgs = { inherit nixpkgs-unstable; };
+            }
+            nix-index-database.nixosModules.nix-index
+          ];
+        };
         jmtoepperwienpc = nixpkgs-stable.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
