@@ -8,7 +8,7 @@ output DP-2 {
 }
 output DP-3 {
   mode 3840x2160@120Hz
-  pos 1080 420
+  pos 1080 550
   scale 2
 }
 output DP-4 {
