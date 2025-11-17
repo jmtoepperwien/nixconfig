@@ -474,6 +474,42 @@ in
         thunderbird.enable = true;
         passwordCommand = "keepassxc-cli clip ${keepass-database} 'LUH Mail' -y 2:$(${pkgs.yubikey-manager}/bin/ykman list -s)";
       };
+    "ai" =
+      let
+        mailboxFolders = [
+          "Inbox"
+          "Sent"
+          "Archive"
+        ];
+      in
+      {
+        address = "m.toepperwien@ai.uni-hannover.de";
+        userName = "m.toepperwien@ai.uni-hannover.de";
+        realName = "Jan Malte Töpperwien";
+        mbsync = {
+          enable = true;
+          create = "maildir";
+        };
+        msmtp.enable = true;
+        smtp = {
+          host = "smtp.uni-hannover.de";
+          port = 587;
+          tls.enable = true;
+          tls.useStartTls = true;
+        };
+        imap = {
+          host = "mail.uni-hannover.de";
+          port = 993;
+          tls.enable = true;
+        };
+        neomutt = {
+          enable = true;
+          extraMailboxes = mailboxFolders;
+        };
+        thunderbird.enable = true;
+        passwordCommand = "keepassxc-cli clip ${keepass-database} 'AI Mail' -y 2:$(${pkgs.yubikey-manager}/bin/ykman list -s)";
+      };
+
     "gmail" = {
       address = "m.toepperwien@gmail.com";
       userName = "m.toepperwien@gmail.com";

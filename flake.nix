@@ -63,6 +63,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./graphical/options.nix
             disko.nixosModules.disko
             ./system/worknotebook.nix
             ./graphical/window_manager.nix
@@ -87,6 +88,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./graphical/options.nix
             disko.nixosModules.disko
             ./system/work.nix
             ./graphical/window_manager.nix
@@ -117,6 +119,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./graphical/options.nix
             ./system/maltepc.nix
             ./graphical/window_manager.nix
             ./common.nix
@@ -142,6 +145,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./graphical/options.nix
             ./system/maltexps.nix
             ./graphical/window_manager.nix
             ./common.nix
@@ -168,6 +172,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./graphical/options.nix
             ./system/pi3.nix
             ./ssh.nix
             ./common.nix
@@ -182,6 +187,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./graphical/options.nix
             ./system/server_variables.nix
             ./system/pi4.nix
             ./ssh.nix
@@ -208,6 +214,7 @@
             inherit nixpkgs-stable;
           };
           modules = [
+            ./graphical/options.nix
             disko.nixosModules.disko
             ./system/server_variables.nix
             ./system/server.nix
