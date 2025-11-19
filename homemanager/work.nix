@@ -6,7 +6,7 @@
   ];
 
   home.packages = with pkgs; [
-    mattermost
+    mattermost-desktop
   ];
 
   home.stateVersion = "25.05";

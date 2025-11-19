@@ -7,25 +7,25 @@ end
 
 -- to enable nvim-cmp (use in setup of lsps)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local on_attach = function(client, bufnr)
-  require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
-end
 
 -- Python
-require('lspconfig').pyright.setup { capabilities = capabilities, on_attach = on_attach, settings = {
+vim.lsp.config("pyright", {
+  capabilities = capabilities,
+  settings = {
     exclude = { ".venv" },
     venvPath = ".",
     venv = ".venv"
-  } }
+  }
+})
+vim.lsp.enable({ "pyright" })
 
 -- Lua
-require'lspconfig'.lua_ls.setup {
+vim.lsp.config("lua_ls", {
   capabilities = capabilities,
-  on_attach = on_attach,
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
-      if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+      if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
         return
       end
     end
@@ -53,14 +53,20 @@ require'lspconfig'.lua_ls.setup {
   settings = {
     Lua = {}
   }
-}
+})
+vim.lsp.enable({ "lua_ls" })
 
 -- Haskell
-require('lspconfig').hls.setup { capabilities = capabilities, on_attach = on_attach,
-  filetypes = { 'haskell', 'lhaskell', 'cabal' } }
+vim.lsp.config("hls", {
+  capabilities = capabilities,
+  filetypes = { 'haskell', 'lhaskell', 'cabal' }
+})
+vim.lsp.enable({ "hls" })
 
 -- C/C++
-require('lspconfig').clangd.setup { capabilities = capabilities, on_attach = on_attach, }
+vim.lsp.config("clangd", { capabilities = capabilities, })
+vim.lsp.enable({ "clangd" })
 
 -- Nix
-require('lspconfig').nixd.setup { capabilities = capabilities, on_attach = on_attach, }
+vim.lsp.config("nixd", { capabilities = capabilities, })
+vim.lsp.enable({ "nixd" })
