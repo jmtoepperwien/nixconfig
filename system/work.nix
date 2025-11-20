@@ -16,7 +16,36 @@
   ];
   environment.systemPackages = with pkgs; [
     clinfo
+    cudaPackages.cudatoolkit
+    cudaPackages.cuda_nvcc
+    cudaPackages.cuda_opencl
   ];
+  # Use extra caches for packages
+  nix.settings.substituters = [
+    "https://nix-community.cachix.org"
+    "https://cache.nixos-cuda.org"
+  ];
+  nix.settings.trusted-public-keys = [
+    # Compare to the key published at https://nix-community.org/cache
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.cudaSupport = false;
+  nixpkgs.config.allowUnfreePredicate =
+    p:
+    builtins.all (
+      license:
+      license.free
+      || builtins.elem license.shortName [
+        "CUDA EULA"
+        "cuDNN EULA"
+        "cuTENSOR EULA"
+        "NVidia OptiX EULA"
+      ]
+    ) (if builtins.isList p.meta.license then p.meta.license else [ p.meta.license ]);
+
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -30,6 +59,7 @@
     modesetting.enable = true;
     open = true;
   };
+  hardware.nvidia-container-toolkit.enable = true;
   programs.sway.extraOptions = [ "--unsupported-gpu" ];
   # vulkan
   hardware.graphics.extraPackages = with pkgs; [
