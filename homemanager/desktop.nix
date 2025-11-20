@@ -85,6 +85,7 @@ in
       (aspellWithDicts aspell-dicts)
       qutebrowser
       sway
+      swaylock
       hyprland
       slurp
       grim
