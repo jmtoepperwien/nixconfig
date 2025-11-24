@@ -390,7 +390,10 @@ return require("lazy").setup({
     },
   },
   {
-    "nvim-treesitter/nvim-treesitter-context"
+    "nvim-treesitter/nvim-treesitter-context",
+    config = {
+      max_lines = 5,
+    },
   },
   {
     "amitds1997/remote-nvim.nvim",

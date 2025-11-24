@@ -23,12 +23,12 @@ set $monitor_right "DP-2"
 
 # Bind workspaces to monitors
 workspace 1 output $monitor_middle
-workspace 2 output $monitor_right
-workspace 3 output $monitor_left
-workspace 4 output $monitor_middle
+workspace 2 output $monitor_middle
+workspace 3 output $monitor_middle
+workspace 4 output $monitor_right
 workspace 5 output $monitor_right
-workspace 6 output $monitor_left
-workspace 7 output $monitor_middle
-workspace 8 output $monitor_right
+workspace 6 output $monitor_right
+workspace 7 output $monitor_left
+workspace 8 output $monitor_left
 workspace 9 output $monitor_left
 workspace 10 output $monitor_middle
