@@ -212,6 +212,9 @@ in
         smudge = "f() { tmpfile=$(mktemp); sqlite3 $tmpfile; cat $tmpfile; rm $tmpfile; }; f";
         required = "true";
       };
+      merge.tool = "meld";
+      mergetool.prompt = "false";
+      "mergetool \"meld\"".cmd = "${pkgs.meld}/bin/meld \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output=\"$MERGED\"";
     };
     delta.enable = true;
     #riff.enable = true;
