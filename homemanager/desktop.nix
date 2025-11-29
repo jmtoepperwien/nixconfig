@@ -127,6 +127,13 @@ in
       qmk
       amdgpu_top
       solvespace  # nice and easy CAD program
+      bottles
+      appimage-run
+      aria2
+      gimp
+      drawio
+      hexchat
+      pocket-casts
     ]
     ++ (with nixpkgs-unstable.legacyPackages.${pkgs.system}; [
       neovim-qt
