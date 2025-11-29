@@ -31,7 +31,6 @@
     vulkan-headers
     vulkan-loader
     rocmPackages.clr.icd
-    amdvlk
   ];
 
   # virtualisation

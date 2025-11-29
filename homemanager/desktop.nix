@@ -204,13 +204,9 @@ in
 
   programs.git = {
     enable = true;
-    userName = "Jan Malte Töpperwien";
-    userEmail = "m.toepperwien@protonmail.com";
-    signing = {
-      key = "0x4AD13F07CA26E224!";
-      signByDefault = true;
-    };
-    extraConfig = {
+    settings = {
+      user.name = "Jan Malte Töpperwien";
+      user.email = "m.toepperwien@protonmail.com";
       core = {
         excludesfile = "/home/mtoepperwien/.config/git/ignore";
       };
@@ -223,9 +219,16 @@ in
       mergetool.prompt = "false";
       "mergetool \"meld\"".cmd = "${pkgs.meld}/bin/meld \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output=\"$MERGED\"";
     };
-    delta.enable = true;
+    signing = {
+      key = "0x4AD13F07CA26E224!";
+      signByDefault = true;
+    };
     #riff.enable = true;
     #gitui.enable = true;
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   programs.atuin = {

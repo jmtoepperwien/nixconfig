@@ -47,7 +47,7 @@
     su
     bat
     eza
-    du-dust
+    dust
     duf
     fzf
     fd
