@@ -123,6 +123,7 @@
             ./system/maltepc.nix
             ./graphical/window_manager.nix
             ./common.nix
+            ./dns.nix
             ./ssd.nix
             ./ssh.nix
             agenix.nixosModules.default
@@ -149,6 +150,7 @@
             ./system/maltexps.nix
             ./graphical/window_manager.nix
             ./common.nix
+            ./dns.nix
             ./ssd.nix
             ./programs/ppti.nix
             agenix.nixosModules.default
@@ -176,6 +178,7 @@
             ./system/pi3.nix
             ./ssh.nix
             ./common.nix
+            ./dns.nix
             agenix.nixosModules.default
             nix-index-database.nixosModules.nix-index
           ];
@@ -192,6 +195,7 @@
             ./system/pi4.nix
             ./ssh.nix
             ./common.nix
+            ./dns.nix
             ./programs/nginx.nix
             ./programs/postgresql.nix
             ./programs/gitea.nix
@@ -221,6 +225,7 @@
             ./system/hardware/server.nix
             ./ssh.nix
             ./common.nix
+            ./dns.nix
             ./programs/nginx.nix
             ./programs/postgresql.nix
             ./programs/gitea.nix

@@ -150,13 +150,6 @@
   # drive health checks
   services.smartd.enable = true;
 
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
-  networking.networkmanager.dns = "none";
-  networking.dhcpcd.extraConfig = "nohook resolv.conf";
-
   virtualisation = {
     oci-containers.backend = "podman";
     podman = {
