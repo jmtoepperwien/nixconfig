@@ -68,7 +68,6 @@ in
       jq
       inkscape
       imv
-      nodejs
       nodePackages.npm
       wget
       curl
