@@ -111,7 +111,7 @@ in
       unzip
       # gnupg
       gnupg
-      pinentry-curses
+      pinentry-qt
       pass
       gcr  # Provides org.gnome.keyring.SystemPrompter
 

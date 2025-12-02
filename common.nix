@@ -66,7 +66,7 @@
     ncdu
     pass
     gnupg
-    pinentry-curses
+    pinentry-tty
     tmux
     tree
     tealdeer
