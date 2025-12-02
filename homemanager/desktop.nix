@@ -184,6 +184,16 @@ in
     enable = true;
     package = pkgs.vscode.fhs;
   };
+  # [TODO: maybe this can be removed in the future. Right now electron needs gpu disabled]
+  xdg.desktopEntries."code" = {
+    name = "Visual Studio Code";
+    exec = "code --new-window --enable-ozone --ozone-platform=wayland --disable-gpu %F";
+  };
+  xdg.desktopEntries."obsidian" = {
+    name = "Obsidian";
+    exec = "obsidian --enable-ozone --ozone-platform=wayland --disable-gpu %u";
+  };
+
 
   programs.direnv = {
     enable = true;
@@ -401,6 +411,7 @@ in
       "x-scheme-handler/steam" = [ "steam.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "image/png" = [ "feh.desktop" ];
+      "x-scheme-handler/obsidian" = [ "obsidian.desktop" ];
     };
   };
 
