@@ -94,6 +94,7 @@
             ./graphical/window_manager.nix
             ./common.nix
             ./ssd.nix
+            ./ssh.nix
             agenix.nixosModules.default
             spicetify-nix.nixosModules.default
             home-manager.nixosModules.home-manager
