@@ -54,6 +54,7 @@ in
       alacritty
       warp-terminal
       element-desktop
+      ferdium
       discord
       fnott
       mpv
