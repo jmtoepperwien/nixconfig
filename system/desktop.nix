@@ -126,8 +126,6 @@
     ibus.engines = with pkgs.ibus-engines; [ anthy ];
   };
 
-  services.preload.enable = true;
-
   # Yubikey
   hardware.gpgSmartcards.enable = true;
   hardware.ledger.enable = true;
