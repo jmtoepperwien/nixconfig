@@ -21,6 +21,7 @@
     settings = {
       ldap_base_dn = "dc=mosi,dc=com";
       ldap_user_email = "m.toepperwien@protonmail.com";
+      ldap_user_pass = "lldapdefaultpassword";
       ldap_user_dn = "admin";
       database_url = "postgres://%2Frun%2Fpostgresql/lldap";
       http_url = "http://mosildap.duckdns.org";

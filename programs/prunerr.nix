@@ -42,6 +42,8 @@ let
   main-wrapper = python3Packages.buildPythonPackage {
     pname = "main-wrapper";
     version = "0.1.1";
+    pyproject = true;
+    build-system = [ python3Packages.setuptools ];
     src = fetchPypi {
       pname = "main-wrapper";
       version = "0.1.1";
@@ -56,6 +58,8 @@ let
   service-logging = python3Packages.buildPythonPackage {
     pname = "service-logging";
     version = "0.1.1";
+    pyproject = true;
+    build-system = [ python3Packages.setuptools ];
     src = fetchPypi {
       pname = "service-logging";
       version = "0.1.1";

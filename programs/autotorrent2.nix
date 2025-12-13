@@ -16,6 +16,8 @@ let
   chardet = python3Packages.buildPythonPackage {
     pname = "chardet";
     version = "4.0.0";
+    pyproject = true;
+    build-system = [ python3Packages.setuptools ];
     src = fetchPypi {
       pname = "chardet";
       version = "4.0.0";
@@ -26,6 +28,8 @@ let
   libtc = python3Packages.buildPythonPackage {
     pname = "libtc";
     version = "1.3.4";
+    pyproject = true;
+    build-system = [ python3Packages.setuptools ];
     src = fetchPypi {
       pname = "libtc";
       version = "1.3.4";
@@ -41,6 +45,7 @@ let
       python3Packages.appdirs
     ];
     doCheck = false; # was failing, just skip
+    pythonRelaxDeps = true; # Relax strict version constraints
   };
 in
 python3Packages.buildPythonPackage rec {

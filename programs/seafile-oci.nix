@@ -112,7 +112,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'seahub',
         'USER': 'seafile',
-        'PASSWORD': '',  # Using peer authentication
+        'PASSWORD': \'\',  # Using peer authentication
         'HOST': 'host.containers.internal',
         'PORT': '5432',
     }
@@ -189,7 +189,7 @@ EOF
         extraConfig = ''
           proxy_read_timeout 1200s;
           client_max_body_size 0;
-          proxy_set_header Host $http_host;
+          proxy_set_header Host $host;
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto $scheme;
@@ -203,7 +203,7 @@ EOF
         extraConfig = ''
           rewrite ^/seafhttp(.*)$ $1 break;
           client_max_body_size 0;
-          proxy_set_header Host $http_host;
+          proxy_set_header Host $host;
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto $scheme;
