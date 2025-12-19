@@ -63,7 +63,12 @@
     };
     systemd-boot.enable = true;
   };
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
 
   users.groups.mtoepperwien = { };
   users.users.mtoepperwien = {

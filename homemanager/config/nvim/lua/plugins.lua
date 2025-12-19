@@ -435,6 +435,7 @@ return require("lazy").setup({
       vim.g.molten_virt_lines_off_by_1 = true
     end,
   },
+  { "3rd/image.nvim" },
   {
     "quarto-dev/quarto-nvim",
     dependencies = {

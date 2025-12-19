@@ -446,7 +446,6 @@ in
     "protonmail" = {
       address = "m.toepperwien@protonmail.com";
       userName = "m.toepperwien@protonmail.com";
-      primary = true;
       realName = "Jan Malte Töpperwien";
       thunderbird.enable = true;
       neomutt.enable = true;
@@ -511,6 +510,7 @@ in
         address = "m.toepperwien@ai.uni-hannover.de";
         userName = "m.toepperwien@ai.uni-hannover.de";
         realName = "Jan Malte Töpperwien";
+        primary = true;
         mbsync = {
           enable = true;
           create = "maildir";

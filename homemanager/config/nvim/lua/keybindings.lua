@@ -57,6 +57,9 @@ vim.keymap.set("n", "<Leader>rr", ":MoltenReevaluateCell<CR>", { desc = "re-eval
 vim.keymap.set("v", "<Leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv<ESC>", { desc = "execute visual selection", silent = true })
 vim.keymap.set("n", "<Leader>oh", ":MoltenHideOutput<CR>", { desc = "close output window", silent = true })
 vim.keymap.set("n", "<Leader>md", ":MoltenDelete<CR>", { desc = "delete Molten cell", silent = true })
+vim.keymap.set("n", "<Leader>os", ":noautocmd MoltenEnterOutput<CR>",
+    { silent = true, desc = "show/enter output" })
+
 -- Quarto
 local runner = require("quarto.runner")
 vim.keymap.set("n", "<Leader>rc", runner.run_cell,  { desc = "run cell", silent = true })
