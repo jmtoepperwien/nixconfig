@@ -238,7 +238,7 @@
             ./programs/navidrome.nix
             ./programs/monitoring.nix
             ./programs/jellyfin.nix
-            ./programs/seafile-oci.nix
+            # ./programs/seafile-oci.nix
             ./programs/ldap.nix
             ./programs/immich.nix
             ./programs/webdav.nix
