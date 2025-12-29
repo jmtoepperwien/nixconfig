@@ -193,7 +193,14 @@ in
     name = "Obsidian";
     exec = "obsidian --enable-ozone --ozone-platform=wayland --disable-gpu %u";
   };
-
+  xdg.desktopEntries."ferdium" = {
+    name = "Ferdium";
+    exec = "ferdium --enable-ozone --ozone-platform=wayland --disable-gpu %U";
+  };
+  xdg.desktopEntries."Mattermost" = {
+    name = "Mattermost";
+    exec = "${pkgs.mattermost}/bin/mattermost --enable-ozone --ozone-platform=wayland --disable-gpu %U";
+  };
 
   programs.direnv = {
     enable = true;
