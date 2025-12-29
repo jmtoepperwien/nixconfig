@@ -49,6 +49,12 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.initrd.availableKernelModules = [
+    "r8169"
+  ];
+  networking.interfaces.enp4s0.wakeOnLan.enable = true;
+  networking.firewall.allowedUDPPorts = [ 9 ];
+
   # gpu
   hardware.graphics = {
     enable = true;

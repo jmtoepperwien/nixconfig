@@ -89,6 +89,7 @@
     openseachest
     distrobox
     deploy-rs
+    wol  # wake-on-lan
   ];
 
   programs.nix-ld.enable = true;
