@@ -1,25 +1,25 @@
 ### Output configuration
-output DP-2 {
+output "Dell Inc. DELL U2725QE 8H97484" {
   mode 3840x2160@120Hz
   pos 3000 0
   # adaptive_sync on
   transform 90
   scale 2
 }
-output DP-3 {
+output "Dell Inc. DELL U2725QE 7J97484" {
   mode 3840x2160@120Hz
   pos 1080 550
   scale 2
 }
-output DP-4 {
+output "Dell Inc. DELL U2725QE 5J97484" {
   mode 3840x2160@120Hz
   pos 0 0
   transform 90
   scale 2
 }
-set $monitor_left "DP-4"
-set $monitor_middle "DP-3"
-set $monitor_right "DP-2"
+set $monitor_left "Dell Inc. DELL U2725QE 5J97484"
+set $monitor_middle "Dell Inc. DELL U2725QE 7J97484"
+set $monitor_right "Dell Inc. DELL U2725QE 8H97484"
 
 # Bind workspaces to monitors
 workspace 1 output $monitor_middle
