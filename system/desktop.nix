@@ -39,6 +39,12 @@
     pcsclite
   ];
 
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [
+    cups-filters
+    cups-browsed
+    gutenprint
+  ];
 
   virtualisation.libvirtd = {
     enable = true;
