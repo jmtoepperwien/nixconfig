@@ -52,7 +52,7 @@ vim.keymap.set("n", "<leader>?", vim.lsp.buf.hover, {})
 -- Molten
 vim.keymap.set("n", "<Leader>e", ":MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
 vim.keymap.set("n", "<Leader>os", ":noautocmd MoltenEnterOutput<CR>", { desc = "open output window", silent = true })
-vim.keymap.set("n", "<Leader>of", ":noautocmd MoltenEnterOutput<CR>:wincmd _<CR>:wincmd |", { desc = "open output window", silent = true })
+vim.keymap.set("n", "<Leader>of", ":noautocmd MoltenEnterOutput<CR>:wincmd _<CR>:wincmd |<CR>", { desc = "open output window", silent = true })
 
 vim.keymap.set("n", "<Leader>rr", ":MoltenReevaluateCell<CR>", { desc = "re-eval cell", silent = true })
 vim.keymap.set("v", "<Leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv<ESC>", { desc = "execute visual selection", silent = true })
