@@ -427,6 +427,7 @@ return require("lazy").setup({
     init = function()
       -- this guide will be using image.nvim
       -- Don't forget to setup and install the plugin if you want to view image outputs
+      vim.g.molten_image_provider = "image.nvim"
 
       -- optional, I like wrapping. works for virt text and the output window
       vim.g.molten_wrap_output = true
@@ -437,9 +438,23 @@ return require("lazy").setup({
 
       -- this will make it so the output shows up below the \`\`\` cell delimiter
       vim.g.molten_virt_lines_off_by_1 = true
+
+
+      vim.g.molten_enter_output_behavior = "open_and_enter"
     end,
   },
-  { "3rd/image.nvim" },
+  { "3rd/image.nvim",
+    opts = {
+      backend = "kitty", -- Kitty will provide the best experience, but you need a compatible terminal
+      integrations = {}, -- do whatever you want with image.nvim's integrations
+      max_width = 100, -- tweak to preference
+      max_height = 12, -- ^
+      max_height_window_percentage = math.huge, -- this is necessary for a good experience
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true,
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+    },
+  },
   {
     "quarto-dev/quarto-nvim",
     dependencies = {
