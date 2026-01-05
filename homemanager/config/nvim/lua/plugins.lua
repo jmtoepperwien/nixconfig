@@ -341,6 +341,10 @@ return require("lazy").setup({
           name = "personal",
           path = "~/vaults/personal",
         },
+        {
+          name = "phd",
+          path = "~/vaults/phd",
+        },
       },
       daily_notes = {
         folder = "daily_notes",
