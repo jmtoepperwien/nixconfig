@@ -17,4 +17,6 @@
       include common
     '';
   };
+
+  programs.git.settings.user.email = "m.toepperwien@ai.uni-hannover.de";
 }

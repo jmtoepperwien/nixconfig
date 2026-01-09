@@ -300,7 +300,7 @@ in
     enable = true;
     settings = {
       user.name = "Jan Malte Töpperwien";
-      user.email = "m.toepperwien@protonmail.com";
+      user.email = lib.mkDefault "m.toepperwien@protonmail.com";
       core = {
         excludesfile = "/home/mtoepperwien/.config/git/ignore";
       };
