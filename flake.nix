@@ -249,13 +249,24 @@
         };
 
       };
-      deploy.nodes.server = {
-        hostname = "mosihome.duckdns.org";
-        profiles.system = {
-          sshUser = "mtoepperwien";
-          interactiveSudo = true;
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server;
+      deploy.nodes = {
+        workpc = {
+          hostname = "workpc";
+          profiles.system = {
+            sshUser = "mtoepperwien";
+            interactiveSudo = true;
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jmtoepperwienpc;
+          };
+        };
+        server = {
+          hostname = "mosihome.duckdns.org";
+          profiles.system = {
+            sshUser = "mtoepperwien";
+            interactiveSudo = true;
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server;
+          };
         };
       };
     };

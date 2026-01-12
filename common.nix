@@ -144,6 +144,18 @@
       set -g visual-activity off
       set -g base-index 1
       setw -g pane-base-index 1
+
+      # Alt + number key bindings for window switching/creation
+      bind-key -n M-1 if-shell 'tmux list-windows | grep "^1:"' 'select-window -t 1' 'new-window -t 1'
+      bind-key -n M-2 if-shell 'tmux list-windows | grep "^2:"' 'select-window -t 2' 'new-window -t 2'
+      bind-key -n M-3 if-shell 'tmux list-windows | grep "^3:"' 'select-window -t 3' 'new-window -t 3'
+      bind-key -n M-4 if-shell 'tmux list-windows | grep "^4:"' 'select-window -t 4' 'new-window -t 4'
+      bind-key -n M-5 if-shell 'tmux list-windows | grep "^5:"' 'select-window -t 5' 'new-window -t 5'
+      bind-key -n M-6 if-shell 'tmux list-windows | grep "^6:"' 'select-window -t 6' 'new-window -t 6'
+      bind-key -n M-7 if-shell 'tmux list-windows | grep "^7:"' 'select-window -t 7' 'new-window -t 7'
+      bind-key -n M-8 if-shell 'tmux list-windows | grep "^8:"' 'select-window -t 8' 'new-window -t 8'
+      bind-key -n M-9 if-shell 'tmux list-windows | grep "^9:"' 'select-window -t 9' 'new-window -t 9'
+      bind-key -n M-0 if-shell 'tmux list-windows | grep "^0:"' 'select-window -t 0' 'new-window -t 0'
     '';
   };
   xdg.mime.enable = true;
