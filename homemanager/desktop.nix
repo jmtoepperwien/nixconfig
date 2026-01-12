@@ -170,6 +170,7 @@ in
         user = "mtoepperwien";
         hostname = "192.168.1.149";
         proxyJump = "server";
+        forwardAgent = true;
         remoteForwards = [
           {
             bind.address = "/run/user/1000/gnupg/S.gpg-agent";
@@ -180,6 +181,7 @@ in
       server = {
         hostname = "mosihome.duckdns.org";
         user = "mtoepperwien";
+        forwardAgent = true;
       };
       tobiserver = {
         hostname = "accounts.fritz-schubert-akademie.de";
@@ -199,6 +201,7 @@ in
       workpc = {
         hostname = "jmtoepperwienpc.ai.uni-hannover.de";
         user = "mtoepperwien";
+        forwardAgent = true;
         remoteForwards = [
           {
             bind.address = "/run/user/1000/gnupg/S.gpg-agent";
