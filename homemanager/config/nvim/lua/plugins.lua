@@ -42,7 +42,7 @@ return require("lazy").setup({
       ts_update()
     end,
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter.config").setup({
         auto_install = true,
         highlight = {
           enable = true
