@@ -145,6 +145,83 @@ in
     NIXOS_OZONE_WL = "1";
   };
 
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+        forwardAgent = false;
+        serverAliveInterval = 30;
+        serverAliveCountMax = 5;
+        compression = true;
+        addKeysToAgent = "30m";
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "10m";
+      };
+      workCluster = {
+        match = "originalhost luis-cluster*,work* exec \"! nc -zw1 %h 22\"";
+        proxyJump = "work-jump";
+      };
+
+      homepc = {
+        user = "mtoepperwien";
+        hostname = "192.168.1.149";
+        proxyJump = "server";
+      };
+      server = {
+        hostname = "mosihome.duckdns.org";
+        user = "mtoepperwien";
+      };
+      tobiserver = {
+        hostname = "accounts.fritz-schubert-akademie.de";
+      };
+      luis-cluster = {
+        hostname = "login.cluster.uni-hannover.de";
+        user = "nhwptoem";
+      };
+      luis-cluster-transfer = {
+        hostname = "transfer.cluster.uni-hannover.de";
+        user = "nhwptoem";
+      };
+      work-jump = {
+        hostname = "ssh1.ai.uni-hannover.de";
+        user = "toepperwien";
+      };
+      workpc = {
+        hostname = "jmtoepperwienpc.ai.uni-hannover.de";
+        user = "mtoepperwien";
+      };
+      workpc-bootup = {
+        hostname = "jmtoepperwienpc.ai.uni-hannover.de";
+        user = "root";
+      };
+      n2-jumphost = {
+        hostname = "fe.noctua2.pc2.uni-paderborn.de";
+        user = "inxml20";
+        identityFile = "~/.config/ssh/yubikey.pub";
+        identitiesOnly = true;
+        proxyJump = "workpc";
+      };
+      n2login1 = {
+        hostname = "n2login1.ab2021.pc2.uni-paderborn.de";
+        user = "inxml20";
+        proxyJump = "n2-jumphost";
+        identityFile = "~/.config/ssh/yubikey.pub";
+        identitiesOnly = true;
+      };
+      n2login2 = {
+        hostname = "n2login2.ab2021.pc2.uni-paderborn.de";
+        user = "inxml20";
+        proxyJump = "n2-jumphost";
+        identityFile = "~/.config/ssh/yubikey.pub";
+        identitiesOnly = true;
+      };
+    };
+  };
+
   home.pointerCursor =
     let
       getFrom = url: hash: name: {
