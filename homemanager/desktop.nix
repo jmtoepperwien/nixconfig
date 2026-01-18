@@ -212,6 +212,7 @@ in
       workpc-bootup = {
         hostname = "jmtoepperwienpc.ai.uni-hannover.de";
         user = "root";
+        extraOptions."HostKeyAlias" = "workpc-bootup";
       };
       n2-jumphost = {
         hostname = "fe.noctua2.pc2.uni-paderborn.de";
