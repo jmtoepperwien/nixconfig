@@ -165,7 +165,10 @@ in
         match = "originalhost luis-cluster*,work* exec \"! nc -zw1 %h 22\"";
         proxyJump = "work-jump";
       };
-
+      pc2Cluster = {
+        match = "originalhost n2-jumphost exec \"! nc -zw1 %h 22\"";
+        proxyJump = "workpc";
+      };
       homepc = {
         user = "mtoepperwien";
         hostname = "192.168.1.149";
@@ -219,7 +222,6 @@ in
         user = "inxml20";
         identityFile = "~/.config/ssh/yubikey.pub";
         identitiesOnly = true;
-        proxyJump = "workpc";
       };
       n2login1 = {
         hostname = "n2login1.ab2021.pc2.uni-paderborn.de";
