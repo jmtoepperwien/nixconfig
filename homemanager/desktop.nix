@@ -162,7 +162,7 @@ in
         controlPersist = "10m";
       };
       workCluster = {
-        match = "originalhost luis-cluster*,work* exec \"! nc -zw1 %h 22\"";
+        match = "originalhost luis-cluster*,work*,kisski-cluster* exec \"! nc -zw1 %h 22\"";
         proxyJump = "work-jump";
       };
       pc2Cluster = {
@@ -236,6 +236,10 @@ in
         proxyJump = "n2-jumphost";
         identityFile = "~/.config/ssh/yubikey.pub";
         identitiesOnly = true;
+      };
+      kisski-cluster = {
+        hostname = "kisski01.cluster.uni-hannover.de";
+        user = "mtoepper";
       };
     };
   };
