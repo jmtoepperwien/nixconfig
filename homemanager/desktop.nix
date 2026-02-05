@@ -103,7 +103,7 @@ in
       ripgrep
       pdfgrep
       zathura
-      okular
+      kdePackages.okular
       wl-clipboard
       nerd-fonts.sauce-code-pro
       nerd-fonts.fira-code
