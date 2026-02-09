@@ -261,5 +261,6 @@
     wantedBy = [ "default.target" ];
     after = [ "default.target" ];
   };
+  services.logind.settings.Login.HandlePowerKey = lib.mkDefault "suspend";
 
 }

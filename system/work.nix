@@ -81,4 +81,6 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   graphical.swayOptions = [ "--unsupported-gpu" ];
+
+  services.logind.settings.Login.HandlePowerKey = "ignore";
 }
