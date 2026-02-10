@@ -30,6 +30,10 @@
       "net.ipv4.tcp_fin_timeout" = 30;
     };
   };
+  boot.initrd.network = {
+    enable = false;
+  };
+
 
   services.zfs.autoScrub.enable = true;
 

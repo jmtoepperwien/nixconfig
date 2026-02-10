@@ -26,7 +26,7 @@
   # Enable luks decryption via ssh
   # This will not activate Wake-on-LAN as it is more system specific
   boot.initrd.network = {
-    enable = true;
+    enable = lib.mkDefault true;
     udhcpc.enable = true;
     ssh = {
       enable = true;
