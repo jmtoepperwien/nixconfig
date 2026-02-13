@@ -37,12 +37,14 @@ return require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    version = "*",
     build = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
     end,
+    lazy = false,
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
         auto_install = true,
         highlight = {
           enable = true
