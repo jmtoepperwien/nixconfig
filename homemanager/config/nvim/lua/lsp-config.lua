@@ -5,9 +5,6 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- to enable nvim-cmp (use in setup of lsps)
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 -- Python
 vim.lsp.config("pyright", {
   capabilities = capabilities,

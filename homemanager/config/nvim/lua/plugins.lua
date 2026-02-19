@@ -15,12 +15,30 @@ return require("lazy").setup({
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
     config = function()
       require("lualine").setup({
-        options = { theme = "gruvbox-material" },
+        options = {
+          theme = "gruvbox-material",
+          always_show_tabline = true,
+        },
+        tabline = {
+          lualine_b = {
+            {
+              function()
+                local dot_git = vim.fs.find({ '.git' }, { upward = true, stop = vim.loop.os_homedir() })[1]
+                if dot_git then
+                  return vim.fn.fnamemodify(dot_git, ':h:t')
+                else
+                  return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:~')
+                end
+              end,
+            },
+          },
+          lualine_x = { 'branch' },
+        },
         sections = {
           lualine_a = { 'mode' },
-          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_b = { 'diff', 'diagnostics' },
           lualine_c = { { 'filename', path = 1 } },
-          lualine_x = { 'encoding', 'fileformat', 'filetype' },
+          lualine_x = { 'encoding', 'fileformat' },
           lualine_y = { 'progress' },
           lualine_z = { 'location' }
         },
@@ -34,6 +52,20 @@ return require("lazy").setup({
         },
       })
     end,
+  },
+  {
+    'Bekaboo/dropbar.nvim',
+    -- optional, but required for fuzzy finder support
+    dependencies = {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make'
+    },
+    config = function()
+      local dropbar_api = require('dropbar.api')
+      vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
+      vim.keymap.set('n', '[;', dropbar_api.goto_context_start, { desc = 'Go to start of current context' })
+      vim.keymap.set('n', '];', dropbar_api.select_next_context, { desc = 'Select next context' })
+    end
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -96,6 +128,16 @@ return require("lazy").setup({
   { "tpope/vim-sensible" },
   { "tpope/vim-abolish" },
   { "tpope/vim-vinegar" },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
+  },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { { "nvim-lua/plenary.nvim" },
@@ -191,20 +233,141 @@ return require("lazy").setup({
       require("gitsigns").setup()
     end,
   },
+  {
+    'saghen/blink.cmp',
+    -- optional: provides snippets for the snippet source
+    dependencies = { 'rafamadriz/friendly-snippets', 'L3MON4D3/LuaSnip' },
 
+    -- use a release tag to download pre-built binaries
+    version = '1.*',
+    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+      -- 'super-tab' for mappings similar to vscode (tab to accept)
+      -- 'enter' for enter to accept
+      -- 'none' for no mappings
+      --
+      -- All presets have the following mappings:
+      -- C-space: Open menu or open docs if already open
+      -- C-n/C-p or Up/Down: Select next/previous item
+      -- C-e: Hide menu
+      -- C-k: Toggle signature help (if signature.enabled = true)
+      --
+      -- See :h blink-cmp-config-keymap for defining your own keymap
+      keymap = { preset = 'default' },
+
+      appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono'
+      },
+
+      -- (Default) Only show the documentation popup when manually triggered
+      completion = { documentation = { auto_show = true } },
+
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+
+      snippets = {
+        preset = "luasnip",
+      },
+
+      -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+      -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+      -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+      --
+      -- See the fuzzy documentation for more information
+      fuzzy = { implementation = "prefer_rust_with_warning" }
+    },
+    opts_extend = { "sources.default" }
+  },
+  {
+    'stevearc/conform.nvim',
+    opts = {
+
+      formatters_by_ft = {
+        lua = { "stylua" },
+        -- Conform will run multiple formatters sequentially
+        python = { "ruff_format" },
+        -- You can customize some of the format options for the filetype (:help conform.format)
+        rust = { "rustfmt", lsp_format = "fallback" },
+        -- Conform will run the first available formatter
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+      format_on_save = function()
+        local ignore_filetypes = { "lua" }
+        if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+          vim.notify("range formatting for " .. vim.bo.filetype .. " not working properly.")
+          return
+        end
+
+        local hunks = require("gitsigns").get_hunks()
+        if hunks == nil then
+          return
+        end
+
+        local format = require("conform").format
+
+        local function format_range()
+          if next(hunks) == nil then
+            vim.notify("Done formatting git hunks!", "info", { title = "formatting" })
+            return
+          end
+          local hunk = nil
+          while next(hunks) ~= nil and (hunk == nil or hunk.type == "delete") do
+            hunk = table.remove(hunks)
+          end
+
+          if hunk ~= nil and hunk.type ~= "delete" then
+            local start = hunk.added.start
+            local last = start + hunk.added.count
+            -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
+            local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
+            local range = { start = { start, 0 }, ["end"] = { last - 1, last_hunk_line:len() } }
+            format({ range = range, async = true, lsp_fallback = true }, function()
+              vim.defer_fn(function()
+                format_range()
+              end, 1)
+            end)
+          end
+        end
+
+        format_range()
+      end
+    },
+  },
   -- nvim-lsp setup {{{
   { 'neovim/nvim-lspconfig', config = function() require("lsp-config") end },
 
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "hrsh7th/cmp-cmdline",
-  "hrsh7th/cmp-nvim-lsp-signature-help",
-  "hrsh7th/cmp-nvim-lua",
+  -- "hrsh7th/cmp-nvim-lsp",
+  -- "hrsh7th/cmp-buffer",
+  -- "hrsh7th/cmp-path",
+  -- "hrsh7th/cmp-cmdline",
+  -- "hrsh7th/cmp-nvim-lsp-signature-help",
+  -- "hrsh7th/cmp-nvim-lua",
   { "onsails/lspkind-nvim" },
-  { "L3MON4D3/LuaSnip",    version = "v2.*", build = "make install_jsregexp" },
-  "saadparwaiz1/cmp_luasnip",
-  { "hrsh7th/nvim-cmp",      config = function() require('lsp-cmp-setup') end },
+  { "L3MON4D3/LuaSnip",    version = "v2.*", build = "make install_jsregexp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    config = function()
+      -- Load standard snippets
+      require("luasnip.loaders.from_vscode").lazy_load()
+      -- Load your custom snippets (Expanded path is required!)
+      require("luasnip.loaders.from_lua").lazy_load({
+        paths = { vim.fn.expand("~/.config/nvim/LuaSnip/") }
+      })
+    end,
+  },
+  -- "saadparwaiz1/cmp_luasnip",
+  -- { "hrsh7th/nvim-cmp",      config = function() require('lsp-cmp-setup') end },
   -- nvim-lsp setup }}}
 
   {
