@@ -101,7 +101,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.mtoepperwien = import ./homemanager/work.nix;
+              home-manager.users.mtoepperwien = import ./homemanager/workpc.nix;
               home-manager.extraSpecialArgs = { inherit nixpkgs-unstable; };
             }
             nix-index-database.nixosModules.nix-index
