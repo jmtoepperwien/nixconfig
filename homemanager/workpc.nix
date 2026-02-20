@@ -19,4 +19,6 @@
       include common
     '';
   };
+
+  programs.kitty.font.size = 12;
 }

@@ -405,7 +405,7 @@ in
     shellIntegration.enableBashIntegration = true;
     font = {
       name = "SauceCodePro Nerd Font Mono";
-      size = 15;
+      size = lib.mkDefault 15;
     };
     themeFile = "GruvboxMaterialDarkMedium";
     settings = {

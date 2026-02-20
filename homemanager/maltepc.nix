@@ -38,4 +38,6 @@
       include common
     '';
   };
+
+  programs.kitty.font.size = 15;
 }
