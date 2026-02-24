@@ -135,6 +135,7 @@ in
   ];
   services.rtorrent = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.rtorrent;
     user = "rtorrent";
     group = "media";
     dataPermissions = "0775";

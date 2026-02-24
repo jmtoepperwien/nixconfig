@@ -10,6 +10,7 @@
   ];
 
   home.packages = with pkgs; [
+    btop-rocm
     # Gaming {{{
     rusty-path-of-building
     # lutris notes
