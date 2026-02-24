@@ -177,5 +177,9 @@
     };
   };
 
+  system.activationScripts.nonposix.text = ''
+    ln -sf /run/current-system/sw/bin/bash /bin/bash
+    rm -rf /lib64 ; mkdir /lib64 ; ln -sf ${pkgs.glibc.outPath}/lib/ld-linux-x86-64.so.2 /lib64
+  '';
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 }

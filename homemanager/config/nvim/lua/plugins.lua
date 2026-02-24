@@ -128,6 +128,7 @@ return require("lazy").setup({
   { "tpope/vim-sensible" },
   { "tpope/vim-abolish" },
   { "tpope/vim-vinegar" },
+  { "tpope/vim-fugitive" },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
