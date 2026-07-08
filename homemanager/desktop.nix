@@ -244,6 +244,15 @@ in
         HostName = "login.cluster.uni-hannover.de";
         User = "nhwptoem";
       };
+      "ai-n*" = {
+        User = "nhwptoem";
+        ProxyJump = "luis-cluster";
+      };
+      "tnt-n*" = {
+        User = "nhwptoem";
+        ProxyJump = "luis-cluster";
+      };
+
       luis-cluster-transfer = {
         HostName = "transfer.cluster.uni-hannover.de";
         User = "nhwptoem";
