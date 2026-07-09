@@ -49,6 +49,8 @@
     cups-browsed
     gutenprint
   ];
+
+  programs.sway.enable = true;
   # hardware.printers = {
   #   ensurePrinters = [
   #     {
