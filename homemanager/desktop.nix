@@ -607,7 +607,7 @@ in
       {
         plugin = lspsaga-nvim;
         type = "lua";
-        config = "require('lspsaga').setup({})"; 
+        config = "require('lspsaga').setup({ lightbulb = { ignore = { ft = { 'markdown' } } } })";
       }
       # Colorscheme + statusline + winbar
       {
@@ -968,31 +968,6 @@ in
               ft_runners = {},
               never_run = { "yaml" },
             },
-          })
-        '';
-      }
-      {
-        plugin = pkgs.vimPlugins.image-nvim;
-        type = "lua";
-        config = ''
-          require("image").setup({
-            backend = "kitty",
-            integrations = {
-              markdown = {
-                enabled = true,
-                filetypes = { "markdown" },
-              },
-              html = {
-                enabled = true,
-                filetypes = { "markdown", "html" },
-              },
-            },
-            max_width = 100,
-            max_height = 12,
-            max_height_window_percentage = math.huge,
-            max_width_window_percentage = math.huge,
-            window_overlap_clear_enabled = true,
-            window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
           })
         '';
       }
