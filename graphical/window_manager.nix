@@ -26,5 +26,9 @@
     # gtk portal needed to make gtk apps happy
     configPackages = [ pkgs.xdg-desktop-portal-wlr ];
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    wlr.settings.screencast = {
+      chooser_type = "dmenu";
+      chooser_cmd = "${pkgs.fuzzel}/bin/fuzzel -d -l 10 -p 'Select a source to share:'";
+    };
   };
 }
