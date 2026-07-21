@@ -180,33 +180,34 @@ in
       ## automatically execute cross-seed search on finished downloads
       method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.hash=}"
 
-      # Network limits
-      network.http.max_open.set = 50
+      # Network limits (tuned for 5k+ torrents; see programs/torrent.nix commit msg)
+      network.http.max_open.set = 99
       network.max_open_files.set = 600
-      network.max_open_sockets.set = 100
+      network.max_open_sockets.set = 1024
 
       network.port_random.set = no
 
       # Peer settings
-      throttle.min_peers.normal.set = 39
-      throttle.max_peers.normal.set = 40
+      throttle.min_peers.normal.set = 99
+      throttle.max_peers.normal.set = 100
       throttle.min_peers.seed.set = -1
       throttle.max_peers.seed.set = -1
       throttle.max_downloads.global.set = 100
       throttle.max_uploads.global.set = 100
       throttle.max_downloads.set = 20
       throttle.max_uploads.set = 20
-      trackers.numwant.set = 40
+      trackers.numwant.set = 80
       ### performance
       network.receive_buffer.size.set =  16M
       network.send_buffer.size.set    = 16M
 
       # Miscellaneous settings
       pieces.memory.max.set = 2048M
-      schedule2 = session_save, 3600, 3600, ((session.save))
+      # First save 20 min after start, then every 12 h (wiki cadence for 5k+ torrents)
+      schedule2 = session_save, 1200, 43200, ((session.save))
       system.file.allocate.set = 0
       pieces.preload.type.set = 2
-      network.xmlrpc.size_limit.set = 10M
+      network.xmlrpc.size_limit.set = 4M
 
       log.open_file = "debug_log", (cat,/var/log/rtorrent/debug_log.txt.,(system.time),.,(system.pid))
       log.add_output = "error", "debug_log"
@@ -289,6 +290,8 @@ in
       serviceConfig = {
         EnvironmentFile = "/run/proton_incoming";
         NetworkNamespacePath = "/var/run/netns/vpn";
+        # Wiki explicit: implicit 4096 default must be overridden for >1024 sockets
+        LimitNOFILE = "8192";
         ExecStart = lib.mkForce (
           pkgs.writers.writeBash "start-rtorrent" ''
             echo "${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC"
@@ -297,6 +300,23 @@ in
         );
       };
     };
+
+  # TCP→unix proxy so the *arr suite and autobrr can talk to rtorrent's SCGI
+  # socket without going through nginx (whose `scgi_pass` against rtorrent
+  # upstream was observed to be closed prematurely by rtorrent itself).
+  # Mirrors the prowlarrforward pattern in programs/usenet.nix.
+  systemd.services.rtorrent-scgi-tcp = {
+    requires = [ "rtorrent.service" ];
+    after = [ "rtorrent.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.socat}/bin/socat TCP-LISTEN:5000,reuseaddr,fork,bind=127.0.0.1 UNIX-CONNECT:/run/rtorrent/rpc.sock";
+      User = "rtorrent";
+      Group = "media";
+      Restart = "always";
+      Type = "simple";
+    };
+  };
 
   services.rutorrent = {
     enable = false;
