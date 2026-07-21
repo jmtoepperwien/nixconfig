@@ -13,7 +13,7 @@
 
   users.users.jellyfin.extraGroups = [ "media" ];
 
-  services.jellyseerr = {
+  services.seerr = {
     enable = true;
   };
 }

@@ -150,6 +150,7 @@
   services.sabnzbd = {
     enable = true;
     group = "media";
+    configFile = null;
   };
   networking.firewall.allowedTCPPorts = [ 6789 ];
 }

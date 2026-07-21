@@ -68,7 +68,7 @@
     wireless = {
       enable  = true;
       secretsFile = config.age.secrets.wifipassword.path;
-      userControlled.enable = true;
+      userControlled = true;
       networks."Mosi".pskRaw = "ext:mosi_pskraw";
     };
     networkmanager.enable = false;

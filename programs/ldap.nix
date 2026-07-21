@@ -21,7 +21,8 @@
     settings = {
       ldap_base_dn = "dc=mosi,dc=com";
       ldap_user_email = "m.toepperwien@protonmail.com";
-      ldap_user_pass = "lldapdefaultpassword";
+      ldap_user_pass_file = config.age.secrets.ldap.path;
+      force_ldap_user_pass_reset = "always";
       ldap_user_dn = "admin";
       database_url = "postgres://%2Frun%2Fpostgresql/lldap";
       http_url = "http://ldap.mosi.me";

@@ -159,13 +159,18 @@
               proxy_set_header Connection "upgrade";
             '';
           };
-          "/jellyseerr/" = {
+          "/jellyseerr" = {
+            extraConfig = '''
+              rewrite ^/jellyseerr(/.*)?$ /seerr$1 permanent;
+            ''';
+          };
+          "/seerr/" = {
             proxyPass = "http://localhost:5055";
             extraConfig = ''
-              set $app 'jellyseerr';
+              set $app 'seerr';
 
-              # Remove /jellyseerr path to pass to the app
-              rewrite ^/jellyseerr/?(.*)$ /$1 break;
+              # Remove /seerr path to pass to the app
+              rewrite ^/seerr/?(.*)$ /$1 break;
 
               # Redirect location headers
               proxy_redirect ^ /$app;
@@ -393,13 +398,18 @@
               proxy_set_header Connection "upgrade";
             '';
           };
-          "/jellyseerr/" = {
+          "/jellyseerr" = {
+            extraConfig = '''
+              rewrite ^/jellyseerr(/.*)?$ /seerr$1 permanent;
+            ''';
+          };
+          "/seerr/" = {
             proxyPass = "http://localhost:5055";
             extraConfig = ''
-              set $app 'jellyseerr';
+              set $app 'seerr';
 
-              # Remove /jellyseerr path to pass to the app
-              rewrite ^/jellyseerr/?(.*)$ /$1 break;
+              # Remove /seerr path to pass to the app
+              rewrite ^/seerr/?(.*)$ /$1 break;
 
               # Redirect location headers
               proxy_redirect ^ /$app;
