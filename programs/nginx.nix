@@ -160,9 +160,9 @@
             '';
           };
           "/jellyseerr" = {
-            extraConfig = '''
+            extraConfig = ''
               rewrite ^/jellyseerr(/.*)?$ /seerr$1 permanent;
-            ''';
+            '';
           };
           "/seerr/" = {
             proxyPass = "http://localhost:5055";
@@ -399,9 +399,9 @@
             '';
           };
           "/jellyseerr" = {
-            extraConfig = '''
+            extraConfig = ''
               rewrite ^/jellyseerr(/.*)?$ /seerr$1 permanent;
-            ''';
+            '';
           };
           "/seerr/" = {
             proxyPass = "http://localhost:5055";

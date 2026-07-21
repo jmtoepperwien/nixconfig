@@ -10,14 +10,7 @@
   # but no replacement exists for the bridge use-case yet)
   nixpkgs.config.permittedInsecurePackages = [ "olm-3.2.16" ];
 
-  age.secrets."mautrix-whatsapp" = {
-    file = ../secrets/mautrix-whatsapp.age;
-    owner = "mautrix-whatsapp";
-    group = "mautrix-whatsapp";
-  };
-
   services.mautrix-whatsapp = {
-    environmentFile = config.age.secrets."mautrix-whatsapp".path;
     enable = false;
     # continuwuity handles appservice registration via admin commands,
     # not via the synapse app_service_config_files mechanism.
