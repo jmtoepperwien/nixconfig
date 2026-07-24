@@ -56,6 +56,7 @@
     pkgs.alsa-utils
     pkgs.mediainfo
     pkgs.fuse
+    pkgs.kitty.terminfo
   ];
 
   age.secrets.wifipassword.file = ../secrets/wifipassword.age;
