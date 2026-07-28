@@ -182,7 +182,10 @@ in
 
       # Network limits (tuned for 5k+ torrents; see programs/torrent.nix commit msg)
       network.http.max_open.set = 99
-      network.max_open_files.set = 600
+      # Raised from 600: with 5k+ torrents and max_open_sockets=1024 the old
+      # value left little headroom under LimitNOFILE=8192, causing fd
+      # exhaustion stalls that manifest as RPC unresponsiveness.
+      network.max_open_files.set = 4096
       network.max_open_sockets.set = 1024
 
       network.port_random.set = no
@@ -292,6 +295,11 @@ in
         NetworkNamespacePath = "/var/run/netns/vpn";
         # Wiki explicit: implicit 4096 default must be overridden for >1024 sockets
         LimitNOFILE = "8192";
+        # rtorrent's core is single-threaded; protect its scheduling latency
+        # (and thus RPC responsiveness) from contention with nginx/ZFS/arr-suite.
+        Nice = -5;
+        IOSchedulingClass = "best-effort";
+        IOSchedulingPriority = 2;
         ExecStart = lib.mkForce (
           pkgs.writers.writeBash "start-rtorrent" ''
             echo "${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC"
@@ -457,14 +465,18 @@ in
           mkdir /var/lib/rtorrent/at2-queue/processed
           ${pkgs.inotify-tools}/bin/inotifywait --monitor --event create,moved_to,modify /var/lib/rtorrent/at2-queue \
           | while read changed; do
+            # Coalesce bursts of events (e.g. cross-seed dropping several
+            # matches at once) into a single pass instead of firing at2 once
+            # per inotify event.
+            sleep 5
+            # First add catches torrents already indexed by a prior scan; scan
+            # then refreshes the db with anything new on disk; second add
+            # retries torrents that only match post-scan (e.g. content that
+            # just finished writing when cross-seed dropped the file).
             ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
             ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} scan
             ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} add rtorrent /var/lib/rtorrent/at2-queue/*.torrent
             mv /var/lib/rtorrent/at2-queue/*.torrent /var/lib/rtorrent/at2-queue/processed
-            #for file in /var/lib/rtorrent/at2-queue/*.torrent; do
-            #  ${autotorrent2Package}/bin/at2 --config ${autotorrent2Config} add rtorrent "$file"
-            #  mv "$file" /var/lib/rtorrent/at2-queue/processed
-            #done
           done
         '';
       in
