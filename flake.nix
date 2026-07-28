@@ -233,7 +233,7 @@
             ./programs/kodi_nfs.nix
             ./programs/usenet.nix
             ./network/proton_wireguard.nix
-            ./programs/torrent.nix
+            ./programs/torrent
             ./programs/irc.nix
             ./programs/navidrome.nix
 
@@ -263,7 +263,7 @@
             ./programs/kodi_nfs.nix
             ./programs/usenet.nix
             ./network/proton_wireguard.nix
-            ./programs/torrent.nix
+            ./programs/torrent
             #./programs/irc.nix
             ./programs/navidrome.nix
             ./programs/monitoring.nix

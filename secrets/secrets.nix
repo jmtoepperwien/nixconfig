@@ -27,11 +27,6 @@ in
     maltexps
     serverhost
   ];
-  "unpackerrConfig.age".publicKeys = [
-    maltepc
-    maltexps
-    serverhost
-  ];
   "autobrrConfig.age".publicKeys = [
     maltepc
     maltexps
