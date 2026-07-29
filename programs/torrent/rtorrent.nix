@@ -95,8 +95,11 @@ in
       throttle.max_peers.normal.set = 100
       throttle.min_peers.seed.set = -1
       throttle.max_peers.seed.set = -1
-      throttle.max_downloads.global.set = 100
-      throttle.max_uploads.global.set = 100
+      # Lowered from 100/100: fewer simultaneously-active torrents means
+      # fewer concurrent random-read streams competing for disk I/O, which
+      # was blocking rtorrent's single main thread and stalling RPC.
+      throttle.max_downloads.global.set = 40
+      throttle.max_uploads.global.set = 40
       throttle.max_downloads.set = 20
       throttle.max_uploads.set = 20
       trackers.numwant.set = 80
@@ -109,7 +112,11 @@ in
       # First save 20 min after start, then every 12 h (wiki cadence for 5k+ torrents)
       schedule2 = session_save, 1200, 43200, ((session.save))
       system.file.allocate.set = 0
-      pieces.preload.type.set = 2
+      # Disabled (was 2, "direct paging"): forces the main thread to
+      # synchronously touch/page-in piece data before serving peers, which
+      # blocks the same thread that services RPC on slow disk reads. Let
+      # the kernel's normal async readahead handle it instead.
+      pieces.preload.type.set = 0
       network.xmlrpc.size_limit.set = 4M
 
       log.open_file = "debug_log", (cat,/var/log/rtorrent/debug_log.txt.,(system.time),.,(system.pid))
