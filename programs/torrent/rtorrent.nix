@@ -14,6 +14,45 @@ let
       --data-urlencode 'includeSingleEpisodes=true'
   '';
   prunerrPackage = pkgs.callPackage ../prunerr.nix { };
+
+  # Pin rtorrent 0.16.15 + libtorrent-rakshasa 0.16.15. Unstable's
+  # 0.16.17 has a CurlSocket lifecycle race (torrent::internal_error:
+  # CurlSocket::event_error() self still exists) that crashes the
+  # service ~20 min after start when session.save() holds the main
+  # thread and curl events queue up. 0.16.15 keeps the per-category
+  # socket API (system.sockets.* — we rely on system.sockets.rpc.min_alloc)
+  # and the SCGI EPIPE fix from 0.16.13, while predating the 0.16.17
+  # regression. Stable nixpkgs (nixos-26.05) ships rtorrent and
+  # libtorrent-rakshasa at 0.16.5 (too old — 0.16.15 rtorrent requires
+  # libtorrent >= 0.16.15), so both must be bumped in lockstep. The
+  # 0.16.15 tarballs are not published as GitHub release assets (only
+  # git tags exist), so we use the archive/<tag>.tar.gz auto-generated
+  # tarballs and override sourceRoot to match the directory name
+  # ('libtorrent-0.16.15' / 'rtorrent-0.16.15'), since the upstream
+  # build expects 'libtorrent-rakshasa-${version}' /
+  # 'rtorrent-${version}'.
+  # Note: 'libtorrent-rakshasa' is the rakshasa fork used by rtorrent;
+  # there's a separate 'libtorrent-rasterbar' used by Deluge/qBittorrent
+  # — do not confuse them.
+  libtorrentRakshasa = pkgs.libtorrent-rakshasa.overrideAttrs (old: {
+    version = "0.16.15";
+    src = pkgs.fetchurl {
+      url = "https://github.com/rakshasa/libtorrent/archive/refs/tags/v0.16.15.tar.gz";
+      sha256 = "1kvphfd2xdv6rc8y93dy35pb5489w8hl9jp877a1xk6zq566jbxd";
+    };
+    sourceRoot = "libtorrent-0.16.15";
+  });
+  rtorrentPinned =
+    (pkgs.rtorrent.override {
+      libtorrent-rakshasa = libtorrentRakshasa;
+    }).overrideAttrs (old: {
+      version = "0.16.15";
+      src = pkgs.fetchurl {
+        url = "https://github.com/rakshasa/rtorrent/archive/refs/tags/v0.16.15.tar.gz";
+        sha256 = "03fjsi1brflahzpl7ay26g8hzz14mfa6qn9lrl37qvqf748y6dsj";
+      };
+      sourceRoot = "rtorrent-0.16.15";
+    });
 in
 {
   users.groups."rtorrent" = { };
@@ -36,7 +75,7 @@ in
   ];
   services.rtorrent = {
     enable = true;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.rtorrent;
+    package = rtorrentPinned;
     user = "rtorrent";
     group = "media";
     dataPermissions = "0775";
@@ -95,7 +134,6 @@ in
       # bracket default (48) to keep RPC responsive under peer/tracker
       # socket pressure from 5k+ torrents, independent of other categories.
       system.sockets.rpc.min_alloc.set = 64
-      system.sockets.http.max_alloc.set = 99
 
       network.port_random.set = no
       network.http.dns_cache_timeout.set = 25
