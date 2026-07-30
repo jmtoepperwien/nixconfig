@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -35,6 +36,7 @@ in
   ];
   services.rtorrent = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.rtorrent;
     user = "rtorrent";
     group = "media";
     dataPermissions = "0775";
