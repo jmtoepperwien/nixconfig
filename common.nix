@@ -65,7 +65,7 @@
     btrfs-progs
     wget
     curl
-    # btop
+    btop
     hdparm
     mediainfo
     ffmpeg
