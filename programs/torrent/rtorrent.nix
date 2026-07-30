@@ -41,7 +41,7 @@ in
     group = "media";
     dataPermissions = "0775";
     downloadDir = "${config.server.media_folder}/downloads/torrent";
-    configText = ''
+    configText = lib.mkForce ''
       dht.mode.set = auto
       protocol.pex.set = yes
 
@@ -50,6 +50,14 @@ in
       system.umask.set = 0002
 
       pieces.hash.on_completion.set = no
+
+      # Default download dir (used by RPC/magnet adds; watch-dir schedule
+      # overrides per-torrent below) and session path (matches
+      # torrent-dir/output-dir in cross-seed.nix / autotorrent2.nix).
+      # Restored from upstream nixpkgs module default config which we
+      # are otherwise overriding via lib.mkForce above.
+      directory.default.set = ${config.server.media_folder}/downloads/torrent
+      session.path.set = /var/lib/rtorrent/session/
 
       ## The following line can be added to .rtorrent.rc to set up watch directories
       ##
@@ -69,7 +77,7 @@ in
       ##     the string before the 1st comma is unique for all entries (watch_directory in example)
       ##     the number after the 1st comman is unique for all entries (1 in example)
 
-      schedule2 = watch_directory,1,30,"load.start_verbose=/var/lib/rtorrent/watch/*.torrent,d.directory.set=${config.server.media_folder}/downloads/torrent/,d.delete_tied="
+      schedule = watch_directory,1,30,"load.start_verbose=/var/lib/rtorrent/watch/*.torrent,d.directory.set=${config.server.media_folder}/downloads/torrent/,d.delete_tied="
       ## set added time
       method.set_key = event.download.inserted_new, loaded_time, "d.custom.set=addtime,$cat=$system.time=;d.save_full_session="
 
@@ -83,14 +91,14 @@ in
       method.set_key=event.download.finished,cross_seed,"execute2={${cross-seedHook}/bin/cross-seed-hook,$d.hash=}"
 
       # Network limits (tuned for 5k+ torrents; see programs/torrent commit msg)
-      network.http.max_open.set = 99
-      # Raised from 600: with 5k+ torrents and max_open_sockets=1024 the old
-      # value left little headroom under LimitNOFILE=8192, causing fd
-      # exhaustion stalls that manifest as RPC unresponsiveness.
-      network.max_open_files.set = 4096
-      network.max_open_sockets.set = 1024
+      # RPC is its own socket category as of 0.16.15; raised above the
+      # bracket default (48) to keep RPC responsive under peer/tracker
+      # socket pressure from 5k+ torrents, independent of other categories.
+      system.sockets.rpc.min_alloc.set = 64
+      system.sockets.http.max_alloc.set = 99
 
       network.port_random.set = no
+      network.http.dns_cache_timeout.set = 25
 
       # Peer settings
       throttle.min_peers.normal.set = 99
@@ -112,7 +120,10 @@ in
       # Miscellaneous settings
       pieces.memory.max.set = 2048M
       # First save 20 min after start, then every 12 h (wiki cadence for 5k+ torrents)
-      schedule2 = session_save, 1200, 43200, ((session.save))
+      schedule = session_save, 1200, 43200, ((session.save))
+      # Stop new downloads when free space drops below 1 GB (5k+ torrents
+      # can fill disk fast). Restored from upstream module default config.
+      schedule = monitor_diskspace, 15, 60, ((close_low_diskspace, 1000M))
       system.file.allocate.set = 0
       # Disabled (was 2, "direct paging"): forces the main thread to
       # synchronously touch/page-in piece data before serving peers, which
@@ -120,6 +131,12 @@ in
       # the kernel's normal async readahead handle it instead.
       pieces.preload.type.set = 0
       network.xmlrpc.size_limit.set = 4M
+
+      # SCGI socket path. The upstream module's default config sets this
+      # via `mkBefore`, but our configText uses `lib.mkForce` so we have
+      # to set it explicitly. ExecStartPost (`fix-rpc-socket-permission`)
+      # chmods g+w on this socket so the `media` group can scgi_pass it.
+      scgi_local = /run/rtorrent/rpc.sock
 
       log.open_file = "debug_log", (cat,/var/log/rtorrent/debug_log.txt.,(system.time),.,(system.pid))
       log.add_output = "error", "debug_log"
@@ -164,6 +181,21 @@ in
             ${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC
           ''
         );
+        # The module's own chmod/chown schedule (in its default configText)
+        # is unreliable across rtorrent versions, silently leaving the
+        # socket without group-write and breaking nginx's scgi_pass. Fix
+        # it directly instead of depending on rtorrent's own scheduler.
+        ExecStartPost = pkgs.writers.writeBash "fix-rpc-socket-permission" ''
+          for i in $(seq 1 30); do
+            if [ -S /run/rtorrent/rpc.sock ]; then
+              chmod g+w /run/rtorrent/rpc.sock
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "rpc.sock did not appear within 30s" >&2
+          exit 1
+        '';
       };
     };
 
