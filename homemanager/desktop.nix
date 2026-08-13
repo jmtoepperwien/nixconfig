@@ -168,14 +168,14 @@ in
       pocket-casts
       imagemagick
       ghostscript
+      papis
     ]
-    ++ (with nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}; [
+    ++ (with pkgs; [
       neovim-qt
       neovide
     ])
     ++ (with pkgs-unstable; [
       claude-code
-      papis
     ])
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       pi
@@ -463,7 +463,7 @@ in
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    package = nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.neovim-unwrapped;
+    package = pkgs.neovim-unwrapped;
     withPython3 = true;
     withRuby = true;
     plugins = with pkgs.vimPlugins; [
