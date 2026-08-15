@@ -35,6 +35,12 @@
     extraPackages = [ pkgs.intel-media-driver ];
   };
 
+  # bfq is the only scheduler that honors ionice classes/priorities; the
+  # default "none" scheduler ignores IOSchedulingClass/Priority entirely.
+  services.udev.extraRules = ''
+    ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+  '';
+
   services.zfs.autoScrub.enable = true;
 
   boot.loader = {

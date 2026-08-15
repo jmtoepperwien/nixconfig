@@ -212,7 +212,9 @@ in
         # (and thus RPC responsiveness) from contention with nginx/ZFS/arr-suite.
         Nice = -5;
         IOSchedulingClass = "best-effort";
-        IOSchedulingPriority = 2;
+        # bfq now actually enforces this; keep rtorrent at the neutral
+        # default so it doesn't outrank jellyfin's streaming reads.
+        IOSchedulingPriority = 4;
         ExecStart = lib.mkForce (
           pkgs.writers.writeBash "start-rtorrent" ''
             echo "${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC"
