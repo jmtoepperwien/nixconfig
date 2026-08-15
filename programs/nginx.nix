@@ -58,7 +58,7 @@
       # Prevent injection of code in other mime types (XSS Attacks)
       add_header X-Content-Type-Options nosniff;
     '';
-    proxyTimeout = "30m";
+    proxyTimeout = "60m";
     virtualHosts = {
       "jmtoepperwien.com" = {
         forceSSL = true;

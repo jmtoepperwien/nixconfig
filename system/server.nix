@@ -26,9 +26,13 @@
       "net.ipv4.tcp_wmem" = "4096 12582912 16777216";
       "net.ipv4.tcp_slow_start_after_idle" = 0;
       "net.ipv4.tcp_tw_reuse" = 1;
-      "net.ipv4.tcp_tw_recycle" = 1;
       "net.ipv4.tcp_fin_timeout" = 30;
     };
+  };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = [ pkgs.intel-media-driver ];
   };
 
   services.zfs.autoScrub.enable = true;
