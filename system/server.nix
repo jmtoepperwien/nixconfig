@@ -32,7 +32,12 @@
 
   hardware.graphics = {
     enable = true;
-    extraPackages = [ pkgs.intel-media-driver ];
+    # intel-media-driver: VAAPI; vpl-gpu-rt: oneVPL/MFX backend needed for
+    # Jellyfin's QSV mode specifically (Alder Lake+ no longer ships libmfx).
+    extraPackages = [
+      pkgs.intel-media-driver
+      pkgs.vpl-gpu-rt
+    ];
   };
 
   services.zfs.autoScrub.enable = true;
