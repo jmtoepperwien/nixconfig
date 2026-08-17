@@ -29,7 +29,7 @@
     clusterName = "workpc";
     controlMachine = "jmtoepperwienpc";
     nodeName = [
-      "jmtoepperwienpc CPUs=14 Sockets=1 CoresPerSocket=7 ThreadsPerCore=2 RealMemory=64068 Gres=gpu:nvidia:1 State=UNKNOWN"
+      "jmtoepperwienpc CPUs=14 Sockets=1 CoresPerSocket=7 ThreadsPerCore=2 RealMemory=64065 Gres=gpu:nvidia:1 State=UNKNOWN"
     ];
     partitionName = [
       "main Nodes=jmtoepperwienpc Default=YES MaxTime=INFINITE State=UP"
