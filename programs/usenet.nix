@@ -151,6 +151,7 @@
     enable = true;
     group = "media";
     configFile = null;
+    settings.misc.port = 6789;
   };
   networking.firewall.allowedTCPPorts = [ 6789 ];
 }
