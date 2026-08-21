@@ -77,7 +77,6 @@ in
     requires = [
       "flood.service"
       "rtorrent.service"
-      "autotorrent2.service"
     ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {

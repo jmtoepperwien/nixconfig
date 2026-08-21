@@ -23,9 +23,10 @@
           conf = pkgs.writeText "rtorrent-rpc-http.conf" ''
             daemon off;
             pid /run/rtorrent-rpc-http/nginx.pid;
-            error_log /dev/stderr;
+            error_log /run/rtorrent-rpc-http/error.log warn;
             events {}
             http {
+              access_log off;
               client_body_temp_path /run/rtorrent-rpc-http/client_body;
               proxy_temp_path /run/rtorrent-rpc-http/proxy;
               server {
