@@ -22,6 +22,7 @@
     "files.mosi.me"
     "ldap.mosi.me"
     "photos.mosi.me"
+    "cloud.mosi.me"
   ];
 
   users.users.nginx.extraGroups = [ "rtorrent" "media" ];

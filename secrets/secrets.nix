@@ -69,4 +69,8 @@ in
     maltexps
     serverhost
   ];
+  "ocis-yaml.age".publicKeys = [
+    maltepc
+    serverhost
+  ];
 }

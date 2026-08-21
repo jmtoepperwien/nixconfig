@@ -279,6 +279,7 @@
             ./programs/webdav.nix
             ./programs/matrix.nix
             ./programs/mautrix-whatsapp.nix
+            ./programs/ocis.nix
 
             agenix.nixosModules.default
             nix-index-database.nixosModules.nix-index
