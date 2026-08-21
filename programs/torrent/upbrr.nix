@@ -55,7 +55,7 @@ in
       User = "upbrr";
       Group = "upbrr";
       WorkingDirectory = "/var/lib/upbrr";
-      ExecStart = "${upbrrPackage}/bin/upbrr serve --config=/var/lib/upbrr";
+      ExecStart = "${upbrrPackage}/bin/upbrr serve --config=/var/lib/upbrr/config.yaml";
       Type = "simple";
       NoNewPrivileges = true;
       ProtectSystem = "strict";

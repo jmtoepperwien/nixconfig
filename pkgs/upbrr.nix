@@ -60,7 +60,7 @@ buildGoModule (finalAttrs: {
   vendorHash = "sha256-fbqCCmSPfjtwyUituQ/wXvsm6Xs6QyJjvKOlpuPkr3w=";
 
   preBuild = ''
-    cp -r ${finalAttrs.passthru.upbrr-web} internal/webserver/assets/
+    cp -r ${finalAttrs.passthru.upbrr-web}/. internal/webserver/assets/
   '';
 
   ldflags = [
