@@ -45,15 +45,18 @@
   services.sanoid = {
     enable = true;
     templates.main = {
-      hourly = 24;
-      daily = 7;
+      hourly = 48;
+      daily = 30;
       monthly = 3;
+      yearly = 1;
       autosnap = true;
       autoprune = true;
     };
     templates.media = {
+      hourly = 0;
       daily = 7;
-      monthly = 1;
+      monthly = 2;
+      yearly = 0;
       autosnap = true;
       autoprune = true;
     };
