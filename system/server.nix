@@ -42,6 +42,31 @@
 
   services.zfs.autoScrub.enable = true;
 
+  services.sanoid = {
+    enable = true;
+    templates.main = {
+      hourly = 24;
+      daily = 7;
+      monthly = 3;
+      autosnap = true;
+      autoprune = true;
+    };
+    templates.media = {
+      daily = 7;
+      monthly = 1;
+      autosnap = true;
+      autoprune = true;
+    };
+    datasets = {
+      "zroot/root".useTemplate = [ "main" ];
+      "zroot/home".useTemplate = [ "main" ];
+      "zroot/var/lib".useTemplate = [ "main" ];
+      "zstorage/git".useTemplate = [ "main" ];
+      "zstorage/cloud".useTemplate = [ "main" ];
+      "zstorage/media".useTemplate = [ "media" ];
+    };
+  };
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
