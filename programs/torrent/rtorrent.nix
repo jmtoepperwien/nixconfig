@@ -15,44 +15,25 @@ let
   '';
   prunerrPackage = pkgs.callPackage ../prunerr.nix { };
 
-  # Pin rtorrent 0.16.15 + libtorrent-rakshasa 0.16.15. Unstable's
-  # 0.16.17 has a CurlSocket lifecycle race (torrent::internal_error:
-  # CurlSocket::event_error() self still exists) that crashes the
-  # service ~20 min after start when session.save() holds the main
-  # thread and curl events queue up. 0.16.15 keeps the per-category
-  # socket API (system.sockets.* — we rely on system.sockets.rpc.min_alloc)
-  # and the SCGI EPIPE fix from 0.16.13, while predating the 0.16.17
-  # regression. Stable nixpkgs (nixos-26.05) ships rtorrent and
-  # libtorrent-rakshasa at 0.16.5 (too old — 0.16.15 rtorrent requires
-  # libtorrent >= 0.16.15), so both must be bumped in lockstep. The
-  # 0.16.15 tarballs are not published as GitHub release assets (only
-  # git tags exist), so we use the archive/<tag>.tar.gz auto-generated
-  # tarballs and override sourceRoot to match the directory name
-  # ('libtorrent-0.16.15' / 'rtorrent-0.16.15'), since the upstream
-  # build expects 'libtorrent-rakshasa-${version}' /
-  # 'rtorrent-${version}'.
+  # Use rtorrent + libtorrent-rakshasa from nixpkgs-unstable (currently
+  # 0.16.20). The earlier 0.16.15 pin was a workaround for 0.16.17's
+  # CurlSocket lifecycle race (torrent::internal_error:
+  # CurlSocket::event_error() self still exists), which crashed the
+  # service ~20 min after start when session.save() held the main
+  # thread and curl events queued up. That regression was fixed
+  # upstream in 0.16.18 by commit 3b6da6fe ("Reordered http queue
+  # slots to avoid race conditions.").
+  #
+  # Stable nixpkgs (nixos-26.05) ships rtorrent 0.16.5, which is too
+  # old for the per-category socket API we rely on
+  # (system.sockets.rpc.min_alloc).
+  #
   # Note: 'libtorrent-rakshasa' is the rakshasa fork used by rtorrent;
   # there's a separate 'libtorrent-rasterbar' used by Deluge/qBittorrent
-  # — do not confuse them.
-  libtorrentRakshasa = pkgs.libtorrent-rakshasa.overrideAttrs (old: {
-    version = "0.16.15";
-    src = pkgs.fetchurl {
-      url = "https://github.com/rakshasa/libtorrent/archive/refs/tags/v0.16.15.tar.gz";
-      sha256 = "1kvphfd2xdv6rc8y93dy35pb5489w8hl9jp877a1xk6zq566jbxd";
-    };
-    sourceRoot = "libtorrent-0.16.15";
-  });
-  rtorrentPinned =
-    (pkgs.rtorrent.override {
-      libtorrent-rakshasa = libtorrentRakshasa;
-    }).overrideAttrs (old: {
-      version = "0.16.15";
-      src = pkgs.fetchurl {
-        url = "https://github.com/rakshasa/rtorrent/archive/refs/tags/v0.16.15.tar.gz";
-        sha256 = "03fjsi1brflahzpl7ay26g8hzz14mfa6qn9lrl37qvqf748y6dsj";
-      };
-      sourceRoot = "rtorrent-0.16.15";
-    });
+  # — do not confuse them. The upstream rtorrent derivation already
+  # builds against the matching libtorrent-rakshasa from the same
+  # nixpkgs-unstable, so no manual pairing is needed.
+  rtorrentPackage = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.rtorrent;
 in
 {
   users.groups."rtorrent" = { };
@@ -75,7 +56,7 @@ in
   ];
   services.rtorrent = {
     enable = true;
-    package = rtorrentPinned;
+    package = rtorrentPackage;
     user = "rtorrent";
     group = "media";
     dataPermissions = "0775";
@@ -92,7 +73,7 @@ in
 
       # Default download dir (used by RPC/magnet adds; watch-dir schedule
       # overrides per-torrent below) and session path (matches
-      # torrent-dir/output-dir in cross-seed.nix / autotorrent2.nix).
+      # torrent-dir/link-dir in cross-seed.nix).
       # Restored from upstream nixpkgs module default config which we
       # are otherwise overriding via lib.mkForce above.
       directory.default.set = ${config.server.media_folder}/downloads/torrent
@@ -135,7 +116,6 @@ in
       # socket pressure from 5k+ torrents, independent of other categories.
       system.sockets.rpc.min_alloc.set = 64
 
-      network.port_random.set = no
       network.http.dns_cache_timeout.set = 25
 
       # Peer settings
@@ -217,8 +197,8 @@ in
         IOSchedulingPriority = 4;
         ExecStart = lib.mkForce (
           pkgs.writers.writeBash "start-rtorrent" ''
-            echo "${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC"
-            ${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.port_range.set=$TCPPORTPUBLIC-$((TCPPORTPUBLIC+1)) -o dht.port.set=$UDPPORTPUBLIC
+            echo "${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.listen.port.range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC"
+            ${config.services.rtorrent.package}/bin/rtorrent -n -o system.daemon.set=true -o import=${configFile} -o network.listen.port.range.set=$TCPPORTPUBLIC-$TCPPORTPUBLIC -o dht.port.set=$UDPPORTPUBLIC
           ''
         );
         # The module's own chmod/chown schedule (in its default configText)
