@@ -113,6 +113,7 @@
   };
 
   users.groups.mtoepperwien = { };
+  users.groups.cloud = { };
   users.users.mtoepperwien = {
     isNormalUser = true;
     group = "mtoepperwien";
@@ -122,6 +123,8 @@
       "audio"
       "usenet"
       "rtorrent"
+      "cloud"
+      "media"
     ];
     openssh.authorizedKeys.keyFiles = [
       ../authorized_keys
@@ -149,9 +152,9 @@
 
   # locations
   systemd.tmpfiles.rules = [
-    "d ${config.server.media_folder} 0770 mtoepperwien media"
+    "d ${config.server.media_folder} 0770 root media"
     "d ${config.server.git_folder} 0770 ${config.services.gitea.user} ${config.services.gitea.group}"
-    "d ${config.server.cloud_folder} 0770 mtoepperwien cloud"
+    "d ${config.server.cloud_folder} 0771 root cloud"
   ];
 
   system.stateVersion = "24.11";

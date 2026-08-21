@@ -214,10 +214,6 @@
           "/upbrr/" = {
             proxyPass = "http://localhost:7480/upbrr/";
             extraConfig = ''
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
               proxy_buffering off;
             '';
           };
@@ -247,11 +243,10 @@
           };
         };
       };
-      "ldap.mosi.me" = {
+      "cloud.mosi.me" = {
         forceSSL = true;
         useACMEHost = "mosi.me";
         locations = {
-          "/".proxyPass = "http://localhost:17170";
           "/robots.txt" = {
             extraConfig = ''
               rewrite ^/(.*)  $1;
@@ -263,10 +258,11 @@
           };
         };
       };
-      "files.mosi.me" = {
+      "ldap.mosi.me" = {
         forceSSL = true;
         useACMEHost = "mosi.me";
         locations = {
+          "/".proxyPass = "http://localhost:17170";
           "/robots.txt" = {
             extraConfig = ''
               rewrite ^/(.*)  $1;
@@ -468,10 +464,6 @@
           "/upbrr/" = {
             proxyPass = "http://localhost:7480/upbrr/";
             extraConfig = ''
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
               proxy_buffering off;
             '';
           };

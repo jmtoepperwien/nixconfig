@@ -16,5 +16,12 @@
     cloud_folder = lib.mkOption {
       default = "/mnt/cloud";
     };
+    nextcloud = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable Nextcloud (cloud file sync) at files.mosi.me";
+      };
+    };
   };
 }

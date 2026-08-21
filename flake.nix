@@ -264,6 +264,7 @@
             ./dns.nix
             ./programs/nginx.nix
             ./programs/postgresql.nix
+            ./programs/nextcloud.nix
             ./programs/gitea.nix
             ./programs/kodi_nfs.nix
             ./programs/usenet.nix
