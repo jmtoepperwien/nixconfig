@@ -48,6 +48,10 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
+    upbrr = {
+      url = "github:autobrr/upbrr/v0.3.1";
+      flake = false;
+    };
   };
 
   outputs =
@@ -66,6 +70,7 @@
       nix-index-database,
       nushell-git-aliases,
       llm-agents,
+      upbrr,
       ...
     }@inputs:
     rec {
@@ -277,6 +282,21 @@
 
             agenix.nixosModules.default
             nix-index-database.nixosModules.nix-index
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  upbrr = prev.callPackage ./pkgs/upbrr.nix {
+                    src = inputs.upbrr;
+                    src-web = inputs.upbrr + "/webui";
+                    version = "0.3.1";
+                  };
+                  upbrr-bootstrap-auth = prev.callPackage ./pkgs/upbrr-bootstrap-auth.nix {
+                    src = inputs.upbrr;
+                    bootstrapMain = ./pkgs/upbrr-bootstrap-auth-src/main.go;
+                  };
+                })
+              ];
+            }
           ];
         };
 

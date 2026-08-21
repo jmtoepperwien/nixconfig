@@ -64,4 +64,9 @@ in
     maltepc
     workpchost
   ];
+  "upbrrWebAuth.age".publicKeys = [
+    maltepc
+    maltexps
+    serverhost
+  ];
 }

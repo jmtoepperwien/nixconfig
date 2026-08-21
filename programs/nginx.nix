@@ -205,6 +205,21 @@
               rewrite ^/autobrr/(.*)$ /$1 break;
             '';
           };
+          "/upbrr" = {
+            extraConfig = ''
+              return 301 https://$host/upbrr/;
+            '';
+          };
+          "/upbrr/" = {
+            proxyPass = "http://localhost:7480/upbrr/";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_buffering off;
+            '';
+          };
           "/flood/".proxyPass = "http://localhost:5678";
           "/grafana/" = {
             proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
@@ -442,6 +457,21 @@
             proxyPass = "http://localhost:7474";
             extraConfig = ''
               rewrite ^/autobrr/(.*)$ /$1 break;
+            '';
+          };
+          "/upbrr" = {
+            extraConfig = ''
+              return 301 https://$host/upbrr/;
+            '';
+          };
+          "/upbrr/" = {
+            proxyPass = "http://localhost:7480/upbrr/";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_buffering off;
             '';
           };
 
