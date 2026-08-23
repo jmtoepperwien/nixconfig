@@ -91,6 +91,7 @@ in
     description = "Cleanuparr";
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
     environment = {
       PORT = "11011";
       BASE_PATH = "/cleanuparr";

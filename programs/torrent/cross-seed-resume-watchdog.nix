@@ -26,8 +26,21 @@ let
     for hash_, name, complete, is_active, left_bytes, custom1 in rows:
         if TAG not in custom1.split(","):
             continue
-        if complete and not is_active and left_bytes == 0:
-            print(f"Resuming stuck cross-seed torrent: {name} [{hash_}]")
+        # Resume any inactive cross-seed torrent. This catches both:
+        #   - complete torrents that flipped back to paused (cross-seed
+        #     injects stopped, then re-resumes via in-process loop that
+        #     can die or get reverted by an rtorrent client quirk; see
+        #     cross-seed/cross-seed#261, #430)
+        #   - partially downloaded torrents that were resumed by
+        #     cross-seed's own loop, then stopped again
+        # If a torrent has been deliberately paused long-term, the next
+        # timer cycle will resume it again - we accept that trade-off
+        # per the design decision.
+        if not is_active:
+            print(
+                f"Resuming inactive cross-seed torrent: {name} [{hash_}] "
+                f"(complete={complete}, left_bytes={left_bytes})"
+            )
             proxy.d.resume(hash_)
   '';
 in
