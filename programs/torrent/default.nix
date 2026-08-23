@@ -9,5 +9,6 @@
     ./upbrr.nix
     ./cross-seed.nix
     ./cross-seed-resume-watchdog.nix
+    ./cleanuparr.nix
   ];
 }

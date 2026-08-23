@@ -124,6 +124,7 @@
           "/sonarr/".proxyPass = "http://localhost:8989";
           "/radarr/".proxyPass = "http://localhost:7878";
           "/lidarr".proxyPass = "http://localhost:8686";
+          "/cleanuparr/".proxyPass = "http://localhost:11011";
           "/bazarr".proxyPass = "http://localhost:${toString config.services.bazarr.listenPort}";
           "/readarr/".proxyPass = "http://localhost:8787";
           "/prowlarr/".proxyPass = "http://unix:/run/prowlarr/prowlarr.sock";
@@ -374,6 +375,7 @@
           "/sonarr/".proxyPass = "http://localhost:8989";
           "/radarr/".proxyPass = "http://localhost:7878";
           "/lidarr".proxyPass = "http://localhost:8686";
+          "/cleanuparr/".proxyPass = "http://localhost:11011";
           "/readarr/".proxyPass = "http://localhost:8787";
           "/prowlarr/".proxyPass = "http://unix:/run/prowlarr/prowlarr.sock";
           "/navidrome".proxyPass = "http://localhost:3333";
