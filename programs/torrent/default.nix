@@ -8,5 +8,6 @@
     ./rtorrent-rpc-bridge.nix
     ./upbrr.nix
     ./cross-seed.nix
+    ./cross-seed-resume-watchdog.nix
   ];
 }
