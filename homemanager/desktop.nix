@@ -214,7 +214,7 @@ in
         ControlPath = "~/.ssh/master-%r@%n:%p";
         ControlPersist = "10h";
       };
-      "Match final originalhost luis-cluster*,work*,!work-jump,kisski-cluster* exec \"bash -c '! nc -zw1 %h 22'\"" = {
+      "Match final originalhost luis-cluster*,work*,!work-jump,kisski-cluster*,proteus* exec \"bash -c '! nc -zw1 %h 22'\"" = {
         ProxyJump = "work-jump";
       };
       "Match originalhost n2-jumphost,otus-jumphost exec \"bash -c '! nc -zw1 %h 22'\"" = {
@@ -276,6 +276,10 @@ in
         HostName = "jmtoepperwienpc.ai.uni-hannover.de";
         User = "root";
         HostKeyAlias = "workpc-bootup";
+      };
+      proteus = {
+        HostName = "proteus.ai.uni-hannover.de";
+        User = "mtoepperwien";
       };
       otus-jumphost = {
         HostName = "fe.otus.pc2.uni-paderborn.de";
