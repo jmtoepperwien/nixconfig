@@ -213,6 +213,7 @@ in
         ControlMaster = "auto";
         ControlPath = "~/.ssh/master-%r@%n:%p";
         ControlPersist = "10h";
+        StreamLocalBindUnlink = "yes";
       };
       "Match final originalhost luis-cluster*,work*,!work-jump,kisski-cluster*,proteus* exec \"bash -c '! nc -zw1 %h 22'\"" = {
         ProxyJump = "work-jump";

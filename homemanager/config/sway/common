@@ -238,6 +238,6 @@ for_window [class="^.*"] border pixel 2
 # Miscellanous {{{
 # enable screensharing via pipwire on wlroots based desktops
 exec export XDG_CURRENT_DESKTOP=sway
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP
 exec systemctl --user start sway-finished.target
 # Miscellanous }}}
