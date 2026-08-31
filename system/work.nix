@@ -46,7 +46,7 @@
       ]
     ) (if builtins.isList p.meta.license then p.meta.license else [ p.meta.license ]);
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   boot.initrd.availableKernelModules = [
     "r8169"
