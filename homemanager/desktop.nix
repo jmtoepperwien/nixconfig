@@ -36,6 +36,7 @@ let
       pillow
       requests
       websocket-client
+      rich
       # for markdown rendering in nvim
       pylatexenc
     ];
@@ -1339,6 +1340,10 @@ in
     scdaemonSettings = {
       disable-ccid = true;
     };
+    # Prevent gpg from autostarting a local agent when the SSH-forwarded
+    # gpg-agent socket momentarily looks unreachable, which would otherwise
+    # delete and replace the forwarded socket with a local one.
+    settings.no-autostart = true;
   };
 
   programs.zellij = {
