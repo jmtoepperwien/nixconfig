@@ -16,7 +16,7 @@
         enabledCollectors = [
           "systemd"
         ];
-        port = 9000;
+        port = 9101;
       };
     };
     scrapeConfigs = [

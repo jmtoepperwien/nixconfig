@@ -281,6 +281,7 @@
             ./programs/matrix.nix
             ./programs/mautrix-whatsapp.nix
             ./programs/ocis.nix
+            ./programs/music-assistant.nix
 
             agenix.nixosModules.default
             nix-index-database.nixosModules.nix-index
