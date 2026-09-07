@@ -174,12 +174,10 @@ in
         "network-online.target"
         "protonvpn.service"
         "natpmp-proton.service"
-        "natpmp-forward.service"
       ];
       after = [
         "protonvpn.service"
         "natpmp-proton.service"
-        "natpmp-forward.service"
         "nss-lookup.target"
       ];
       wantedBy = [ "multi-user.target" ];
