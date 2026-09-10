@@ -6,6 +6,12 @@ let
   # upstream rtorrent quirk where a resumed torrent silently flips back to
   # paused; see cross-seed/cross-seed#261, #430). This periodically re-syncs
   # any complete-but-paused cross-seed torrent back to active.
+  #
+  # d.is_active can read 1 even while d.state is 0 (rtorrent's persisted
+  # started/stopped flag, which is what Flood/reality actually reflect) -
+  # so d.state is the field to check. Likewise d.resume only toggles a
+  # transient flag; d.start is the call that actually sets d.state=1 and
+  # makes the torrent seed again (verified live against rtorrent).
   script = pkgs.writers.writePython3 "cross-seed-resume-watchdog" { } ''
     import xmlrpc.client
 
@@ -18,15 +24,15 @@ let
         "d.hash=",
         "d.name=",
         "d.complete=",
-        "d.is_active=",
+        "d.state=",
         "d.left_bytes=",
         "d.custom1=",
     )
 
-    for hash_, name, complete, is_active, left_bytes, custom1 in rows:
+    for hash_, name, complete, state, left_bytes, custom1 in rows:
         if TAG not in custom1.split(","):
             continue
-        # Resume any inactive cross-seed torrent. This catches both:
+        # Start any stopped cross-seed torrent. This catches both:
         #   - complete torrents that flipped back to paused (cross-seed
         #     injects stopped, then re-resumes via in-process loop that
         #     can die or get reverted by an rtorrent client quirk; see
@@ -36,12 +42,12 @@ let
         # If a torrent has been deliberately paused long-term, the next
         # timer cycle will resume it again - we accept that trade-off
         # per the design decision.
-        if not is_active:
+        if not state:
             print(
-                f"Resuming inactive cross-seed torrent: {name} [{hash_}] "
+                f"Starting stopped cross-seed torrent: {name} [{hash_}] "
                 f"(complete={complete}, left_bytes={left_bytes})"
             )
-            proxy.d.resume(hash_)
+            proxy.d.start(hash_)
   '';
 in
 {
@@ -61,8 +67,8 @@ in
   systemd.timers.cross-seed-resume-watchdog = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnBootSec = "5min";
-      OnUnitActiveSec = "5min";
+      OnBootSec = "1min";
+      OnUnitActiveSec = "1min";
     };
   };
 }
