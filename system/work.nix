@@ -84,8 +84,16 @@
 
   services.logind.settings.Login.HandlePowerKey = "ignore";
 
-  services.ollama = {
+  services.llama-cpp = {
     enable = true;
-    package = pkgs.ollama-cuda;
+    package = pkgs.llama-cpp.override { cudaSupport = true; };
+    extraFlags = [
+      "--no-models-autoload"
+      "--jinja"
+      "-ngl"
+      "999"
+      "-c"
+      "32768"
+    ];
   };
 }
