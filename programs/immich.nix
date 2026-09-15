@@ -2,12 +2,14 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
 {
   services.immich = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.immich;
     settings.server.externalDomain = "https://photos.mosi.me/";
   };
   services.nginx.virtualHosts."photos.mosi.me" = {
