@@ -2,7 +2,7 @@
 set mouse=
 
 if exists("g:neovide")
-    set guifont=SauceCodePro\ Nerd\ Font\ Mono:h18
+    set guifont=SauceCodePro\ Nerd\ Font\ Mono:h15
     let g:neovide_cursor_animation_length = 0.0
     let g:neovide_cursor_trail_size = 0
     let g:neovide_scroll_animation_far_lines = 0
@@ -12,7 +12,7 @@ endif
 
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont SauceCodePro\ Nerd\ Font\ Mono:h18
+    GuiFont SauceCodePro\ Nerd\ Font\ Mono:h15
 endif
 
 if exists(':GuiTabline')
