@@ -63,6 +63,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     open = true;
+    powerManagement.enable = true;
   };
   hardware.nvidia-container-toolkit.enable = true;
   programs.sway.extraOptions = [ "--unsupported-gpu" ];
