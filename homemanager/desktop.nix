@@ -1321,6 +1321,8 @@ in
       "x-scheme-handler/steam" = [ "steam.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "image/png" = [ "feh.desktop" ];
+      "text/plain" = [ "nvim-qt.desktop" ];
+      "text/markdown" = [ "nvim-qt.desktop" ];
       "x-scheme-handler/obsidian" = [ "obsidian.desktop" ];
     };
   };
