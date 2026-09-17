@@ -497,7 +497,7 @@ in
       vim-wordmotion
       # nix
       nix-develop-nvim
-      # plenary-nvim: required by obsidian-nvim, hawtkeys, neogit, fzf-lua etc.
+      # plenary-nvim: required by obsidian-nvim, hawtkeys, neogit etc.
       plenary-nvim
       # simple setup() plugins
       { plugin = marks-nvim;        type = "lua"; config = "require('marks').setup()"; }
@@ -586,6 +586,37 @@ in
           })
         '';
       }
+      {
+        plugin = snacks-nvim;
+        type = "lua";
+        config = ''
+          require("snacks").setup({
+            dashboard = {
+              enabled = true,
+              -- default "startup" section requires lazy.nvim's lazy.stats; unused here
+              sections = {
+                { section = "header" },
+                { section = "keys", gap = 1, padding = 1 },
+              },
+            },
+            picker = {
+              sources = {
+                files = { hidden = true, follow = true },
+                grep  = { hidden = true, follow = true },
+              },
+            },
+          })
+        '';
+      }
+      {
+        plugin = trouble-nvim;
+        type = "lua";
+        config = ''
+          require("trouble").setup({})
+          vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (workspace)" })
+          vim.keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Diagnostics (buffer)" })
+        '';
+      }
       # LSP + completion
       # fallback icons for unknown filetypes
       { plugin = nvim-web-devicons; type = "lua"; config = "require('nvim-web-devicons').setup({ default = true })"; }
@@ -663,60 +694,6 @@ in
           })
         '';
       }
-      telescope-fzf-native-nvim
-      telescope-project-nvim
-      {
-        plugin = telescope-nvim;
-        type = "lua";
-        config = ''
-          -- Defer telescope setup and extension loading to VimEnter so they don't block startup
-          vim.api.nvim_create_autocmd("VimEnter", {
-            callback = function()
-              require("telescope").setup({
-                pickers = {
-                  live_grep  = { find_command = { "rg", "--hidden", "--glob", "!**/.git/*", "-L" } },
-                  find_files = {
-                    find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "-L" },
-                    mappings = {
-                      n = {
-                        ["cd"] = function(prompt_bufnr)
-                          local selection = require("telescope.actions.state").get_selected_entry()
-                          local dir = vim.fn.fnamemodify(selection.path, ":p:h")
-                          require("telescope.actions").close(prompt_bufnr)
-                          vim.cmd(string.format("silent lcd %s", dir))
-                        end,
-                      },
-                    },
-                  },
-                },
-                extensions = {
-                  project = {
-                    hidden_files = true,
-                    theme = "dropdown",
-                    order_by = "asc",
-                    search_by = "title",
-                    sync_with_nvim_tree = true,
-                    on_project_selected = function(prompt_bufnr)
-                      local project_actions = require("telescope._extensions.project.actions")
-                      project_actions.change_working_directory(prompt_bufnr, false)
-                      local localconf = io.open("./.nvim.lua", "r")
-                      if localconf ~= nil then
-                        local selection = vim.fn.input("Found .nvim.lua \nChoose action: [l]oad [i]gnore: ")
-                        if selection == "l" then dofile("./.nvim.lua") end
-                      end
-                    end,
-                  },
-                },
-              })
-              require("telescope").load_extension("fzf")
-              require("telescope").load_extension("project")
-            end,
-            once = true,
-          })
-          -- TelescopeResults filetype setup
-          vim.api.nvim_create_autocmd("FileType", { pattern = "TelescopeResults", command = "setlocal nofoldenable" })
-        '';
-      }
       {
         plugin = dropbar-nvim;
         type = "lua";
@@ -750,16 +727,7 @@ in
       # File manager
       { plugin = oil-nvim; type = "lua"; config = "require('oil').setup({})"; }
       # Editing / UI tools
-      {
-        plugin = nvim-neoclip-lua;
-        type = "lua";
-        config = ''
-          require("neoclip").setup()
-          require("telescope").load_extension("neoclip")
-        '';
-      }
       { plugin = twilight-nvim;     type = "lua"; config = "require('twilight').setup()"; }
-      { plugin = fzf-vim; }
       {
         plugin = nvim-bqf;
         type = "lua";
@@ -798,6 +766,7 @@ in
             { "<leader>r", group = "run" },
             { "<leader>o", group = "output" },
             { "<leader>d", group = "daily/notes" },
+            { "<leader>x", group = "diagnostics" },
           })
         '';
       }
@@ -856,7 +825,6 @@ in
       { plugin = gitsigns-nvim; type = "lua"; config = "require('gitsigns').setup()"; }
       neogit
       diffview-nvim
-      fzf-lua
       {
         plugin = pkgs.vimUtils.buildVimPlugin {
           pname = "diffs.nvim";

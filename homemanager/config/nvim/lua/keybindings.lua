@@ -13,7 +13,7 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" }
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 -- Lspsaga
 vim.keymap.set("n", "<leader>ld", ":Lspsaga goto_definition<CR>")
-vim.keymap.set("n", "<leader>lr", ":Lspsaga finder<CR>")
+vim.keymap.set("n", "<leader>lr", ":Trouble lsp_references toggle<CR>")
 vim.keymap.set("n", "<leader>lci", ":Lspsaga incoming_calls<CR>")
 vim.keymap.set("n", "<leader>lco", ":Lspsaga outgoing_calls<CR>")
 vim.keymap.set("n", "<leader>lo", ":Lspsaga outline<CR>")
@@ -31,16 +31,13 @@ vim.keymap.set("t", "<A-CR>", "<C-\\><C-n>:ToggleTerm<CR>")
 vim.keymap.set("n", "<C-A-/>", ":ToggleTerm direction=float<CR>")
 vim.keymap.set("n", "<A-/>", ":ToggleTerm direction=horizontal<CR>")
 
--- Telescope bindings (lazy-loaded on first use)
-vim.keymap.set("n", "<leader>ff", function() require('telescope.builtin').find_files() end, { desc = "Find files" })
-vim.keymap.set("n", "<leader>fg", function() require('telescope.builtin').live_grep() end, { desc = "Live grep" })
-vim.keymap.set("n", "<leader>fb", function() require('telescope.builtin').buffers() end, { desc = "Buffers" })
-vim.keymap.set("n", "<leader>fh", function() require('telescope.builtin').help_tags() end, { desc = "Help tags" })
-vim.keymap.set("n", "<leader>fp", function()
-  local project = require('telescope').extensions.project
-  project.project()
-end, { desc = "Projects" })
-vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Find TODOs" })
+-- Snacks picker bindings
+vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Help tags" })
+vim.keymap.set("n", "<leader>fp", function() Snacks.picker.zoxide() end, { desc = "Projects" })
+vim.keymap.set("n", "<leader>ft", ":TodoTrouble<CR>", { desc = "Find TODOs" })
 
 -- Obsidian bindings
 vim.keymap.set("n", "<leader>dn", ":ObsidianToday<CR>", {})
