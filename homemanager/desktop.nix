@@ -1384,7 +1384,7 @@ in
         userName = "m.toepperwien@stud.uni-hannover.de";
         realName = "Jan Malte Töpperwien";
         mbsync = {
-          enable = true;
+          enable = false;
           create = "maildir";
         };
         msmtp.enable = true;
@@ -1420,7 +1420,7 @@ in
         realName = "Jan Malte Töpperwien";
         primary = true;
         mbsync = {
-          enable = true;
+          enable = false;
           create = "maildir";
         };
         msmtp.enable = true;
@@ -1480,7 +1480,7 @@ in
       source ${neomutt_gruvboxtheme}/colors-gruvbox-shuber-extended.muttrc
     '';
   };
-  programs.mbsync.enable = true;
-  services.mbsync.enable = true;
+  programs.mbsync.enable = false;
+  services.mbsync.enable = false;
   programs.msmtp.enable = true;
 }
