@@ -45,4 +45,24 @@
       host  all all ::1/128      trust
     '';
   };
+
+  # Nightly logical backups onto the redundant zstorage pool (dataDir itself
+  # stays on the fast NVMe zroot pool). Retention comes for free from the
+  # existing sanoid schedule on zstorage/cloud (daily/monthly/yearly autoprune).
+  systemd.tmpfiles.rules = [
+    "d ${config.server.cloud_folder}/backups 0700 postgres postgres"
+    "d ${config.server.cloud_folder}/backups/postgresql 0700 postgres postgres"
+  ];
+  services.postgresqlBackup = {
+    enable = true;
+    databases = [
+      "nextcloud"
+      "gitea"
+      "lldap"
+      "immich"
+    ];
+    location = "${config.server.cloud_folder}/backups/postgresql";
+    compression = "zstd";
+    startAt = "*-*-* 03:15:00";
+  };
 }
