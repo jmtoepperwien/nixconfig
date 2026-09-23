@@ -7,9 +7,14 @@
 }:
 
 {
+  systemd.tmpfiles.rules = [ "d ${config.server.media_folder}/immich 0750 immich immich" ];
+
+  users.users.immich.extraGroups = [ "media" ];
+
   services.immich = {
     enable = true;
     package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.immich;
+    mediaLocation = "${config.server.media_folder}/immich";
     settings.server.externalDomain = "https://photos.mosi.me/";
   };
   services.nginx.virtualHosts."photos.mosi.me" = {
