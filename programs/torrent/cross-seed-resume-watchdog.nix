@@ -54,7 +54,7 @@ in
   systemd.services.cross-seed-resume-watchdog = {
     description = "Resume cross-seed torrents stuck paused after injection";
     after = [ "rtorrent-rpc-http.service" ];
-    requires = [ "rtorrent-rpc-http.service" ];
+    wants = [ "rtorrent-rpc-http.service" ];
     serviceConfig = {
       Type = "oneshot";
       User = "rtorrent";

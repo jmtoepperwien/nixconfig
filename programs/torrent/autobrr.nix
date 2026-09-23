@@ -74,7 +74,7 @@ in
       "network.target"
       "rtorrent.service"
     ];
-    requires = [
+    wants = [
       "flood.service"
       "rtorrent.service"
     ];
@@ -85,6 +85,7 @@ in
       WorkingDirectory = "/var/lib/autobrr";
       ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/rm -f /var/lib/autobrr/freespace.sh; ${pkgs.coreutils}/bin/cp ${autobrrFreeSpace}/bin/autobrr-free-space /var/lib/autobrr/freespace.sh'";
       ExecStart = "${autobrrPackage}/bin/autobrr --config=/var/lib/autobrr";
+      Restart = "on-failure";
       Type = "simple";
     };
   };

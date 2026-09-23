@@ -10,7 +10,8 @@
   # cross-seed, on loopback only.
   systemd.services.rtorrent-rpc-http = {
     description = "HTTP-to-SCGI bridge for rtorrent RPC (vpn netns)";
-    bindsTo = [ "netns-vpn.service" "rtorrent.service" ];
+    bindsTo = [ "netns-vpn.service" ];
+    wants = [ "rtorrent.service" ];
     after = [ "netns-vpn.service" "rtorrent.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {

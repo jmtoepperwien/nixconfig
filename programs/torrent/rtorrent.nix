@@ -222,7 +222,7 @@ in
   # upstream was observed to be closed prematurely by rtorrent itself).
   # Mirrors the prowlarrforward pattern in programs/usenet.nix.
   systemd.services.rtorrent-scgi-tcp = {
-    requires = [ "rtorrent.service" ];
+    wants = [ "rtorrent.service" ];
     after = [ "rtorrent.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {

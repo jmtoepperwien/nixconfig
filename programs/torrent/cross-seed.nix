@@ -39,7 +39,7 @@ in
       "rtorrent.service"
       "rtorrent-rpc-http.service"
     ];
-    requires = [
+    wants = [
       "rtorrent.service"
       "rtorrent-rpc-http.service"
     ];

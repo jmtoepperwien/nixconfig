@@ -7,7 +7,7 @@
   systemd.services.flood = {
     enable = true;
     description = "Flood frontend for rtorrent";
-    bindsTo = [ "rtorrent.service" ];
+    wants = [ "rtorrent.service" ];
     after = [ "rtorrent.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
