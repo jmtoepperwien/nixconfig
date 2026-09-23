@@ -57,8 +57,18 @@ in
         while true; do
           sleep 45
           source ${portsFile}
-          read -r newUdpPublic newUdpPrivate < <(${natpmpRequest} udp)
-          read -r newTcpPublic newTcpPrivate < <(${natpmpRequest} tcp)
+          # A transient NAT-PMP probe failure (gateway hiccup) must not
+          # crash this loop: doing so fails the whole service, which
+          # (via rtorrent's requires on natpmp-proton) kills rtorrent on
+          # every blip instead of only on a genuine port change.
+          if ! read -r newUdpPublic newUdpPrivate < <(${natpmpRequest} udp); then
+            echo "natpmp udp probe failed, retrying next cycle" >&2
+            continue
+          fi
+          if ! read -r newTcpPublic newTcpPrivate < <(${natpmpRequest} tcp); then
+            echo "natpmp tcp probe failed, retrying next cycle" >&2
+            continue
+          fi
           if [ "$newUdpPublic" != "$UDPPORTPUBLIC" ] || [ "$newTcpPublic" != "$TCPPORTPUBLIC" ]; then
             echo "natpmp public port changed (udp $UDPPORTPUBLIC -> $newUdpPublic, tcp $TCPPORTPUBLIC -> $newTcpPublic), reconfiguring"
             {
