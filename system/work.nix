@@ -51,6 +51,21 @@
   boot.initrd.availableKernelModules = [
     "r8169"
   ];
+
+  # nixos/modules/hardware/video/nvidia.nix only adds these when
+  # services.xserver.enable is true; this host is pure Wayland, so declare them
+  # explicitly or the 5090 comes up with no DRM node and Sway falls back to the
+  # iGPU/simpledrm.
+  boot.kernelModules = [
+    "nvidia_modeset"
+    "nvidia_drm"
+  ];
+
+  # S3 ("deep") hangs this board in the ACPI platform phase: pm_test shows the
+  # devices phase completing and the platform phase never returning, leaving the
+  # machine powered but dead with the fans pinned. s2idle avoids the _PTS/NVS
+  # path entirely and suspends/resumes correctly.
+  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
   networking.interfaces.enp4s0.wakeOnLan.enable = true;
   networking.firewall.allowedUDPPorts = [ 9 ];
 
